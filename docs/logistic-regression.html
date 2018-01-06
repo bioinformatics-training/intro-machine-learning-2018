@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>An Introduction to Machine Learning</title>
+  <meta name="description" content="Course materials for An Introduction to Machine Learning">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="An Introduction to Machine Learning" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="figures/cover_image.png" />
+  <meta property="og:description" content="Course materials for An Introduction to Machine Learning" />
+  <meta name="github-repo" content="bioinformatics-training/intro-machine-learning-2018" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="An Introduction to Machine Learning" />
+  
+  <meta name="twitter:description" content="Course materials for An Introduction to Machine Learning" />
+  <meta name="twitter:image" content="figures/cover_image.png" />
+
+<meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
+
+
+<meta name="date" content="2018-01-06">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="linear-models.html">
+<link rel="next" href="dimensionality-reduction.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An Introduction to Machine Learning</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About the course</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#registration"><i class="fa fa-check"></i><b>1.2</b> Registration</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>1.3</b> Prerequisites</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#github"><i class="fa fa-check"></i><b>1.4</b> Github</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>1.5</b> License</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#contact"><i class="fa fa-check"></i><b>1.6</b> Contact</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#colophon"><i class="fa fa-check"></i><b>1.7</b> Colophon</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#what-is-machine-learning"><i class="fa fa-check"></i><b>2.1</b> What is machine learning?</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#aspects-of-ml"><i class="fa fa-check"></i><b>2.2</b> Aspects of ML</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#what-actually-happened-under-the-hood"><i class="fa fa-check"></i><b>2.3</b> What actually happened under the hood</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and matrix algebra</a><ul>
+<li class="chapter" data-level="3.1" data-path="linear-models.html"><a href="linear-models.html#linear-models"><i class="fa fa-check"></i><b>3.1</b> Linear models</a></li>
+<li class="chapter" data-level="3.2" data-path="linear-models.html"><a href="linear-models.html#matrix-algebra"><i class="fa fa-check"></i><b>3.2</b> Matrix algebra</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>4</b> Supervised learning</a><ul>
+<li class="chapter" data-level="4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#regression"><i class="fa fa-check"></i><b>4.1</b> Regression</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>4.1.1</b> Linear regression</a></li>
+<li class="chapter" data-level="4.1.2" data-path="logistic-regression.html"><a href="logistic-regression.html#polynomial-regression"><i class="fa fa-check"></i><b>4.1.2</b> Polynomial regression</a></li>
+<li class="chapter" data-level="4.1.3" data-path="logistic-regression.html"><a href="logistic-regression.html#distributions-of-fits"><i class="fa fa-check"></i><b>4.1.3</b> Distributions of fits</a></li>
+<li class="chapter" data-level="4.1.4" data-path="logistic-regression.html"><a href="logistic-regression.html#gaussian-process-regression"><i class="fa fa-check"></i><b>4.1.4</b> Gaussian process regression</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="logistic-regression.html"><a href="logistic-regression.html#classification"><i class="fa fa-check"></i><b>4.2</b> Classification</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression"><i class="fa fa-check"></i><b>4.2.1</b> Logistic regression</a></li>
+<li class="chapter" data-level="4.2.2" data-path="logistic-regression.html"><a href="logistic-regression.html#gp-classification"><i class="fa fa-check"></i><b>4.2.2</b> GP classification</a></li>
+<li class="chapter" data-level="4.2.3" data-path="logistic-regression.html"><a href="logistic-regression.html#other-classification-approaches."><i class="fa fa-check"></i><b>4.2.3</b> Other classification approaches.</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="logistic-regression.html"><a href="logistic-regression.html#resources"><i class="fa fa-check"></i><b>4.3</b> Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html"><i class="fa fa-check"></i><b>5</b> Dimensionality reduction</a><ul>
+<li class="chapter" data-level="5.1" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#linear-dimensionality-reduction"><i class="fa fa-check"></i><b>5.1</b> Linear Dimensionality Reduction</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#interpreting-the-principle-component-axes"><i class="fa fa-check"></i><b>5.1.1</b> Interpreting the Principle Component Axes</a></li>
+<li class="chapter" data-level="5.1.2" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#horseshoe-effect"><i class="fa fa-check"></i><b>5.1.2</b> Horseshoe effect</a></li>
+<li class="chapter" data-level="5.1.3" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#pca-analysis-of-mammalian-development"><i class="fa fa-check"></i><b>5.1.3</b> PCA analysis of mammalian development</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#nonlinear-dimensionality-reduction"><i class="fa fa-check"></i><b>5.2</b> Nonlinear Dimensionality Reduction</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#nonlinear-warping"><i class="fa fa-check"></i><b>5.2.1</b> Nonlinear warping</a></li>
+<li class="chapter" data-level="5.2.2" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#stochasticity"><i class="fa fa-check"></i><b>5.2.2</b> Stochasticity</a></li>
+<li class="chapter" data-level="5.2.3" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#analysis-of-mammalian-development"><i class="fa fa-check"></i><b>5.2.3</b> Analysis of mammalian development</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#other-dimensionality-reduction-techniques"><i class="fa fa-check"></i><b>5.3</b> Other dimensionality reduction techniques</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>6</b> Clustering</a><ul>
+<li class="chapter" data-level="6.1" data-path="clustering.html"><a href="clustering.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="clustering.html"><a href="clustering.html#distance-metrics"><i class="fa fa-check"></i><b>6.2</b> Distance metrics</a></li>
+<li class="chapter" data-level="6.3" data-path="clustering.html"><a href="clustering.html#hierarchic-agglomerative"><i class="fa fa-check"></i><b>6.3</b> Hierarchic agglomerative</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="clustering.html"><a href="clustering.html#linkage-algorithms"><i class="fa fa-check"></i><b>6.3.1</b> Linkage algorithms</a></li>
+<li class="chapter" data-level="6.3.2" data-path="clustering.html"><a href="clustering.html#example-clustering-synthetic-data-sets"><i class="fa fa-check"></i><b>6.3.2</b> Example: clustering synthetic data sets</a></li>
+<li class="chapter" data-level="6.3.3" data-path="clustering.html"><a href="clustering.html#example-gene-expression-profiling-of-human-tissues"><i class="fa fa-check"></i><b>6.3.3</b> Example: gene expression profiling of human tissues</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="clustering.html"><a href="clustering.html#k-means"><i class="fa fa-check"></i><b>6.4</b> K-means</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="clustering.html"><a href="clustering.html#algorithm"><i class="fa fa-check"></i><b>6.4.1</b> Algorithm</a></li>
+<li class="chapter" data-level="6.4.2" data-path="clustering.html"><a href="clustering.html#choosing-initial-cluster-centres"><i class="fa fa-check"></i><b>6.4.2</b> Choosing initial cluster centres</a></li>
+<li class="chapter" data-level="6.4.3" data-path="clustering.html"><a href="clustering.html#choosingK"><i class="fa fa-check"></i><b>6.4.3</b> Choosing k</a></li>
+<li class="chapter" data-level="6.4.4" data-path="clustering.html"><a href="clustering.html#example-clustering-synthetic-data-sets-1"><i class="fa fa-check"></i><b>6.4.4</b> Example: clustering synthetic data sets</a></li>
+<li class="chapter" data-level="6.4.5" data-path="clustering.html"><a href="clustering.html#example-gene-expression-profiling-of-human-tissues-1"><i class="fa fa-check"></i><b>6.4.5</b> Example: gene expression profiling of human tissues</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="clustering.html"><a href="clustering.html#dbscan"><i class="fa fa-check"></i><b>6.5</b> DBSCAN</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="clustering.html"><a href="clustering.html#algorithm-1"><i class="fa fa-check"></i><b>6.5.1</b> Algorithm</a></li>
+<li class="chapter" data-level="6.5.2" data-path="clustering.html"><a href="clustering.html#implementation-in-r"><i class="fa fa-check"></i><b>6.5.2</b> Implementation in R</a></li>
+<li class="chapter" data-level="6.5.3" data-path="clustering.html"><a href="clustering.html#choosing-parameters"><i class="fa fa-check"></i><b>6.5.3</b> Choosing parameters</a></li>
+<li class="chapter" data-level="6.5.4" data-path="clustering.html"><a href="clustering.html#example-clustering-synthetic-data-sets-2"><i class="fa fa-check"></i><b>6.5.4</b> Example: clustering synthetic data sets</a></li>
+<li class="chapter" data-level="6.5.5" data-path="clustering.html"><a href="clustering.html#example-gene-expression-profiling-of-human-tissues-2"><i class="fa fa-check"></i><b>6.5.5</b> Example: gene expression profiling of human tissues</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="clustering.html"><a href="clustering.html#evaluating-cluster-quality"><i class="fa fa-check"></i><b>6.6</b> Evaluating cluster quality</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="clustering.html"><a href="clustering.html#silhouetteMethod"><i class="fa fa-check"></i><b>6.6.1</b> Silhouette method</a></li>
+<li class="chapter" data-level="6.6.2" data-path="clustering.html"><a href="clustering.html#example---k-means-clustering-of-blobs-data-set"><i class="fa fa-check"></i><b>6.6.2</b> Example - k-means clustering of blobs data set</a></li>
+<li class="chapter" data-level="6.6.3" data-path="clustering.html"><a href="clustering.html#example---dbscan-clustering-of-noisy-moons"><i class="fa fa-check"></i><b>6.6.3</b> Example - DBSCAN clustering of noisy moons</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="clustering.html"><a href="clustering.html#exercises"><i class="fa fa-check"></i><b>6.7</b> Exercises</a><ul>
+<li class="chapter" data-level="6.7.1" data-path="clustering.html"><a href="clustering.html#clusteringEx1"><i class="fa fa-check"></i><b>6.7.1</b> Exercise 1</a></li>
+<li class="chapter" data-level="6.7.2" data-path="clustering.html"><a href="clustering.html#clusteringEx2"><i class="fa fa-check"></i><b>6.7.2</b> Exercise 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="supervised-learning.html"><a href="supervised-learning.html"><i class="fa fa-check"></i><b>7</b> Supervised Learning</a></li>
+<li class="chapter" data-level="8" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html"><i class="fa fa-check"></i><b>8</b> Nearest neighbours</a><ul>
+<li class="chapter" data-level="8.1" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#introduction-1"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#classification-simulated-data"><i class="fa fa-check"></i><b>8.2</b> Classification: simulated data</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#knn-function"><i class="fa fa-check"></i><b>8.2.1</b> knn function</a></li>
+<li class="chapter" data-level="8.2.2" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#plotting-decision-boundaries"><i class="fa fa-check"></i><b>8.2.2</b> Plotting decision boundaries</a></li>
+<li class="chapter" data-level="8.2.3" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#bias-variance-tradeoff"><i class="fa fa-check"></i><b>8.2.3</b> Bias-variance tradeoff</a></li>
+<li class="chapter" data-level="8.2.4" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#choosing-k"><i class="fa fa-check"></i><b>8.2.4</b> Choosing <em>k</em></a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#knn-cell-segmentation"><i class="fa fa-check"></i><b>8.3</b> Classification: cell segmentation</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#cell-segmentation-data-set"><i class="fa fa-check"></i><b>8.3.1</b> Cell segmentation data set</a></li>
+<li class="chapter" data-level="8.3.2" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#data-splitting"><i class="fa fa-check"></i><b>8.3.2</b> Data splitting</a></li>
+<li class="chapter" data-level="8.3.3" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#identification-of-data-quality-issues"><i class="fa fa-check"></i><b>8.3.3</b> Identification of data quality issues</a></li>
+<li class="chapter" data-level="8.3.4" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#fit-model-without-feature-selection"><i class="fa fa-check"></i><b>8.3.4</b> Fit model without feature selection</a></li>
+<li class="chapter" data-level="8.3.5" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#feature-selection-using-filter"><i class="fa fa-check"></i><b>8.3.5</b> Feature selection using filter</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#knn-regression"><i class="fa fa-check"></i><b>8.4</b> Regression</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#partition-data"><i class="fa fa-check"></i><b>8.4.1</b> Partition data</a></li>
+<li class="chapter" data-level="8.4.2" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#data-pre-processing"><i class="fa fa-check"></i><b>8.4.2</b> Data pre-processing</a></li>
+<li class="chapter" data-level="8.4.3" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#search-for-optimum-k"><i class="fa fa-check"></i><b>8.4.3</b> Search for optimum <em>k</em></a></li>
+<li class="chapter" data-level="8.4.4" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#use-model-to-make-predictions"><i class="fa fa-check"></i><b>8.4.4</b> Use model to make predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#exercises-1"><i class="fa fa-check"></i><b>8.5</b> Exercises</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#knnEx1"><i class="fa fa-check"></i><b>8.5.1</b> Exercise 1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="svm.html"><a href="svm.html"><i class="fa fa-check"></i><b>9</b> Support vector machines</a><ul>
+<li class="chapter" data-level="9.1" data-path="svm.html"><a href="svm.html#introduction-2"><i class="fa fa-check"></i><b>9.1</b> Introduction</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="svm.html"><a href="svm.html#maximum-margin-classifier"><i class="fa fa-check"></i><b>9.1.1</b> Maximum margin classifier</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="svm.html"><a href="svm.html#support-vector-classifier"><i class="fa fa-check"></i><b>9.2</b> Support vector classifier</a></li>
+<li class="chapter" data-level="9.3" data-path="svm.html"><a href="svm.html#support-vector-machine"><i class="fa fa-check"></i><b>9.3</b> Support Vector Machine</a></li>
+<li class="chapter" data-level="9.4" data-path="svm.html"><a href="svm.html#example---training-a-classifier"><i class="fa fa-check"></i><b>9.4</b> Example - training a classifier</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="svm.html"><a href="svm.html#setup-environment"><i class="fa fa-check"></i><b>9.4.1</b> Setup environment</a></li>
+<li class="chapter" data-level="9.4.2" data-path="svm.html"><a href="svm.html#partition-data-1"><i class="fa fa-check"></i><b>9.4.2</b> Partition data</a></li>
+<li class="chapter" data-level="9.4.3" data-path="svm.html"><a href="svm.html#visualize-training-data"><i class="fa fa-check"></i><b>9.4.3</b> Visualize training data</a></li>
+<li class="chapter" data-level="9.4.4" data-path="svm.html"><a href="svm.html#define-a-custom-model"><i class="fa fa-check"></i><b>9.4.4</b> Define a custom model</a></li>
+<li class="chapter" data-level="9.4.5" data-path="svm.html"><a href="svm.html#model-cross-validation-and-tuning"><i class="fa fa-check"></i><b>9.4.5</b> Model cross-validation and tuning</a></li>
+<li class="chapter" data-level="9.4.6" data-path="svm.html"><a href="svm.html#prediction-performance-measures"><i class="fa fa-check"></i><b>9.4.6</b> Prediction performance measures</a></li>
+<li class="chapter" data-level="9.4.7" data-path="svm.html"><a href="svm.html#plot-decision-boundary"><i class="fa fa-check"></i><b>9.4.7</b> Plot decision boundary</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="svm.html"><a href="svm.html#example---regression"><i class="fa fa-check"></i><b>9.5</b> Example - regression</a></li>
+<li class="chapter" data-level="9.6" data-path="svm.html"><a href="svm.html#further-reading"><i class="fa fa-check"></i><b>9.6</b> Further reading</a></li>
+<li class="chapter" data-level="9.7" data-path="svm.html"><a href="svm.html#exercises-2"><i class="fa fa-check"></i><b>9.7</b> Exercises</a><ul>
+<li class="chapter" data-level="9.7.1" data-path="svm.html"><a href="svm.html#exercise-1"><i class="fa fa-check"></i><b>9.7.1</b> Exercise 1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="decision-trees.html"><a href="decision-trees.html"><i class="fa fa-check"></i><b>10</b> Decision trees and random forests</a><ul>
+<li class="chapter" data-level="10.1" data-path="decision-trees.html"><a href="decision-trees.html#decision-trees"><i class="fa fa-check"></i><b>10.1</b> Decision Trees</a></li>
+<li class="chapter" data-level="10.2" data-path="decision-trees.html"><a href="decision-trees.html#random-forest"><i class="fa fa-check"></i><b>10.2</b> Random Forest</a></li>
+<li class="chapter" data-level="10.3" data-path="decision-trees.html"><a href="decision-trees.html#exercises-3"><i class="fa fa-check"></i><b>10.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ann.html"><a href="ann.html"><i class="fa fa-check"></i><b>11</b> Artificial neural networks</a><ul>
+<li class="chapter" data-level="11.1" data-path="ann.html"><a href="ann.html#neural-networks"><i class="fa fa-check"></i><b>11.1</b> Neural Networks</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>12</b> Summary</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="logistic-regression.html"><a href="logistic-regression.html#resources"><i class="fa fa-check"></i><b>A</b> Resources</a><ul>
+<li class="chapter" data-level="A.1" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i><b>A.1</b> Python</a></li>
+<li class="chapter" data-level="A.2" data-path="resources.html"><a href="resources.html#machine-learning-data-set-repositories"><i class="fa fa-check"></i><b>A.2</b> Machine learning data set repositories</a><ul>
+<li class="chapter" data-level="A.2.1" data-path="resources.html"><a href="resources.html#mldata"><i class="fa fa-check"></i><b>A.2.1</b> MLDATA</a></li>
+<li class="chapter" data-level="A.2.2" data-path="resources.html"><a href="resources.html#uci-machine-learning-repository"><i class="fa fa-check"></i><b>A.2.2</b> UCI Machine Learning Repository</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="solutions-linear-models.html"><a href="solutions-linear-models.html"><i class="fa fa-check"></i><b>B</b> Solutions ch. 3 - Linear models and matrix algebra</a><ul>
+<li class="chapter" data-level="B.1" data-path="solutions-linear-models.html"><a href="solutions-linear-models.html#example-2"><i class="fa fa-check"></i><b>B.1</b> Example 2</a></li>
+<li class="chapter" data-level="B.2" data-path="solutions-linear-models.html"><a href="solutions-linear-models.html#example-2-1"><i class="fa fa-check"></i><b>B.2</b> Example 2</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="solutions-logistic-regression.html"><a href="solutions-logistic-regression.html"><i class="fa fa-check"></i><b>C</b> Solutions ch. 4 - Linear and non-linear (logistic) regression</a></li>
+<li class="chapter" data-level="D" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html"><i class="fa fa-check"></i><b>D</b> Solutions ch. 9 - Dimensionality reduction</a><ul>
+<li class="chapter" data-level="D.1" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html#exercise-8.1"><i class="fa fa-check"></i><b>D.1</b> Exercise 8.1</a></li>
+<li class="chapter" data-level="D.2" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html#exercise-8.2"><i class="fa fa-check"></i><b>D.2</b> Exercise 8.2</a></li>
+<li class="chapter" data-level="D.3" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html#exercise-8.3."><i class="fa fa-check"></i><b>D.3</b> Exercise 8.3.</a></li>
+<li class="chapter" data-level="D.4" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html#exercise-8.4."><i class="fa fa-check"></i><b>D.4</b> Exercise 8.4.</a></li>
+<li class="chapter" data-level="D.5" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html#exercise-8.4"><i class="fa fa-check"></i><b>D.5</b> Exercise 8.4</a></li>
+<li class="chapter" data-level="D.6" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html#exercise-8.6."><i class="fa fa-check"></i><b>D.6</b> Exercise 8.6.</a></li>
+<li class="chapter" data-level="D.7" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html#exercise-8.7."><i class="fa fa-check"></i><b>D.7</b> Exercise 8.7.</a></li>
+<li class="chapter" data-level="D.8" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html#exercise-8.8."><i class="fa fa-check"></i><b>D.8</b> Exercise 8.8.</a></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="solutions-clustering.html"><a href="solutions-clustering.html"><i class="fa fa-check"></i><b>E</b> Solutions ch. 10 - Clustering</a><ul>
+<li class="chapter" data-level="E.1" data-path="solutions-clustering.html"><a href="solutions-clustering.html#exercise-1-1"><i class="fa fa-check"></i><b>E.1</b> Exercise 1</a></li>
+</ul></li>
+<li class="chapter" data-level="F" data-path="solutions-nearest-neighbours.html"><a href="solutions-nearest-neighbours.html"><i class="fa fa-check"></i><b>F</b> Solutions ch. 5 - Nearest neighbours</a><ul>
+<li class="chapter" data-level="F.1" data-path="solutions-nearest-neighbours.html"><a href="solutions-nearest-neighbours.html#exercise-1-2"><i class="fa fa-check"></i><b>F.1</b> Exercise 1</a></li>
+</ul></li>
+<li class="chapter" data-level="G" data-path="solutions-svm.html"><a href="solutions-svm.html"><i class="fa fa-check"></i><b>G</b> Solutions ch. 7 - Support vector machines</a><ul>
+<li class="chapter" data-level="G.1" data-path="solutions-svm.html"><a href="solutions-svm.html#exercise-1-3"><i class="fa fa-check"></i><b>G.1</b> Exercise 1</a></li>
+</ul></li>
+<li class="chapter" data-level="H" data-path="solutions-decision-trees.html"><a href="solutions-decision-trees.html"><i class="fa fa-check"></i><b>H</b> Solutions ch. 6 - Decision trees and random forests</a><ul>
+<li class="chapter" data-level="H.1" data-path="solutions-decision-trees.html"><a href="solutions-decision-trees.html#exercise-1-4"><i class="fa fa-check"></i><b>H.1</b> Exercise 1</a></li>
+</ul></li>
+<li class="chapter" data-level="I" data-path="solutions-ann.html"><a href="solutions-ann.html"><i class="fa fa-check"></i><b>I</b> Solutions ch. 8 - Artificial neural networks</a><ul>
+<li class="chapter" data-level="I.1" data-path="solutions-ann.html"><a href="solutions-ann.html#exercise-1-5"><i class="fa fa-check"></i><b>I.1</b> Exercise 1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Introduction to Machine Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="logistic-regression" class="section level1">
+<h1><span class="header-section-number">4</span> Supervised learning</h1>
+<p>Supervised learning refers to the general task of inferring functions from a labelled set of data. This labelled data consists of a matched pair of observations <span class="math inline">\(\{\mathbf{X},\mathbf{y}\}\)</span>, where <span class="math inline">\(\mathbf{X}\)</span> usually denotes a matrix of (real-valued) explanatory variables (the <em>input variables</em>), and <span class="math inline">\(\mathbf{y} = (y_1,\ldots,y_n)^\top\)</span> denotes a vector of observations for a variable of interest (the <em>output variable</em>). Depending on the nature of the output variable, supervised learning is split into regression and classification tasks.</p>
+<p>Within a regression setting, we aim to identify how the input variables map to the continuous-valued output variables. A simple example would involved measuring the population size of a bacterial culture, <span class="math inline">\(\mathbf{y} = (N_1,\ldots,N_n)^\top\)</span>, at a set of time points, <span class="math inline">\(\mathbf{X} = (t_1,\ldots,t_n)^\top\)</span>, and learning the function that maps from <span class="math inline">\(\mathbf{X}\)</span> to <span class="math inline">\(\mathbf{y}\)</span>. Doing so should reveal something about the physical nature of the system, as well as allow us to predict the output variable, <span class="math inline">\(\mathbf{y}^*\)</span>, for a new set of times, <span class="math inline">\(\mathbf{X}^*\)</span>.</p>
+<p>Classification algorithms, on the other hand, deal with discrete-valued outputs. Here each observation in <span class="math inline">\(\mathbf{y}\)</span> can take on only a finite number of values. For example, we may have a measurment that indicates “infected” versus “uninfected”, which can be represented by binary values <span class="math inline">\(y_i \in [0,1]\)</span>, but more generally have data that falls into <span class="math inline">\(K\)</span> classes e.g., “group 1” through to “group K”. As with regression, the aim is to identify how a potentially continuous-valued input variables maps to a discrete set of class labels, and ultimately, assign labels to a new set of data. Notable examples would be to identify how the expression of particular set of marker genes are predictive of a discrete phenotype.</p>
+<p>Although throughout this chapter we assume that input variables are continuous in nature, input variables can be discrete, or a variety of other types including graphs and strings.</p>
+<p>In section <a href="logistic-regression.html#regression">4.1</a> we briefly recap linear regression, and introduce nonlinear approaches to regression based on Gaussian processes. We demonstrate the use of regression to predict gene expression values as a function of time, and how this can be used to inform us about the nature of the data. In section <a href="logistic-regression.html#classification">4.2</a> we introduce a variety of classification algorithms, starting with logistic regression (section <a href="logistic-regression.html#logistic-regression">4</a>), and demonstrate how such approaches can be used to predict pathogen infection status in <em>Arabidopsis thaliana</em>. By doing so we identify key marker genes indicative of pathogen growth. Finally, we note the limitations of linear classification algorithms, and introduce nonlinear approaches based on Gaussian processes (section <a href="logistic-regression.html#gp-classification">4.2.2</a>).</p>
+<div id="regression" class="section level2">
+<h2><span class="header-section-number">4.1</span> Regression</h2>
+<p>In this section, we will make use of an existing dataset which captures the gene expression levels in the model plant <em>Arabidopsis thaliana</em> following innoculation with <em>Botrytis cinerea</em> <span class="citation">(Windram et al. <a href="#ref-windram2012arabidopsis">2012</a>)</span>, a necrotrophic pathogen considered to be the second most important fungal plant pathogen due to its ability to cause disease in a range of plants. The dataset is a time series measuring the gene expression in <em>Arabidopsis</em> leaves following inoculation with <em>Botrytis cinerea</em> over a <span class="math inline">\(48\)</span> hour time window.</p>
+<p>The dataset is available from GEO (GSE39597) but with a pre-processed version found in the data folder. This processed data contains the expression levels of a set of marker genes in tab delimited format. The fist row contains gene IDs for the variables <span class="math inline">\(163\)</span> marker genes. Column <span class="math inline">\(2\)</span> contains the time points of observations, with column <span class="math inline">\(3\)</span> containing a binary indication of infection status, evalutated according to the prescence of <em>Botrytis cinerea</em> Tubulin protein. All subsequent columns indicate (<span class="math inline">\(\log_2\)</span>) normalised <em>Arabidopsis</em> gene expression values from microarrays (V4 TAIR V9 spotted cDNA array). The expression dataset itself contains two time series: the first <span class="math inline">\(24\)</span> observations represent measurements of <em>Arabidopsis</em> gene expression in a control experiment (uninfected), from <span class="math inline">\(2h\)</span> through <span class="math inline">\(48h\)</span> at <span class="math inline">\(2\)</span>-hourly intervals, and therefore capture dynamic aspects of plant behaviour, including circadian rhythms; the second set of <span class="math inline">\(24\)</span> observations represents an infected dataset, again commencing <span class="math inline">\(2h\)</span> after inoculation with <em>Botyris cinerea</em> through to <span class="math inline">\(48h\)</span>.</p>
+<p>Within this section our output variable will typically be the expression level of a particular gene of interest, denoted <span class="math inline">\(\mathbf{y} =(y_1,\ldots,y_n)^\top\)</span>, with the explanatory variable being time, <span class="math inline">\(\mathbf{X} =(t_1,\ldots,t_n)^\top\)</span>. We can read the dataset into {R} as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">D &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;data/Arabidopsis/Arabidopsis_Botrytis_transpose_3.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">row.names=</span><span class="dv">1</span>)</code></pre></div>
+<p>We can also extract out the names of variables, and the unique vector of measurment times:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">genenames &lt;-<span class="st"> </span><span class="kw">colnames</span>(D)
+Xs &lt;-<span class="st"> </span>D<span class="op">$</span>Time[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>]</code></pre></div>
+<p>Exercise 3.1. Plot the gene expression profiles to familiarise yourself with the data.</p>
+<div id="linear-regression" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> Linear regression</h3>
+<p>Recall that one of the simplest forms of regression - linear regression - assumes that the variable of interest, <span class="math inline">\(y\)</span>, depends on an explanatory variable, <span class="math inline">\(x\)</span>, via:</p>
+<p><span class="math inline">\(y = mx + c.\)</span></p>
+<p>For a typical set of data, we have a vector of observations, <span class="math inline">\(\mathbf{y} = (y_1,y_2,\ldots,y_n)\)</span> with a corresponding set of explanatory variables. For now we can assume that the explanatory variable is scalar, for example time in hours, such that we have a set of observations, <span class="math inline">\(\mathbf{X} = (t_1,t_2,\ldots,t_n)\)</span>. Using linear regression we aim to infer the parameters <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>, which will tell us something about the relationship between the two variables, and allow us to make predictions at a new set of locations, <span class="math inline">\(\mathbf{X}*\)</span>.</p>
+<p>Within {R}, linear regression can be implemented via the {lm} function. In the example below, we perform linear regression for the gene expression of AT2G28890 as a function of time, using the infection time series only (hence we use only the first <span class="math inline">\(24\)</span> datapoints):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(AT2G28890<span class="op">~</span>Time, <span class="dt">data =</span> D[<span class="dv">25</span><span class="op">:</span><span class="kw">nrow</span>(D),])</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = AT2G28890 ~ Time, data = D[25:nrow(D), ])
+## 
+## Coefficients:
+## (Intercept)         Time  
+##    10.14010     -0.04997</code></pre>
+<p>Linear regression is also implemented within the {caret} package, allowing us to make use of its various other utilities. In fact, within {caret}, linear regression is performed by calling the function {lm}. In the example, below, we perform linear regression for AT2G28890, and calculate the predict the expression pattern for that gene using the {predict} function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)</code></pre></div>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mlbench)
+<span class="kw">set.seed</span>(<span class="dv">1</span>)
+
+geneindex &lt;-<span class="st"> </span><span class="kw">which</span>(genenames<span class="op">==</span><span class="st">&quot;AT2G28890&quot;</span>)
+
+lrfit &lt;-<span class="st"> </span><span class="kw">train</span>(y<span class="op">~</span>., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>Xs,<span class="dt">y=</span>D[<span class="dv">25</span><span class="op">:</span><span class="kw">nrow</span>(D),geneindex]), <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)
+predictedValues&lt;-<span class="kw">predict</span>(lrfit)</code></pre></div>
+<p>A summary of the model, including parameters, can be printed out to screen using the {summary} function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(lrfit)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = .outcome ~ ., data = dat)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.77349 -0.17045 -0.01839  0.15795  0.63098 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 10.14010    0.13975   72.56  &lt; 2e-16 ***
+## x           -0.04997    0.00489  -10.22 8.14e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3317 on 22 degrees of freedom
+## Multiple R-squared:  0.826,  Adjusted R-squared:  0.8181 
+## F-statistic: 104.4 on 1 and 22 DF,  p-value: 8.136e-10</code></pre>
+<p>Finally, we can fit a linear model to the control dataset, and plot the inferred results alongside the observation data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit2 &lt;-<span class="st"> </span><span class="kw">train</span>(y<span class="op">~</span>., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>Xs,<span class="dt">y=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex]), <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)
+predictedValues2&lt;-<span class="kw">predict</span>(lrfit2)
+
+<span class="kw">plot</span>(Xs,D[<span class="dv">25</span><span class="op">:</span><span class="kw">nrow</span>(D),geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(D[,geneindex])<span class="op">-</span><span class="fl">0.2</span>, <span class="kw">max</span>(D[,geneindex]<span class="op">+</span><span class="fl">0.2</span>)),<span class="dt">main=</span>genenames[geneindex])
+<span class="kw">points</span>(Xs,D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">points</span>(Xs,predictedValues,<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)
+<span class="kw">points</span>(Xs,predictedValues2,<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
+<p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Whilst the model appeared to do resonably well at capturing the general trends in the datset, if we look at the control data (in red), you may notice that, visually, there appears to be more structure to the data than indicated by the model fit. Indeed, if we look AT2G28890 up on <a href="http://viridiplantae.ibvf.csic.es/circadiaNet/genes/atha/AT2G28890.html">CircadianNET</a>, we will see it is likely circadian in nature (<span class="math inline">\(p&lt;5\times10^{-5}\)</span>).</p>
+</div>
+<div id="polynomial-regression" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> Polynomial regression</h3>
+<p>In general, linear models will not be appropriate for a large variety of datasets, particularly when the variables of interest are nonlinear. We can instead try to fit more complex models, such as a quadratic functions, which have the following form:</p>
+<p><span class="math inline">\(y = m_1 x + m_2 x^2 + c,\)</span></p>
+<p>where <span class="math inline">\(m = [m_1,m_2,c]\)</span> represent the parameters we’re interested in inferring. An <span class="math inline">\(n\)</span>th-order polynomial has the form:</p>
+<p><span class="math inline">\(y = \sum_{i=1}^{n} m_i x^i + c.\)</span></p>
+<p>where <span class="math inline">\(m = [m_1,\ldots,m_n,c]\)</span> are the free parameters. Within {R} we can infer more complex polynomials to the data using the {lm} package by calling the {poly} function when specififying the symbolic model. In the example below we fit a <span class="math inline">\(3\)</span>rd order polynomial (the order of the polynomial is specified via the {degree} variable):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit3 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span><span class="kw">poly</span>(x,<span class="dt">degree=</span><span class="dv">3</span>), <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex]))</code></pre></div>
+<p>We can do this within {caret}. In the snippet, below, we fit <span class="math inline">\(3\)</span>rd order polynomials to the control and infected datasets, and plot the fits alongside the data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit3 &lt;-<span class="st"> </span><span class="kw">train</span>(y<span class="op">~</span><span class="kw">poly</span>(x,<span class="dt">degree=</span><span class="dv">3</span>), <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex]), <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)
+lrfit4 &lt;-<span class="st"> </span><span class="kw">train</span>(y<span class="op">~</span><span class="kw">poly</span>(x,<span class="dt">degree=</span><span class="dv">3</span>), <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">25</span><span class="op">:</span><span class="kw">nrow</span>(D),<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">25</span><span class="op">:</span><span class="kw">nrow</span>(D),geneindex]), <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)
+
+<span class="kw">plot</span>(Xs,D[<span class="dv">25</span><span class="op">:</span><span class="kw">nrow</span>(D),geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(D[,geneindex])<span class="op">-</span><span class="fl">0.2</span>, <span class="kw">max</span>(D[,geneindex]<span class="op">+</span><span class="fl">0.2</span>)),<span class="dt">main=</span>genenames[geneindex])
+<span class="kw">points</span>(Xs,D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">lines</span>(Xs,<span class="kw">fitted</span>(lrfit3),<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">lines</span>(Xs,<span class="kw">fitted</span>(lrfit4),<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</code></pre></div>
+<p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Note that, by eye, the fit appears to be a little better than for the linear regression model … maybe! We can quantify the accuracy of the models by looking at the root-mean-square error (RMSE) on hold-out data, defined as:</p>
+<p><span class="math inline">\(\mbox{RMSE} = \sqrt{\sum_{i=1}^n (\hat{y_i}-y_i)^2/n}\)</span></p>
+<p>where <span class="math inline">\(\hat{y_i}\)</span> is the predicted value and <span class="math inline">\(y_i\)</span> the observed value of the <span class="math inline">\(i\)</span>th datapoint. In previous sections we explicitly specified a set of training data and hold-out data (test data). If we do not specify this in {caret}, the data is split by default values.</p>
+<p>Exercise 3.4. What happens if we fit a much higher order polynomial? Try fitting a polynomial with degree = 20 and plotting the result. The fit <em>appears</em> to match much more closely to the observed data. However, intuitively we feel this is wrong. Whilst it may be possible that the data was generated by a polynomial, it’s far more likely that we are overfitting the data. We can evaluate how good the model <em>really</em> is by holding some data back and looking at the RMSE from bootstrapped samples. How does the RMSE compare? Which model seems to be best?</p>
+</div>
+<div id="distributions-of-fits" class="section level3">
+<h3><span class="header-section-number">4.1.3</span> Distributions of fits</h3>
+<p>In the previous section we explored fitting polynomials to data. Recall that we can fit a <span class="math inline">\(4\)</span>th order polynomial to the control datasets as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit3    &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span><span class="kw">poly</span>(x,<span class="dt">degree=</span><span class="dv">4</span>), <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex]))
+<span class="kw">plot</span>(Xs,D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(D[,geneindex])<span class="op">-</span><span class="fl">0.2</span>, <span class="kw">max</span>(D[,geneindex]<span class="op">+</span><span class="fl">0.2</span>)),<span class="dt">main=</span>genenames[geneindex])
+<span class="kw">lines</span>(Xs,<span class="kw">fitted</span>(lrfit3),<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
+<p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>It looks reasonable. But how does it compare to the following shown in blue?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit4 &lt;-<span class="st">  </span>lrfit3
+lrfit4<span class="op">$</span>coefficients &lt;-<span class="st"> </span>lrfit4<span class="op">$</span>coefficients <span class="op">+</span><span class="st"> </span><span class="fl">0.1</span><span class="op">*</span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="kw">length</span>(lrfit4<span class="op">$</span>coefficients)),<span class="kw">length</span>(lrfit4<span class="op">$</span>coefficients));
+pred1&lt;-<span class="kw">predict</span>(lrfit4, <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex]))
+
+
+<span class="kw">plot</span>(Xs,D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(D[,geneindex])<span class="op">-</span><span class="fl">0.2</span>, <span class="kw">max</span>(D[,geneindex]<span class="op">+</span><span class="fl">0.2</span>)),<span class="dt">main=</span>genenames[geneindex])
+<span class="kw">lines</span>(Xs,<span class="kw">fitted</span>(lrfit3),<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">lines</span>(Xs,pred1,<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Our new fit was generated by slightly tweaking the optimised parameters via the addition of a random variable. We can see that the new fit is almost as good, and will have a very similar SSE. In general, inferring a single fit to a model is prone to overfitting. A much better approach is to instead fit a distribution over fits. We can generate samples from a linear model using the {coef} function. To do so we must use the {lm} function directly, and not via the {caret} package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;arm&quot;</span>)</code></pre></div>
+<pre><code>## Loading required package: MASS</code></pre>
+<pre><code>## Loading required package: Matrix</code></pre>
+<pre><code>## Loading required package: lme4</code></pre>
+<pre><code>## 
+## arm (Version 1.9-3, built: 2016-11-21)</code></pre>
+<pre><code>## Working directory is /Users/matt/git_repositories/intro-machine-learning-2018</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit4    &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span><span class="kw">poly</span>(x,<span class="dt">degree=</span><span class="dv">4</span>), <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex]))
+simulate  &lt;-<span class="st"> </span><span class="kw">coef</span>(<span class="kw">sim</span>(lrfit4))
+paramsamp &lt;-<span class="st"> </span><span class="kw">head</span>(simulate,<span class="dv">10</span>)</code></pre></div>
+<p>This will sample model parameters that are likely to be explaining the dataset, in this case we have produced <span class="math inline">\(10\)</span> different set of sample parameters. In the code, below, we plot these <span class="math inline">\(10\)</span> sample polynomials:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(Xs,D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(D[,geneindex])<span class="op">-</span><span class="fl">0.2</span>, <span class="kw">max</span>(D[,geneindex]<span class="op">+</span><span class="fl">0.2</span>)),<span class="dt">main=</span>genenames[geneindex])
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>)){
+lrfit4<span class="op">$</span>coefficients &lt;-<span class="st"> </span>paramsamp[i,]
+pred1&lt;-<span class="kw">predict</span>(lrfit4, <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex]))
+<span class="kw">lines</span>(Xs,pred1,<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+}</code></pre></div>
+<p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Alternatively, we can visualise the confidence bounds easy using:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit4    &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span><span class="kw">poly</span>(x,<span class="dt">degree=</span><span class="dv">4</span>), <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex]))
+pred1&lt;-<span class="kw">predict</span>(lrfit4, <span class="dt">interval=</span><span class="st">&quot;predict&quot;</span>)</code></pre></div>
+<pre><code>## Warning in predict.lm(lrfit4, interval = &quot;predict&quot;): predictions on current data refer to _future_ responses</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(Xs,D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(D[,geneindex])<span class="op">-</span><span class="fl">0.2</span>, <span class="kw">max</span>(D[,geneindex]<span class="op">+</span><span class="fl">0.2</span>)),<span class="dt">main=</span>genenames[geneindex])
+<span class="kw">lines</span>(Xs,pred1[,<span class="dv">1</span>],<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">lines</span>(Xs,pred1[,<span class="dv">2</span>],<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">lines</span>(Xs,pred1[,<span class="dv">3</span>],<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
+<p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+<div id="gaussian-process-regression" class="section level3">
+<h3><span class="header-section-number">4.1.4</span> Gaussian process regression</h3>
+<p>In the previous section we briefly explored fitting multiple polynomials to our data. However, we still had to decide on the order of the polynomial beforehand. A far more powerful approach is Gaussian processes (GP) regression <span class="citation">(Williams and Rasmussen <a href="#ref-Williams2006">2006</a>)</span>. Gaussian process regression represent a Bayesian nonparametric approach to regression capable of inferring nonlinear functions from a set of observations. Within a GP regression setting we assume the following model for the data:</p>
+<p><span class="math inline">\(y = f(\mathbf{x})\)</span></p>
+<p>where <span class="math inline">\(f(\cdot)\)</span> represents an unknown nonlinear function.</p>
+<p>Formerly, Gaussian processes are defined as a collections of random variables, any finite subset of which are jointly Gaussian distributed <span class="citation">(Williams and Rasmussen <a href="#ref-Williams2006">2006</a>)</span>. The significance of this might not be immediately clear. Another way to think of GPs is as an infinite dimensional extension to the standard multivariate normal distribution. In the same way as a Gaussian distribution is defined by its mean, <span class="math inline">\(\mu\)</span>, and covaraiance matrix, <span class="math inline">\(\mathbf{K}\)</span>, a Gaussian processes is completely defined by its mean function, <span class="math inline">\(m(x)\)</span>, and covariance function, <span class="math inline">\((x,x^\prime)\)</span>, and we use the notation <span class="math inline">\(f(x) \sim \mathcal{GP}(m(x), k(x,x^\prime))\)</span> to denote that <span class="math inline">\(f(x)\)</span> is drawn from a Gaussian process prior.</p>
+<p>As it is an infinite dimensional object, dealing directly with the GP prior is not feasible. However, we can make use of a particular useful property of a Gaussian distributions to sidestep this. Notably, the integral of a Gaussian distribution is itself a Gaussian distribution. Gaussian processes share this property, which means that if we are interested only in the distribution of the function at a set of locations, <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{x}^*\)</span> we can (analytically) integrate out the effect at all other locations. The resultant prior distribution is, of course, Gaussian:</p>
+<p><span class="math display">\[
+\begin{eqnarray*}
+\begin{pmatrix}\mathbf{y}^\top\\
+\mathbf{y^*}^\top
+\end{pmatrix} &amp; \sim &amp; N\left(\left[\begin{array}{c}
+\mathbf{0}\\
+\mathbf{0}\\
+\end{array}\right],\left[\begin{array}{ccc}
+K(\mathbf{x},\mathbf{x}) &amp; K(\mathbf{x},\mathbf{x}^*)\\
+K(\mathbf{x}^*,\mathbf{x}) &amp; K(\mathbf{x}^*,\mathbf{x}^*) \\
+\end{array}\right)\right]
+\end{eqnarray*} 
+\]</span> Quite often we deal with noisy data. That is:</p>
+<p><span class="math inline">\(y = f(\mathbf{x}) + \varepsilon\)</span>.</p>
+<p>where <span class="math inline">\(\varepsilon\)</span> represents independent noise. In this setting we are interested in inferring the function <span class="math inline">\(\mathbf{f}^*\)</span> at the <span class="math inline">\(\mathbf{X}*\)</span> i.e., not the noisy function <span class="math inline">\(\mathbf{y}^*\)</span>. To do so we note that we have the following joint distribution:</p>
+<p><span class="math display">\[
+\begin{eqnarray*}
+\begin{pmatrix}\mathbf{y}^\top\\
+\mathbf{f^*}^\top
+\end{pmatrix} &amp; \sim &amp; N\left(\left[\begin{array}{c}
+\mathbf{0}\\
+\mathbf{0}\\
+\end{array}\right],\left[\begin{array}{ccc}
+K(\mathbf{x},\mathbf{x})+\sigma_n^2 \mathbb{I} &amp; K(\mathbf{x},\mathbf{x}^*)\\
+K(\mathbf{x}^*,\mathbf{x}) &amp; K(\mathbf{x}^*,\mathbf{x}^*) \\
+\end{array}\right)\right]
+\end{eqnarray*} 
+\]</span></p>
+<p>In the examples below we start by sampling from a GP prior as a way of illustrating what it is they’re doing. We first require a number of packages.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(MASS)
+<span class="kw">require</span>(plyr)</code></pre></div>
+<pre><code>## Loading required package: plyr</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(reshape2)</code></pre></div>
+<pre><code>## Loading required package: reshape2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(ggplot2)</code></pre></div>
+<p>Recall that the GP is completely defined by its mean function and covariance function. We can assume a zero-mean function without loss of generality. Until this point, we have not said much about what the covariance function is. In general, the covariance function encodes all information about the <em>type</em> of functions we’re interested in. The most commonly used covariance function is the squared exponential covariance function:</p>
+<p><span class="math inline">\(C(x,x^\prime) = \sigma^2 \exp\biggl{(}\frac{(x-x^\prime)^2}{2l^2}\biggr{)}\)</span>.</p>
+<p>This encodes for smooth functions (formerly, it specifies funtions that are infinitely differentiable), and has two hyperparameters: a length-scale hyperparameter <span class="math inline">\(l\)</span>, which defines how fast the functions change over the input space (in our examples this would time), and a process variance hyperparameter, <span class="math inline">\(\sigma\)</span>, which encodes the amplitude of the function (in our examples this represents the gene expression levels). In the snippet of code, below, we implement a squared exponential covariance function</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">covSE &lt;-<span class="st"> </span><span class="cf">function</span>(X1,X2,<span class="dt">l=</span><span class="dv">1</span>,<span class="dt">sig=</span><span class="dv">1</span>) {
+  K &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(X1)<span class="op">*</span><span class="kw">length</span>(X2)), <span class="dt">nrow=</span><span class="kw">length</span>(X1))
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(K)) {
+    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(K)) {
+      K[i,j] &lt;-<span class="st"> </span>sig<span class="op">^</span><span class="dv">2</span><span class="op">*</span><span class="kw">exp</span>(<span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>(<span class="kw">abs</span>(X1[i]<span class="op">-</span>X2[j]))<span class="op">^</span><span class="dv">2</span> <span class="op">/</span>l<span class="op">^</span><span class="dv">2</span>)
+    }
+  }
+  <span class="kw">return</span>(K)
+}</code></pre></div>
+<p>To get an idea of what this means, we can generate samples from the GP prior at a set of defined positions along <span class="math inline">\(x\)</span>. Due to the nature of GPs this is Gaussian distributed:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.star &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">5</span>,<span class="dt">len=</span><span class="dv">500</span>) ####Define a set of points at which to evaluate the functions
+sigma  &lt;-<span class="st"> </span><span class="kw">covSE</span>(x.star,x.star) ###Evaluate the covariance function at those locations, to give the covariance matrix.
+y1 &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(x.star)), sigma)
+y2 &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(x.star)), sigma)
+y3 &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(x.star)), sigma)
+<span class="kw">plot</span>(y1,<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(y1,y2,y3),<span class="kw">max</span>(y1,y2,y3)))
+<span class="kw">lines</span>(y2)
+<span class="kw">lines</span>(y3)</code></pre></div>
+<p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>When we specify a GP, we are essentially encoding a distribution over a whole range of functions. Exactly how those functions behave depends upon the choice of covariance function and the hyperparameters. To get a feel for this, try changing the hyperparameters in the above code. A variety of other covariance functions exist, and can be found, with examples in the <a href="http://www.cs.toronto.edu/~duvenaud/cookbook/">Kernel Cookbook</a>.</p>
+<p>Exercise 3.4 (optional): Try implementing another covariance function from the <a href="http://www.cs.toronto.edu/~duvenaud/cookbook/">Kernel Cookbook</a> and generating samples from the GP prior.</p>
+<div id="inference-with-gps" class="section level4">
+<h4><span class="header-section-number">4.1.4.1</span> Inference with GPs</h4>
+<p>We can generate samples from the GP prior, but what about inference? In linear regression we aimed to infer the parameters, <span class="math inline">\(m\)</span> and <span class="math inline">\(a\)</span>. What is the GP doing? Essentially, it’s representing the (unknown) function in terms of the observed data and the hyperparameters. Another way to look at it, is that we have specified a prior distribution (encoding for all functions of a particular kind) over the input space; during inference we give greater weight to a subset of those functions that pass through our observed datapoints, essentially pinning in a subset of the prior functions. If we assume some noise in the observations, we instead give greater weight to prior functions passing <em>close</em> to the observations.</p>
+<p>For the purpose of inference, we typically have a set of observations, <span class="math inline">\(\mathbf{X}\)</span>, and outputs <span class="math inline">\(\mathbf{y}\)</span>, and are interested in inferring the values, <span class="math inline">\(\mathbf{f}^*\)</span>, at new set of test locations, <span class="math inline">\(\mathbf{X}^*\)</span>. We can infer a posterior distribution for <span class="math inline">\(\mathbf{f}^*\)</span> using Bayes’ rule:</p>
+<p><span class="math inline">\(p(\mathbf{f}^* | \mathbf{X}, \mathbf{y}, \mathbf{X}^*) = \frac{p(\mathbf{y}, \mathbf{f}^* | \mathbf{X}, \mathbf{X}^*)}{p(\mathbf{y}|\mathbf{X})}\)</span></p>
+<p>A key advantage of GPs is the preditive distribution is analytically tractible and has the following Gaussian form:</p>
+<p><span class="math inline">\(\mathbf{f}^* | \mathbf{x}, \mathbf{y}, \mathbf{x}* \sim \mathcal{N}(\hat{f}^*,\hat{K}^*)\)</span></p>
+<p>where,</p>
+<p><span class="math inline">\(\hat{f}^* = K(\mathbf{x},\mathbf{x}^*)^\top(K(\mathbf{x},\mathbf{x})+\sigma^2\mathbb{I})^{-1} \mathbf{y}\)</span>,</p>
+<p><span class="math inline">\(\hat{K}^* = K(\mathbf{x}^*,\mathbf{x}^*)^{-1} - K(\mathbf{x},\mathbf{x}^*)^\top (K(\mathbf{x},\mathbf{x})+\sigma^2\mathbb{I})^{-1} K(\mathbf{x},\mathbf{x}^*)\)</span>.</p>
+<p>To demonstrate this, let’s assume we have an unknown function. In our example, for data generation, we will assume this to be <span class="math inline">\(y = \sin(x)\)</span> as an illustrative example of a nonlinear function (although we know this, the GP will only ever see samples from this function, not the function itself). We might have some observations from this function at a set of input positions <span class="math inline">\(x\)</span> e.g., one observation at <span class="math inline">\(x=-2\)</span>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>),
+                <span class="dt">y=</span><span class="kw">sin</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>)))</code></pre></div>
+<p>We can infer a posterior GP (and plot this against the true underlying function in red):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>f<span class="op">$</span>x
+k.xx &lt;-<span class="st"> </span><span class="kw">covSE</span>(x,x)
+k.xxs &lt;-<span class="st"> </span><span class="kw">covSE</span>(x,x.star)
+k.xsx &lt;-<span class="st"> </span><span class="kw">covSE</span>(x.star,x)
+k.xsxs &lt;-<span class="st"> </span><span class="kw">covSE</span>(x.star,x.star)
+
+f.star.bar &lt;-<span class="st"> </span>k.xsx<span class="op">%*%</span><span class="kw">solve</span>(k.xx)<span class="op">%*%</span>f<span class="op">$</span>y  ###Mean
+cov.f.star &lt;-<span class="st"> </span>k.xsxs <span class="op">-</span><span class="st"> </span>k.xsx<span class="op">%*%</span><span class="kw">solve</span>(k.xx)<span class="op">%*%</span>k.xxs ###Var
+
+<span class="kw">plot</span>(x.star,<span class="kw">sin</span>(x.star),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">2.2</span>, <span class="fl">2.2</span>))
+<span class="kw">points</span>(f,<span class="dt">type=</span><span class="st">&#39;o&#39;</span>)
+<span class="kw">lines</span>(x.star,f.star.bar,<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>)
+<span class="kw">lines</span>(x.star,f.star.bar<span class="op">+</span><span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(<span class="kw">diag</span>(cov.f.star)),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">pch=</span><span class="dv">22</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)
+<span class="kw">lines</span>(x.star,f.star.bar<span class="op">-</span><span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(<span class="kw">diag</span>(cov.f.star)),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">pch=</span><span class="dv">22</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</code></pre></div>
+<p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Of course the fit is not particularly good, but we only had one observation, so this is not surprising. Crucially, we can see that the GP encodes the idea of uncertainty. Although the model fit is not particularly good, we can see exactly <em>where</em> it is no good.</p>
+<p>Exercise 3.5 (optional): Try plotting some sample function from the posterior GP. Hint: these will be Gaussian distributed with mean {f.star.bar} and covariance {cov.f.star}.</p>
+<p>Let’s start by adding more observations. Here’s what the posterior fit looks like if we include 4 observations (at <span class="math inline">\(x \in [-4,-2,0,1]\)</span>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="op">-</span><span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>),
+                <span class="dt">y=</span><span class="kw">sin</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="op">-</span><span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>)))
+x &lt;-<span class="st"> </span>f<span class="op">$</span>x
+k.xx &lt;-<span class="st"> </span><span class="kw">covSE</span>(x,x)
+k.xxs &lt;-<span class="st"> </span><span class="kw">covSE</span>(x,x.star)
+k.xsx &lt;-<span class="st"> </span><span class="kw">covSE</span>(x.star,x)
+k.xsxs &lt;-<span class="st"> </span><span class="kw">covSE</span>(x.star,x.star)
+
+f.star.bar &lt;-<span class="st"> </span>k.xsx<span class="op">%*%</span><span class="kw">solve</span>(k.xx)<span class="op">%*%</span>f<span class="op">$</span>y  ###Mean
+cov.f.star &lt;-<span class="st"> </span>k.xsxs <span class="op">-</span><span class="st"> </span>k.xsx<span class="op">%*%</span><span class="kw">solve</span>(k.xx)<span class="op">%*%</span>k.xxs ###Var
+
+<span class="kw">plot</span>(x.star,<span class="kw">sin</span>(x.star),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">2.2</span>, <span class="fl">2.2</span>))
+<span class="kw">points</span>(f,<span class="dt">type=</span><span class="st">&#39;o&#39;</span>)
+<span class="kw">lines</span>(x.star,f.star.bar,<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>)
+<span class="kw">lines</span>(x.star,f.star.bar<span class="op">+</span><span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(<span class="kw">diag</span>(cov.f.star)),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">pch=</span><span class="dv">22</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)
+<span class="kw">lines</span>(x.star,f.star.bar<span class="op">-</span><span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(<span class="kw">diag</span>(cov.f.star)),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">pch=</span><span class="dv">22</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</code></pre></div>
+<p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>And with <span class="math inline">\(7\)</span> observations:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="op">-</span><span class="dv">3</span>,<span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>),
+                <span class="dt">y=</span><span class="kw">sin</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="op">-</span><span class="dv">3</span>,<span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)))
+x &lt;-<span class="st"> </span>f<span class="op">$</span>x
+k.xx &lt;-<span class="st"> </span><span class="kw">covSE</span>(x,x)
+k.xxs &lt;-<span class="st"> </span><span class="kw">covSE</span>(x,x.star)
+k.xsx &lt;-<span class="st"> </span><span class="kw">covSE</span>(x.star,x)
+k.xsxs &lt;-<span class="st"> </span><span class="kw">covSE</span>(x.star,x.star)
+
+f.star.bar &lt;-<span class="st"> </span>k.xsx<span class="op">%*%</span><span class="kw">solve</span>(k.xx)<span class="op">%*%</span>f<span class="op">$</span>y  ###Mean
+cov.f.star &lt;-<span class="st"> </span>k.xsxs <span class="op">-</span><span class="st"> </span>k.xsx<span class="op">%*%</span><span class="kw">solve</span>(k.xx)<span class="op">%*%</span>k.xxs ###Var
+
+<span class="kw">plot</span>(x.star,<span class="kw">sin</span>(x.star),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">2.2</span>, <span class="fl">2.2</span>))
+<span class="kw">points</span>(f,<span class="dt">type=</span><span class="st">&#39;o&#39;</span>)
+<span class="kw">lines</span>(x.star,f.star.bar,<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>)
+<span class="kw">lines</span>(x.star,f.star.bar<span class="op">+</span><span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(<span class="kw">diag</span>(cov.f.star)),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">pch=</span><span class="dv">22</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)
+<span class="kw">lines</span>(x.star,f.star.bar<span class="op">-</span><span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(<span class="kw">diag</span>(cov.f.star)),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">pch=</span><span class="dv">22</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</code></pre></div>
+<p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>We can see that even with only <span class="math inline">\(7\)</span> observations the posterior GP has begun to resemble the true (nonlinear) function very well: over most of the <span class="math inline">\(x\)</span>-axis the mean of the GP lies very close to the true function and, perhaps more importantly, we continue to have an treatment for the uncertainty.</p>
+</div>
+<div id="marginal-likelihood-and-optimisation-of-hyperparameters" class="section level4">
+<h4><span class="header-section-number">4.1.4.2</span> Marginal Likelihood and Optimisation of Hyperparameters</h4>
+<p>Another key aspect of GP regression is the ability to analytically evaluate the marginal likelihood, otherwise referred to as the “model evidence”. The marginal likelihood is the probability of generating the observed datasets under the specified prior. For a GP this would be the probability of seeing the observatins <span class="math inline">\(\mathbf{x}\)</span> under a Gaussian distribtion, <span class="math inline">\(\mathcal{N}(\mathbf{0},K(\mathbf{x},\mathbf{x}))\)</span>. The log marginal likelihood for a noise-free model is:</p>
+<p><span class="math inline">\(\ln p(\mathbf{y}|\mathbf{x}) = -\frac{1}{2}\mathbf{y}^\top [K(\mathbf{x},\mathbf{x})+\sigma_n^2\mathbb{I}]^{-1} \mathbf{y} -\frac{1}{2} \ln |K(\mathbf{x},\mathbf{x})+\sigma_n^2\mathbb{I}| - \frac{n}{2}\ln 2\pi\)</span></p>
+<p>We calculate this in the snippet of code, below, hard-coding a small amount of Gaussian noise:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">calcML &lt;-<span class="st"> </span><span class="cf">function</span>(f,<span class="dt">l=</span><span class="dv">1</span>,<span class="dt">sig=</span><span class="dv">1</span>) {
+  f2 &lt;-<span class="st"> </span><span class="kw">t</span>(f)
+  yt &lt;-<span class="st"> </span>f2[<span class="dv">2</span>,]
+  y  &lt;-<span class="st"> </span>f[,<span class="dv">2</span>]
+  K &lt;-<span class="st"> </span><span class="kw">covSE</span>(f[,<span class="dv">1</span>],f[,<span class="dv">1</span>],l,sig)
+  ML &lt;-<span class="st"> </span><span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>yt<span class="op">%*%</span><span class="kw">ginv</span>(K<span class="op">+</span><span class="fl">0.1</span><span class="op">^</span><span class="dv">2</span><span class="op">*</span><span class="kw">diag</span>(<span class="kw">length</span>(y)))<span class="op">%*%</span>y <span class="op">-</span><span class="fl">0.5</span><span class="op">*</span><span class="kw">log</span>(<span class="kw">det</span>(K)) <span class="op">-</span>(<span class="kw">length</span>(f[,<span class="dv">1</span>])<span class="op">/</span><span class="dv">2</span>)<span class="op">*</span><span class="kw">log</span>(<span class="dv">2</span><span class="op">*</span>pi);
+  <span class="kw">return</span>(ML)
+}</code></pre></div>
+<p>The ability to calculate the marginal likelihood gives us a way to automatically select the hyperparameters. We can increment hyperparameters over a range of values, and choose the values that yield the greatest marginal likelihood. In the example, below, we increment both the length-scale and process variance hyperparameter:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plot3D)
+
+par &lt;-<span class="st"> </span><span class="kw">seq</span>(.<span class="dv">1</span>,<span class="dv">10</span>,<span class="dt">by=</span><span class="fl">0.1</span>)
+ML &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(par)<span class="op">^</span><span class="dv">2</span>), <span class="dt">nrow=</span><span class="kw">length</span>(par), <span class="dt">ncol=</span><span class="kw">length</span>(par))
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(par)) {
+  <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(par)) {
+    ML[i,j] &lt;-<span class="st"> </span><span class="kw">calcML</span>(f,par[i],par[j])
+  }
+}
+<span class="kw">persp3D</span>(<span class="dt">z =</span> ML,<span class="dt">theta =</span> <span class="dv">120</span>)</code></pre></div>
+<p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ind&lt;-<span class="kw">which</span>(ML<span class="op">==</span><span class="kw">max</span>(ML), <span class="dt">arr.ind=</span><span class="ot">TRUE</span>)
+<span class="kw">print</span>(<span class="kw">c</span>(<span class="st">&quot;length-scale&quot;</span>, par[ind[<span class="dv">1</span>]]))</code></pre></div>
+<pre><code>## [1] &quot;length-scale&quot; &quot;2.4&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">c</span>(<span class="st">&quot;process variance&quot;</span>, par[ind[<span class="dv">2</span>]]))</code></pre></div>
+<pre><code>## [1] &quot;process variance&quot; &quot;1.3&quot;</code></pre>
+<p>Here we have performed a grid search to identify the optimal hyperparameters. In actuality, the derivative of the marginal likelihood with respect to the hyperparameters is analytically tractable, allowing us to optimise using gradient search algorithms.</p>
+<p>Exercise 3.6: Try fitting plotting the GP using the optimised hyperparameter values.</p>
+<p>Exercise 3.7: Now try fitting a Gaussian process to one of the gene expression profiles in the Botrytis dataset. Hint: You may need to normalise the time axis. Since this data also contains a high level of noise you will also need to use a covariance function/ML calculation that incorporates noise. The snippet of code, below, does this, with the noise now representing a <span class="math inline">\(3\)</span>rd hyperparameter.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">covSEn &lt;-<span class="st"> </span><span class="cf">function</span>(X1,X2,<span class="dt">l=</span><span class="dv">1</span>,<span class="dt">sig=</span><span class="dv">1</span>,<span class="dt">sigman=</span><span class="fl">0.1</span>) {
+  K &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(X1)<span class="op">*</span><span class="kw">length</span>(X2)), <span class="dt">nrow=</span><span class="kw">length</span>(X1))
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(K)) {
+    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(K)) {
+      
+      K[i,j] &lt;-<span class="st"> </span>sig<span class="op">^</span><span class="dv">2</span><span class="op">*</span><span class="kw">exp</span>(<span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>(<span class="kw">abs</span>(X1[i]<span class="op">-</span>X2[j]))<span class="op">^</span><span class="dv">2</span> <span class="op">/</span>l<span class="op">^</span><span class="dv">2</span>)
+      
+      <span class="cf">if</span> (i<span class="op">==</span>j){
+      K[i,j] &lt;-<span class="st"> </span>K[i,j] <span class="op">+</span><span class="st"> </span>sigman<span class="op">^</span><span class="dv">2</span>
+      }
+      
+    }
+  }
+  <span class="kw">return</span>(K)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">calcMLn &lt;-<span class="st"> </span><span class="cf">function</span>(f,<span class="dt">l=</span><span class="dv">1</span>,<span class="dt">sig=</span><span class="dv">1</span>,<span class="dt">sigman=</span><span class="fl">0.1</span>) {
+  f2 &lt;-<span class="st"> </span><span class="kw">t</span>(f)
+  yt &lt;-<span class="st"> </span>f2[<span class="dv">2</span>,]
+  y  &lt;-<span class="st"> </span>f[,<span class="dv">2</span>]
+  K &lt;-<span class="st"> </span><span class="kw">covSE</span>(f[,<span class="dv">1</span>],f[,<span class="dv">1</span>],l,sig)
+  ML &lt;-<span class="st"> </span><span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>yt<span class="op">%*%</span><span class="kw">ginv</span>(K<span class="op">+</span><span class="kw">diag</span>(<span class="kw">length</span>(y))<span class="op">*</span>sigman<span class="op">^</span><span class="dv">2</span>)<span class="op">%*%</span>y <span class="op">-</span><span class="fl">0.5</span><span class="op">*</span><span class="kw">log</span>(<span class="kw">det</span>(K<span class="op">+</span><span class="kw">diag</span>(<span class="kw">length</span>(y))<span class="op">*</span>sigman<span class="op">^</span><span class="dv">2</span>)) <span class="op">-</span>(<span class="kw">length</span>(f[,<span class="dv">1</span>])<span class="op">/</span><span class="dv">2</span>)<span class="op">*</span><span class="kw">log</span>(<span class="dv">2</span><span class="op">*</span>pi);
+  <span class="kw">return</span>(ML)
+}</code></pre></div>
+</div>
+<div id="model-selection" class="section level4">
+<h4><span class="header-section-number">4.1.4.3</span> Model Selection</h4>
+<p>As well as being a useful criterion for selecting hyperparameters, the marginal likelihood can be used as a basis for selecting models. For example, we might be interested in comparing how well we fit the data using two different covariance functions: a squared exponential covariance function (model 1, <span class="math inline">\(M_1\)</span>) versus a periodic covariance function (model 2, <span class="math inline">\(M_2\)</span>). By taking the ratio of the marginal likelihoods we calculate the <a href="https://en.wikipedia.org/wiki/Bayes_factor">Bayes’ Factor</a> (BF) which allows us to determine which model is the best:</p>
+<p><span class="math inline">\(\mbox{BF} = \frac{ML(M_1)}{ML(M_2)}\)</span>.</p>
+<p>High values for the BF indicate strong evidence for <span class="math inline">\(M_1\)</span> over <span class="math inline">\(M_2\)</span>, whilst low values would indicate the contrary.</p>
+</div>
+<div id="application-1" class="section level4">
+<h4><span class="header-section-number">4.1.4.4</span> Advanced application 1: differential expression of time series</h4>
+<p>Differential expression analysis is concerned with identifying <em>if</em> two sets of data are significantly different from one another. For example, if we measured the expression level of a gene in two different conditions (control versus treatment), you could use an appropriate statistical test to determine whether the expression of that gene had been affected by the treatment. Most statistical tests used for this are not appropriate when dealing with time series data (illustrated in Figure <a href="logistic-regression.html#fig:timeser">4.1</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:timeser"></span>
+<img src="images/TimeSeries.jpg" alt="Differential expression analysis for time series. Here we have two time series with very different behaviour (right). However, as a whole the mean and variance of the time series is identical (left) and the datasets are not differentially expressed using a t-test (p&lt;0.9901)" width="55%" />
+<p class="caption">
+Figure 4.1: Differential expression analysis for time series. Here we have two time series with very different behaviour (right). However, as a whole the mean and variance of the time series is identical (left) and the datasets are not differentially expressed using a t-test (p&lt;0.9901)
+</p>
+</div>
+<p>Gaussian processes regression represents a useful way of modelling time series, and can therefore be used as a basis for detecting differential expression in time series. To do so we write down two competing modes: (i) the two time series are differentially expressed, and are therefore best described by two independent GPs; (ii) the two time series are noisy observations from an identical underlying process, and are therefore best described by a single joint GP.</p>
+<p>Exercise 3.8 (optional): Write a function for determining differential expression for two genes. Hint: you will need to fit <span class="math inline">\(3\)</span> GPs: one to the mock, one to the control, and one to the union of mock and control. You can use the Bayes Factor to determine if the gene is differentially expressed.</p>
+</div>
+<div id="application-2" class="section level4">
+<h4><span class="header-section-number">4.1.4.5</span> Advanced Application 2: Timing of differential expression</h4>
+<p>Nonlinear Bayesian regression represent a powerful tool for modelling time series. In the previous section we have shown how GPs can be used to model if two time series are differentially expressed. More advanced models using GPs aim to identify <em>when</em> two (or more) time series diverge <span class="citation">(Stegle et al. <a href="#ref-Stegle2010robust">2010</a>,<span class="citation">J. Yang et al. (<a href="#ref-yang2016inferring">2016</a>)</span>,<span class="citation">C. A. Penfold et al. (<a href="#ref-penfold2017nonparametric">2017</a>)</span>)</span>. The <a href="https://github.com/ManchesterBioinference/DEtime">DEtime</a> package <span class="citation">(J. Yang et al. <a href="#ref-yang2016inferring">2016</a>)</span> is one way for doing so.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">###install.packages(&quot;devtools&quot;)
+<span class="kw">library</span>(devtools)
+###install_github(&quot;ManchesterBioinference/DEtime&quot;)
+###import(DEtime)
+<span class="kw">library</span>(DEtime)</code></pre></div>
+<p>Within {DEtime}, we can call the function {DEtime_rank} to calculate marginal likelihood ratios for two time series, similar to our application in the previous section. Note that here, the hyperparameters are optimised by gradient search rather than grid searches.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res_rank &lt;-<span class="st"> </span><span class="kw">DEtime_rank</span>(<span class="dt">ControlTimes =</span> Xs, <span class="dt">ControlData =</span> D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,<span class="dv">3</span>], <span class="dt">PerturbedTimes =</span> Xs, <span class="dt">PerturbedData =</span> D[<span class="dv">25</span><span class="op">:</span><span class="dv">48</span>,<span class="dv">3</span>], <span class="dt">savefile=</span><span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## [1] &quot;gene IDs are not provided. Numbers are used instead&quot;
+## rank list saved in DEtime_rank.txt</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#idx &lt;- which(res_rank[,2]&gt;1)</span></code></pre></div>
+<p>For genes that are DE, we identify the timing of divergence between two time series using the function {DEtime_infer} and visualise the plot using the {plot_DEtime} function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw">DEtime_infer</span>(<span class="dt">ControlTimes =</span> Xs, <span class="dt">ControlData =</span> D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,<span class="dv">3</span>], <span class="dt">PerturbedTimes =</span> Xs, <span class="dt">PerturbedData =</span> D[<span class="dv">25</span><span class="op">:</span><span class="dv">48</span>,<span class="dv">3</span>])</code></pre></div>
+<pre><code>## gene IDs are not provided. Numbers are used instead.
+## Testing perturbation time points are not provided. Default one is used.
+## gene 1 is done
+## DEtime inference is done.
+## Please use print_DEtime or plot_DEtime to view the results.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">print_DEtime</code></pre></div>
+<pre><code>## function (DEtimeOutput) 
+## {
+##     cat(&quot;Perturbation point inference results from DEtime package: \n&quot;)
+##     cat(&quot;==========================================================\n&quot;)
+##     print(DEtimeOutput$result, sep = &quot;\t&quot;, zero.print = &quot;.&quot;)
+##     cat(&quot;==========================================================\n&quot;)
+## }
+## &lt;environment: namespace:DEtime&gt;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot_DEtime</span>(res)</code></pre></div>
+<pre><code>## All genes will be plotted 
+## 1 is plotted</code></pre>
+<p>We can do it for all genes using the example below:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw">DEtime_infer</span>(<span class="dt">ControlTimes =</span> Xs, <span class="dt">ControlData =</span> <span class="kw">t</span>(D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,]), <span class="dt">PerturbedTimes =</span> Xs, <span class="dt">PerturbedData =</span> <span class="kw">t</span>(D[<span class="dv">25</span><span class="op">:</span><span class="dv">48</span>,]))</code></pre></div>
+<pre><code>## ControlData is accepted
+## PerturbedData is accepted
+## gene IDs are not provided. Numbers are used instead.
+## Testing perturbation time points are not provided. Default one is used.
+## gene 1 is done
+## gene 2 is done
+## gene 3 is done
+## gene 4 is done
+## gene 5 is done
+## gene 6 is done
+## gene 7 is done
+## gene 8 is done
+## gene 9 is done
+## gene 10 is done
+## gene 11 is done
+## gene 12 is done
+## gene 13 is done
+## gene 14 is done
+## gene 15 is done
+## gene 16 is done
+## gene 17 is done
+## gene 18 is done
+## gene 19 is done
+## gene 20 is done
+## gene 21 is done
+## gene 22 is done
+## gene 23 is done
+## gene 24 is done
+## gene 25 is done
+## gene 26 is done
+## gene 27 is done
+## gene 28 is done
+## gene 29 is done
+## gene 30 is done
+## gene 31 is done
+## gene 32 is done
+## gene 33 is done
+## gene 34 is done
+## gene 35 is done
+## gene 36 is done
+## gene 37 is done
+## gene 38 is done
+## gene 39 is done
+## gene 40 is done
+## gene 41 is done
+## gene 42 is done
+## gene 43 is done
+## gene 44 is done
+## gene 45 is done
+## gene 46 is done
+## gene 47 is done
+## gene 48 is done
+## gene 49 is done
+## gene 50 is done
+## gene 51 is done
+## gene 52 is done
+## gene 53 is done
+## gene 54 is done
+## gene 55 is done
+## gene 56 is done
+## gene 57 is done
+## gene 58 is done
+## gene 59 is done
+## gene 60 is done
+## gene 61 is done
+## gene 62 is done
+## gene 63 is done
+## gene 64 is done
+## gene 65 is done
+## gene 66 is done
+## gene 67 is done
+## gene 68 is done
+## gene 69 is done
+## gene 70 is done
+## gene 71 is done
+## gene 72 is done
+## gene 73 is done
+## gene 74 is done
+## gene 75 is done
+## gene 76 is done
+## gene 77 is done
+## gene 78 is done
+## gene 79 is done
+## gene 80 is done
+## gene 81 is done
+## gene 82 is done
+## gene 83 is done
+## gene 84 is done
+## gene 85 is done
+## gene 86 is done
+## gene 87 is done
+## gene 88 is done
+## gene 89 is done
+## gene 90 is done
+## gene 91 is done
+## gene 92 is done
+## gene 93 is done
+## gene 94 is done
+## gene 95 is done
+## gene 96 is done
+## gene 97 is done
+## gene 98 is done
+## gene 99 is done
+## gene 100 is done
+## gene 101 is done
+## gene 102 is done
+## gene 103 is done
+## gene 104 is done
+## gene 105 is done
+## gene 106 is done
+## gene 107 is done
+## gene 108 is done
+## gene 109 is done
+## gene 110 is done
+## gene 111 is done
+## gene 112 is done
+## gene 113 is done
+## gene 114 is done
+## gene 115 is done
+## gene 116 is done
+## gene 117 is done
+## gene 118 is done
+## gene 119 is done
+## gene 120 is done
+## gene 121 is done
+## gene 122 is done
+## gene 123 is done
+## gene 124 is done
+## gene 125 is done
+## gene 126 is done
+## gene 127 is done
+## gene 128 is done
+## gene 129 is done
+## gene 130 is done
+## gene 131 is done
+## gene 132 is done
+## gene 133 is done
+## gene 134 is done
+## gene 135 is done
+## gene 136 is done
+## gene 137 is done
+## gene 138 is done
+## gene 139 is done
+## gene 140 is done
+## gene 141 is done
+## gene 142 is done
+## gene 143 is done
+## gene 144 is done
+## gene 145 is done
+## gene 146 is done
+## gene 147 is done
+## gene 148 is done
+## gene 149 is done
+## gene 150 is done
+## gene 151 is done
+## gene 152 is done
+## gene 153 is done
+## gene 154 is done
+## gene 155 is done
+## gene 156 is done
+## gene 157 is done
+## gene 158 is done
+## gene 159 is done
+## gene 160 is done
+## gene 161 is done
+## gene 162 is done
+## gene 163 is done
+## gene 164 is done
+## DEtime inference is done.
+## Please use print_DEtime or plot_DEtime to view the results.</code></pre>
+<p>By systematically evaluating the time of divergence for all genes (and visualising the results as a histogram), we can we can begin to shed light on the temporal progression of the infection process.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">as.numeric</span>(res<span class="op">$</span>result[,<span class="dv">2</span>]),<span class="dt">breaks=</span><span class="dv">20</span>)</code></pre></div>
+<p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+</div>
+<div id="scalability" class="section level4">
+<h4><span class="header-section-number">4.1.4.6</span> Scalability</h4>
+<p>Whilst GPs represent a powerful approach to nonlinear regression, they do have some limitations. Computationally, GPs do not scale well with the number of observations, and standard GP approaches are not suitable when we have a very large datasets (thousands of observations). To overcome these limitations, approximate approaches to inference with GPs have been developed.</p>
+</div>
+</div>
+</div>
+<div id="classification" class="section level2">
+<h2><span class="header-section-number">4.2</span> Classification</h2>
+<p>Classification algorithms are a supervised learning techniques that assign data to categorical outputs. For example we may have a continuous input variable, <span class="math inline">\(x\)</span>, and want to learn how that variable maps to a discrete valued output, <span class="math inline">\(y\in [0,1]\)</span>, which might represent two distinct phenotypes “infected” versus “uninfected”.</p>
+<p>This section is slit as follows in section <a href="logistic-regression.html#logistic-regression">4</a> we introduce logistic regression, a simple classification algorithm based on linear models, and in section @ref(#gp-classification) we demonstrate the use of nonlinear classifiers based on Gaussian process, highlighting when GP classifiers are more appropriate.</p>
+<div id="logistic-regression" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Logistic regression</h3>
+<p>The type of linear regression models we’ve been using up to this point deal with real-valued <span class="math inline">\(\mathbf{y}\)</span>, and are therefore not appropriate for classification. To deal with cases where <span class="math inline">\(\mathbf{y}\)</span> is a binary outcome, we instead fit a linear model to the logit (natural log) of the log-odds ratio:</p>
+<p><span class="math inline">\(\ln \biggl{(}\frac{p(x)}{1-p(x)}\biggr{)} = c + m_1 x_1.\)</span></p>
+<p>Although this model is not immediately intuitive, if we solve for <span class="math inline">\(p(x)\)</span> we get:</p>
+<p><span class="math inline">\(p(x) = \frac{1}{1+\exp(-c - m_1 x_1)}\)</span>.</p>
+<p>We have thus specified a function that indicates the probability of success for a given value of <span class="math inline">\(x\)</span> e.g., <span class="math inline">\(P(y=1|x)\)</span>. Note that in our observation data <span class="math inline">\(\mathbf{y}\)</span> itself can only take on one of two values. We can think of our data as a being a sample from a Bernoulli trial, and we can therefore write down the likelihood for the observation:</p>
+<p><span class="math inline">\(\mathcal{L}(c,m_1) = \prod_{i=1}^n p(x_i)^{y_i} (1-p(x_i)^{1-y_i})\)</span>.</p>
+<p>In general, these models do not admit a closed form solution, but can be solved iteratively via maximum likelihood, that is by finding the values <span class="math inline">\((c,m_1)\)</span> that return the greatest value of <span class="math inline">\(\mathcal{L}(c,m_1)\)</span>. Within {caret}, logistic regression can applied using the {glm} function.</p>
+<p>To illustate this we will again make use of our plant dataset. Recall that the second column represents a binary variable indicative of infection status e.g., population growth of <em>Botrytis cinerea</em> using statistical enrichment of <em>Botrytis</em> Tubulin versus the earliest time point.</p>
+<p>In the excercises, below, we will aim to learn a set of markers capable of predicting infection status using logistic regression. To begin with, let’s see if <em>time</em> is informative of infection status:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pROC)</code></pre></div>
+<pre><code>## Type &#39;citation(&quot;pROC&quot;)&#39; for a citation.</code></pre>
+<pre><code>## 
+## Attaching package: &#39;pROC&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     cov, smooth, var</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ROCR)</code></pre></div>
+<pre><code>## Loading required package: gplots</code></pre>
+<pre><code>## 
+## Attaching package: &#39;gplots&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:stats&#39;:
+## 
+##     lowess</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">warn=</span><span class="op">-</span><span class="dv">1</span>)
+mod_fit &lt;-<span class="st"> </span><span class="kw">train</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D<span class="op">$</span>Time, <span class="dt">y =</span> <span class="kw">as.factor</span>(D<span class="op">$</span>Class)), <span class="dt">method=</span><span class="st">&quot;glm&quot;</span>, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)</code></pre></div>
+<p>To evaluate the model, we will load in a second (related) dataset, containnig a new set of observations not seen by the model, and predict infection status.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Dpred &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;data/Arabidopsis/Arabidopsis_Botrytis_pred_transpose_3.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">row.names=</span><span class="dv">1</span>)
+
+prob &lt;-<span class="st"> </span><span class="kw">predict</span>(mod_fit, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> Dpred<span class="op">$</span>Time, <span class="dt">y =</span> <span class="kw">as.factor</span>(Dpred<span class="op">$</span>Class)), <span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)
+pred &lt;-<span class="st"> </span><span class="kw">prediction</span>(prob<span class="op">$</span><span class="st">`</span><span class="dt">1</span><span class="st">`</span>, <span class="kw">as.factor</span>(Dpred<span class="op">$</span>Class))</code></pre></div>
+<p>To evaluate how well the algorithm has done, we can calculate a variety of summary statistics. For example the number of true positives, true negatives, false positive and false negatives. A useful summary is to plot the ROC curve (false positive rate versus true positive rate) and calculate the area under that curve. For a perfect algorithm, the area under this curve (AUC) will be equal to <span class="math inline">\(1\)</span>, whereas random assignment would give an area of <span class="math inline">\(0.5\)</span>. In the example below, we will calculate the AUC for a logistic regression model:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;tpr&quot;</span>, <span class="dt">x.measure =</span> <span class="st">&quot;fpr&quot;</span>)
+<span class="kw">plot</span>(perf)</code></pre></div>
+<p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">auc &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;auc&quot;</span>)
+auc &lt;-<span class="st"> </span>auc<span class="op">@</span>y.values[[<span class="dv">1</span>]]
+auc</code></pre></div>
+<pre><code>## [1] 0.6111111</code></pre>
+<p>Okay, so a score of <span class="math inline">\(0.61\)</span> is certainly better than random, but not particularly good. This is perhaps not surprising, as half the time series (the control) is uninfected over the entirety of the time series, whilst in the second times series (infection) Botrytis is able to infect from around time point 8 onwards. The slight better than random performence seems to arise by the slight bias in the number of instances of each class.</p>
+<p>In the example, below, we instead try to regress infection status against gene expression levels. The idea, then, is to identify genes that have expression values indicative of <em>Botrytis</em> infection.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aucscore &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">164</span>), <span class="dv">1</span>, <span class="dv">164</span>)
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq</span>(<span class="dv">3</span>,<span class="dv">164</span>)){
+mod_fit &lt;-<span class="st"> </span><span class="kw">train</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D[,i], <span class="dt">y =</span> <span class="kw">as.factor</span>(D<span class="op">$</span>Class)), <span class="dt">method=</span><span class="st">&quot;glm&quot;</span>, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)
+prob &lt;-<span class="st"> </span><span class="kw">predict</span>(mod_fit, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> Dpred[,i], <span class="dt">y =</span> <span class="kw">as.factor</span>(Dpred<span class="op">$</span>Class)), <span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)
+pred &lt;-<span class="st"> </span><span class="kw">prediction</span>(prob<span class="op">$</span><span class="st">`</span><span class="dt">1</span><span class="st">`</span>, <span class="kw">as.factor</span>(Dpred<span class="op">$</span>Class))
+perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;tpr&quot;</span>, <span class="dt">x.measure =</span> <span class="st">&quot;fpr&quot;</span>)
+auc &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;auc&quot;</span>)
+aucscore[i] &lt;-<span class="st"> </span>auc<span class="op">@</span>y.values[[<span class="dv">1</span>]]
+}
+
+<span class="kw">plot</span>(aucscore[<span class="dv">1</span>,<span class="dv">3</span><span class="op">:</span><span class="kw">ncol</span>(aucscore)],<span class="dt">ylab=</span><span class="st">&quot;AUC&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;gene index&quot;</span>)</code></pre></div>
+<p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p>We note that, several genes in the list apear to have AUC scores much greater than 0.6. We can take a look at some of the genes with high predictive power:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">genenames[<span class="kw">which</span>(aucscore<span class="op">&gt;</span><span class="fl">0.8</span>)]</code></pre></div>
+<pre><code>##  [1] &quot;AT1G29990&quot; &quot;AT1G67170&quot; &quot;AT2G21380&quot; &quot;AT2G28890&quot; &quot;AT2G35500&quot;
+##  [6] &quot;AT2G45660&quot; &quot;AT3G09980&quot; &quot;AT3G11590&quot; &quot;AT3G13720&quot; &quot;AT3G25710&quot;
+## [11] &quot;AT3G44720&quot; &quot;AT3G48150&quot; &quot;AT4G00710&quot; &quot;AT4G02150&quot; &quot;AT4G16380&quot;
+## [16] &quot;AT4G19700&quot; &quot;AT4G26450&quot; &quot;AT4G28640&quot; &quot;AT4G34710&quot; &quot;AT4G36970&quot;
+## [21] &quot;AT4G39050&quot; &quot;AT5G11980&quot; &quot;AT5G22630&quot; &quot;AT5G24660&quot; &quot;AT5G43700&quot;
+## [26] &quot;AT5G50010&quot; &quot;AT5G56250&quot;</code></pre>
+<p>Unsurprisingly, amongst these genes we see a variety whose proteins are known to be targeted by various pathogen effectors, and are therefore directly implicated in immune response (Table 3.1).</p>
+<table>
+<thead>
+<tr class="header">
+<th>Gene</th>
+<th>Effector</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AT3G25710</td>
+<td>ATR1_ASWA1</td>
+</tr>
+<tr class="even">
+<td>AT4G19700</td>
+<td>ATR13_NOKS1</td>
+</tr>
+<tr class="odd">
+<td>AT4G34710</td>
+<td>ATR13_NOKS1</td>
+</tr>
+<tr class="even">
+<td>AT4G39050</td>
+<td>ATR13_NOKS1</td>
+</tr>
+<tr class="odd">
+<td>AT5G24660</td>
+<td>ATR13_NOKS1</td>
+</tr>
+<tr class="even">
+<td>AT4G00710</td>
+<td>AvrRpt2_Pto JL1065_CatalyticDead</td>
+</tr>
+<tr class="odd">
+<td>AT4G16380</td>
+<td>HARXL44</td>
+</tr>
+<tr class="even">
+<td>AT2G45660</td>
+<td>HARXL45</td>
+</tr>
+<tr class="odd">
+<td>AT5G11980</td>
+<td>HARXL73</td>
+</tr>
+<tr class="even">
+<td>AT2G35500</td>
+<td>HARXLL445</td>
+</tr>
+<tr class="odd">
+<td>AT1G67170</td>
+<td>HARXLL470_WACO9</td>
+</tr>
+<tr class="even">
+<td>AT4G36970</td>
+<td>HARXLL470_WACO9</td>
+</tr>
+<tr class="odd">
+<td>AT5G56250</td>
+<td>HARXLL470_WACO9</td>
+</tr>
+<tr class="even">
+<td>AT3G09980</td>
+<td>HARXLL516_WACO9</td>
+</tr>
+<tr class="odd">
+<td>AT5G50010</td>
+<td>HARXLL60</td>
+</tr>
+<tr class="even">
+<td>AT3G44720</td>
+<td>HARXLL73_2_WACO9</td>
+</tr>
+<tr class="odd">
+<td>AT5G22630</td>
+<td>HARXLL73_2_WACO9</td>
+</tr>
+<tr class="even">
+<td>AT5G43700</td>
+<td>HopH1_Psy B728A</td>
+</tr>
+</tbody>
+</table>
+<p>Table 3.1: Genes predictive of infection status of <em>Botrytis cinerea</em> whose proteins are targeted by effectors of a variety of pathogen</p>
+<p>Let’s take a look at what the data looks like. In this case we plot the training data labels and the fit from the logistic regression i.e., <span class="math inline">\(p(\mathbf{y}=1|\mathbf{x})\)</span>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bestpredictor &lt;-<span class="st"> </span><span class="kw">which</span>(aucscore<span class="op">==</span><span class="kw">max</span>(aucscore))
+
+best_mod_fit &lt;-<span class="st"> </span><span class="kw">train</span>(y <span class="op">~</span>., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D[,bestpredictor], <span class="dt">y =</span> <span class="kw">as.factor</span>(D<span class="op">$</span>Class)), <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>, <span class="dt">method=</span><span class="st">&quot;glm&quot;</span>)
+
+<span class="kw">plot</span>(D[,bestpredictor],D<span class="op">$</span>Class,<span class="dt">xlab=</span>genenames[bestpredictor],<span class="dt">ylab=</span><span class="st">&quot;Class&quot;</span>)
+<span class="kw">lines</span>(<span class="kw">seq</span>(<span class="kw">min</span>(D[,bestpredictor]),<span class="kw">max</span>(D[,bestpredictor]),<span class="dt">length=</span><span class="dv">200</span>),<span class="kw">predict</span>(best_mod_fit,<span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="kw">min</span>(D[,bestpredictor]),<span class="kw">max</span>(D[,bestpredictor]),<span class="dt">length=</span><span class="dv">200</span>)),<span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)[,<span class="dv">2</span>])</code></pre></div>
+<p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+</div>
+<div id="gp-classification" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> GP classification</h3>
+<p>Classification approaches using Gaussian processes are also possible. Unlike Gaussian process regression, Gaussian process classification is not analytically tractable, and we must instead use approximations. A GP classified has been implemented in {caret} using a polynomial kernel, and can be called using the following code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_fit2 &lt;-<span class="st"> </span><span class="kw">train</span>(y<span class="op">~</span>., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D<span class="op">$</span>Time, <span class="dt">y =</span> <span class="kw">as.factor</span>(D<span class="op">$</span>Class)), <span class="dt">method=</span><span class="st">&quot;gaussprPoly&quot;</span>)</code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;kernlab&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
+## 
+##     alpha</code></pre>
+<p>Again, we can systematically evaluate how well different genes predict the observed phenotype.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aucscore2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">164</span>), <span class="dv">1</span>, <span class="dv">164</span>)
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq</span>(<span class="dv">3</span>,<span class="dv">164</span>)){
+mod_fit2 &lt;-<span class="st"> </span><span class="kw">gausspr</span>(D[,i], <span class="kw">as.factor</span>(D<span class="op">$</span>Class), <span class="dt">scaled =</span> <span class="ot">TRUE</span>, <span class="dt">type=</span> <span class="ot">NULL</span>, <span class="dt">kernel=</span><span class="st">&quot;rbfdot&quot;</span>, <span class="dt">kpar=</span><span class="st">&quot;automatic&quot;</span>, <span class="dt">variance.model =</span> <span class="ot">FALSE</span>, <span class="dt">tol=</span><span class="fl">0.0005</span>, <span class="dt">cross=</span><span class="dv">0</span>, <span class="dt">fit=</span><span class="ot">TRUE</span>) 
+prob&lt;-<span class="kw">predict</span>(mod_fit2, Dpred[,i], <span class="dt">type=</span><span class="st">&quot;probabilities&quot;</span>)
+pred &lt;-<span class="st"> </span><span class="kw">prediction</span>(prob[,<span class="dv">2</span>], <span class="kw">as.factor</span>(Dpred<span class="op">$</span>Class))
+perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;tpr&quot;</span>, <span class="dt">x.measure =</span> <span class="st">&quot;fpr&quot;</span>)
+auc &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;auc&quot;</span>)
+aucscore2[i] &lt;-<span class="st"> </span>auc<span class="op">@</span>y.values[[<span class="dv">1</span>]]
+}</code></pre></div>
+<pre><code>## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
+## Using automatic sigma estimation (sigest) for RBF or laplace kernel</code></pre>
+<p>We can compare the performence against the logistic regression:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">t</span>(aucscore),<span class="kw">t</span>(aucscore2),<span class="dt">xlab=</span><span class="st">&quot;Logistic&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;GP&quot;</span>)</code></pre></div>
+<p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p>Note that the results are, similar. Dissapointingly so. We have gone to the effort to utilise a far more powerful method and the empircal results are no better, and in some cases are actually worse.</p>
+<p>GP and other nonlinear approaches become necesary if, for example, the data is nonlinear. To illustrate this we will construct an artifical dataset in which low expression levels of a gene indicate no infection, with moderate levels indicating infection; very high levels of the gene, however, do not indicate infected status, but only arise artifically, due to e.g., inducible overexpression. For this dataset very high levels are thus labelled as uninfected. Below we construct this <em>in silico</em> dataset based loosley on the expression levels of AT3G44720.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xtrain =<span class="st"> </span>D[,bestpredictor] 
+
+ytrain =<span class="st"> </span><span class="kw">as.numeric</span>(D<span class="op">$</span>Class)
+ytrain[<span class="kw">which</span>(xtrain<span class="op">&gt;</span><span class="fl">12.5</span>)]=<span class="dv">0</span>
+ytrain[<span class="kw">which</span>(xtrain<span class="op">&lt;</span><span class="dv">10</span>)]=<span class="dv">0</span>
+ytrain =<span class="st"> </span><span class="kw">as.factor</span>(ytrain)
+
+xpred =<span class="st"> </span>Dpred[,bestpredictor] 
+ypred =<span class="st"> </span><span class="kw">as.numeric</span>(Dpred<span class="op">$</span>Class)
+ypred[<span class="kw">which</span>(xpred<span class="op">&gt;</span><span class="fl">12.5</span>)]=<span class="dv">0</span>
+ypred[<span class="kw">which</span>(xpred<span class="op">&lt;</span><span class="dv">10</span>)]=<span class="dv">0</span>
+ypred =<span class="st"> </span><span class="kw">as.factor</span>(ypred)</code></pre></div>
+<p>Let’s first fit a logistic model and visualise the result:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_fit3 &lt;-<span class="st"> </span><span class="kw">train</span>(y <span class="op">~</span>., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> xtrain, <span class="dt">y=</span> <span class="kw">as.factor</span>(ytrain)), <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;glm&quot;</span>)
+
+<span class="kw">plot</span>(xtrain,<span class="kw">as.numeric</span>(ytrain)<span class="op">-</span><span class="dv">1</span>,<span class="dt">xlab=</span><span class="st">&quot;Marker gene&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Class&quot;</span>)
+
+<span class="kw">lines</span>(<span class="kw">seq</span>(<span class="kw">min</span>(xtrain),<span class="kw">max</span>(xtrain),<span class="dt">length=</span><span class="dv">200</span>),<span class="kw">predict</span>(mod_fit3,<span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="kw">min</span>(xtrain),<span class="kw">max</span>(xtrain),<span class="dt">length=</span><span class="dv">200</span>),<span class="dt">y=</span> <span class="kw">matrix</span>(<span class="dv">200</span>,<span class="dv">1</span>,<span class="dv">1</span>)),<span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)[,<span class="dv">2</span>])</code></pre></div>
+<p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_fit3<span class="op">$</span>results<span class="op">$</span>Accuracy</code></pre></div>
+<pre><code>## [1] 0.8660466</code></pre>
+<p>We can see from the plot that the model fit is very poor. However, if we look at the accuracy (printed at the bottom) the result appear to be good. This is due to the skewed number of samples from each class: there are far more non infected samples than there are infected, which means that if the model predicts uninfected for every instance, it will be correct more than it’s incorrect. We can similary check the result on our test dataset:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prob&lt;-<span class="kw">predict</span>(mod_fit3, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">x =</span>xpred, <span class="dt">y =</span> <span class="kw">as.factor</span>(ypred)), <span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)
+pred &lt;-<span class="st"> </span><span class="kw">prediction</span>(prob[,<span class="dv">2</span>], ypred)
+perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;tpr&quot;</span>, <span class="dt">x.measure =</span> <span class="st">&quot;fpr&quot;</span>)
+auc &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;auc&quot;</span>)
+auc &lt;-<span class="st"> </span>auc<span class="op">@</span>y.values[[<span class="dv">1</span>]]
+auc</code></pre></div>
+<pre><code>## [1] 0.7104377</code></pre>
+<p>We can now instead attempt to take advantage the extra flexibility of GPs.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_fit2 &lt;-<span class="st"> </span><span class="kw">gausspr</span>(y<span class="op">~</span>x,<span class="dt">x=</span>xtrain, <span class="dt">y=</span>ytrain, <span class="dt">scaled =</span> <span class="ot">TRUE</span>, <span class="dt">type=</span> <span class="ot">NULL</span>, <span class="dt">kernel=</span><span class="st">&quot;rbfdot&quot;</span>, <span class="dt">kpar=</span><span class="st">&quot;automatic&quot;</span>, <span class="dt">variance.model =</span> <span class="ot">FALSE</span>, <span class="dt">tol=</span><span class="fl">0.0005</span>, <span class="dt">cross=</span><span class="dv">0</span>, <span class="dt">fit=</span><span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## Using automatic sigma estimation (sigest) for RBF or laplace kernel</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(xtrain,<span class="kw">as.numeric</span>(ytrain)<span class="op">-</span><span class="dv">1</span>,<span class="dt">xlab=</span><span class="st">&quot;Marker gene&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Class&quot;</span>)
+<span class="kw">lines</span>(<span class="kw">seq</span>(<span class="kw">min</span>(xtrain),<span class="kw">max</span>(xtrain),<span class="dt">length=</span><span class="dv">200</span>),<span class="kw">predict</span>(mod_fit3,<span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="kw">min</span>(xtrain),<span class="kw">max</span>(xtrain),<span class="dt">length=</span><span class="dv">200</span>),<span class="dt">y=</span> <span class="kw">matrix</span>(<span class="dv">200</span>,<span class="dv">1</span>,<span class="dv">1</span>)),<span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)[,<span class="dv">2</span>])
+<span class="kw">lines</span>(<span class="kw">seq</span>(<span class="kw">min</span>(xtrain),<span class="kw">max</span>(xtrain),<span class="dt">length=</span><span class="dv">200</span>),<span class="kw">predict</span>(mod_fit2,<span class="kw">seq</span>(<span class="kw">min</span>(xtrain),<span class="kw">max</span>(xtrain),<span class="dt">length=</span><span class="dv">200</span>), <span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)[,<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
+<p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prob2&lt;-kernlab<span class="op">::</span><span class="kw">predict</span>(mod_fit2, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">x =</span>xpred), <span class="dt">type=</span><span class="st">&quot;probabilities&quot;</span>)
+prob&lt;-<span class="kw">predict</span>(mod_fit2, xpred, <span class="dt">type=</span><span class="st">&quot;probabilities&quot;</span>)
+pred &lt;-<span class="st"> </span><span class="kw">prediction</span>(prob2[,<span class="dv">2</span>], ypred)
+perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;tpr&quot;</span>, <span class="dt">x.measure =</span> <span class="st">&quot;fpr&quot;</span>)
+auc &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;auc&quot;</span>)
+auc &lt;-<span class="st"> </span>auc<span class="op">@</span>y.values[[<span class="dv">1</span>]]
+auc</code></pre></div>
+<pre><code>## [1] 0.8193042</code></pre>
+<p>We can see that this is a much better model, both in terms of the model fit which has attempted to find a nonlinear classifier, and in terms of the AUC score.</p>
+</div>
+<div id="other-classification-approaches." class="section level3">
+<h3><span class="header-section-number">4.2.3</span> Other classification approaches.</h3>
+<p>Quite often in ML we are interested in predicting class labels with maximum accuracy. That is, we are less concerned about intepreting what our function says about the system, and are only interested in our ability to predict <span class="math inline">\(\mathbf{y}*\)</span> at the new locations <span class="math inline">\(\mathbf{X}*\)</span>.</p>
+<p>A variety of classifiers are availble in {caret}, including those based on random forests and support vector machines, as well as those based on neural networks. In the example, below, we use some of these approaches to predict infection status from expression data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;stepPlr&quot;</span>)
+<span class="kw">library</span>(<span class="st">&quot;party&quot;</span>)</code></pre></div>
+<pre><code>## Loading required package: grid</code></pre>
+<pre><code>## Loading required package: mvtnorm</code></pre>
+<pre><code>## Loading required package: modeltools</code></pre>
+<pre><code>## Loading required package: stats4</code></pre>
+<pre><code>## 
+## Attaching package: &#39;modeltools&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:kernlab&#39;:
+## 
+##     prior</code></pre>
+<pre><code>## The following object is masked from &#39;package:plyr&#39;:
+## 
+##     empty</code></pre>
+<pre><code>## The following object is masked from &#39;package:lme4&#39;:
+## 
+##     refit</code></pre>
+<pre><code>## Loading required package: strucchange</code></pre>
+<pre><code>## Loading required package: zoo</code></pre>
+<pre><code>## 
+## Attaching package: &#39;zoo&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     as.Date, as.Date.numeric</code></pre>
+<pre><code>## Loading required package: sandwich</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;kernlab&quot;</span>)
+mod_fit1 &lt;-<span class="st"> </span><span class="kw">train</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D<span class="op">$</span>AT3G44720, <span class="dt">y =</span> <span class="kw">as.factor</span>(D<span class="op">$</span>Class)), <span class="dt">method=</span><span class="st">&quot;plr&quot;</span>)
+
+mod_fit2 &lt;-<span class="st"> </span><span class="kw">train</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D<span class="op">$</span>AT3G44720, <span class="dt">y =</span> <span class="kw">as.factor</span>(D<span class="op">$</span>Class)), <span class="dt">method=</span><span class="st">&quot;cforest&quot;</span>)
+
+mod_fit3 &lt;-<span class="st"> </span><span class="kw">train</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D<span class="op">$</span>AT3G44720, <span class="dt">y =</span> <span class="kw">as.factor</span>(D<span class="op">$</span>Class)), <span class="dt">method=</span><span class="st">&quot;svmRadialWeights&quot;</span>)</code></pre></div>
+<p>Although we can run a variety of algorithms and check the accuracy of their predictions seperately, another approach would be to combine predicitons to achieve increased accuracy. More information on ensemble learning is available from <a href="https://cran.r-project.org/web/packages/caretEnsemble/vignettes/caretEnsemble-intro.html">CRAN</a>.</p>
+</div>
+</div>
+<div id="resources" class="section level2">
+<h2><span class="header-section-number">4.3</span> Resources</h2>
+<p>A variety of examples using {caret} to perform regression and classification have been implemented <a href="https://github.com/tobigithub/caret-machine-learning">here</a>.</p>
+<p>More comprehensive Gaussian process packages are available including the Matlab package <a href="http://www.gaussianprocess.org/gpml/code/matlab/doc/">GPML</a>, and Python package <a href="https://github.com/SheffieldML/GPy">GPy</a>. GP code based on <a href="https://www.tensorflow.org">Tensorflow</a> is also available in the form of <a href="http://gpflow.readthedocs.io/en/latest/intro.html">GPflow</a> and <a href="https://github.com/GPflow/GPflowOpt">GPflowopt</a>.</p>
+<p>======= ## Exercises</p>
+<p>Solutions to exercises can be found in appendix <a href="solutions-logistic-regression.html#solutions-logistic-regression">C</a>.</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-windram2012arabidopsis">
+<p>Windram, Oliver, Priyadharshini Madhou, Stuart McHattie, Claire Hill, Richard Hickman, Emma Cooke, Dafyd J Jenkins, et al. 2012. “Arabidopsis Defense Against Botrytis Cinerea: Chronology and Regulation Deciphered by High-Resolution Temporal Transcriptomic Analysis.” <em>The Plant Cell</em> 24 (9). Am Soc Plant Biol: 3530–57.</p>
+</div>
+<div id="ref-Williams2006">
+<p>Williams, Christopher KI, and Carl Edward Rasmussen. 2006. <em>Gaussian Processes for Machine Learning</em>. Vol. 2. the MIT Press.</p>
+</div>
+<div id="ref-Stegle2010robust">
+<p>Stegle, Oliver, Katherine J Denby, Emma J Cooke, David L Wild, Zoubin Ghahramani, and Karsten M Borgwardt. 2010. “A Robust Bayesian Two-Sample Test for Detecting Intervals of Differential Gene Expression in Microarray Time Series.” <em>Journal of Computational Biology</em> 17 (3). Mary Ann Liebert, Inc. 140 Huguenot Street, 3rd Floor New Rochelle, NY 10801 USA: 355–67. <a href="http://online.liebertpub.com/doi/abs/10.1089/cmb.2009.0175" class="uri">http://online.liebertpub.com/doi/abs/10.1089/cmb.2009.0175</a>.</p>
+</div>
+<div id="ref-yang2016inferring">
+<p>Yang, Jing, Christopher A Penfold, Murray R Grant, and Magnus Rattray. 2016. “Inferring the Perturbation Time from Biological Time Course Data.” <em>Bioinformatics</em>. Oxford Univ Press, btw329.</p>
+</div>
+<div id="ref-penfold2017nonparametric">
+<p>Penfold, Christopher Andrew, Anastasiya Sybirna, John Reid, Yun Huang, Lorenz Wernisch, Zoubin Ghahramani, Murray Grant, and M Azim Surani. 2017. “Nonparametric Bayesian Inference of Transcriptional Branching and Recombination Identifies Regulators of Early Human Germ Cell Development.” <em>bioRxiv</em>. Cold Spring Harbor Labs Journals, 167684.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="linear-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="dimensionality-reduction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/bioinformatics-training/intro-machine-learning/edit/master/03-logistic-regression.Rmd",
+"text": "Edit"
+},
+"download": ["intro-machine-learning.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
