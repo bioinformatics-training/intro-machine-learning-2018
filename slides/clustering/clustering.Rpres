@@ -8,6 +8,7 @@ Clustering
 #date: `r format(Sys.time(), '%d %B, %Y')`
 autosize: true
 transition: rotate
+css: custom.css
 
 Clustering
 ===
@@ -16,41 +17,348 @@ Clustering attempts to find groups (clusters) of similar objects. The members of
 
 Methods of clustering can be broadly divided into two types:
 
-**Hierarchic** techniques produce dendrograms (trees) through a process of division or agglomeration.
+- **Hierarchic** techniques produce dendrograms (trees) through a process of division or agglomeration.
 
-**Partitioning** algorithms divide objects into non-overlapping subsets (examples include k-means and DBSCAN)
+- **Partitioning** algorithms divide objects into non-overlapping subsets (examples include k-means and DBSCAN)
 
 
-Hierarchical clustering
+========================
+```{r clusterTypes, fig.cap='Example clusters. **A**, *blobs*; **B**, *aggregation* [@Gionis2007]; **C**, *noisy moons*; **D**, *different density*; **E**, *anisotropic distributions*; **F**, *no structure*.', out.width='80%', fig.asp=1.2, fig.align='center', echo=F}
+library(ggplot2)
+library(GGally)
+setwd("../../")
+blobs <- read.csv("data/example_clusters/blobs.csv", header=F)
+aggregation <- read.table("data/example_clusters/aggregation.txt")
+noisy_moons <- read.csv("data/example_clusters/noisy_moons.csv", header=F)
+diff_density <- read.csv("data/example_clusters/different_density.csv", header=F)
+aniso <- read.csv("data/example_clusters/aniso.csv", header=F)
+no_structure <- read.csv("data/example_clusters/no_structure.csv", header=F)
+
+plotList <- list(
+qplot(x=V1, y=V2, data=blobs, geom="point", size=I(0.2)) +
+  annotate("text", x=(0.01 * (max(blobs$V1)-min(blobs$V1))) + min(blobs$V1),
+           y=(0.9 * (max(blobs$V2)-min(blobs$V2))) + min(blobs$V2),
+           label ="A", size=8, col="blue"),
+qplot(x=V1, y=V2, data=aggregation, geom="point", size=I(0.2)) +
+  annotate("text", x=(0.01 * (max(aggregation$V1)-min(aggregation$V1))) + min(aggregation$V1),
+           y=(0.9 * (max(aggregation$V2)-min(aggregation$V2))) + min(aggregation$V2),
+           label="B", size=8, col="blue"),
+qplot(x=V1, y=V2, data=noisy_moons, geom="point", size=I(0.2)) +
+  annotate("text", x=(0.01 * (max(noisy_moons$V1)-min(noisy_moons$V1))) + min(noisy_moons$V1),
+           y=(0.9 * (max(noisy_moons$V2)-min(noisy_moons$V2))) + min(noisy_moons$V2),
+           label="C", size=8, col="blue"),
+qplot(x=V1, y=V2, data=diff_density, geom="point", size=I(0.2)) +
+  annotate("text", x=(0.01 * (max(diff_density$V1)-min(diff_density$V1))) + min(diff_density$V1),
+           y=(0.9 * (max(diff_density$V2)-min(diff_density$V2))) + min(diff_density$V2),
+           label="D", size=8, col="blue"),
+qplot(x=V1, y=V2, data=aniso, geom="point", size=I(0.2)) +
+  annotate("text", x=(0.01 * (max(aniso$V1)-min(aniso$V1))) + min(aniso$V1),
+           y=(0.9 * (max(aniso$V2)-min(aniso$V2))) + min(aniso$V2),
+           label="E", size=8, col="blue"),
+qplot(x=V1, y=V2, data=no_structure, geom="point", size=I(0.2)) +
+  annotate("text", x=(0.01 * (max(no_structure$V1)-min(no_structure$V1))) + min(no_structure$V1),
+           y=(0.9 * (max(no_structure$V2)-min(no_structure$V2))) + min(no_structure$V2),
+           label="F", size=8, col="blue")
+)
+
+pm <- ggmatrix(
+  plotList, nrow=2, ncol=3, showXAxisPlotLabels = F, showYAxisPlotLabels = F
+) + theme_bw()
+
+pm
+```
+
+
+Distance metrics
 ========================================================
 type: section
 
+Euclidean distance
 ========================================================
+```{r euclideanDistanceDiagram, fig.cap='Euclidean distance.', out.width='75%', fig.asp=0.9, fig.align='center', echo=F}
+par(mai=c(0.8,0.8,0.1,0.1))
+x <- c(0.75,4.5)
+y <- c(2.5,4.5)
+plot(x, y, xlim=range(0,5), ylim=range(0,5), cex=5, col="steelblue", pch=16, cex.lab=1.5)
+segments(x[1], y[1], x[2], y[2], lwd=4, col="grey30")
+text(0.75,2, expression(paste('p(x'[1],'y'[1],')')), cex=1.7)
+text(4.5,4, expression(paste('q(x'[2],'y'[2],')')), cex=1.7)
+text(2.5,0.5, expression(paste('dist(p,q)'==sqrt((x[2]-x[1])^2 + (y[2]-y[1])^2))), cex=1.7)
+```
+
+Hierarchic agglomerative
+========================================================
+type: section
+
+
+========================================================
+Building a dendrogram
 ![](img/hclust_demo_0.svg)
 
 ========================================================
-
+Building a dendrogram continued
 ![](img/hclust_demo_1.svg)
 
 ========================================================
+Building a dendrogram continued
 ![](img/hclust_demo_2.svg)
 
 ========================================================
+Building a dendrogram continued
 ![](img/hclust_demo_3.svg)
 
 ========================================================
+Building a dendrogram continued
 ![](img/hclust_demo_4.svg)
 
 ========================================================
+Building a dendrogram continued
 ![](img/hclust_demo_5.svg)
 
 ========================================================
+
+Linkage algorithms
+========================================================
+type: sub-section
+
+
+========================================================
+```{r echo=F}
+m <- matrix(c(rep(NA,5),
+       2,rep(NA,4),
+       6,5,rep(NA,3),
+       10,10,5,rep(NA,2),
+       9,8,3,4,NA),ncol=5,byrow=T,
+       dimnames=list(LETTERS[1:5], LETTERS[1:5])
+)
+
+mDisplay <- matrix(c(
+       2,rep("",3),
+       6,5,rep("",2),
+       10,10,5,rep("",1),
+       9,8,3,4),ncol=4,byrow=T,
+       dimnames=list(LETTERS[2:5], LETTERS[1:4])
+)
+
+d <- as.dist(m)
+```
+
+Distance matrix
+
+```{r distance-matrix, tidy=FALSE, echo=F}
+knitr::kable(
+  mDisplay, caption = 'Example distance matrix',
+  booktabs = TRUE
+)
+```
+
+
+```{r echo=F}
+hclustSingle <- hclust(d, method="single")
+hclustComplete <- hclust(d, method="complete")
+hclustAverage <- hclust(d, method="average")
+```
+
+Merge distances
+
+```{r distance-merge, tidy=FALSE, echo=F}
+Single <- c(0,hclustSingle$height)
+Complete <- c(0,hclustComplete$height)
+Average <- c(0,hclustAverage$height)
+Groups <- c("A,B,C,D,E", "(A,B),C,D,E", "(A,B),(C,E),D", "(A,B)(C,D,E)", "(A,B,C,D,E)")
+distanceMerge <- data.frame(Groups,Single,Complete,Average)
+knitr::kable(
+  distanceMerge, caption = 'Merge distances for objects in the example distance matrix using three different linkage methods.',
+  booktabs = TRUE
+)
+
+```
+
+==================================
+
+```{r linkageComparison, fig.cap='Dendrograms for the example distance matrix using three different linkage methods. ', out.width='100%', fig.asp=0.3, fig.align='center', fig.show='hold',echo=F}
+library(ggplot2)
+library(ggdendro)
+
+dend_single <- as.dendrogram(hclustSingle)
+dend_complete <- as.dendrogram(hclustComplete)
+dend_average <- as.dendrogram(hclustAverage)
+
+dd_single <- dendro_data(dend_single, type="rectangle")
+dd_complete <- dendro_data(dend_complete, type="rectangle")
+dd_average <- dendro_data(dend_average, type="rectangle")
+
+p_single <- ggplot(segment(dd_single)) +
+  geom_segment(aes(x=x, y=y, xend=xend, yend=yend)) +
+  coord_flip() +
+  scale_y_reverse(expand=c(0.05,0)) +
+  ggtitle("Single linkage") +
+  geom_text(aes(x = x, y = y, label = label, angle = 0, hjust = -1), data= label(dd_single)) +
+  ylab("Distance") +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+p_single
+
+p_complete <- ggplot(segment(dd_complete)) +
+  geom_segment(aes(x=x, y=y, xend=xend, yend=yend)) +
+  coord_flip() +
+  scale_y_reverse(expand=c(0.05,0)) +
+  ggtitle("Complete linkage") +
+  geom_text(aes(x = x, y = y, label = label, angle = 0, hjust = -1), data= label(dd_complete)) +
+  ylab("Distance") +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+p_complete
+
+p_average <- ggplot(segment(dd_average)) +
+  geom_segment(aes(x=x, y=y, xend=xend, yend=yend)) +
+  coord_flip() +
+  scale_y_reverse(expand=c(0.05,0)) +
+  ggtitle("Average linkage") +
+  geom_text(aes(x = x, y = y, label = label, angle = 0, hjust = -1), data= label(dd_average)) +
+  ylab("Distance") +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+p_average
+
+```
+
+Hierarchical clustering examples
+====================================
+type: prompt
+
+- Clustering synthetic data sets (6.3.2)
+- Gene expression profiling of human tissues (6.3.3)
+
 
 K-means clustering
 ========================================================
 type: section
 
+Algorithm
+========================================================
+**Pseudocode for the K-means algorithm**
 
+```
+randomly choose k objects as initial centroids
+while true:
+
+1. create k clusters by assigning each object to closest centroid
+
+2. compute k new centroids by averaging the objects in each cluster
+
+3. if none of the centroids differ from the previous iteration: return the current set of clusters
+```
+
+
+K-means clustering examples
+====================================
+type: prompt
+
+- Clustering synthetic data sets (6.4.4)
+- Gene expression profiling of human tissues (6.4.5)
+
+Randomly choose initial centroids
+===================================
+
+```{r echo=F}
+library(RColorBrewer)
+point_shapes <- c(17,19)
+point_colours <- brewer.pal(3,"Dark2")
+point_size = 4
+center_point_size = 12
+load("/Users/matt/git_repositories/intro-machine-learning-2018/data/example_clusters/kmeans_iteration_demo.rda")
+
+ggplot(kmeans_demo_df, aes(V1,V2)) +
+   geom_point(col="grey30", shape=15, size=point_size) +
+   geom_point(data=initial_centroids, aes(V1,V2), shape=3,
+              col="black", size=center_point_size) +theme_bw()
+
+prev_centroids = initial_centroids
+```
+
+First iteration
+========================================================
+
+```{r echo=F}
+res <- suppressWarnings(kmeans(kmeans_demo_df,centers=initial_centroids, iter.max=1, algorithm="Lloyd"))
+current_centers <- as.data.frame(res$centers)
+  ggplot(kmeans_demo_df, aes(V1,V2)) +
+    geom_point(col=point_colours[res$cluster], shape=point_shapes[res$cluster], size=point_size) +
+    geom_point(data=prev_centroids, aes(V1,V2), shape=3, col="black", size=center_point_size) + theme_bw() +
+    annotate("text", x=-10, y=9, label ="a", size=16, col="black")
+```
+***
+```{r echo=F}
+  ggplot(kmeans_demo_df, aes(V1,V2)) +
+    geom_point(col=point_colours[res$cluster], shape=point_shapes[res$cluster], size=point_size) +
+    geom_point(data=current_centers, aes(V1,V2), shape=3, col="black", size=center_point_size) + theme_bw() +
+  annotate("text", x=-10, y=9, label ="b", size=16, col="black")
+prev_centroids=current_centers
+```
+
+Second iteration
+========================================================
+
+```{r echo=F}
+res <- suppressWarnings(kmeans(kmeans_demo_df,centers=initial_centroids, iter.max=2, algorithm="Lloyd"))
+current_centers <- as.data.frame(res$centers)
+  ggplot(kmeans_demo_df, aes(V1,V2)) +
+    geom_point(col=point_colours[res$cluster], shape=point_shapes[res$cluster], size=point_size) +
+    geom_point(data=prev_centroids, aes(V1,V2), shape=3, col="black", size=center_point_size) + theme_bw() +
+    annotate("text", x=-10, y=9, label ="a", size=16, col="black")
+```
+***
+```{r echo=F}
+  ggplot(kmeans_demo_df, aes(V1,V2)) +
+    geom_point(col=point_colours[res$cluster], shape=point_shapes[res$cluster], size=point_size) +
+    geom_point(data=current_centers, aes(V1,V2), shape=3, col="black", size=center_point_size) + theme_bw() +
+  annotate("text", x=-10, y=9, label ="b", size=16, col="black")
+prev_centroids=current_centers
+```
+
+Third iteration
+========================================================
+
+```{r echo=F}
+res <- suppressWarnings(kmeans(kmeans_demo_df,centers=initial_centroids, iter.max=3, algorithm="Lloyd"))
+current_centers <- as.data.frame(res$centers)
+  ggplot(kmeans_demo_df, aes(V1,V2)) +
+    geom_point(col=point_colours[res$cluster], shape=point_shapes[res$cluster], size=point_size) +
+    geom_point(data=prev_centroids, aes(V1,V2), shape=3, col="black", size=center_point_size) + theme_bw() +
+    annotate("text", x=-10, y=9, label ="a", size=16, col="black")
+```
+***
+```{r echo=F}
+  ggplot(kmeans_demo_df, aes(V1,V2)) +
+    geom_point(col=point_colours[res$cluster], shape=point_shapes[res$cluster], size=point_size) +
+    geom_point(data=current_centers, aes(V1,V2), shape=3, col="black", size=center_point_size) + theme_bw() +
+  annotate("text", x=-10, y=9, label ="b", size=16, col="black")
+prev_centroids=current_centers
+```
+
+Fourth and final iteration
+========================================================
+
+```{r echo=F}
+res <- suppressWarnings(kmeans(kmeans_demo_df,centers=initial_centroids, iter.max=3, algorithm="Lloyd"))
+current_centers <- as.data.frame(res$centers)
+  ggplot(kmeans_demo_df, aes(V1,V2)) +
+    geom_point(col=point_colours[res$cluster], shape=point_shapes[res$cluster], size=point_size) +
+    geom_point(data=prev_centroids, aes(V1,V2), shape=3, col="black", size=center_point_size) + theme_bw() +
+    annotate("text", x=-10, y=9, label ="a", size=16, col="black")
+```
+***
+```{r echo=F}
+  ggplot(kmeans_demo_df, aes(V1,V2)) +
+    geom_point(col=point_colours[res$cluster], shape=point_shapes[res$cluster], size=point_size) +
+    geom_point(data=current_centers, aes(V1,V2), shape=3, col="black", size=center_point_size) + theme_bw() +
+  annotate("text", x=-10, y=9, label ="b", size=16, col="black")
+prev_centroids=current_centers
+```
 
 DBSCAN
 ========================================================
@@ -58,6 +366,13 @@ type: section
 
 Density-based spatial clustering of applications with noise
 
+
+DBSCAN examples
+====================================
+type: prompt
+
+- Clustering synthetic data sets (6.5.4)
+- Gene expression profiling of human tissues (6.5.5)
 
 
 Prompt Slide

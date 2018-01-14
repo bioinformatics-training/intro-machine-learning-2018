@@ -42,11 +42,11 @@ qplot(x=V1, y=V2, data=aggregation, geom="point", size=I(0.2)) +
 qplot(x=V1, y=V2, data=noisy_moons, geom="point", size=I(0.2)) + 
   annotate("text", x=(0.01 * (max(noisy_moons$V1)-min(noisy_moons$V1))) + min(noisy_moons$V1),
            y=(0.9 * (max(noisy_moons$V2)-min(noisy_moons$V2))) + min(noisy_moons$V2),
-           label="D", size=8, col="blue"),
+           label="C", size=8, col="blue"),
 qplot(x=V1, y=V2, data=diff_density, geom="point", size=I(0.2)) + 
   annotate("text", x=(0.01 * (max(diff_density$V1)-min(diff_density$V1))) + min(diff_density$V1),
            y=(0.9 * (max(diff_density$V2)-min(diff_density$V2))) + min(diff_density$V2),
-           label="C", size=8, col="blue"),
+           label="D", size=8, col="blue"),
 qplot(x=V1, y=V2, data=aniso, geom="point", size=I(0.2)) + 
   annotate("text", x=(0.01 * (max(aniso$V1)-min(aniso$V1))) + min(aniso$V1),
            y=(0.9 * (max(aniso$V2)-min(aniso$V2))) + min(aniso$V2),
@@ -67,6 +67,33 @@ pm
 ## Distance metrics
 
 Various distance metrics can be used with clustering algorithms. We will use Euclidean distance in the examples and exercises in this chapter.
+
+\begin{equation}
+  distance\left(p,q\right)=\sqrt{\sum_{i=1}^{n} (p_i-q_i)^2}
+  (\#eq:euclidean)
+\end{equation}
+
+```{r euclideanDistanceDiagram, fig.cap='Euclidean distance.', out.width='75%', fig.asp=0.9, fig.align='center', echo=F}
+par(mai=c(0.8,0.8,0.1,0.1))
+x <- c(0.75,4.5)
+y <- c(2.5,4.5)
+plot(x, y, xlim=range(0,5), ylim=range(0,5), cex=5, col="steelblue", pch=16, cex.lab=1.5)
+segments(x[1], y[1], x[2], y[2], lwd=4, col="grey30")
+text(0.75,2, expression(paste('p(x'[1],'y'[1],')')), cex=1.7)
+text(4.5,4, expression(paste('q(x'[2],'y'[2],')')), cex=1.7)
+text(2.5,0.5, expression(paste('dist(p,q)'==sqrt((x[2]-x[1])^2 + (y[2]-y[1])^2))), cex=1.7)
+```
+
+```{r euclideanDistanceDiagram1, fig.cap='Euclidean distance.', out.width='75%', fig.asp=0.9, fig.align='center', echo=F}
+par(mai=c(0.8,0.8,0.1,0.1))
+x <- c(0.75,4.5)
+y <- c(2.5,4.5)
+plot(x, y, xlim=range(0,5), ylim=range(0,5), cex=5, col="steelblue", pch=16, cex.lab=1.5)
+segments(x[1], y[1], x[2], y[2], lwd=4, col="grey30")
+text(0.75,2, expression(paste('p(x'[1],'y'[1],')')), cex=1.7)
+text(4.5,4, expression(paste('q(x'[2],'y'[2],')')), cex=1.7)
+text(2.5,0.5, expression(paste('dist(p,q)'==sqrt((x[2]-x[1])^2 + (y[2]-y[1])^2))), cex=1.7)
+```
 
 
 ## Hierarchic agglomerative
@@ -108,7 +135,9 @@ knitr::kable(
 
 
 Single linkage - nearest neighbours linkage
+
 Complete linkage - furthest neighbours linkage
+
 Average linkage - UPGMA (Unweighted Pair Group Method with Arithmetic Mean) 
 
 ```{r echo=F}
