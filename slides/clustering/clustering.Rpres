@@ -1,8 +1,73 @@
+```{r setup, include=FALSE}
+opts_chunk$set(cache=TRUE)
+```
+
 Clustering
 ========================================================
-author: Matt Wayland
-date: `r format(Sys.time(), '%d %B, %Y')`
+#author: Matt Wayland
+#date: `r format(Sys.time(), '%d %B, %Y')`
 autosize: true
+transition: rotate
+
+Clustering
+===
+
+Clustering attempts to find groups (clusters) of similar objects. The members of a cluster should be more similar to each other, than to objects in other clusters. Clustering algorithms aim to minimize intra-cluster variation and maximize inter-cluster variation.
+
+Methods of clustering can be broadly divided into two types:
+
+**Hierarchic** techniques produce dendrograms (trees) through a process of division or agglomeration.
+
+**Partitioning** algorithms divide objects into non-overlapping subsets (examples include k-means and DBSCAN)
+
+
+Hierarchical clustering
+========================================================
+type: section
+
+========================================================
+![](img/hclust_demo_0.svg)
+
+========================================================
+
+![](img/hclust_demo_1.svg)
+
+========================================================
+![](img/hclust_demo_2.svg)
+
+========================================================
+![](img/hclust_demo_3.svg)
+
+========================================================
+![](img/hclust_demo_4.svg)
+
+========================================================
+![](img/hclust_demo_5.svg)
+
+========================================================
+
+K-means clustering
+========================================================
+type: section
+
+
+
+DBSCAN
+========================================================
+type: section
+
+Density-based spatial clustering of applications with noise
+
+
+
+Prompt Slide
+====================================
+type: prompt
+
+
+Alert Slide
+====================================
+type: alert
 
 First Slide
 ========================================================
