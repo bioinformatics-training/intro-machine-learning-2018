@@ -738,6 +738,7 @@ knitr::include_graphics("images/DBSCAN_Illustration.svg")
 The method requires two parameters; MinPts that is the minimum number of samples in any cluster; Eps that is the maximum distance of the sample to at least one other sample within the same cluster.
 
 This algorithm works on a parametric approach. The two parameters involved in this algorithm are:
+
 * e (eps) is the radius of our neighborhoods around a data point p.
 * minPts is the minimum number of data points we want in a neighborhood to define a cluster.
 

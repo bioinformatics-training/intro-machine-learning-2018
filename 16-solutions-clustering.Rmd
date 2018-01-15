@@ -1,4 +1,4 @@
-# Solutions ch. 10 - Clustering {#solutions-clustering}
+# Solutions ch. 6 - Clustering {#solutions-clustering}
 
 Solutions to exercises of chapter \@ref(clustering). 
 
@@ -87,61 +87,8 @@ ggplot(data = imgDF, aes(x = x, y = y)) +
   theme_minimal()
 ```
 
-K-means clustering with k=4 rapidly and effectively segments the image of the histological section into the biological objects we can see by eye. A manual segmentation of the same image would be very laborious. This exercise highlights the importance of 
+K-means clustering with k=4 rapidly and effectively segments the image of the histological section into the biological objects we can see by eye. A manual segmentation of the same image would be very laborious. This exercise highlights the importance of using biological insight to choose a sensible value of k.
 
 *N.B.* the cluster centres provide the mean pixel intensities for the red, green and blue channels and we have used this information to colour the pixels belonging to each cluster (figure \@ref(fig:pixelClustersK4)).
 
-
-<!--
-
-## Exercise 1
-
-Load required packages
-```{r echo=T}
-library(ggplot2)
-library(cluster)
-library(RColorBrewer)
-```
-
-Define colours for plots
-```{r echo=T}
-clusterColours <- brewer.pal(9,"Set1")
-```
-
-Read data
-```{r echo=T}
-noisy_moons <- read.csv("data/example_clusters/noisy_moons.csv", header=F)
-```
-
-Perform clustering
-```{r echo=T}
-res <- dbscan::dbscan(noisy_moons[,1:2], eps=0.075, minPts = 10)
-```
-
-Identify noise points as we do not want to include these in the silhouette analysis
-```{r echo=T}
-# identify and remove noise points
-noise <- res$cluster==0
-```
-
-Remove noise points from cluster results
-```{r echo=T}
-clusters <- res$cluster[!noise]
-```
-
-Generate distance matrix from ```noisy_moons``` data.frame, exluding noise points.
-```{r echo=T}
-d <- dist(noisy_moons[!noise,1:2])
-```
-
-Silhouette analysis
-```{r echo=T}
-sil <- silhouette(clusters, d)
-plot(sil, border=NA, col=clusterColours[sort(clusters)], main="")
-```
-
-
-
-
--->
 
