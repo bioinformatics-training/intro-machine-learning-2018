@@ -609,6 +609,7 @@ mod_fit2 <- train(y~., data=data.frame(x = D$Time, y = as.factor(D$Class)), meth
 Again, we can systematically evaluate how well different genes predict the observed phenotype.
 
 ```{r echo=T}
+library(kernlab)
 aucscore2 <- matrix(rep(0, 164), 1, 164)
 for (i in seq(3,164)){
 mod_fit2 <- gausspr(D[,i], as.factor(D$Class), scaled = TRUE, type= NULL, kernel="rbfdot", kpar="automatic", variance.model = FALSE, tol=0.0005, cross=0, fit=TRUE) 
