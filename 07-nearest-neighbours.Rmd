@@ -477,31 +477,47 @@ Create a list of computational options for resampling. In the interest of speed 
 train_ctrl <- trainControl(method="repeatedcv",
                    number = 5,
                    repeats = 5,
-                   preProcOptions=list(cutoff=0.75),
+                   #preProcOptions=list(cutoff=0.75),
                    seeds = seeds)
 ```
-The ```cutoff``` refers to the correlation coefficient threshold.
 
 Create a grid of values of _k_ for evaluation.
 ```{r echo=T}
 tuneParam <- data.frame(k=seq(5,500,10))
 ```
 
-To deal with the issues of scaling, skewness and highly correlated predictors identified earlier, we need to pre-process the data. We will use the Yeo-Johnson transformation to reduce skewness, because it can deal with the zero values present in some of the predictors. 
-Perform cross validation to find best value of _k_.
-```{r echo=T} <!--, message=F, warning=F-->
+To deal with the issues of scaling, skewness and highly correlated predictors identified earlier, we need to pre-process the data. We will use the Yeo-Johnson transformation to reduce skewness, because it can deal with the zero values present in some of the predictors. Ideally the pre-processing procedures would be performed within each cross-validation loop, using the following command:
+```
 knnFit <- train(segDataTrain, segClassTrain, 
                 method="knn",
                 preProcess = c("YeoJohnson", "center", "scale", "corr"),
                 tuneGrid=tuneParam,
                 trControl=train_ctrl)
-
-knnFit
 ```
 
+However, this is time-consuming, so for the purposes of this demonstration we will pre-process the entire training data-set before proceeding with training and cross-validation.
+```{r echo=T, message=F, warning=F}
+transformations <- preProcess(segDataTrain, 
+                              method=c("YeoJohnson", "center", "scale", "corr"),
+                              cutoff=0.75)
+segDataTrain <- predict(transformations, segDataTrain)
+```
 
+The ```cutoff``` refers to the correlation coefficient threshold.
 
+```{r echo=T}
+str(segDataTrain)
+```
 
+Perform cross validation to find best value of _k_.
+```{r echo=T}
+knnFit <- train(segDataTrain, segClassTrain, 
+                method="knn",
+                tuneGrid=tuneParam,
+                trControl=train_ctrl)
+knnFit
+
+```
 
 ```{r cvAccuracySegDataHighCorRem, fig.cap='Accuracy (repeated cross-validation) as a function of neighbourhood size for the segmentation training data with highly correlated predictors removed.', out.width='100%', fig.asp=0.6, fig.align='center', echo=T}
 plot(knnFit)
@@ -552,7 +568,6 @@ knn_sbf <- sbf(segDataTrain,
                 sbfControl = sbf_ctrl,
                 ## now arguments to `train`:
                 method = "knn",
-                preProcess = c("YeoJohnson", "center", "scale", "corr"),
                 tuneGrid = tuneParam)
 knn_sbf
 ```
@@ -574,8 +589,10 @@ knn_sbf$fit$finalModel$k
 
 Let's predict our test set using our final model.
 ```{r echo=T}
+segDataTest <- predict(transformations, segDataTest)
 test_pred <- predict(knn_sbf, segDataTest)
 confusionMatrix(test_pred$pred, segClassTest)
+
 ```
 
 
@@ -632,6 +649,17 @@ Detection of near zero variance predictors:
 nearZeroVar(descrTrain)
 ```
 
+We know there are issues with scaling, and the presence of highly correlated predictors and near zero variance predictors. These problems are resolved by pre-processing. First we define the procesing steps.
+```{r echo=T}
+transformations <- preProcess(descrTrain,
+                              method=c("center", "scale", "corr", "nzv"),
+                              cutoff=0.75)
+```
+Then this transformation can be applied to the compound descriptor data set.
+```{r echo=T}
+descrTrain <- predict(transformations, descrTrain)
+```
+
 ### Search for optimum _k_
 The optimum value of _k_ can be found by cross-validation, following similar methodology to that used to find the best _k_ for classification. We'll start by generating seeds to make this example reproducible.
 ```{r echo=T}
@@ -641,12 +669,11 @@ for(i in 1:25) seeds[[i]] <- sample.int(1000, 10)
 seeds[[26]] <- sample.int(1000,1)
 ```
 
-Ten values of _k_ will be evaluated using 5 repeats of 5-fold cross-validation. We know there are issues with scaling, and the presence of highly correlated predictors and near zero variance predictors. These problems are resolved by pre-processing.
+Ten values of _k_ will be evaluated using 5 repeats of 5-fold cross-validation.
 ```{r echo=T}
 knnTune <- train(descrTrain,
                  concRatioTrain,
                  method="knn",
-                 preProcess = c("center", "scale", "corr", "nzv"),
                  tuneGrid = data.frame(.k=1:10),
                  trControl = trainControl(method="repeatedcv",
                                           number = 5,
@@ -664,6 +691,10 @@ plot(knnTune)
 ```
 
 ### Use model to make predictions
+Before attempting to predict the blood/brain concentration ratios of the test samples, the descriptors in the test set must be transformed using the same pre-processing procedure that was applied to the descriptors in the training set.
+```{r echo=T}
+descrTest <- predict(transformations, descrTest)
+```
 
 Use model to predict outcomes (concentration ratios) of the test set.
 ```{r echo=T}

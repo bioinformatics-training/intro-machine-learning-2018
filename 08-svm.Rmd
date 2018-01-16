@@ -355,6 +355,11 @@ concRatioTrain <- logBBB[trainIndex]
 descrTest <- bbbDescr[-trainIndex,]
 concRatioTest <- logBBB[-trainIndex]
 
+transformations <- preProcess(descrTrain,
+                              method=c("center", "scale", "corr", "nzv"),
+                              cutoff=0.75)
+descrTrain <- predict(transformations, descrTrain)
+
 set.seed(42)
 seeds <- vector(mode = "list", length = 26)
 for(i in 1:25) seeds[[i]] <- sample.int(1000, 50)
@@ -366,7 +371,6 @@ In the arguments to the ```train``` function we change ```method``` from ```knn`
 svmTune2 <- train(descrTrain,
                  concRatioTrain,
                  method=svmRadialE1071,
-                 preProcess = c("center", "scale", "corr", "nzv"),
                  tuneLength = 9,
                  trControl = trainControl(method="repeatedcv",
                                           number = 5,
@@ -385,6 +389,7 @@ plot(svmTune2)
 
 Use model to predict outcomes, after first pre-processing the test set.
 ```{r echo=T}
+descrTest <- predict(transformations, descrTest)
 test_pred <- predict(svmTune2, descrTest)
 ```
 

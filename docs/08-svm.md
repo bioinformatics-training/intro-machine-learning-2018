@@ -558,6 +558,11 @@ concRatioTrain <- logBBB[trainIndex]
 descrTest <- bbbDescr[-trainIndex,]
 concRatioTest <- logBBB[-trainIndex]
 
+transformations <- preProcess(descrTrain,
+                              method=c("center", "scale", "corr", "nzv"),
+                              cutoff=0.75)
+descrTrain <- predict(transformations, descrTrain)
+
 set.seed(42)
 seeds <- vector(mode = "list", length = 26)
 for(i in 1:25) seeds[[i]] <- sample.int(1000, 50)
@@ -570,7 +575,6 @@ In the arguments to the ```train``` function we change ```method``` from ```knn`
 svmTune2 <- train(descrTrain,
                  concRatioTrain,
                  method=svmRadialE1071,
-                 preProcess = c("center", "scale", "corr", "nzv"),
                  tuneLength = 9,
                  trControl = trainControl(method="repeatedcv",
                                           number = 5,
@@ -579,14 +583,7 @@ svmTune2 <- train(descrTrain,
                                           preProcOptions=list(cutoff=0.75)
                                           )
 )
-```
 
-```
-## Warning in nominalTrainWorkflow(x = x, y = y, wts = weights, info =
-## trainInfo, : There were missing values in resampled performance measures.
-```
-
-```r
 svmTune2
 ```
 
@@ -594,23 +591,23 @@ svmTune2
 ## Support Vector Machines with Radial Kernel - e1071 
 ## 
 ## 168 samples
-## 134 predictors
+##  61 predictor
 ## 
-## Pre-processing: centered (61), scaled (61), remove (73) 
+## No pre-processing
 ## Resampling: Cross-Validated (5 fold, repeated 5 times) 
 ## Summary of sample sizes: 134, 136, 134, 133, 135, 134, ... 
 ## Resampling results across tuning parameters:
 ## 
 ##   cost   RMSE       Rsquared   MAE      
-##    0.25  0.5897361  0.5057243  0.4371828
-##    0.50  0.5549909  0.5278095  0.4104311
-##    1.00  0.5403895  0.5232633  0.4070214
-##    2.00  0.5342050  0.5227053  0.4041875
-##    4.00  0.5321020  0.5250414  0.4014602
-##    8.00  0.5296600  0.5290777  0.4022885
-##   16.00  0.5291135  0.5299735  0.4021494
-##   32.00  0.5291135  0.5299735  0.4021494
-##   64.00  0.5291135  0.5299735  0.4021494
+##    0.25  0.5975889  0.4731069  0.4431324
+##    0.50  0.5635694  0.4995130  0.4163780
+##    1.00  0.5474320  0.5010678  0.4108350
+##    2.00  0.5381658  0.5078395  0.4065265
+##    4.00  0.5328509  0.5168000  0.4014653
+##    8.00  0.5299465  0.5221113  0.4017165
+##   16.00  0.5297629  0.5224211  0.4016452
+##   32.00  0.5297629  0.5224211  0.4016452
+##   64.00  0.5297629  0.5224211  0.4016452
 ## 
 ## RMSE was used to select the optimal model using  the smallest value.
 ## The final value used for the model was cost = 16.
@@ -629,6 +626,7 @@ plot(svmTune2)
 Use model to predict outcomes, after first pre-processing the test set.
 
 ```r
+descrTest <- predict(transformations, descrTest)
 test_pred <- predict(svmTune2, descrTest)
 ```
 

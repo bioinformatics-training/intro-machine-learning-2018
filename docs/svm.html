@@ -719,6 +719,11 @@ concRatioTrain &lt;-<span class="st"> </span>logBBB[trainIndex]
 descrTest &lt;-<span class="st"> </span>bbbDescr[<span class="op">-</span>trainIndex,]
 concRatioTest &lt;-<span class="st"> </span>logBBB[<span class="op">-</span>trainIndex]
 
+transformations &lt;-<span class="st"> </span><span class="kw">preProcess</span>(descrTrain,
+                              <span class="dt">method=</span><span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>, <span class="st">&quot;corr&quot;</span>, <span class="st">&quot;nzv&quot;</span>),
+                              <span class="dt">cutoff=</span><span class="fl">0.75</span>)
+descrTrain &lt;-<span class="st"> </span><span class="kw">predict</span>(transformations, descrTrain)
+
 <span class="kw">set.seed</span>(<span class="dv">42</span>)
 seeds &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="dv">26</span>)
 <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">25</span>) seeds[[i]] &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="dv">1000</span>, <span class="dv">50</span>)
@@ -727,7 +732,6 @@ seeds[[<span class="dv">26</span>]] &lt;-<span class="st"> </span><span class="k
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svmTune2 &lt;-<span class="st"> </span><span class="kw">train</span>(descrTrain,
                  concRatioTrain,
                  <span class="dt">method=</span>svmRadialE1071,
-                 <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>, <span class="st">&quot;corr&quot;</span>, <span class="st">&quot;nzv&quot;</span>),
                  <span class="dt">tuneLength =</span> <span class="dv">9</span>,
                  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;repeatedcv&quot;</span>,
                                           <span class="dt">number =</span> <span class="dv">5</span>,
@@ -735,30 +739,29 @@ seeds[[<span class="dv">26</span>]] &lt;-<span class="st"> </span><span class="k
                                           <span class="dt">seeds=</span>seeds,
                                           <span class="dt">preProcOptions=</span><span class="kw">list</span>(<span class="dt">cutoff=</span><span class="fl">0.75</span>)
                                           )
-)</code></pre></div>
-<pre><code>## Warning in nominalTrainWorkflow(x = x, y = y, wts = weights, info =
-## trainInfo, : There were missing values in resampled performance measures.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svmTune2</code></pre></div>
+)
+
+svmTune2</code></pre></div>
 <pre><code>## Support Vector Machines with Radial Kernel - e1071 
 ## 
 ## 168 samples
-## 134 predictors
+##  61 predictor
 ## 
-## Pre-processing: centered (61), scaled (61), remove (73) 
+## No pre-processing
 ## Resampling: Cross-Validated (5 fold, repeated 5 times) 
 ## Summary of sample sizes: 134, 136, 134, 133, 135, 134, ... 
 ## Resampling results across tuning parameters:
 ## 
 ##   cost   RMSE       Rsquared   MAE      
-##    0.25  0.5897361  0.5057243  0.4371828
-##    0.50  0.5549909  0.5278095  0.4104311
-##    1.00  0.5403895  0.5232633  0.4070214
-##    2.00  0.5342050  0.5227053  0.4041875
-##    4.00  0.5321020  0.5250414  0.4014602
-##    8.00  0.5296600  0.5290777  0.4022885
-##   16.00  0.5291135  0.5299735  0.4021494
-##   32.00  0.5291135  0.5299735  0.4021494
-##   64.00  0.5291135  0.5299735  0.4021494
+##    0.25  0.5975889  0.4731069  0.4431324
+##    0.50  0.5635694  0.4995130  0.4163780
+##    1.00  0.5474320  0.5010678  0.4108350
+##    2.00  0.5381658  0.5078395  0.4065265
+##    4.00  0.5328509  0.5168000  0.4014653
+##    8.00  0.5299465  0.5221113  0.4017165
+##   16.00  0.5297629  0.5224211  0.4016452
+##   32.00  0.5297629  0.5224211  0.4016452
+##   64.00  0.5297629  0.5224211  0.4016452
 ## 
 ## RMSE was used to select the optimal model using  the smallest value.
 ## The final value used for the model was cost = 16.</code></pre>
@@ -770,7 +773,8 @@ Figure 9.14: Root Mean Squared Error as a function of cost.
 </p>
 </div>
 <p>Use model to predict outcomes, after first pre-processing the test set.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(svmTune2, descrTest)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">descrTest &lt;-<span class="st"> </span><span class="kw">predict</span>(transformations, descrTest)
+test_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(svmTune2, descrTest)</code></pre></div>
 <p>Prediction performance can be visualized in a scatterplot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(concRatioTest, test_pred) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;observed&quot;</span>) <span class="op">+</span>
