@@ -1,4 +1,0 @@
-# Summary {#summary}
-
-<!-- summary -->
-

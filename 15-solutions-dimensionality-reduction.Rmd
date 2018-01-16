@@ -1,8 +1,8 @@
-# Solutions ch. 9 - Dimensionality reduction {#solutions-dimensionality-reduction}
+# Solutions ch. 5 - Dimensionality reduction {#solutions-dimensionality-reduction}
 
 Solutions to exercises of chapter \@ref(dimensionality-reduction).
 
-## Exercise 8.1
+## Exercise 5.1
 
 We can read the data in using the following command:
 
@@ -14,7 +14,7 @@ genenames <- genenames[4:nrow(D)]
 
 This reads in the corresponding spreadsheet into the R environment as a data frame variable. 
 
-## Exercise 8.2
+## Exercise 5.2
 
 We will first run PCA on the data. Recall that the data is already log_2 normalised, with expression values beginning from row 4. Within R we would run:
 
@@ -45,7 +45,7 @@ legend(-95, 50, legend=c("ESC", "preimp", "PGC", "soma"), col=c("red", "black", 
 
 From the plot, we can see PCA has done a reasonable job of separating out various cells. For example, a cluster of PGCs appears at the top of the plot, with somatic cells towards the lower right hand side. Pre-implantation embryos and ESCs appear to cluster together: perhaps this is not surprising as the ESCs are derived from blastocyst cells. Loosely, we can interpret the PC1 as dividing pre-implantation cells from somatic cells, with PC2 separating out PGCs.
 
-## Exercise 8.3. 
+## Exercise 5.3. 
 
 In the previous exercise we used PCA to reduce the dimensionality of our data from thousands of genes down to two principle components. By eye, PCA appeared to do a reasonable job separating out different cell types. A useful next step might therefore be to perform clustering on the reduced dimensional space, which can be done using:
 
@@ -74,7 +74,7 @@ clusterresults[1,which(clusterresults[2,]==3)]
 clusterresults[1,which(clusterresults[2,]==4)]
 ```
 
-## Exercise 8.4.
+## Exercise 5.4.
 
 In our previous section we identified clusters associated with various groups. In our application cluster 1 was associated primarily with pre-implantation cells, with cluster 3 associated with PGCs. We could therefore empirically look for genes that are differentially expressed. Since we know SOX17 is associated with PGC specification [@irie2015sox17,@tang2015unique] let's first compare the expression levels of SOX17 in the two groups:
 
@@ -93,7 +93,7 @@ pvalstore[i]  <-  pvals$p.value
 sortedgenes <- genenames[order(pvalstore)]
 ```
 
-## Exercise 8.4
+## Exercise 5.5
 
 Within our example, the original axes of our data have very obvious solutions: the axes represent the expression levels of individual genes. The PCs, however, represent linear combinations of various genes, and do not have obvious interpretations. To find an intuition, we can project the original axes (genes) into the new co-ordinate system. This is stored in \texttt{pcaresult$rotation} variable.
 
@@ -124,7 +124,7 @@ text(pcaresult$rotation[,1:2], genenames, , cex = .4)
 
 This appears to identify a number of genes associated with embryogenesis, for example, DPPA3, which encodes for a maternally inherited factor, Stella, required for normal pre-implantation development [@bortvin2004dppa3,@payer2003stella] as well as regulation of transcriptional and endogenous retrovirus programs during maternal-to-zygotic transition [@Huang2017stella].
 
-## Exercise 8.6. 
+## Exercise 5.6. 
 
 We can run tSNE using the following command:
 
@@ -149,7 +149,7 @@ points(y4,type="p",col="green")
 legend(-40, 40, legend=c("ESC", "preimp", "PGC", "soma"), col=c("red", "black", "blue", "green"),pch="o", bty="n", cex=0.8)
 ```
 
-## Exercise 8.7.
+## Exercise 5.7.
 
 We can plot the expression patterns for pre-implantation embryos:
 
@@ -173,7 +173,7 @@ legend(-10, 10, legend=c("Ooc", "Zyg", "2C", "4C","8C","Mor","Blast"), col=c("to
 ```
 
 
-## Exercise 8.8.
+## Exercise 5.8.
 
 Before we perform any clustering let's generate labels for the pre-implantation data.
 

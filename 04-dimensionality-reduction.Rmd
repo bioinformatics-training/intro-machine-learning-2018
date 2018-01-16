@@ -138,15 +138,15 @@ Now that we have a feel for PCA and understand some of the basic commands we can
 
 Preprocessed data contains $\log_2$ normalised counts for around $400$ cells using $2957$ marker genes can be found in the file \texttt{/data/PGC_transcriptomics/PGC_transcriptomics.csv}. Note that the first line of data in the file is an indicator denoting cell type (-1 = ESC, 0 = pre-implantation, 1 = PGC, and 2 = somatic cell). The second row indicates the sex of the cell (0 = unknown/unlabelled, 1 = XX, 2 = XY), with the third row indicating capture time (-1 = ESC, 0 - 7 denotes various developmental stages from zygote to blastocyst, 8 - 13 indicates increasing times of embryo development from week 4 through to week 19).
 
-Excercise 8.1. First load in the expression data into R and plot some example expression patterns.
+Exercise 5.1. First load in the expression data into R and plot some example expression patterns.
 
-Excercise 8.2. Use \texttt{prcomp} to perform PCA on the data.
+Exercise 5.2. Use \texttt{prcomp} to perform PCA on the data.
 
-Excercise 8.3. Try plotting visualising the original axis. Can we identify any genes of interest that may be particularly important for PGCs?
+Exercise 5.3. Try plotting visualising the original axis. Can we identify any genes of interest that may be particularly important for PGCs?
 
-Excercise 8.4. Does the data separate well? Perform k-means cluster analysis on the data to see if we can identify distinct clusters.
+Exercise 5.4. Does the data separate well? Perform k-means cluster analysis on the data to see if we can identify distinct clusters.
 
-Excercise 8.5. Perform a differential expression analysis between blastocyst cells and the PGCs.
+Exercise 5.5. Perform a differential expression analysis between blastocyst cells and the PGCs.
 
 ## Nonlinear Dimensionality Reduction {#nonlinear-dimensionality-reduction}
 

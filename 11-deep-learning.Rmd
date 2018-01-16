@@ -1,4 +1,4 @@
-# Artificial neural networks {#mlnn}
+# Deep Learning {#mlnn}
 
 <!-- Chris -->
 
@@ -356,7 +356,7 @@ More complex learning algorithms can easily be built using keras using the Model
 
 Another approach is to use transfer learning. This is where we make use of existing neural networks to make predictions on our specific datasets, usually fixing the top layers in place and fine tuning the lower layers to our dataset. For example, for image recognition we could make use of top perfoming neural networks on the [ImageNet](http://www.image-net.org) database. Whilst none of these networks would have been designed to identify *Rick* they would have been trained on millions of images, and the top levels would have been able to extract useful general features of an image. 
 
-# Further reading
+## Further reading
 
 A particularly comprehensive introduction to *Deep Learning* can be found in the e-book [Neural Networks and Deep Learning](http://neuralnetworksanddeeplearning.com/chap3.html), written by Michael Nielsen.
 

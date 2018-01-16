@@ -1,4 +1,4 @@
-# Solutions ch. 8 - Artificial neural networks {#solutions-ann}
+# Solutions ch. 10 - Artificial neural networks {#solutions-ann}
 
 Solutions to exercises of chapter \@ref(ann).
 
