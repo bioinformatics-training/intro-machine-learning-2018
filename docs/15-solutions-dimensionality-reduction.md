@@ -81,6 +81,23 @@ clusterresults[1,which(clusterresults[2,]==1)]
 ```
 
 ```
+## preimp.46 preimp.51 preimp.82 preimp.87    ESC.16    ESC.18    ESC.31 
+##  "preimp"  "preimp"  "preimp"  "preimp"     "ESC"     "ESC"     "ESC" 
+##    ESC.33    soma.3    soma.4    soma.6    soma.8   soma.12   soma.13 
+##     "ESC"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.14   soma.15   soma.20   soma.23   soma.25   soma.27   soma.48 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.49   soma.50   soma.51   soma.52   soma.53   soma.54   soma.58 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.70   soma.81 
+##    "soma"    "soma"
+```
+
+```r
+clusterresults[1,which(clusterresults[2,]==2)]
+```
+
+```
 ## PGC.192 PGC.193 PGC.194 PGC.196 PGC.197 PGC.199 PGC.200 PGC.201    soma 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"  "soma" 
 ##  soma.1  soma.2  soma.5  soma.7  soma.9 soma.10 soma.11 soma.16 soma.17 
@@ -97,23 +114,6 @@ clusterresults[1,which(clusterresults[2,]==1)]
 ##  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma" 
 ## soma.76 soma.77 soma.78 soma.79 soma.80 soma.82 soma.83 soma.84 soma.85 
 ##  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"
-```
-
-```r
-clusterresults[1,which(clusterresults[2,]==2)]
-```
-
-```
-## preimp.46 preimp.51 preimp.82 preimp.87    ESC.16    ESC.18    ESC.31 
-##  "preimp"  "preimp"  "preimp"  "preimp"     "ESC"     "ESC"     "ESC" 
-##    ESC.33    soma.3    soma.4    soma.6    soma.8   soma.12   soma.13 
-##     "ESC"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.14   soma.15   soma.20   soma.23   soma.25   soma.27   soma.48 
-##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.49   soma.50   soma.51   soma.52   soma.53   soma.54   soma.58 
-##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.70   soma.81 
-##    "soma"    "soma"
 ```
 
 ```r
@@ -232,13 +232,13 @@ t.test(D[which(genenames=="SOX17")+3, which(clusterresults[2,]==1)],D[which(gene
 ## 	Welch Two Sample t-test
 ## 
 ## data:  D[which(genenames == "SOX17") + 3, which(clusterresults[2, ] ==  and D[which(genenames == "SOX17") + 3, which(clusterresults[2, ] ==     1)] and     3)]
-## t = -14.982, df = 259.61, p-value < 2.2e-16
+## t = -7.1147, df = 51.754, p-value = 3.326e-09
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -2.530947 -1.942935
+##  -2.477008 -1.387061
 ## sample estimates:
-##  mean of x  mean of y 
-## 0.09538186 2.33232284
+## mean of x mean of y 
+## 0.4002884 2.3323228
 ```
 
 Typically we won't always know the important genes, but can perform an unbiased analysis by testing all genes.

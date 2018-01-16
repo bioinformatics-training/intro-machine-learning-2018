@@ -892,9 +892,10 @@ Create a list of computational options for resampling. In the interest of speed 
 train_ctrl <- trainControl(method="repeatedcv",
                    number = 5,
                    repeats = 5,
-                   #preProcOptions=list(cutoff=0.75),
+                   preProcOptions=list(cutoff=0.75),
                    seeds = seeds)
 ```
+The ```cutoff``` refers to the correlation coefficient threshold.
 
 Create a grid of values of _k_ for evaluation.
 
@@ -902,139 +903,21 @@ Create a grid of values of _k_ for evaluation.
 tuneParam <- data.frame(k=seq(5,500,10))
 ```
 
-To deal with the issues of scaling, skewness and highly correlated predictors identified earlier, we need to pre-process the data. We will use the Yeo-Johnson transformation to reduce skewness, because it can deal with the zero values present in some of the predictors. Ideally the pre-processing procedures would be performed within each cross-validation loop, using the following command:
-```
+To deal with the issues of scaling, skewness and highly correlated predictors identified earlier, we need to pre-process the data. We will use the Yeo-Johnson transformation to reduce skewness, because it can deal with the zero values present in some of the predictors. 
+Perform cross validation to find best value of _k_.
+```{r echo=T} <!--, message=F, warning=F-->
 knnFit <- train(segDataTrain, segClassTrain, 
                 method="knn",
                 preProcess = c("YeoJohnson", "center", "scale", "corr"),
                 tuneGrid=tuneParam,
                 trControl=train_ctrl)
-```
 
-However, this is time-consuming, so for the purposes of this demonstration we will pre-process the entire training data-set before proceeding with training and cross-validation.
-
-```r
-transformations <- preProcess(segDataTrain, 
-                              method=c("YeoJohnson", "center", "scale", "corr"),
-                              cutoff=0.75)
-segDataTrain <- predict(transformations, segDataTrain)
-```
-
-The ```cutoff``` refers to the correlation coefficient threshold.
-
-
-```r
-str(segDataTrain)
-```
-
-```
-## 'data.frame':	1010 obs. of  27 variables:
-##  $ AngleCh1               : num  1.045 0.873 -0.376 -0.994 1.586 ...
-##  $ ConvexHullPerimRatioCh1: num  0.31 -1.221 -0.363 1.22 1.113 ...
-##  $ EntropyIntenCh1        : num  -2.443 -0.671 -1.688 0.554 0.425 ...
-##  $ EqEllipseOblateVolCh1  : num  -0.414 1.693 0.711 -1.817 -1.667 ...
-##  $ FiberAlign2Ch3         : num  -1.8124 0.0933 -0.9679 -0.6188 -0.8721 ...
-##  $ FiberAlign2Ch4         : num  -1.729 -0.331 1.255 -0.291 0.463 ...
-##  $ FiberWidthCh1          : num  -0.776 0.878 -0.779 0.712 0.758 ...
-##  $ IntenCoocASMCh4        : num  -0.368 -0.64 -0.652 -0.665 -0.671 ...
-##  $ IntenCoocContrastCh3   : num  2.4777 0.0604 -0.0816 0.0634 0.6386 ...
-##  $ IntenCoocContrastCh4   : num  1.101 0.127 1.046 0.602 1.445 ...
-##  $ IntenCoocMaxCh3        : num  -0.815 -0.232 -0.168 -1.366 -1.37 ...
-##  $ KurtIntenCh1           : num  -0.97 -0.26 0.562 -0.187 0.296 ...
-##  $ KurtIntenCh3           : num  -1.506 -1.133 -0.672 -1.908 -1.491 ...
-##  $ KurtIntenCh4           : num  0.68398 -0.00329 -0.09737 -0.1679 -0.79044 ...
-##  $ NeighborAvgDistCh1     : num  2.5376 -1.4791 -0.5357 0.1062 0.0663 ...
-##  $ NeighborMinDistCh1     : num  3.286 0.289 0.557 -1.679 -1.679 ...
-##  $ ShapeBFRCh1            : num  0.6733 -0.5448 -0.0649 0.8849 1.4669 ...
-##  $ ShapeLWRCh1            : num  1.23 -0.351 1.525 -1.832 -1.717 ...
-##  $ SkewIntenCh1           : num  -0.213 -0.297 0.384 -2.41 -2.678 ...
-##  $ SpotFiberCountCh3      : num  -0.366 1.275 1.275 -0.366 -1.573 ...
-##  $ TotalIntenCh2          : num  -1.701 1.682 -0.233 1.107 1.019 ...
-##  $ VarIntenCh1            : num  -2.118 -1.346 -1.917 1.062 0.856 ...
-##  $ VarIntenCh3            : num  -1.9155 -0.1836 -0.8001 0.0478 -0.3658 ...
-##  $ VarIntenCh4            : num  -2.304 0.332 -1.092 0.843 0.387 ...
-##  $ WidthCh1               : num  -1.626 1.845 -0.718 -0.188 -0.333 ...
-##  $ XCentroid              : num  -1.647 -0.241 1.484 -0.412 -0.492 ...
-##  $ YCentroid              : num  -2.098 1.447 1.118 -0.251 -0.138 ...
-```
-
-Perform cross validation to find best value of _k_.
-
-```r
-knnFit <- train(segDataTrain, segClassTrain, 
-                method="knn",
-                tuneGrid=tuneParam,
-                trControl=train_ctrl)
 knnFit
 ```
 
-```
-## k-Nearest Neighbors 
-## 
-## 1010 samples
-##   27 predictor
-##    2 classes: 'PS', 'WS' 
-## 
-## No pre-processing
-## Resampling: Cross-Validated (5 fold, repeated 5 times) 
-## Summary of sample sizes: 808, 808, 808, 808, 808, 808, ... 
-## Resampling results across tuning parameters:
-## 
-##   k    Accuracy   Kappa    
-##     5  0.7883168  0.5449241
-##    15  0.7992079  0.5702967
-##    25  0.8114851  0.5960169
-##    35  0.8033663  0.5780284
-##    45  0.8065347  0.5844876
-##    55  0.8047525  0.5809689
-##    65  0.8097030  0.5903493
-##    75  0.8089109  0.5884100
-##    85  0.8067327  0.5829885
-##    95  0.8059406  0.5798239
-##   105  0.8021782  0.5723636
-##   115  0.8047525  0.5770621
-##   125  0.8011881  0.5681088
-##   135  0.8011881  0.5675244
-##   145  0.8013861  0.5675697
-##   155  0.8031683  0.5703946
-##   165  0.8013861  0.5660457
-##   175  0.8011881  0.5654292
-##   185  0.7996040  0.5610611
-##   195  0.7978218  0.5561759
-##   205  0.7982178  0.5568515
-##   215  0.7972277  0.5539169
-##   225  0.7976238  0.5546920
-##   235  0.7968317  0.5520418
-##   245  0.7968317  0.5517094
-##   255  0.7958416  0.5487693
-##   265  0.7956436  0.5475332
-##   275  0.7958416  0.5467831
-##   285  0.7994059  0.5535346
-##   295  0.7978218  0.5492166
-##   305  0.7984158  0.5488107
-##   315  0.7958416  0.5412723
-##   325  0.7968317  0.5424166
-##   335  0.7908911  0.5264160
-##   345  0.7902970  0.5236154
-##   355  0.7873267  0.5143268
-##   365  0.7861386  0.5101993
-##   375  0.7831683  0.5016861
-##   385  0.7796040  0.4900167
-##   395  0.7778218  0.4836628
-##   405  0.7706931  0.4601307
-##   415  0.7596040  0.4287823
-##   425  0.7489109  0.3946052
-##   435  0.7384158  0.3621238
-##   445  0.7326733  0.3390919
-##   455  0.7251485  0.3140993
-##   465  0.7213861  0.2974286
-##   475  0.7154455  0.2720747
-##   485  0.7091089  0.2460255
-##   495  0.7017822  0.2169777
-## 
-## Accuracy was used to select the optimal model using  the largest value.
-## The final value used for the model was k = 25.
-```
+
+
+
 
 
 ```r
@@ -1096,7 +979,152 @@ knn_sbf <- sbf(segDataTrain,
                 sbfControl = sbf_ctrl,
                 ## now arguments to `train`:
                 method = "knn",
+                preProcess = c("YeoJohnson", "center", "scale", "corr"),
                 tuneGrid = tuneParam)
+```
+
+```
+## Warning in preProcess.default(thresh = 0.95, k = 5, freqCut = 19, uniqueCut = 10, : correlation matrix could not be computed:
+##  1correlation matrix could not be computed:
+##  0.318091534789045correlation matrix could not be computed:
+##  0.460443788379738correlation matrix could not be computed:
+##  -0.0558076756121481correlation matrix could not be computed:
+##  -0.277694139449617correlation matrix could not be computed:
+##  0.249664372997467correlation matrix could not be computed:
+##  -0.16917572282694correlation matrix could not be computed:
+##  0.0322471147419416correlation matrix could not be computed:
+##  -0.101256549239793correlation matrix could not be computed:
+##  0.686157099237658correlation matrix could not be computed:
+##  -0.0546898613425807correlation matrix could not be computed:
+##  -0.407902478526775correlation matrix could not be computed:
+##  0.162203563532878correlation matrix could not be computed:
+##  0.258689286813188correlation matrix could not be computed:
+##  0.200696051349995correlation matrix could not be computed:
+##  0.318091534789045correlation matrix could not be computed:
+##  1correlation matrix could not be computed:
+##  0.447124911392658correlation matrix could not be computed:
+##  -0.105101207667655correlation matrix could not be computed:
+##  -0.362983563583841correlation matrix could not be computed:
+##  0.205784228528686correlation matrix could not be computed:
+##  -0.0903719189552464correlation matrix could not be computed:
+##  0.113109221450124correlation matrix could not be computed:
+##  -0.0819609323500842correlation matrix could not be computed:
+##  0.244748161385148correlation matrix could not be computed:
+##  -0.107471608862106correlation matrix could not be computed:
+##  -0.26334864008133correlation matrix could not be computed:
+##  0.598015583208681correlation matrix could not be computed:
+##  0.7494069213488correlation matrix could not be computed:
+##  0.422081633586389correlation matrix could not be computed:
+##  0.460443788379738correlation matrix could not be computed:
+##  0.447124911392658correlation matrix could not be computed:
+##  1correlation matrix could not be computed:
+##  -0.179152014875766correlation matrix could not be computed:
+##  -0.329932861970601correlation matrix could not be computed:
+##  0.282695340424695correlation matrix could not be computed:
+##  -0.0800411543495003correlation matrix could not be computed:
+##  0.049393855203254correlation matrix could not be computed:
+##  -0.119382015977433correlation matrix could not be computed:
+##  0.58068432268511correlation matrix could not be computed:
+##  -0.491745620258996correlation matrix could not be computed:
+##  -0.306559155379991correlation matrix could not be computed:
+##  0.526765116121676correlation matrix could not be computed:
+##  0.313760632661449correlation matrix could not be computed:
+##  0.319952097684266correlation matrix could not be computed:
+##  -0.0558076756121481correlation matrix could not be computed:
+##  -0.105101207667655correlation matrix could not be computed:
+##  -0.179152014875766correlation matrix could not be computed:
+##  1correlation matrix could not be computed:
+##  -0.0124337473281373correlation matrix could not be computed:
+##  0.20122297861047correlation matrix could not be computed:
+##  -0.0465505999843043correlation matrix could not be computed:
+##  0.131920694828622correlation matrix could not be computed:
+##  0.518843767911874correlation matrix could not be computed:
+##  -0.170488678709915correlation matrix could not be computed:
+##  0.152990448007074correlation matrix could not be computed:
+##  -0.0103980066380415correlation matrix could not be computed:
+##  -0.186007749318516correlation matrix could not be computed:
+##  -0.137252844930066correlation matrix could not be computed:
+##  -0.284934600610347correlation matrix could not be computed:
+##  -0.277694139449617correlation matrix could not be computed:
+##  -0.362983563583841correlation matrix could not be computed:
+##  -0.329932861970601correlation matrix could not be computed:
+##  -0.0124337473281373correlation matrix could not be computed:
+##  1correlation matrix could not be computed:
+##  -0.685655138601016correlation matrix could not be computed:
+##  -0.0123761294580506correlation matrix could not be computed:
+##  -0.25961360973928correlation matrix could not be computed:
+##  0.024809278267411correlation matrix could not be computed:
+##  -0.301346853105565correlation matrix could not be computed:
+##  0.163549308722761correlation matrix could not be computed:
+##  0.0591055635684691correlation matrix could not be computed:
+##  -0.387429764842215correlation matrix could not be computed:
+##  -0.259220353686262correlation matrix could not be computed:
+##  -0.20889438434493correlation matrix could not be computed:
+##  0.249664372997467correlation matrix could not be computed:
+##  0.205784228528686correlation matrix could not be computed:
+##  0.282695340424695correlation matrix could not be computed:
+##  0.20122297861047correlation matrix could not be computed:
+##  -0.685655138601016correlation matrix could not be computed:
+##  1correlation matrix could not be computed:
+##  -0.0366569014917813correlation matrix could not be computed:
+##  0.510512160918018correlation matrix could not be computed:
+##  0.056545368866987correlation matrix could not be computed:
+##  0.266420212195659correlation matrix could not be computed:
+##  -0.104662653230901correlation matrix could not be computed:
+##  -0.115116612675658correlation matrix could not be computed:
+##  0.220328684018251correlation matrix could not be computed:
+##  0.148612332664612correlation matrix could not be computed:
+##  -0.101760510385104correlation matrix could not be computed:
+##  -0.16917572282694correlation matrix could not be computed:
+##  -0.0903719189552464correlation matrix could not be computed:
+##  -0.0800411543495003correlation matrix could not be computed:
+##  -0.0465505999843043correlation matrix could not be computed:
+##  -0.0123761294580506correlation matrix could not be computed:
+##  -0.0366569014917813correlation matrix could not be computed:
+##  1correlation matrix could not be computed:
+##  0.142973465025804correlation matrix could not be computed:
+##  0.020125322780473correlation matrix could not be computed:
+##  -0.0950261188791647correlation matrix could not be computed:
+##  0.0296634671241952correlation matrix could not be computed:
+##  0.726555485735146correlation matrix could not be computed:
+##  -0.0453459142006165correlation matrix could not be computed:
+##  -0.0402631964188738correlation matrix could not be computed:
+##  -0.0185880124013955correlation matrix could not be computed:
+##  0.0322471147419416correlation matrix could not be computed:
+##  0.113109221450124correlation matrix could not be computed:
+##  0.049393855203254correlation matrix could not be computed:
+##  0.131920694828622correlation matrix could not be computed:
+##  -0.25961360973928correlation matrix could not be computed:
+##  0.510512160918018correlation matrix could not be computed:
+##  0.142973465025804correlation matrix could not be computed:
+##  1correlation matrix could not be computed:
+##  0.0584883291273215correlation matrix could not be computed:
+##  0.0287280706906099correlation matrix could not be computed:
+##  0.0146620416362401correlation matrix could not be computed:
+##  0.115293204604724correlation matrix could not be computed:
+##  0.0587227893331608correlation matrix could not be computed:
+##  0.0614874220114966correlation matrix could not be computed:
+##  -0.0824940679274775correlation matrix could not be computed:
+##  -0.101256549239793correlation matrix could not be computed:
+##  -0.0819609323500842correlation matrix could not be computed:
+##  -0.119382015977433correlation matrix could not be computed:
+##  0.518843767911874correlation matrix could not be computed:
+##  0.024809278267411correlation matrix could not be computed:
+##  0.056545368866987correlation matrix could not be computed:
+##  0.020125322780473correlation matrix could not be computed:
+##  0.0584883291273215correlation matrix could not be computed:
+##  1correlation matrix could not be computed:
+##  -0.122775757112098correlation matrix could not be computed:
+##  0.13211545973806correlation matrix could not be computed:
+##  0.057787287325637correlation matrix could not be computed:
+##  -0.125639415305477correlation matrix could not be computed:
+##  -0.0747979708803367correlation matrix could not be computed:
+##  -0.193505626062254correlation matrix could not be computed:
+##  0.686157099237658correlation matrix could not be computed:
+##  0.244748161385148correlation matrix could not
+```
+
+```r
 knn_sbf
 ```
 
@@ -1108,16 +1136,16 @@ knn_sbf
 ## 
 ## Resampling performance:
 ## 
-##     ROC   Sens Spec   ROCSD  SensSD  SpecSD
-##  0.8821 0.8298 0.77 0.02201 0.02612 0.06864
+##     ROC   Sens   Spec   ROCSD SensSD SpecSD
+##  0.8824 0.8311 0.7689 0.02804 0.0457 0.0521
 ## 
-## Using the training set, 16 variables were selected:
+## Using the training set, 15 variables were selected:
 ##    ConvexHullPerimRatioCh1, EntropyIntenCh1, FiberWidthCh1, IntenCoocASMCh4, IntenCoocContrastCh3...
 ## 
-## During resampling, the top 5 selected variables (out of a possible 19):
+## During resampling, the top 5 selected variables (out of a possible 20):
 ##    ConvexHullPerimRatioCh1 (100%), EntropyIntenCh1 (100%), FiberWidthCh1 (100%), IntenCoocASMCh4 (100%), IntenCoocContrastCh3 (100%)
 ## 
-## On average, 15.6 variables were selected (min = 15, max = 17)
+## On average, 14.7 variables were selected (min = 13, max = 17)
 ```
 
 Much information about the final model is stored in **knn_sbf**. To reveal the identities of the predictors selected for the final model run:
@@ -1134,7 +1162,7 @@ predictors(knn_sbf)
 ##  [9] "KurtIntenCh4"            "ShapeBFRCh1"            
 ## [11] "ShapeLWRCh1"             "SkewIntenCh1"           
 ## [13] "TotalIntenCh2"           "VarIntenCh1"            
-## [15] "VarIntenCh4"             "WidthCh1"
+## [15] "VarIntenCh4"
 ```
 
 Here are some performance metrics for the final model:
@@ -1144,8 +1172,8 @@ knn_sbf$results
 ```
 
 ```
-##         ROC      Sens Spec      ROCSD     SensSD     SpecSD
-## 1 0.8820705 0.8298462 0.77 0.02200677 0.02611611 0.06863885
+##         ROC      Sens      Spec      ROCSD     SensSD     SpecSD
+## 1 0.8823547 0.8310769 0.7688889 0.02803876 0.04569645 0.05210339
 ```
 
 To retrieve the optimum value of k found during training run:
@@ -1155,13 +1183,12 @@ knn_sbf$fit$finalModel$k
 ```
 
 ```
-## [1] 25
+## [1] 15
 ```
 
 Let's predict our test set using our final model.
 
 ```r
-segDataTest <- predict(transformations, segDataTest)
 test_pred <- predict(knn_sbf, segDataTest)
 confusionMatrix(test_pred$pred, segClassTest)
 ```
@@ -1171,25 +1198,25 @@ confusionMatrix(test_pred$pred, segClassTest)
 ## 
 ##           Reference
 ## Prediction  PS  WS
-##         PS 543  98
-##         WS 107 261
+##         PS 544 101
+##         WS 106 258
 ##                                           
-##                Accuracy : 0.7968          
-##                  95% CI : (0.7707, 0.8213)
+##                Accuracy : 0.7948          
+##                  95% CI : (0.7686, 0.8194)
 ##     No Information Rate : 0.6442          
 ##     P-Value [Acc > NIR] : <2e-16          
 ##                                           
-##                   Kappa : 0.5593          
-##  Mcnemar's Test P-Value : 0.5763          
+##                   Kappa : 0.5539          
+##  Mcnemar's Test P-Value : 0.781           
 ##                                           
-##             Sensitivity : 0.8354          
-##             Specificity : 0.7270          
-##          Pos Pred Value : 0.8471          
-##          Neg Pred Value : 0.7092          
+##             Sensitivity : 0.8369          
+##             Specificity : 0.7187          
+##          Pos Pred Value : 0.8434          
+##          Neg Pred Value : 0.7088          
 ##              Prevalence : 0.6442          
-##          Detection Rate : 0.5382          
-##    Detection Prevalence : 0.6353          
-##       Balanced Accuracy : 0.7812          
+##          Detection Rate : 0.5391          
+##    Detection Prevalence : 0.6392          
+##       Balanced Accuracy : 0.7778          
 ##                                           
 ##        'Positive' Class : PS              
 ## 
@@ -1383,19 +1410,6 @@ nearZeroVar(descrTrain)
 ## [1]  3 16 22 25 50 60
 ```
 
-We know there are issues with scaling, and the presence of highly correlated predictors and near zero variance predictors. These problems are resolved by pre-processing. First we define the procesing steps.
-
-```r
-transformations <- preProcess(descrTrain,
-                              method=c("center", "scale", "corr", "nzv"),
-                              cutoff=0.75)
-```
-Then this transformation can be applied to the compound descriptor data set.
-
-```r
-descrTrain <- predict(transformations, descrTrain)
-```
-
 ### Search for optimum _k_
 The optimum value of _k_ can be found by cross-validation, following similar methodology to that used to find the best _k_ for classification. We'll start by generating seeds to make this example reproducible.
 
@@ -1406,12 +1420,13 @@ for(i in 1:25) seeds[[i]] <- sample.int(1000, 10)
 seeds[[26]] <- sample.int(1000,1)
 ```
 
-Ten values of _k_ will be evaluated using 5 repeats of 5-fold cross-validation.
+Ten values of _k_ will be evaluated using 5 repeats of 5-fold cross-validation. We know there are issues with scaling, and the presence of highly correlated predictors and near zero variance predictors. These problems are resolved by pre-processing.
 
 ```r
 knnTune <- train(descrTrain,
                  concRatioTrain,
                  method="knn",
+                 preProcess = c("center", "scale", "corr", "nzv"),
                  tuneGrid = data.frame(.k=1:10),
                  trControl = trainControl(method="repeatedcv",
                                           number = 5,
@@ -1419,7 +1434,14 @@ knnTune <- train(descrTrain,
                                           seeds=seeds,
                                           preProcOptions=list(cutoff=0.75))
                  )
+```
 
+```
+## Warning in nominalTrainWorkflow(x = x, y = y, wts = weights, info =
+## trainInfo, : There were missing values in resampled performance measures.
+```
+
+```r
 knnTune
 ```
 
@@ -1427,27 +1449,27 @@ knnTune
 ## k-Nearest Neighbors 
 ## 
 ## 168 samples
-##  61 predictor
+## 134 predictors
 ## 
-## No pre-processing
+## Pre-processing: centered (61), scaled (61), remove (73) 
 ## Resampling: Cross-Validated (5 fold, repeated 5 times) 
 ## Summary of sample sizes: 135, 134, 136, 134, 133, 135, ... 
 ## Resampling results across tuning parameters:
 ## 
 ##   k   RMSE       Rsquared   MAE      
-##    1  0.6520387  0.3985028  0.4632774
-##    2  0.6113262  0.4259039  0.4627144
-##    3  0.5862976  0.4444624  0.4402393
-##    4  0.5828015  0.4437783  0.4407852
-##    5  0.5933604  0.4209923  0.4516132
-##    6  0.5982192  0.4100908  0.4550370
-##    7  0.6032227  0.4002708  0.4531828
-##    8  0.6078117  0.3936972  0.4583254
-##    9  0.6106399  0.3858548  0.4596576
-##   10  0.6149638  0.3799661  0.4629568
+##    1  0.6249813  0.4252866  0.4469617
+##    2  0.5739571  0.4587652  0.4463633
+##    3  0.5526831  0.4774589  0.4261490
+##    4  0.5722223  0.4416758  0.4402972
+##    5  0.5808907  0.4274941  0.4464657
+##    6  0.5929657  0.4023380  0.4570959
+##    7  0.5956411  0.3963721  0.4548864
+##    8  0.5963858  0.3943279  0.4533836
+##    9  0.5989177  0.3899874  0.4490968
+##   10  0.6035294  0.3826941  0.4538279
 ## 
 ## RMSE was used to select the optimal model using  the smallest value.
-## The final value used for the model was k = 4.
+## The final value used for the model was k = 3.
 ```
 
 The Root Mean Squared Error (RMSE) measures the differences between the values predicted by the model and the values actually observed. More specifically, it represents the sample standard deviation of the difference between the predicted values and observed values. 
@@ -1462,11 +1484,6 @@ plot(knnTune)
 </div>
 
 ### Use model to make predictions
-Before attempting to predict the blood/brain concentration ratios of the test samples, the descriptors in the test set must be transformed using the same pre-processing procedure that was applied to the descriptors in the training set.
-
-```r
-descrTest <- predict(transformations, descrTest)
-```
 
 Use model to predict outcomes (concentration ratios) of the test set.
 
@@ -1496,7 +1513,7 @@ cor(concRatioTest, test_pred)
 ```
 
 ```
-## [1] 0.7278034
+## [1] 0.7064688
 ```
 
 

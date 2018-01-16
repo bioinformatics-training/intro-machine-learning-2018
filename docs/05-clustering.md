@@ -28,6 +28,21 @@ Methods of clustering can be broadly divided into two types:
 
 Various distance metrics can be used with clustering algorithms. We will use Euclidean distance in the examples and exercises in this chapter.
 
+\begin{equation}
+  distance\left(p,q\right)=\sqrt{\sum_{i=1}^{n} (p_i-q_i)^2}
+  (\#eq:euclidean)
+\end{equation}
+
+<div class="figure" style="text-align: center">
+<img src="05-clustering_files/figure-html/euclideanDistanceDiagram-1.png" alt="Euclidean distance." width="75%" />
+<p class="caption">(\#fig:euclideanDistanceDiagram)Euclidean distance.</p>
+</div>
+
+<div class="figure" style="text-align: center">
+<img src="05-clustering_files/figure-html/euclideanDistanceDiagram1-1.png" alt="Euclidean distance." width="75%" />
+<p class="caption">(\#fig:euclideanDistanceDiagram1)Euclidean distance.</p>
+</div>
+
 
 ## Hierarchic agglomerative
 
@@ -54,7 +69,9 @@ E    9    8    3    4
 
 
 Single linkage - nearest neighbours linkage
+
 Complete linkage - furthest neighbours linkage
+
 Average linkage - UPGMA (Unweighted Pair Group Method with Arithmetic Mean) 
 
 
@@ -650,6 +667,8 @@ res <- lapply(k, function(i){kmeans(diff_density[,1:2], i, nstart=50)})
 
 ```
 ## Warning: did not converge in 10 iterations
+
+## Warning: did not converge in 10 iterations
 ```
 Failure to converge, so increase number of iterations.
 
@@ -888,6 +907,7 @@ Abstract DBSCAN algorithm in pseudocode [@Schubert2017]
 The method requires two parameters; MinPts that is the minimum number of samples in any cluster; Eps that is the maximum distance of the sample to at least one other sample within the same cluster.
 
 This algorithm works on a parametric approach. The two parameters involved in this algorithm are:
+
 * e (eps) is the radius of our neighborhoods around a data point p.
 * minPts is the minimum number of data points we want in a neighborhood to define a cluster.
 

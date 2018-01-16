@@ -1,4 +1,4 @@
-# Solutions ch. 10 - Clustering {#solutions-clustering}
+# Solutions ch. 6 - Clustering {#solutions-clustering}
 
 Solutions to exercises of chapter \@ref(clustering). 
 
@@ -120,71 +120,8 @@ ggplot(data = imgDF, aes(x = x, y = y)) +
 <p class="caption">(\#fig:pixelClustersK4)Result of k-means clustering of pixels based on colour for k=4.</p>
 </div>
 
-K-means clustering with k=4 rapidly and effectively segments the image of the histological section into the biological objects we can see by eye. A manual segmentation of the same image would be very laborious. This exercise highlights the importance of 
+K-means clustering with k=4 rapidly and effectively segments the image of the histological section into the biological objects we can see by eye. A manual segmentation of the same image would be very laborious. This exercise highlights the importance of using biological insight to choose a sensible value of k.
 
 *N.B.* the cluster centres provide the mean pixel intensities for the red, green and blue channels and we have used this information to colour the pixels belonging to each cluster (figure \@ref(fig:pixelClustersK4)).
 
-
-<!--
-
-## Exercise 1
-
-Load required packages
-
-```r
-library(ggplot2)
-library(cluster)
-library(RColorBrewer)
-```
-
-Define colours for plots
-
-```r
-clusterColours <- brewer.pal(9,"Set1")
-```
-
-Read data
-
-```r
-noisy_moons <- read.csv("data/example_clusters/noisy_moons.csv", header=F)
-```
-
-Perform clustering
-
-```r
-res <- dbscan::dbscan(noisy_moons[,1:2], eps=0.075, minPts = 10)
-```
-
-Identify noise points as we do not want to include these in the silhouette analysis
-
-```r
-# identify and remove noise points
-noise <- res$cluster==0
-```
-
-Remove noise points from cluster results
-
-```r
-clusters <- res$cluster[!noise]
-```
-
-Generate distance matrix from ```noisy_moons``` data.frame, exluding noise points.
-
-```r
-d <- dist(noisy_moons[!noise,1:2])
-```
-
-Silhouette analysis
-
-```r
-sil <- silhouette(clusters, d)
-plot(sil, border=NA, col=clusterColours[sort(clusters)], main="")
-```
-
-<img src="16-solutions-clustering_files/figure-html/unnamed-chunk-11-1.png" width="672" />
-
-
-
-
--->
 

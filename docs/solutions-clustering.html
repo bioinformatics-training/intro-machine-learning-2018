@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-01-06">
+<meta name="date" content="2018-01-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -259,7 +259,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="D.7" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html#exercise-8.7."><i class="fa fa-check"></i><b>D.7</b> Exercise 8.7.</a></li>
 <li class="chapter" data-level="D.8" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html#exercise-8.8."><i class="fa fa-check"></i><b>D.8</b> Exercise 8.8.</a></li>
 </ul></li>
-<li class="chapter" data-level="E" data-path="solutions-clustering.html"><a href="solutions-clustering.html"><i class="fa fa-check"></i><b>E</b> Solutions ch. 10 - Clustering</a><ul>
+<li class="chapter" data-level="E" data-path="solutions-clustering.html"><a href="solutions-clustering.html"><i class="fa fa-check"></i><b>E</b> Solutions ch. 6 - Clustering</a><ul>
 <li class="chapter" data-level="E.1" data-path="solutions-clustering.html"><a href="solutions-clustering.html#exercise-1-1"><i class="fa fa-check"></i><b>E.1</b> Exercise 1</a></li>
 </ul></li>
 <li class="chapter" data-level="F" data-path="solutions-nearest-neighbours.html"><a href="solutions-nearest-neighbours.html"><i class="fa fa-check"></i><b>F</b> Solutions ch. 5 - Nearest neighbours</a><ul>
@@ -296,7 +296,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="solutions-clustering" class="section level1">
-<h1><span class="header-section-number">E</span> Solutions ch. 10 - Clustering</h1>
+<h1><span class="header-section-number">E</span> Solutions ch. 6 - Clustering</h1>
 <p>Solutions to exercises of chapter <a href="clustering.html#clustering">6</a>.</p>
 <!--
 set.seed(42)
@@ -379,70 +379,8 @@ Figure E.2: Result of k-means clustering of pixels based on colour for k=2.
 Figure E.3: Result of k-means clustering of pixels based on colour for k=4.
 </p>
 </div>
-<p>K-means clustering with k=4 rapidly and effectively segments the image of the histological section into the biological objects we can see by eye. A manual segmentation of the same image would be very laborious. This exercise highlights the importance of</p>
+<p>K-means clustering with k=4 rapidly and effectively segments the image of the histological section into the biological objects we can see by eye. A manual segmentation of the same image would be very laborious. This exercise highlights the importance of using biological insight to choose a sensible value of k.</p>
 <p><em>N.B.</em> the cluster centres provide the mean pixel intensities for the red, green and blue channels and we have used this information to colour the pixels belonging to each cluster (figure <a href="solutions-clustering.html#fig:pixelClustersK4">E.3</a>).</p>
-<!--
-
-## Exercise 1
-
-Load required packages
-
-```r
-library(ggplot2)
-library(cluster)
-library(RColorBrewer)
-```
-
-Define colours for plots
-
-```r
-clusterColours <- brewer.pal(9,"Set1")
-```
-
-Read data
-
-```r
-noisy_moons <- read.csv("data/example_clusters/noisy_moons.csv", header=F)
-```
-
-Perform clustering
-
-```r
-res <- dbscan::dbscan(noisy_moons[,1:2], eps=0.075, minPts = 10)
-```
-
-Identify noise points as we do not want to include these in the silhouette analysis
-
-```r
-# identify and remove noise points
-noise <- res$cluster==0
-```
-
-Remove noise points from cluster results
-
-```r
-clusters <- res$cluster[!noise]
-```
-
-Generate distance matrix from ```noisy_moons``` data.frame, exluding noise points.
-
-```r
-d <- dist(noisy_moons[!noise,1:2])
-```
-
-Silhouette analysis
-
-```r
-sil <- silhouette(clusters, d)
-plot(sil, border=NA, col=clusterColours[sort(clusters)], main="")
-```
-
-<img src="16-solutions-clustering_files/figure-html/unnamed-chunk-11-1.png" width="672" />
-
-
-
-
--->
 
 </div>
 </div>
