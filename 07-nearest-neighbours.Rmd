@@ -664,10 +664,6 @@ plot(knnTune)
 ```
 
 ### Use model to make predictions
-Before attempting to predict the blood/brain concentration ratios of the test samples, the descriptors in the test set must be transformed using the same pre-processing procedure that was applied to the descriptors in the training set.
-```{r echo=T}
-descrTest <- predict(transformations, descrTest)
-```
 
 Use model to predict outcomes (concentration ratios) of the test set.
 ```{r echo=T}
