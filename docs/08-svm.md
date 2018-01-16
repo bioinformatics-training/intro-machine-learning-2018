@@ -155,7 +155,7 @@ getDoParWorkers()
 ```
 
 ```
-## [1] 2
+## [1] 4
 ```
 
 ### Partition data
@@ -332,7 +332,7 @@ svmTune
 ## Support Vector Machines with Radial Kernel - e1071 
 ## 
 ## 280 samples
-##   2 predictor
+##   2 predictors
 ##   2 classes: 'A', 'B' 
 ## 
 ## Pre-processing: centered (2), scaled (2) 
@@ -351,7 +351,7 @@ svmTune
 ##   32.00  0.9629592  0.8914286  0.8914286
 ##   64.00  0.9609184  0.8771429  0.8871429
 ## 
-## ROC was used to select the optimal model using  the largest value.
+## ROC was used to select the optimal model using the largest value.
 ## The final value used for the model was cost = 16.
 ```
 
@@ -591,25 +591,25 @@ svmTune2
 ## Support Vector Machines with Radial Kernel - e1071 
 ## 
 ## 168 samples
-##  61 predictor
+##  61 predictors
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold, repeated 5 times) 
-## Summary of sample sizes: 134, 136, 134, 133, 135, 134, ... 
+## Summary of sample sizes: 134, 135, 135, 134, 134, 135, ... 
 ## Resampling results across tuning parameters:
 ## 
 ##   cost   RMSE       Rsquared   MAE      
-##    0.25  0.5975889  0.4731069  0.4431324
-##    0.50  0.5635694  0.4995130  0.4163780
-##    1.00  0.5474320  0.5010678  0.4108350
-##    2.00  0.5381658  0.5078395  0.4065265
-##    4.00  0.5328509  0.5168000  0.4014653
-##    8.00  0.5299465  0.5221113  0.4017165
-##   16.00  0.5297629  0.5224211  0.4016452
-##   32.00  0.5297629  0.5224211  0.4016452
-##   64.00  0.5297629  0.5224211  0.4016452
+##    0.25  0.5971200  0.4824548  0.4414628
+##    0.50  0.5626587  0.5069825  0.4131150
+##    1.00  0.5471035  0.5087939  0.4074223
+##    2.00  0.5399000  0.5129105  0.4055802
+##    4.00  0.5356158  0.5197415  0.4029454
+##    8.00  0.5327136  0.5240834  0.4034633
+##   16.00  0.5325896  0.5242726  0.4035651
+##   32.00  0.5325896  0.5242726  0.4035651
+##   64.00  0.5325896  0.5242726  0.4035651
 ## 
-## RMSE was used to select the optimal model using  the smallest value.
+## RMSE was used to select the optimal model using the smallest value.
 ## The final value used for the model was cost = 16.
 ```
 

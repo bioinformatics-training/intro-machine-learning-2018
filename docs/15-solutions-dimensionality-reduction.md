@@ -81,6 +81,55 @@ clusterresults[1,which(clusterresults[2,]==1)]
 ```
 
 ```
+##    preimp  preimp.1  preimp.2  preimp.3  preimp.4  preimp.5  preimp.6 
+##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
+##  preimp.7  preimp.8  preimp.9 preimp.10 preimp.11       ESC     ESC.1 
+##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"     "ESC"     "ESC" 
+## preimp.12 preimp.13 preimp.14 preimp.15 preimp.16 preimp.17 preimp.18 
+##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
+## preimp.19 preimp.20 preimp.21 preimp.22 preimp.23 preimp.24 preimp.25 
+##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
+## preimp.26 preimp.27 preimp.28 preimp.29 preimp.30 preimp.31 preimp.32 
+##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
+## preimp.33 preimp.34 preimp.35 preimp.36 preimp.37 preimp.38 preimp.39 
+##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
+## preimp.40 preimp.41 preimp.42 preimp.43 preimp.44 preimp.45 preimp.47 
+##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
+## preimp.48 preimp.49 preimp.50 preimp.52 preimp.53 preimp.54 preimp.55 
+##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
+## preimp.56 preimp.57 preimp.58 preimp.59 preimp.60 preimp.61 preimp.62 
+##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
+## preimp.63 preimp.64 preimp.65 preimp.66 preimp.67 preimp.68 preimp.69 
+##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
+## preimp.70 preimp.71 preimp.72 preimp.73 preimp.74 preimp.75 preimp.76 
+##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
+## preimp.77 preimp.78 preimp.79 preimp.80 preimp.81 preimp.83 preimp.84 
+##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
+## preimp.85 preimp.86 preimp.88 preimp.89     ESC.2     ESC.3     ESC.4 
+##  "preimp"  "preimp"  "preimp"  "preimp"     "ESC"     "ESC"     "ESC" 
+##     ESC.5     ESC.6     ESC.7     ESC.8     ESC.9    ESC.10    ESC.11 
+##     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC" 
+##    ESC.12    ESC.13    ESC.14    ESC.15    ESC.17    ESC.19    ESC.20 
+##     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC" 
+##    ESC.21    ESC.22    ESC.23    ESC.24    ESC.25    ESC.26    ESC.27 
+##     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC" 
+##    ESC.28    ESC.29    ESC.30    ESC.32   PGC.145   PGC.202   PGC.203 
+##     "ESC"     "ESC"     "ESC"     "ESC"     "PGC"     "PGC"     "PGC" 
+##   PGC.204   PGC.206   PGC.208   PGC.209   PGC.210   PGC.211   PGC.212 
+##     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC" 
+##   PGC.213   PGC.214   PGC.215   PGC.216   PGC.218   PGC.219   PGC.220 
+##     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC" 
+##   PGC.221   PGC.222   PGC.223   PGC.224   PGC.225   PGC.226   PGC.227 
+##     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC" 
+##   PGC.228   PGC.229   PGC.230   PGC.232 
+##     "PGC"     "PGC"     "PGC"     "PGC"
+```
+
+```r
+clusterresults[1,which(clusterresults[2,]==2)]
+```
+
+```
 ## preimp.46 preimp.51 preimp.82 preimp.87    ESC.16    ESC.18    ESC.31 
 ##  "preimp"  "preimp"  "preimp"  "preimp"     "ESC"     "ESC"     "ESC" 
 ##    ESC.33    soma.3    soma.4    soma.6    soma.8   soma.12   soma.13 
@@ -94,7 +143,7 @@ clusterresults[1,which(clusterresults[2,]==1)]
 ```
 
 ```r
-clusterresults[1,which(clusterresults[2,]==2)]
+clusterresults[1,which(clusterresults[2,]==3)]
 ```
 
 ```
@@ -147,55 +196,6 @@ clusterresults[1,which(clusterresults[2,]==2)]
 ```
 
 ```r
-clusterresults[1,which(clusterresults[2,]==3)]
-```
-
-```
-##    preimp  preimp.1  preimp.2  preimp.3  preimp.4  preimp.5  preimp.6 
-##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-##  preimp.7  preimp.8  preimp.9 preimp.10 preimp.11       ESC     ESC.1 
-##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"     "ESC"     "ESC" 
-## preimp.12 preimp.13 preimp.14 preimp.15 preimp.16 preimp.17 preimp.18 
-##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.19 preimp.20 preimp.21 preimp.22 preimp.23 preimp.24 preimp.25 
-##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.26 preimp.27 preimp.28 preimp.29 preimp.30 preimp.31 preimp.32 
-##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.33 preimp.34 preimp.35 preimp.36 preimp.37 preimp.38 preimp.39 
-##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.40 preimp.41 preimp.42 preimp.43 preimp.44 preimp.45 preimp.47 
-##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.48 preimp.49 preimp.50 preimp.52 preimp.53 preimp.54 preimp.55 
-##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.56 preimp.57 preimp.58 preimp.59 preimp.60 preimp.61 preimp.62 
-##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.63 preimp.64 preimp.65 preimp.66 preimp.67 preimp.68 preimp.69 
-##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.70 preimp.71 preimp.72 preimp.73 preimp.74 preimp.75 preimp.76 
-##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.77 preimp.78 preimp.79 preimp.80 preimp.81 preimp.83 preimp.84 
-##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.85 preimp.86 preimp.88 preimp.89     ESC.2     ESC.3     ESC.4 
-##  "preimp"  "preimp"  "preimp"  "preimp"     "ESC"     "ESC"     "ESC" 
-##     ESC.5     ESC.6     ESC.7     ESC.8     ESC.9    ESC.10    ESC.11 
-##     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC" 
-##    ESC.12    ESC.13    ESC.14    ESC.15    ESC.17    ESC.19    ESC.20 
-##     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC" 
-##    ESC.21    ESC.22    ESC.23    ESC.24    ESC.25    ESC.26    ESC.27 
-##     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC" 
-##    ESC.28    ESC.29    ESC.30    ESC.32   PGC.145   PGC.202   PGC.203 
-##     "ESC"     "ESC"     "ESC"     "ESC"     "PGC"     "PGC"     "PGC" 
-##   PGC.204   PGC.206   PGC.208   PGC.209   PGC.210   PGC.211   PGC.212 
-##     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC" 
-##   PGC.213   PGC.214   PGC.215   PGC.216   PGC.218   PGC.219   PGC.220 
-##     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC" 
-##   PGC.221   PGC.222   PGC.223   PGC.224   PGC.225   PGC.226   PGC.227 
-##     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC" 
-##   PGC.228   PGC.229   PGC.230   PGC.232 
-##     "PGC"     "PGC"     "PGC"     "PGC"
-```
-
-```r
 clusterresults[1,which(clusterresults[2,]==4)]
 ```
 
@@ -232,13 +232,13 @@ t.test(D[which(genenames=="SOX17")+3, which(clusterresults[2,]==1)],D[which(gene
 ## 	Welch Two Sample t-test
 ## 
 ## data:  D[which(genenames == "SOX17") + 3, which(clusterresults[2, ] ==  and D[which(genenames == "SOX17") + 3, which(clusterresults[2, ] ==     1)] and     3)]
-## t = -0.081071, df = 41.257, p-value = 0.9358
+## t = -11.069, df = 344.66, p-value < 2.2e-16
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.5376875  0.4961767
+##  -2.250895 -1.571663
 ## sample estimates:
 ## mean of x mean of y 
-## 0.4002884 0.4210437
+## 0.4210437 2.3323228
 ```
 
 Typically we won't always know the important genes, but can perform an unbiased analysis by testing all genes.

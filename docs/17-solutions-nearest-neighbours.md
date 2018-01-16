@@ -1,4 +1,4 @@
-# Solutions ch. 5 - Nearest neighbours {#solutions-nearest-neighbours}
+# Solutions ch. 8 - Nearest neighbours {#solutions-nearest-neighbours}
 
 Solutions to exercises of chapter \@ref(nearest-neighbours).
 
@@ -37,6 +37,10 @@ library(doMC)
 
 ```r
 library(corrplot)
+```
+
+```
+## corrplot 0.84 loaded
 ```
 
 Prepare for parallel processing
@@ -237,7 +241,7 @@ knnFit
 ## k-Nearest Neighbors 
 ## 
 ## 147 samples
-##   7 predictor
+##   7 predictors
 ##   3 classes: 'Canadian', 'Kama', 'Rosa' 
 ## 
 ## Pre-processing: centered (3), scaled (3), remove (4) 
@@ -272,7 +276,7 @@ knnFit
 ##   47  0.8934799  0.8401614
 ##   49  0.8920513  0.8379992
 ## 
-## Accuracy was used to select the optimal model using  the largest value.
+## Accuracy was used to select the optimal model using the largest value.
 ## The final value used for the model was k = 3.
 ```
 

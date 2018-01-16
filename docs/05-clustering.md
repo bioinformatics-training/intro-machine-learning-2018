@@ -109,7 +109,7 @@ library(dendextend)
 ```
 ## 
 ## ---------------------
-## Welcome to dendextend version 1.5.2
+## Welcome to dendextend version 1.6.0
 ## Type citation('dendextend') for how to cite the package.
 ## 
 ## Type browseVignettes(package = 'dendextend') for the package vignette.
@@ -669,6 +669,10 @@ res <- lapply(k, function(i){kmeans(diff_density[,1:2], i, nstart=50)})
 ## Warning: did not converge in 10 iterations
 
 ## Warning: did not converge in 10 iterations
+
+## Warning: did not converge in 10 iterations
+
+## Warning: did not converge in 10 iterations
 ```
 Failure to converge, so increase number of iterations.
 
@@ -804,7 +808,7 @@ getDoParWorkers()
 ```
 
 ```
-## [1] 2
+## [1] 4
 ```
 
 Instead of using the **lapply** function to vectorize our code, we will instead use the parallel equivalent, **foreach**. Like **lapply**, **foreach** returns a list by default. For this example we have set a seed, rather than generate a random number, for the sake of reproducibility. Ordinarily we would omit ```set.seed(42)``` and ```.options.multicore=list(set.seed=FALSE)```.
@@ -855,13 +859,13 @@ table(tissue, res_k_15[[7]]$cluster)
 ```
 ##              
 ## tissue         1  2  3  4  5  6  7
-##   cerebellum   0  0  0  0  0  5 33
-##   colon        0  0 34  0  0  0  0
+##   cerebellum   0  0  5 31  0  0  2
+##   colon        0 34  0  0  0  0  0
 ##   endometrium 15  0  0  0  0  0  0
-##   hippocampus  0  0  0  0 31  0  0
-##   kidney      37  2  0  0  0  0  0
-##   liver        0 26  0  0  0  0  0
-##   placenta     0  0  0  6  0  0  0
+##   hippocampus  0  0 31  0  0  0  0
+##   kidney      37  0  0  0  0  0  2
+##   liver        0  0  0  0  0 24  2
+##   placenta     0  0  0  0  6  0  0
 ```
 The analysis has found a distinct cluster for each tissue and therefore performed slightly better than the earlier hierarchical clustering analysis, which placed endometrium and kidney observations in the same cluster.
 
@@ -1531,8 +1535,7 @@ ggplot(data = imgDF, aes(x = x, y = y)) +
 
 This should be all the information you need to perform this exercise.
 
-### Exercise 2 {#clusteringEx2}
-Try applying clustering to one of the data sets that was used for classification earlier in the course. Do any clusters found correspond to the classes defined for those data sets?
+
 
 **Solutions to exercises can be found in appendix \@ref(solutions-clustering).**
 

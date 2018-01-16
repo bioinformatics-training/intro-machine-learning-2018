@@ -177,7 +177,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="6.7" data-path="clustering.html"><a href="clustering.html#exercises"><i class="fa fa-check"></i><b>6.7</b> Exercises</a><ul>
 <li class="chapter" data-level="6.7.1" data-path="clustering.html"><a href="clustering.html#clusteringEx1"><i class="fa fa-check"></i><b>6.7.1</b> Exercise 1</a></li>
-<li class="chapter" data-level="6.7.2" data-path="clustering.html"><a href="clustering.html#clusteringEx2"><i class="fa fa-check"></i><b>6.7.2</b> Exercise 2</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="supervised-learning.html"><a href="supervised-learning.html"><i class="fa fa-check"></i><b>7</b> Supervised Learning</a></li>
@@ -262,10 +261,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="E" data-path="solutions-clustering.html"><a href="solutions-clustering.html"><i class="fa fa-check"></i><b>E</b> Solutions ch. 6 - Clustering</a><ul>
 <li class="chapter" data-level="E.1" data-path="solutions-clustering.html"><a href="solutions-clustering.html#exercise-1-1"><i class="fa fa-check"></i><b>E.1</b> Exercise 1</a></li>
 </ul></li>
-<li class="chapter" data-level="F" data-path="solutions-nearest-neighbours.html"><a href="solutions-nearest-neighbours.html"><i class="fa fa-check"></i><b>F</b> Solutions ch. 5 - Nearest neighbours</a><ul>
+<li class="chapter" data-level="F" data-path="solutions-nearest-neighbours.html"><a href="solutions-nearest-neighbours.html"><i class="fa fa-check"></i><b>F</b> Solutions ch. 8 - Nearest neighbours</a><ul>
 <li class="chapter" data-level="F.1" data-path="solutions-nearest-neighbours.html"><a href="solutions-nearest-neighbours.html#exercise-1-2"><i class="fa fa-check"></i><b>F.1</b> Exercise 1</a></li>
 </ul></li>
-<li class="chapter" data-level="G" data-path="solutions-svm.html"><a href="solutions-svm.html"><i class="fa fa-check"></i><b>G</b> Solutions ch. 7 - Support vector machines</a><ul>
+<li class="chapter" data-level="G" data-path="solutions-svm.html"><a href="solutions-svm.html"><i class="fa fa-check"></i><b>G</b> Solutions ch. 9 - Support vector machines</a><ul>
 <li class="chapter" data-level="G.1" data-path="solutions-svm.html"><a href="solutions-svm.html#exercise-1-3"><i class="fa fa-check"></i><b>G.1</b> Exercise 1</a></li>
 </ul></li>
 <li class="chapter" data-level="H" data-path="solutions-decision-trees.html"><a href="solutions-decision-trees.html"><i class="fa fa-check"></i><b>H</b> Solutions ch. 6 - Decision trees and random forests</a><ul>
@@ -274,6 +273,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="I" data-path="solutions-ann.html"><a href="solutions-ann.html"><i class="fa fa-check"></i><b>I</b> Solutions ch. 8 - Artificial neural networks</a><ul>
 <li class="chapter" data-level="I.1" data-path="solutions-ann.html"><a href="solutions-ann.html#exercise-1-5"><i class="fa fa-check"></i><b>I.1</b> Exercise 1</a></li>
 </ul></li>
+<li class="chapter" data-level="J" data-path="mlnn.html"><a href="mlnn.html"><i class="fa fa-check"></i><b>J</b> Artificial neural networks</a><ul>
+<li class="chapter" data-level="J.1" data-path="mlnn.html"><a href="mlnn.html#multilayer-neural-networks"><i class="fa fa-check"></i><b>J.1</b> Multilayer Neural Networks</a><ul>
+<li class="chapter" data-level="J.1.1" data-path="mlnn.html"><a href="mlnn.html#constructing-layers-in-kerasr"><i class="fa fa-check"></i><b>J.1.1</b> Constructing layers in kerasR</a></li>
+<li class="chapter" data-level="J.1.2" data-path="mlnn.html"><a href="mlnn.html#reading-in-images"><i class="fa fa-check"></i><b>J.1.2</b> Reading in images</a></li>
+<li class="chapter" data-level="J.1.3" data-path="mlnn.html"><a href="mlnn.html#rick-and-morty-classifier-using-deep-learning"><i class="fa fa-check"></i><b>J.1.3</b> Rick and Morty classifier using Deep Learning</a></li>
+</ul></li>
+<li class="chapter" data-level="J.2" data-path="mlnn.html"><a href="mlnn.html#convolutional-neural-networks"><i class="fa fa-check"></i><b>J.2</b> Convolutional neural networks</a><ul>
+<li class="chapter" data-level="J.2.1" data-path="mlnn.html"><a href="mlnn.html#data-augmentation"><i class="fa fa-check"></i><b>J.2.1</b> Data augmentation</a></li>
+<li class="chapter" data-level="J.2.2" data-path="mlnn.html"><a href="mlnn.html#asking-more-precise-questions"><i class="fa fa-check"></i><b>J.2.2</b> Asking more precise questions</a></li>
+<li class="chapter" data-level="J.2.3" data-path="mlnn.html"><a href="mlnn.html#more-complex-networks"><i class="fa fa-check"></i><b>J.2.3</b> More complex networks</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="K" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>K</b> Further reading</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -441,9 +453,9 @@ The more homogenous something is the less information is needed to describe it a
 <p><em>Data Slicing</em></p>
 <p>Data slicing is a step to split data into train and test set. Training data set can be used specifically for our model building. Test dataset should not be mixed up while building model. Even during standardization, we should not standardize our test set.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">3033</span>)
-intrain &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> car_df<span class="op">$</span>V1, <span class="dt">p=</span> <span class="fl">0.7</span>, <span class="dt">list =</span> <span class="ot">FALSE</span>)
+intrain &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> car_df$V1, <span class="dt">p=</span> <span class="fl">0.7</span>, <span class="dt">list =</span> <span class="ot">FALSE</span>)
 training &lt;-<span class="st"> </span>car_df[intrain,]
-testing &lt;-<span class="st"> </span>car_df[<span class="op">-</span>intrain,]</code></pre></div>
+testing &lt;-<span class="st"> </span>car_df[-intrain,]</code></pre></div>
 <p>The “p” parameter holds a decimal value in the range of 0-1. It’s to show that percentage of the split. We are using p=0.7. It means that data split should be done in 70:30 ratio.</p>
 <p><em>Data Preprocessing</em></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#check dimensions of train &amp; test set</span>
@@ -466,7 +478,7 @@ testing &lt;-<span class="st"> </span>car_df[<span class="op">-</span>intrain,]<
 <p><em>Training the Decision Tree classifier with criterion as INFORMATION GAIN</em></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trctrl &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;repeatedcv&quot;</span>, <span class="dt">number =</span> <span class="dv">10</span>, <span class="dt">repeats =</span> <span class="dv">3</span>)
 <span class="kw">set.seed</span>(<span class="dv">3333</span>)
-dtree_fit &lt;-<span class="st"> </span><span class="kw">train</span>(V7 <span class="op">~</span>., <span class="dt">data =</span> training, <span class="dt">method =</span> <span class="st">&quot;rpart&quot;</span>,
+dtree_fit &lt;-<span class="st"> </span><span class="kw">train</span>(V7 ~., <span class="dt">data =</span> training, <span class="dt">method =</span> <span class="st">&quot;rpart&quot;</span>,
                    <span class="dt">parms =</span> <span class="kw">list</span>(<span class="dt">split =</span> <span class="st">&quot;information&quot;</span>),
                    <span class="dt">trControl=</span>trctrl,
                    <span class="dt">tuneLength =</span> <span class="dv">10</span>)</code></pre></div>
@@ -475,7 +487,7 @@ dtree_fit &lt;-<span class="st"> </span><span class="kw">train</span>(V7 <span c
 <pre><code>## CART 
 ## 
 ## 1212 samples
-##    6 predictor
+##    6 predictors
 ##    4 classes: &#39;acc&#39;, &#39;good&#39;, &#39;unacc&#39;, &#39;vgood&#39; 
 ## 
 ## No pre-processing
@@ -495,10 +507,10 @@ dtree_fit &lt;-<span class="st"> </span><span class="kw">train</span>(V7 <span c
 ##   0.07584270  0.7524613  0.4213615
 ##   0.08426966  0.7164441  0.1425639
 ## 
-## Accuracy was used to select the optimal model using  the largest value.
+## Accuracy was used to select the optimal model using the largest value.
 ## The final value used for the model was cp = 0.01123596.</code></pre>
 <p><em>Plotting the decision tress</em></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prp</span>(dtree_fit<span class="op">$</span>finalModel, <span class="dt">box.palette =</span> <span class="st">&quot;Reds&quot;</span>, <span class="dt">tweak =</span> <span class="fl">1.2</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prp</span>(dtree_fit$finalModel, <span class="dt">box.palette =</span> <span class="st">&quot;Reds&quot;</span>, <span class="dt">tweak =</span> <span class="fl">1.2</span>)</code></pre></div>
 <p><img src="09-decision-trees_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p><em>Prediction</em></p>
 <p>The model is trained with cp = 0.01123596. cp is complexity parameter for our dtree. We are ready to predict classes for our test set. We can use predict() method. Let’s try to predict target variable for test set’s 1st record.</p>
@@ -510,7 +522,7 @@ dtree_fit &lt;-<span class="st"> </span><span class="kw">train</span>(V7 <span c
 ## Levels: acc good unacc vgood</code></pre>
 <p>For our 1st record of testing data classifier is predicting class variable as “unacc”. Now, its time to predict target variable for the whole test set.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(dtree_fit, <span class="dt">newdata =</span> testing)
-<span class="kw">confusionMatrix</span>(test_pred, testing<span class="op">$</span>V7 )  <span class="co">#check accuracy</span></code></pre></div>
+<span class="kw">confusionMatrix</span>(test_pred, testing$V7 )  <span class="co">#check accuracy</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -545,7 +557,7 @@ dtree_fit &lt;-<span class="st"> </span><span class="kw">train</span>(V7 <span c
 <p><em>Training the Decision Tree classifier with criterion as GINI INDEX</em></p>
 <p>Let’s try to program a decision tree classifier using splitting criterion as gini index.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">3333</span>)
-dtree_fit_gini &lt;-<span class="st"> </span><span class="kw">train</span>(V7 <span class="op">~</span>., <span class="dt">data =</span> training, <span class="dt">method =</span> <span class="st">&quot;rpart&quot;</span>,
+dtree_fit_gini &lt;-<span class="st"> </span><span class="kw">train</span>(V7 ~., <span class="dt">data =</span> training, <span class="dt">method =</span> <span class="st">&quot;rpart&quot;</span>,
                    <span class="dt">parms =</span> <span class="kw">list</span>(<span class="dt">split =</span> <span class="st">&quot;gini&quot;</span>),
                    <span class="dt">trControl=</span>trctrl,
                    <span class="dt">tuneLength =</span> <span class="dv">10</span>)
@@ -553,7 +565,7 @@ dtree_fit_gini</code></pre></div>
 <pre><code>## CART 
 ## 
 ## 1212 samples
-##    6 predictor
+##    6 predictors
 ##    4 classes: &#39;acc&#39;, &#39;good&#39;, &#39;unacc&#39;, &#39;vgood&#39; 
 ## 
 ## No pre-processing
@@ -573,16 +585,16 @@ dtree_fit_gini</code></pre></div>
 ##   0.07584270  0.7524613  0.4213615
 ##   0.08426966  0.7164441  0.1425639
 ## 
-## Accuracy was used to select the optimal model using  the largest value.
+## Accuracy was used to select the optimal model using the largest value.
 ## The final value used for the model was cp = 0.01123596.</code></pre>
 <p>It is showing us the accuracy metrics for different values of cp.</p>
 <p><em>Plotting decision tree</em></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prp</span>(dtree_fit_gini<span class="op">$</span>finalModel, <span class="dt">box.palette =</span> <span class="st">&quot;Blues&quot;</span>, <span class="dt">tweak =</span> <span class="fl">1.2</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prp</span>(dtree_fit_gini$finalModel, <span class="dt">box.palette =</span> <span class="st">&quot;Blues&quot;</span>, <span class="dt">tweak =</span> <span class="fl">1.2</span>)</code></pre></div>
 <p><img src="09-decision-trees_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p><em>Prediction</em></p>
 <p>Our model is trained with cp = 0.01123596. Now, it’s time to predict target variable for the whole test set.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_pred_gini &lt;-<span class="st"> </span><span class="kw">predict</span>(dtree_fit_gini, <span class="dt">newdata =</span> testing)
-<span class="kw">confusionMatrix</span>(test_pred_gini, testing<span class="op">$</span>V7 )  <span class="co">#check accuracy</span></code></pre></div>
+<span class="kw">confusionMatrix</span>(test_pred_gini, testing$V7 )  <span class="co">#check accuracy</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -654,7 +666,7 @@ Example&lt;-<span class="kw">read.csv</span>(<span class="dt">file=</span><span 
 ## [13] &quot;pdays&quot;          &quot;previous&quot;       &quot;poutcome&quot;       &quot;emp.var.rate&quot;  
 ## [17] &quot;cons.price.idx&quot; &quot;cons.conf.idx&quot;  &quot;euribor3m&quot;      &quot;nr.employed&quot;   
 ## [21] &quot;y&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(Example<span class="op">$</span>y)<span class="op">/</span><span class="kw">nrow</span>(Example)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(Example$y)/<span class="kw">nrow</span>(Example)</code></pre></div>
 <pre><code>## 
 ##        no       yes 
 ## 0.8905074 0.1094926</code></pre>
@@ -664,21 +676,21 @@ Example&lt;-<span class="kw">read.csv</span>(<span class="dt">file=</span><span 
                      <span class="kw">nrow</span>(Example),
                      <span class="dt">replace =</span> T,
                      <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.6</span>,<span class="fl">0.4</span>))
-Example.dev &lt;-<span class="st"> </span>Example[sample.ind<span class="op">==</span><span class="dv">1</span>,]
-Example.val &lt;-<span class="st"> </span>Example[sample.ind<span class="op">==</span><span class="dv">2</span>,]
+Example.dev &lt;-<span class="st"> </span>Example[sample.ind==<span class="dv">1</span>,]
+Example.val &lt;-<span class="st"> </span>Example[sample.ind==<span class="dv">2</span>,]
 
-<span class="kw">table</span>(Example.dev<span class="op">$</span>y)<span class="op">/</span><span class="kw">nrow</span>(Example.dev)</code></pre></div>
+<span class="kw">table</span>(Example.dev$y)/<span class="kw">nrow</span>(Example.dev)</code></pre></div>
 <pre><code>## 
 ##        no       yes 
 ## 0.8881469 0.1118531</code></pre>
 <p>Both development and validation samples have similar target variable distribution. This is just a sample validation.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(Example.dev<span class="op">$</span>y)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(Example.dev$y)</code></pre></div>
 <pre><code>## [1] &quot;factor&quot;</code></pre>
 <p>Class of target or response variable is factor, so a classification Random Forest will be built. The current data frame has a list of independent variables, so we can make it formula and then pass as a parameter value for randomForest.</p>
 <p><em>Make Formula</em></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">varNames &lt;-<span class="st"> </span><span class="kw">names</span>(Example.dev)
 <span class="co"># Exclude ID or Response variable</span>
-varNames &lt;-<span class="st"> </span>varNames[<span class="op">!</span>varNames <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;y&quot;</span>)]
+varNames &lt;-<span class="st"> </span>varNames[!varNames %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;y&quot;</span>)]
 
 <span class="co"># add + sign between exploratory variables</span>
 varNames1 &lt;-<span class="st"> </span><span class="kw">paste</span>(varNames, <span class="dt">collapse =</span> <span class="st">&quot;+&quot;</span>)
@@ -706,8 +718,8 @@ rf.form &lt;-<span class="st"> </span><span class="kw">as.formula</span>(<span c
 var.imp &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">importance</span>(Example.rf,
            <span class="dt">type=</span><span class="dv">2</span>))
 <span class="co"># make row names as columns</span>
-var.imp<span class="op">$</span>Variables &lt;-<span class="st"> </span><span class="kw">row.names</span>(var.imp)
-var.imp[<span class="kw">order</span>(var.imp<span class="op">$</span>MeanDecreaseGini,<span class="dt">decreasing =</span> T),]</code></pre></div>
+var.imp$Variables &lt;-<span class="st"> </span><span class="kw">row.names</span>(var.imp)
+var.imp[<span class="kw">order</span>(var.imp$MeanDecreaseGini,<span class="dt">decreasing =</span> T),]</code></pre></div>
 <pre><code>##                MeanDecreaseGini      Variables
 ## duration             132.170002       duration
 ## euribor3m             54.037698      euribor3m
@@ -733,7 +745,7 @@ var.imp[<span class="kw">order</span>(var.imp<span class="op">$</span>MeanDecrea
 <p><em>Predict Response Variable Value using Random Forest</em></p>
 <p>Generic predict function can be used for predicting response variable using Random Forest object.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Predicting response variable</span>
-Example.dev<span class="op">$</span>predicted.response &lt;-<span class="st"> </span><span class="kw">predict</span>(Example.rf ,Example.dev)</code></pre></div>
+Example.dev$predicted.response &lt;-<span class="st"> </span><span class="kw">predict</span>(Example.rf ,Example.dev)</code></pre></div>
 <p>confusionMatrix function from caret package can be used for creating confusion matrix based on actual response variable and predicted value.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load Library or packages</span>
 <span class="kw">library</span>(e1071)
@@ -741,8 +753,8 @@ Example.dev<span class="op">$</span>predicted.response &lt;-<span class="st"> </
 ## Loading required package: lattice
 ## Loading required package: ggplot2
 <span class="co"># Create Confusion Matrix</span>
-<span class="kw">confusionMatrix</span>(<span class="dt">data=</span>Example.dev<span class="op">$</span>predicted.response,
-                <span class="dt">reference=</span>Example.dev<span class="op">$</span>y,
+<span class="kw">confusionMatrix</span>(<span class="dt">data=</span>Example.dev$predicted.response,
+                <span class="dt">reference=</span>Example.dev$y,
                 <span class="dt">positive=</span><span class="st">&#39;yes&#39;</span>)</code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
@@ -772,11 +784,11 @@ Example.dev<span class="op">$</span>predicted.response &lt;-<span class="st"> </
 ## </code></pre>
 <p>It has accuracy of 99.81%. Now we can predict response for the validation sample and calculate model accuracy for the sample.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Predicting response variable</span>
-Example.val<span class="op">$</span>predicted.response &lt;-<span class="st"> </span><span class="kw">predict</span>(Example.rf ,Example.val)
+Example.val$predicted.response &lt;-<span class="st"> </span><span class="kw">predict</span>(Example.rf ,Example.val)
 
 <span class="co"># Create Confusion Matrix</span>
-<span class="kw">confusionMatrix</span>(<span class="dt">data=</span>Example.val<span class="op">$</span>predicted.response,
-                <span class="dt">reference=</span>Example.val<span class="op">$</span>y,
+<span class="kw">confusionMatrix</span>(<span class="dt">data=</span>Example.val$predicted.response,
+                <span class="dt">reference=</span>Example.val$y,
                 <span class="dt">positive=</span><span class="st">&#39;yes&#39;</span>)</code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 

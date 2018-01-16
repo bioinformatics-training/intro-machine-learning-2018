@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>An Introduction to Machine Learning</title>
+  <meta name="description" content="Course materials for An Introduction to Machine Learning">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="An Introduction to Machine Learning" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="figures/cover_image.png" />
+  <meta property="og:description" content="Course materials for An Introduction to Machine Learning" />
+  <meta name="github-repo" content="bioinformatics-training/intro-machine-learning-2018" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="An Introduction to Machine Learning" />
+  
+  <meta name="twitter:description" content="Course materials for An Introduction to Machine Learning" />
+  <meta name="twitter:image" content="figures/cover_image.png" />
+
+<meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
+
+
+<meta name="date" content="2018-01-16">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="solutions-ann.html">
+<link rel="next" href="further-reading-1.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An Introduction to Machine Learning</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About the course</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#registration"><i class="fa fa-check"></i><b>1.2</b> Registration</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>1.3</b> Prerequisites</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#github"><i class="fa fa-check"></i><b>1.4</b> Github</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>1.5</b> License</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#contact"><i class="fa fa-check"></i><b>1.6</b> Contact</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#colophon"><i class="fa fa-check"></i><b>1.7</b> Colophon</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#what-is-machine-learning"><i class="fa fa-check"></i><b>2.1</b> What is machine learning?</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#aspects-of-ml"><i class="fa fa-check"></i><b>2.2</b> Aspects of ML</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#what-actually-happened-under-the-hood"><i class="fa fa-check"></i><b>2.3</b> What actually happened under the hood</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and matrix algebra</a><ul>
+<li class="chapter" data-level="3.1" data-path="linear-models.html"><a href="linear-models.html#linear-models"><i class="fa fa-check"></i><b>3.1</b> Linear models</a></li>
+<li class="chapter" data-level="3.2" data-path="linear-models.html"><a href="linear-models.html#matrix-algebra"><i class="fa fa-check"></i><b>3.2</b> Matrix algebra</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>4</b> Supervised learning</a><ul>
+<li class="chapter" data-level="4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#regression"><i class="fa fa-check"></i><b>4.1</b> Regression</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>4.1.1</b> Linear regression</a></li>
+<li class="chapter" data-level="4.1.2" data-path="logistic-regression.html"><a href="logistic-regression.html#polynomial-regression"><i class="fa fa-check"></i><b>4.1.2</b> Polynomial regression</a></li>
+<li class="chapter" data-level="4.1.3" data-path="logistic-regression.html"><a href="logistic-regression.html#distributions-of-fits"><i class="fa fa-check"></i><b>4.1.3</b> Distributions of fits</a></li>
+<li class="chapter" data-level="4.1.4" data-path="logistic-regression.html"><a href="logistic-regression.html#gaussian-process-regression"><i class="fa fa-check"></i><b>4.1.4</b> Gaussian process regression</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="logistic-regression.html"><a href="logistic-regression.html#classification"><i class="fa fa-check"></i><b>4.2</b> Classification</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression"><i class="fa fa-check"></i><b>4.2.1</b> Logistic regression</a></li>
+<li class="chapter" data-level="4.2.2" data-path="logistic-regression.html"><a href="logistic-regression.html#gp-classification"><i class="fa fa-check"></i><b>4.2.2</b> GP classification</a></li>
+<li class="chapter" data-level="4.2.3" data-path="logistic-regression.html"><a href="logistic-regression.html#other-classification-approaches."><i class="fa fa-check"></i><b>4.2.3</b> Other classification approaches.</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="logistic-regression.html"><a href="logistic-regression.html#resources"><i class="fa fa-check"></i><b>4.3</b> Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html"><i class="fa fa-check"></i><b>5</b> Dimensionality reduction</a><ul>
+<li class="chapter" data-level="5.1" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#linear-dimensionality-reduction"><i class="fa fa-check"></i><b>5.1</b> Linear Dimensionality Reduction</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#interpreting-the-principle-component-axes"><i class="fa fa-check"></i><b>5.1.1</b> Interpreting the Principle Component Axes</a></li>
+<li class="chapter" data-level="5.1.2" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#horseshoe-effect"><i class="fa fa-check"></i><b>5.1.2</b> Horseshoe effect</a></li>
+<li class="chapter" data-level="5.1.3" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#pca-analysis-of-mammalian-development"><i class="fa fa-check"></i><b>5.1.3</b> PCA analysis of mammalian development</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#nonlinear-dimensionality-reduction"><i class="fa fa-check"></i><b>5.2</b> Nonlinear Dimensionality Reduction</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#nonlinear-warping"><i class="fa fa-check"></i><b>5.2.1</b> Nonlinear warping</a></li>
+<li class="chapter" data-level="5.2.2" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#stochasticity"><i class="fa fa-check"></i><b>5.2.2</b> Stochasticity</a></li>
+<li class="chapter" data-level="5.2.3" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#analysis-of-mammalian-development"><i class="fa fa-check"></i><b>5.2.3</b> Analysis of mammalian development</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#other-dimensionality-reduction-techniques"><i class="fa fa-check"></i><b>5.3</b> Other dimensionality reduction techniques</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>6</b> Clustering</a><ul>
+<li class="chapter" data-level="6.1" data-path="clustering.html"><a href="clustering.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="clustering.html"><a href="clustering.html#distance-metrics"><i class="fa fa-check"></i><b>6.2</b> Distance metrics</a></li>
+<li class="chapter" data-level="6.3" data-path="clustering.html"><a href="clustering.html#hierarchic-agglomerative"><i class="fa fa-check"></i><b>6.3</b> Hierarchic agglomerative</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="clustering.html"><a href="clustering.html#linkage-algorithms"><i class="fa fa-check"></i><b>6.3.1</b> Linkage algorithms</a></li>
+<li class="chapter" data-level="6.3.2" data-path="clustering.html"><a href="clustering.html#example-clustering-synthetic-data-sets"><i class="fa fa-check"></i><b>6.3.2</b> Example: clustering synthetic data sets</a></li>
+<li class="chapter" data-level="6.3.3" data-path="clustering.html"><a href="clustering.html#example-gene-expression-profiling-of-human-tissues"><i class="fa fa-check"></i><b>6.3.3</b> Example: gene expression profiling of human tissues</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="clustering.html"><a href="clustering.html#k-means"><i class="fa fa-check"></i><b>6.4</b> K-means</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="clustering.html"><a href="clustering.html#algorithm"><i class="fa fa-check"></i><b>6.4.1</b> Algorithm</a></li>
+<li class="chapter" data-level="6.4.2" data-path="clustering.html"><a href="clustering.html#choosing-initial-cluster-centres"><i class="fa fa-check"></i><b>6.4.2</b> Choosing initial cluster centres</a></li>
+<li class="chapter" data-level="6.4.3" data-path="clustering.html"><a href="clustering.html#choosingK"><i class="fa fa-check"></i><b>6.4.3</b> Choosing k</a></li>
+<li class="chapter" data-level="6.4.4" data-path="clustering.html"><a href="clustering.html#example-clustering-synthetic-data-sets-1"><i class="fa fa-check"></i><b>6.4.4</b> Example: clustering synthetic data sets</a></li>
+<li class="chapter" data-level="6.4.5" data-path="clustering.html"><a href="clustering.html#example-gene-expression-profiling-of-human-tissues-1"><i class="fa fa-check"></i><b>6.4.5</b> Example: gene expression profiling of human tissues</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="clustering.html"><a href="clustering.html#dbscan"><i class="fa fa-check"></i><b>6.5</b> DBSCAN</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="clustering.html"><a href="clustering.html#algorithm-1"><i class="fa fa-check"></i><b>6.5.1</b> Algorithm</a></li>
+<li class="chapter" data-level="6.5.2" data-path="clustering.html"><a href="clustering.html#implementation-in-r"><i class="fa fa-check"></i><b>6.5.2</b> Implementation in R</a></li>
+<li class="chapter" data-level="6.5.3" data-path="clustering.html"><a href="clustering.html#choosing-parameters"><i class="fa fa-check"></i><b>6.5.3</b> Choosing parameters</a></li>
+<li class="chapter" data-level="6.5.4" data-path="clustering.html"><a href="clustering.html#example-clustering-synthetic-data-sets-2"><i class="fa fa-check"></i><b>6.5.4</b> Example: clustering synthetic data sets</a></li>
+<li class="chapter" data-level="6.5.5" data-path="clustering.html"><a href="clustering.html#example-gene-expression-profiling-of-human-tissues-2"><i class="fa fa-check"></i><b>6.5.5</b> Example: gene expression profiling of human tissues</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="clustering.html"><a href="clustering.html#evaluating-cluster-quality"><i class="fa fa-check"></i><b>6.6</b> Evaluating cluster quality</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="clustering.html"><a href="clustering.html#silhouetteMethod"><i class="fa fa-check"></i><b>6.6.1</b> Silhouette method</a></li>
+<li class="chapter" data-level="6.6.2" data-path="clustering.html"><a href="clustering.html#example---k-means-clustering-of-blobs-data-set"><i class="fa fa-check"></i><b>6.6.2</b> Example - k-means clustering of blobs data set</a></li>
+<li class="chapter" data-level="6.6.3" data-path="clustering.html"><a href="clustering.html#example---dbscan-clustering-of-noisy-moons"><i class="fa fa-check"></i><b>6.6.3</b> Example - DBSCAN clustering of noisy moons</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="clustering.html"><a href="clustering.html#exercises"><i class="fa fa-check"></i><b>6.7</b> Exercises</a><ul>
+<li class="chapter" data-level="6.7.1" data-path="clustering.html"><a href="clustering.html#clusteringEx1"><i class="fa fa-check"></i><b>6.7.1</b> Exercise 1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="supervised-learning.html"><a href="supervised-learning.html"><i class="fa fa-check"></i><b>7</b> Supervised Learning</a></li>
+<li class="chapter" data-level="8" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html"><i class="fa fa-check"></i><b>8</b> Nearest neighbours</a><ul>
+<li class="chapter" data-level="8.1" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#introduction-1"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#classification-simulated-data"><i class="fa fa-check"></i><b>8.2</b> Classification: simulated data</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#knn-function"><i class="fa fa-check"></i><b>8.2.1</b> knn function</a></li>
+<li class="chapter" data-level="8.2.2" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#plotting-decision-boundaries"><i class="fa fa-check"></i><b>8.2.2</b> Plotting decision boundaries</a></li>
+<li class="chapter" data-level="8.2.3" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#bias-variance-tradeoff"><i class="fa fa-check"></i><b>8.2.3</b> Bias-variance tradeoff</a></li>
+<li class="chapter" data-level="8.2.4" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#choosing-k"><i class="fa fa-check"></i><b>8.2.4</b> Choosing <em>k</em></a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#knn-cell-segmentation"><i class="fa fa-check"></i><b>8.3</b> Classification: cell segmentation</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#cell-segmentation-data-set"><i class="fa fa-check"></i><b>8.3.1</b> Cell segmentation data set</a></li>
+<li class="chapter" data-level="8.3.2" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#data-splitting"><i class="fa fa-check"></i><b>8.3.2</b> Data splitting</a></li>
+<li class="chapter" data-level="8.3.3" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#identification-of-data-quality-issues"><i class="fa fa-check"></i><b>8.3.3</b> Identification of data quality issues</a></li>
+<li class="chapter" data-level="8.3.4" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#fit-model-without-feature-selection"><i class="fa fa-check"></i><b>8.3.4</b> Fit model without feature selection</a></li>
+<li class="chapter" data-level="8.3.5" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#feature-selection-using-filter"><i class="fa fa-check"></i><b>8.3.5</b> Feature selection using filter</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#knn-regression"><i class="fa fa-check"></i><b>8.4</b> Regression</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#partition-data"><i class="fa fa-check"></i><b>8.4.1</b> Partition data</a></li>
+<li class="chapter" data-level="8.4.2" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#data-pre-processing"><i class="fa fa-check"></i><b>8.4.2</b> Data pre-processing</a></li>
+<li class="chapter" data-level="8.4.3" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#search-for-optimum-k"><i class="fa fa-check"></i><b>8.4.3</b> Search for optimum <em>k</em></a></li>
+<li class="chapter" data-level="8.4.4" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#use-model-to-make-predictions"><i class="fa fa-check"></i><b>8.4.4</b> Use model to make predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#exercises-1"><i class="fa fa-check"></i><b>8.5</b> Exercises</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#knnEx1"><i class="fa fa-check"></i><b>8.5.1</b> Exercise 1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="svm.html"><a href="svm.html"><i class="fa fa-check"></i><b>9</b> Support vector machines</a><ul>
+<li class="chapter" data-level="9.1" data-path="svm.html"><a href="svm.html#introduction-2"><i class="fa fa-check"></i><b>9.1</b> Introduction</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="svm.html"><a href="svm.html#maximum-margin-classifier"><i class="fa fa-check"></i><b>9.1.1</b> Maximum margin classifier</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="svm.html"><a href="svm.html#support-vector-classifier"><i class="fa fa-check"></i><b>9.2</b> Support vector classifier</a></li>
+<li class="chapter" data-level="9.3" data-path="svm.html"><a href="svm.html#support-vector-machine"><i class="fa fa-check"></i><b>9.3</b> Support Vector Machine</a></li>
+<li class="chapter" data-level="9.4" data-path="svm.html"><a href="svm.html#example---training-a-classifier"><i class="fa fa-check"></i><b>9.4</b> Example - training a classifier</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="svm.html"><a href="svm.html#setup-environment"><i class="fa fa-check"></i><b>9.4.1</b> Setup environment</a></li>
+<li class="chapter" data-level="9.4.2" data-path="svm.html"><a href="svm.html#partition-data-1"><i class="fa fa-check"></i><b>9.4.2</b> Partition data</a></li>
+<li class="chapter" data-level="9.4.3" data-path="svm.html"><a href="svm.html#visualize-training-data"><i class="fa fa-check"></i><b>9.4.3</b> Visualize training data</a></li>
+<li class="chapter" data-level="9.4.4" data-path="svm.html"><a href="svm.html#define-a-custom-model"><i class="fa fa-check"></i><b>9.4.4</b> Define a custom model</a></li>
+<li class="chapter" data-level="9.4.5" data-path="svm.html"><a href="svm.html#model-cross-validation-and-tuning"><i class="fa fa-check"></i><b>9.4.5</b> Model cross-validation and tuning</a></li>
+<li class="chapter" data-level="9.4.6" data-path="svm.html"><a href="svm.html#prediction-performance-measures"><i class="fa fa-check"></i><b>9.4.6</b> Prediction performance measures</a></li>
+<li class="chapter" data-level="9.4.7" data-path="svm.html"><a href="svm.html#plot-decision-boundary"><i class="fa fa-check"></i><b>9.4.7</b> Plot decision boundary</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="svm.html"><a href="svm.html#example---regression"><i class="fa fa-check"></i><b>9.5</b> Example - regression</a></li>
+<li class="chapter" data-level="9.6" data-path="svm.html"><a href="svm.html#further-reading"><i class="fa fa-check"></i><b>9.6</b> Further reading</a></li>
+<li class="chapter" data-level="9.7" data-path="svm.html"><a href="svm.html#exercises-2"><i class="fa fa-check"></i><b>9.7</b> Exercises</a><ul>
+<li class="chapter" data-level="9.7.1" data-path="svm.html"><a href="svm.html#exercise-1"><i class="fa fa-check"></i><b>9.7.1</b> Exercise 1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="decision-trees.html"><a href="decision-trees.html"><i class="fa fa-check"></i><b>10</b> Decision trees and random forests</a><ul>
+<li class="chapter" data-level="10.1" data-path="decision-trees.html"><a href="decision-trees.html#decision-trees"><i class="fa fa-check"></i><b>10.1</b> Decision Trees</a></li>
+<li class="chapter" data-level="10.2" data-path="decision-trees.html"><a href="decision-trees.html#random-forest"><i class="fa fa-check"></i><b>10.2</b> Random Forest</a></li>
+<li class="chapter" data-level="10.3" data-path="decision-trees.html"><a href="decision-trees.html#exercises-3"><i class="fa fa-check"></i><b>10.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ann.html"><a href="ann.html"><i class="fa fa-check"></i><b>11</b> Artificial neural networks</a><ul>
+<li class="chapter" data-level="11.1" data-path="ann.html"><a href="ann.html#neural-networks"><i class="fa fa-check"></i><b>11.1</b> Neural Networks</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>12</b> Summary</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="logistic-regression.html"><a href="logistic-regression.html#resources"><i class="fa fa-check"></i><b>A</b> Resources</a><ul>
+<li class="chapter" data-level="A.1" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i><b>A.1</b> Python</a></li>
+<li class="chapter" data-level="A.2" data-path="resources.html"><a href="resources.html#machine-learning-data-set-repositories"><i class="fa fa-check"></i><b>A.2</b> Machine learning data set repositories</a><ul>
+<li class="chapter" data-level="A.2.1" data-path="resources.html"><a href="resources.html#mldata"><i class="fa fa-check"></i><b>A.2.1</b> MLDATA</a></li>
+<li class="chapter" data-level="A.2.2" data-path="resources.html"><a href="resources.html#uci-machine-learning-repository"><i class="fa fa-check"></i><b>A.2.2</b> UCI Machine Learning Repository</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="solutions-linear-models.html"><a href="solutions-linear-models.html"><i class="fa fa-check"></i><b>B</b> Solutions ch. 3 - Linear models and matrix algebra</a><ul>
+<li class="chapter" data-level="B.1" data-path="solutions-linear-models.html"><a href="solutions-linear-models.html#example-2"><i class="fa fa-check"></i><b>B.1</b> Example 2</a></li>
+<li class="chapter" data-level="B.2" data-path="solutions-linear-models.html"><a href="solutions-linear-models.html#example-2-1"><i class="fa fa-check"></i><b>B.2</b> Example 2</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="solutions-logistic-regression.html"><a href="solutions-logistic-regression.html"><i class="fa fa-check"></i><b>C</b> Solutions ch. 4 - Linear and non-linear (logistic) regression</a></li>
+<li class="chapter" data-level="D" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html"><i class="fa fa-check"></i><b>D</b> Solutions ch. 9 - Dimensionality reduction</a><ul>
+<li class="chapter" data-level="D.1" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html#exercise-8.1"><i class="fa fa-check"></i><b>D.1</b> Exercise 8.1</a></li>
+<li class="chapter" data-level="D.2" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html#exercise-8.2"><i class="fa fa-check"></i><b>D.2</b> Exercise 8.2</a></li>
+<li class="chapter" data-level="D.3" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html#exercise-8.3."><i class="fa fa-check"></i><b>D.3</b> Exercise 8.3.</a></li>
+<li class="chapter" data-level="D.4" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html#exercise-8.4."><i class="fa fa-check"></i><b>D.4</b> Exercise 8.4.</a></li>
+<li class="chapter" data-level="D.5" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html#exercise-8.4"><i class="fa fa-check"></i><b>D.5</b> Exercise 8.4</a></li>
+<li class="chapter" data-level="D.6" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html#exercise-8.6."><i class="fa fa-check"></i><b>D.6</b> Exercise 8.6.</a></li>
+<li class="chapter" data-level="D.7" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html#exercise-8.7."><i class="fa fa-check"></i><b>D.7</b> Exercise 8.7.</a></li>
+<li class="chapter" data-level="D.8" data-path="solutions-dimensionality-reduction.html"><a href="solutions-dimensionality-reduction.html#exercise-8.8."><i class="fa fa-check"></i><b>D.8</b> Exercise 8.8.</a></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="solutions-clustering.html"><a href="solutions-clustering.html"><i class="fa fa-check"></i><b>E</b> Solutions ch. 6 - Clustering</a><ul>
+<li class="chapter" data-level="E.1" data-path="solutions-clustering.html"><a href="solutions-clustering.html#exercise-1-1"><i class="fa fa-check"></i><b>E.1</b> Exercise 1</a></li>
+</ul></li>
+<li class="chapter" data-level="F" data-path="solutions-nearest-neighbours.html"><a href="solutions-nearest-neighbours.html"><i class="fa fa-check"></i><b>F</b> Solutions ch. 8 - Nearest neighbours</a><ul>
+<li class="chapter" data-level="F.1" data-path="solutions-nearest-neighbours.html"><a href="solutions-nearest-neighbours.html#exercise-1-2"><i class="fa fa-check"></i><b>F.1</b> Exercise 1</a></li>
+</ul></li>
+<li class="chapter" data-level="G" data-path="solutions-svm.html"><a href="solutions-svm.html"><i class="fa fa-check"></i><b>G</b> Solutions ch. 9 - Support vector machines</a><ul>
+<li class="chapter" data-level="G.1" data-path="solutions-svm.html"><a href="solutions-svm.html#exercise-1-3"><i class="fa fa-check"></i><b>G.1</b> Exercise 1</a></li>
+</ul></li>
+<li class="chapter" data-level="H" data-path="solutions-decision-trees.html"><a href="solutions-decision-trees.html"><i class="fa fa-check"></i><b>H</b> Solutions ch. 6 - Decision trees and random forests</a><ul>
+<li class="chapter" data-level="H.1" data-path="solutions-decision-trees.html"><a href="solutions-decision-trees.html#exercise-1-4"><i class="fa fa-check"></i><b>H.1</b> Exercise 1</a></li>
+</ul></li>
+<li class="chapter" data-level="I" data-path="solutions-ann.html"><a href="solutions-ann.html"><i class="fa fa-check"></i><b>I</b> Solutions ch. 8 - Artificial neural networks</a><ul>
+<li class="chapter" data-level="I.1" data-path="solutions-ann.html"><a href="solutions-ann.html#exercise-1-5"><i class="fa fa-check"></i><b>I.1</b> Exercise 1</a></li>
+</ul></li>
+<li class="chapter" data-level="J" data-path="mlnn.html"><a href="mlnn.html"><i class="fa fa-check"></i><b>J</b> Artificial neural networks</a><ul>
+<li class="chapter" data-level="J.1" data-path="mlnn.html"><a href="mlnn.html#multilayer-neural-networks"><i class="fa fa-check"></i><b>J.1</b> Multilayer Neural Networks</a><ul>
+<li class="chapter" data-level="J.1.1" data-path="mlnn.html"><a href="mlnn.html#constructing-layers-in-kerasr"><i class="fa fa-check"></i><b>J.1.1</b> Constructing layers in kerasR</a></li>
+<li class="chapter" data-level="J.1.2" data-path="mlnn.html"><a href="mlnn.html#reading-in-images"><i class="fa fa-check"></i><b>J.1.2</b> Reading in images</a></li>
+<li class="chapter" data-level="J.1.3" data-path="mlnn.html"><a href="mlnn.html#rick-and-morty-classifier-using-deep-learning"><i class="fa fa-check"></i><b>J.1.3</b> Rick and Morty classifier using Deep Learning</a></li>
+</ul></li>
+<li class="chapter" data-level="J.2" data-path="mlnn.html"><a href="mlnn.html#convolutional-neural-networks"><i class="fa fa-check"></i><b>J.2</b> Convolutional neural networks</a><ul>
+<li class="chapter" data-level="J.2.1" data-path="mlnn.html"><a href="mlnn.html#data-augmentation"><i class="fa fa-check"></i><b>J.2.1</b> Data augmentation</a></li>
+<li class="chapter" data-level="J.2.2" data-path="mlnn.html"><a href="mlnn.html#asking-more-precise-questions"><i class="fa fa-check"></i><b>J.2.2</b> Asking more precise questions</a></li>
+<li class="chapter" data-level="J.2.3" data-path="mlnn.html"><a href="mlnn.html#more-complex-networks"><i class="fa fa-check"></i><b>J.2.3</b> More complex networks</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="K" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>K</b> Further reading</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Introduction to Machine Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="mlnn" class="section level1">
+<h1><span class="header-section-number">J</span> Artificial neural networks</h1>
+<!-- Chris -->
+<div id="multilayer-neural-networks" class="section level2">
+<h2><span class="header-section-number">J.1</span> Multilayer Neural Networks</h2>
+<p>Neural networks with multiple layers are increasingly used to attack a variety of complex problems under the umberella of <em>Deep Learning</em> <span class="citation">(<span class="citeproc-not-found" data-reference-id="angermueller2016deep"><strong>???</strong></span>)</span>.</p>
+<p>In this final section we will explore the basics of <em>Deep Learning</em> for image classification using a set of images taken from the animated TV series <a href="https://en.wikipedia.org/wiki/Rick_and_Morty">Rick and Morty</a>. For those unfamiliar with Rick and Morty, the series revolves around the adventures of Rick Sanchez, an alcoholic, arguably sociopathic scientist, and his neurotic grandson, Morty Smith. Although many scientists aspire to be like Rick, they’re usually more like a Jerry.</p>
+<p>Our motivating goal in this section is to develop a image classification algorithm capable of telling us whether a given image contains Rick or not: a binary classification task with two classes, <em>Rick</em> or <em>not Rick</em>. For training purposes we have downloaded <span class="math inline">\(1000\)</span> random images of Rick and <span class="math inline">\(1000\)</span> random images without Rick from the website <a href="https://masterofallscience.com">Master of All Science</a>. We have also downloaded <span class="math inline">\(200\)</span> validation images each of the <em>Rick</em> versus <em>not Rick</em> classes. These images can be found in the appropriate subdirectories in the folder {/RickandMorty/data/}.</p>
+<div id="constructing-layers-in-kerasr" class="section level3">
+<h3><span class="header-section-number">J.1.1</span> Constructing layers in kerasR</h3>
+<p>A user friendly package for <em>Deep Learning</em> is available via <a href="https://keras.io">keras</a>, an application programming interface (API) written in Python, which uses either <a href="http://deeplearning.net/software/theano/">theano</a> or <a href="https://www.tensorflow.org">tensorflow</a> as a back-end. An R interface for keras is available in the form of <a href="https://cran.r-project.org/web/packages/kerasR/index.html">kerasR</a>.</p>
+<p>Before we can use kerasR we first need to load the kerasR library in R (we also need to install keras and either theano and tensorflow).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(kerasR)</code></pre></div>
+<pre><code>## successfully loaded keras</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reticulate)
+<span class="kw">library</span>(grid)
+<span class="kw">library</span>(jpeg)
+<span class="kw">set.seed</span>(<span class="dv">12345</span>)</code></pre></div>
+<p>Now we come to specifying the model itself. Keras has an simple and intuitive way of specifying <a href="https://keras.io/layers/core/">layers</a> of a neural network, and kerasR makes good use of this. We first initialie the model:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">Sequential</span>()</code></pre></div>
+<p>This tells keras that we’re using the Sequential API i.e., with the first layer connected to the second, the second to the thrid and so forth, which duistuinguishes it from more complex networks possible using the Model API. Once we’ve specified a sequential model, we have to specifiy the layers of the neural network.</p>
+<p>A standard layer of neurons can be specified using the {Dense} command; the first layer of our network must also include the dimension of the input. So, for example, if our input data was a vector of dimension <span class="math inline">\(1 \times 40\)</span>, we could add an input layer via:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">40</span>)))</code></pre></div>
+<p>We also need to specfy the activation function to the next level. This can be done via {Activation()}, so our snippet of code using a Rectified Linear Unit (relu) activation would look something like:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">40</span>)))
+mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))</code></pre></div>
+<p>We could add another layer of 120 neurons in (adding activation functions):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">40</span>)))
+mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">120</span>))
+mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))</code></pre></div>
+<p>Finally, we should add the output neurons. If we had, for example, a binary classification algorithm, we could have two nodes, with a sigmoid activation function. Our final model would look like:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">40</span>)))
+mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">120</span>))
+mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">2</span>))
+mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;sigmoid&quot;</span>))</code></pre></div>
+<p>That’s it. Simple!</p>
+</div>
+<div id="reading-in-images" class="section level3">
+<h3><span class="header-section-number">J.1.2</span> Reading in images</h3>
+<p>We can load images and plot them in R using the {readJPEG} and {grid.raster} functions respectively.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">im &lt;-<span class="st"> </span><span class="kw">readJPEG</span>(<span class="st">&quot;data/RickandMorty/data/train/Rick/Rick_001.jpg&quot;</span>)
+<span class="kw">grid.raster</span>(im, <span class="dt">interpolate=</span><span class="ot">FALSE</span>)</code></pre></div>
+<p><img src="21-mlnn_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Each image is stored as a jpeg file with <span class="math inline">\(90 \times 160\)</span> pixel resolution and <span class="math inline">\(3\)</span> colour channels (RGB). The input data is therefore a tensor/array of dimension <span class="math inline">\(90 \times 160 \times 3\)</span>. Keras expects inputs in the form of Numpy arrays, and we can construct the training dataset by loading all <span class="math inline">\(1000\)</span> <em>Rick</em> and all <span class="math inline">\(1000\)</span> <em>not Rick</em> images. We first get a list of all the <em>Rick</em> images in the directory {train/Rick}:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">files &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path =</span> <span class="st">&quot;data/RickandMorty/data/train/Rick/&quot;</span>, <span class="dt">pattern =</span> <span class="st">&quot;jpg&quot;</span>)</code></pre></div>
+<p>We next preallocate an empty array to store these training images for the <em>Rick</em> and <em>not Rick</em> images (an array of dimension <span class="math inline">\(2000 \times 90 \times 160 \times 3\)</span>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trainX  &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>, <span class="dt">dim=</span><span class="kw">c</span>(<span class="dv">2000</span>,<span class="dv">90</span>,<span class="dv">160</span>,<span class="dv">3</span>))</code></pre></div>
+<p>We can load images using the {readJPEG} function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">for (i in <span class="dv">1</span>:<span class="dv">1000</span>){
+  trainX[i,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">readJPEG</span>(<span class="kw">paste</span>(<span class="st">&quot;data/RickandMorty/data/train/Rick/&quot;</span>, files[i], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))
+}</code></pre></div>
+<p>Similarly, we can load the <em>not Rick</em> images and store in the same array:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">files &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path =</span> <span class="st">&quot;data/RickandMorty/data/train/Morty/&quot;</span>,<span class="dt">pattern =</span> <span class="st">&quot;jpg&quot;</span>)
+for (i in <span class="dv">1001</span>:<span class="dv">2000</span>){
+  trainX[i,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">readJPEG</span>(<span class="kw">paste</span>(<span class="st">&quot;data/RickandMorty/data/train/Morty/&quot;</span>, files[i<span class="dv">-1000</span>], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))
+}</code></pre></div>
+<p>Next we can construct a vector of length <span class="math inline">\(2000\)</span> containing the classification for each of these <span class="math inline">\(2000\)</span> images e.g., <span class="math inline">\(0\)</span> if the image is a <em>Rick</em> and <span class="math inline">\(1\)</span> if it is <em>not Rick</em>. This is simple enough using the function {rbind}, as we know the first <span class="math inline">\(1000\)</span> images were <em>Rick</em> and the second <span class="math inline">\(1000\)</span> images <em>not Rick</em>. Since we are dealing with a classification algorithm, we next convert the data to binary categorical output (that is, a <em>Rick</em> is now represented as <span class="math inline">\([1, 0]\)</span> and a <em>not Rick</em> is a <span class="math inline">\([0, 1]\)</span>), which we can do using the {to_categorical} conversion function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trainY &lt;-<span class="st"> </span><span class="kw">to_categorical</span>(<span class="kw">rbind</span>(<span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dv">1000</span>, <span class="dv">1</span>), <span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dv">1000</span>, <span class="dv">1</span>)), <span class="dv">2</span>)</code></pre></div>
+<p>Obviously the <span class="math inline">\(2\)</span> in the code snippet above informs us that we have <span class="math inline">\(2\)</span> classes; we could just as easily perform classificaiton with more than <span class="math inline">\(2\)</span> classes, for example if we wanted to classify <em>Ricky</em>, <em>Morty</em> or <em>neither Rick or Morty</em>.</p>
+<p>Next we will load in the validation sets:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">files &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path =</span> <span class="st">&quot;data/RickandMorty/data/validation/Rick/&quot;</span>,<span class="dt">pattern =</span> <span class="st">&quot;jpg&quot;</span>)
+
+validateX  &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>, <span class="dt">dim=</span><span class="kw">c</span>(<span class="dv">400</span>,<span class="dv">90</span>,<span class="dv">160</span>,<span class="dv">3</span>))
+
+for (i in <span class="dv">1</span>:<span class="dv">200</span>){
+  validateX[i,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">readJPEG</span>(<span class="kw">paste</span>(<span class="st">&quot;data/RickandMorty/data/validation/Rick/&quot;</span>, files[i], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))
+}
+
+files &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path =</span> <span class="st">&quot;data/RickandMorty/data/validation/Morty/&quot;</span>,<span class="dt">pattern =</span> <span class="st">&quot;jpg&quot;</span>)
+for (i in <span class="dv">201</span>:<span class="dv">400</span>){
+  validateX[i,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">readJPEG</span>(<span class="kw">paste</span>(<span class="st">&quot;data/RickandMorty/data/validation/Morty/&quot;</span>, files[i<span class="dv">-200</span>], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))
+}
+validateY &lt;-<span class="st"> </span><span class="kw">to_categorical</span>(<span class="kw">rbind</span>(<span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dv">200</span>, <span class="dv">1</span>),<span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="dv">1</span>)),<span class="dv">2</span>)</code></pre></div>
+</div>
+<div id="rick-and-morty-classifier-using-deep-learning" class="section level3">
+<h3><span class="header-section-number">J.1.3</span> Rick and Morty classifier using Deep Learning</h3>
+<p>Let us return to our example of image classification. Our data is slightly different to the usual inputs we’ve been dealing with: that is, we’re not dealing with an input vector, but instead have an image. In this case each image is a <span class="math inline">\(90 \times 160 \time 3\)</span> array, so for our first layer we have to flatten this down. This can be done using {Flatten()}:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod$<span class="kw">add</span>(<span class="kw">Flatten</span>(<span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">90</span>, <span class="dv">160</span>, <span class="dv">3</span>)))</code></pre></div>
+<p>This should turn our <span class="math inline">\(90 \times \160 \times 3\)</span> input into a <span class="math inline">\(1 \times 43200\)</span> node input. We now add an intermediate layer containing <span class="math inline">\(100\)</span> neurons, connected to the input layer with rectified linear units ({relu}):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>))</code></pre></div>
+<p>Finally we connect this layer over the final output layer (two neurons) with sigmoid activation: <a href="https://keras.io/activations/">activation</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">2</span>))
+mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;sigmoid&quot;</span>))</code></pre></div>
+<p>The complete model should look something like:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">Sequential</span>()
+mod$<span class="kw">add</span>(<span class="kw">Flatten</span>(<span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">90</span>, <span class="dv">160</span>, <span class="dv">3</span>)))
+mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>))
+mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">2</span>))
+mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;sigmoid&quot;</span>))</code></pre></div>
+<p>We can visualise this model using the {plot_model} function (Figure <a href="mlnn.html#fig:examplenet">J.1</a>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot_model</span>(mod,<span class="st">&#39;images/DNN1.png&#39;</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:examplenet"></span>
+<img src="images/DNN1.png" alt="Example of a multilayer convolutional neural network" width="50%" />
+<p class="caption">
+Figure J.1: Example of a multilayer convolutional neural network
+</p>
+</div>
+<p>We can also print a summary of the network, for example to see how many parameters it has, using the {summary} function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(mod)</code></pre></div>
+<pre><code>## &lt;keras.models.Sequential&gt;</code></pre>
+<p>In this case we see a total of <span class="math inline">\(4320302\)</span> parameters. Next we need to compile and run the model. In this case we need to specify three things:</p>
+<ul>
+<li><p>A <a href="https://keras.io/losses/">loss</a> function, which specifies the objective function that the model will try to minimise. A number of existing loss functions are built into keras, including mean squared error (mean_squared_error) and categorical cross entropy (categorical_crossentropy). Since we are dealing with binary classification, we will use binary cross entropy (binary_crossentropy).</p></li>
+<li><p>An <a href="https://keras.io/optimizers/">optimiser</a>, which determines how the loss functin is optimised. Possible examples include stochastic gradient descent ({SGD()}) and Root Mean Square Propagation ({RMSprop()}).</p></li>
+<li><p>A list of <a href="https://keras.io/metrics/">metrics</a> to return. These are additional summary statistics that keras evaluates and prints. For classification, a good choice would be accuracy.</p></li>
+</ul>
+<p>We can compile this using {keras_compile}:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">keras_compile</span>(mod,  <span class="dt">loss =</span> <span class="st">&#39;binary_crossentropy&#39;</span>, <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">&#39;accuracy&#39;</span>), <span class="dt">optimizer =</span> <span class="kw">RMSprop</span>())</code></pre></div>
+<p>Finally the model can be fitted to the data. When doing so we additionally need to specify the validation set (if we have one), the batch size and the number of epochs, where an epoch is one forward pass and one backward pass of all the training examples and the batch size is the number of training examples in one forward/backward pass. You may want to go and get a tea whilst this is running!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">keras_fit</span>(mod, trainX, trainY, <span class="dt">validation_data =</span> <span class="kw">list</span>(validateX, validateY), <span class="dt">batch_size =</span> <span class="dv">32</span>, <span class="dt">epochs =</span> <span class="dv">25</span>, <span class="dt">verbose =</span> <span class="dv">1</span>)</code></pre></div>
+<p>For this model we achieved an accuracy of <span class="math inline">\(0.5913\)</span> on the validation dataset at epoch <span class="math inline">\(23\)</span> (which had a corresponding accuracy of <span class="math inline">\(0.5938\)</span> on the training set). Not great is an understatement. In fact it’s barely better than random (which would be <span class="math inline">\(0.5\)</span>, with <span class="math inline">\(1\)</span> being perfect)! Let’s try adding in another layer to the network. In this case we add in a layer containing <span class="math inline">\(70\)</span> neurons, connected with {relu} activations:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">Sequential</span>()
+mod$<span class="kw">add</span>(<span class="kw">Flatten</span>(<span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">90</span>, <span class="dv">160</span>, <span class="dv">3</span>)))
+mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>))
+mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">70</span>))
+mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">2</span>))
+mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;sigmoid&quot;</span>))
+<span class="kw">keras_compile</span>(mod,  <span class="dt">loss =</span> <span class="st">&#39;binary_crossentropy&#39;</span>, <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">&#39;accuracy&#39;</span>), <span class="dt">optimizer =</span> <span class="kw">RMSprop</span>())
+<span class="kw">keras_fit</span>(mod, trainX, trainY, <span class="dt">validation_data =</span> <span class="kw">list</span>(validateX, validateY), <span class="dt">batch_size =</span> <span class="dv">32</span>, <span class="dt">epochs =</span> <span class="dv">25</span>, <span class="dt">verbose =</span> <span class="dv">1</span>)</code></pre></div>
+<p>We can again visualise the model:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot_model</span>(mod,<span class="st">&#39;images/DNN2.png&#39;</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:examplenet2"></span>
+<img src="images/DNN2.png" alt="Example of a multilayer convolutional neural network" width="50%" />
+<p class="caption">
+Figure J.2: Example of a multilayer convolutional neural network
+</p>
+</div>
+<p>We get now get a validation accuracy of <span class="math inline">\(0.6238\)</span> at epoch <span class="math inline">\(25\)</span>, with corresponding training accuracy of <span class="math inline">\(0.5767\)</span>. It’s an improvement, but it’s still pretty bad. We could try adding in extra layers, but it seems we’re getting nowhere fast, and will need to change tactic. We need to think a little about what the data actually is. In this case, we’re looking at a set of images. As Rick Sanchez can appear almost anywhere in the image, there’s no reason to think that a given input node should correspond in two different images, so it’s not surprising that the network did so badly. We need something that can extract out features from the image irregardless of where Rick is in the image. There are approaches build precicesly for image analysis that do just this: convolutional neural networks.</p>
+</div>
+</div>
+<div id="convolutional-neural-networks" class="section level2">
+<h2><span class="header-section-number">J.2</span> Convolutional neural networks</h2>
+<p>Convolutional neural networks essentially scan through an image and extract out a set of features. In multilayer neural networks, these features might then be passed on to deeper layers (other convolutional layers or standard neurons) as shown in Figure <a href="mlnn.html#fig:covnet">J.3</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:covnet"></span>
+<img src="images/Screen-Shot-2015-11-07-at-7.26.20-AM.png" alt="Example of a multilayer convolutional neural network" width="50%" />
+<p class="caption">
+Figure J.3: Example of a multilayer convolutional neural network
+</p>
+</div>
+<p>In kerasR we can add a convolutional layer using {Conv2D}. A multilayer convolutional neural network might look something like:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">Sequential</span>()
+mod$<span class="kw">add</span>(<span class="kw">Conv2D</span>(<span class="dt">filters =</span> <span class="dv">20</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>),<span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">90</span>, <span class="dv">160</span>, <span class="dv">3</span>)))
+mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod$<span class="kw">add</span>(<span class="kw">MaxPooling2D</span>(<span class="dt">pool_size=</span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>)))
+mod$<span class="kw">add</span>(<span class="kw">Conv2D</span>(<span class="dt">filters =</span> <span class="dv">20</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>)))
+mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod$<span class="kw">add</span>(<span class="kw">MaxPooling2D</span>(<span class="dt">pool_size=</span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>)))
+mod$<span class="kw">add</span>(<span class="kw">Conv2D</span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>)))
+mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod$<span class="kw">add</span>(<span class="kw">MaxPooling2D</span>(<span class="dt">pool_size=</span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>)))
+mod$<span class="kw">add</span>(<span class="kw">Flatten</span>())
+mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>))
+mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod$<span class="kw">add</span>(<span class="kw">Dropout</span>(<span class="fl">0.6</span>))
+mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">2</span>))
+mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;sigmoid&quot;</span>))
+
+<span class="kw">keras_compile</span>(mod,  <span class="dt">loss =</span> <span class="st">&#39;binary_crossentropy&#39;</span>, <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">&#39;accuracy&#39;</span>), <span class="dt">optimizer =</span> <span class="kw">RMSprop</span>())
+<span class="kw">keras_fit</span>(mod, trainX, trainY, <span class="dt">validation_data =</span> <span class="kw">list</span>(validateX, validateY), <span class="dt">batch_size =</span> <span class="dv">32</span>, <span class="dt">epochs =</span> <span class="dv">25</span>, <span class="dt">verbose =</span> <span class="dv">1</span>)</code></pre></div>
+<p>Again we can visualise this network:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot_model</span>(mod,<span class="st">&#39;images/DNN3.png&#39;</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:examplenet3"></span>
+<img src="images/DNN3.png" alt="Example of a multilayer convolutional neural network" width="50%" />
+<p class="caption">
+Figure J.4: Example of a multilayer convolutional neural network
+</p>
+</div>
+<p>Okay, so now we have achieved a better accuracy: we have an accuracy of <span class="math inline">\(0.8462\)</span> on the validation dataset at epoch <span class="math inline">\(23\)</span>, with a training accuracy of <span class="math inline">\(0.9688\)</span>. Whilst this is still not great, it’s accurate enough to begin useuflly making predictions and visualising the results. We have a trained model for classification of Rick, we can use it to make predictions for images not present in either the training or validation datasets. First load in the new set of images, which can be found in the {predictions} subfolder:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">files &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path =</span> <span class="st">&quot;data/RickandMorty/data/predictions/&quot;</span>,<span class="dt">pattern =</span> <span class="st">&quot;jpg&quot;</span>)
+predictX  &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>,<span class="dt">dim=</span><span class="kw">c</span>(<span class="kw">length</span>(files),<span class="dv">90</span>,<span class="dv">160</span>,<span class="dv">3</span>))
+for (i in <span class="dv">1</span>:<span class="kw">length</span>(files)){
+  x &lt;-<span class="st"> </span><span class="kw">readJPEG</span>(<span class="kw">paste</span>(<span class="st">&quot;data/RickandMorty/data/predictions/&quot;</span>, files[i],<span class="dt">sep=</span><span class="st">&quot;&quot;</span>))
+  predictX[i,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>] &lt;-<span class="st"> </span>x[<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>]
+}</code></pre></div>
+<p>A hard classification can be assigned using the {keras_predict_classes} function, whilst the probability of assignment to either class can be evaluated using {keras_predict_proba} (this can be useful for images that might be ambiguous).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">probY &lt;-<span class="st"> </span><span class="kw">keras_predict_proba</span>(mod, predictX)
+predictY &lt;-<span class="st"> </span><span class="kw">keras_predict_classes</span>(mod, predictX)</code></pre></div>
+<p>We can plot an example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">choice =<span class="st"> </span><span class="dv">13</span>
+if (predictY[choice]==<span class="dv">0</span>) {
+  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
+  <span class="kw">grid.text</span>(<span class="dt">label=</span><span class="st">&#39;Rick&#39;</span>,<span class="dt">x =</span> <span class="fl">0.4</span>, <span class="dt">y =</span> <span class="fl">0.77</span>,<span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;top&quot;</span>), <span class="dt">gp=</span><span class="kw">gpar</span>(<span class="dt">fontsize=</span><span class="dv">15</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>))
+} else {
+  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
+  <span class="kw">grid.text</span>(<span class="dt">label=</span><span class="st">&#39;Not Rick&#39;</span>,<span class="dt">x =</span> <span class="fl">0.4</span>, <span class="dt">y =</span> <span class="fl">0.77</span>,<span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;top&quot;</span>), <span class="dt">gp=</span><span class="kw">gpar</span>(<span class="dt">fontsize=</span><span class="dv">15</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>))
+}</code></pre></div>
+<p><img src="21-mlnn_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">choice =<span class="st"> </span><span class="dv">1</span>
+if (predictY[choice]==<span class="dv">0</span>) {
+  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
+  <span class="kw">grid.text</span>(<span class="dt">label=</span><span class="st">&#39;Rick&#39;</span>,<span class="dt">x =</span> <span class="fl">0.4</span>, <span class="dt">y =</span> <span class="fl">0.77</span>,<span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;top&quot;</span>), <span class="dt">gp=</span><span class="kw">gpar</span>(<span class="dt">fontsize=</span><span class="dv">15</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>))
+} else {
+  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
+  <span class="kw">grid.text</span>(<span class="dt">label=</span><span class="st">&#39;Not Rick&#39;</span>,<span class="dt">x =</span> <span class="fl">0.4</span>, <span class="dt">y =</span> <span class="fl">0.77</span>,<span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;top&quot;</span>), <span class="dt">gp=</span><span class="kw">gpar</span>(<span class="dt">fontsize=</span><span class="dv">15</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>))
+}</code></pre></div>
+<p><img src="21-mlnn_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">choice =<span class="st"> </span><span class="dv">6</span>
+if (predictY[choice]==<span class="dv">0</span>) {
+  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
+  <span class="kw">grid.text</span>(<span class="dt">label=</span><span class="st">&#39;Rick&#39;</span>,<span class="dt">x =</span> <span class="fl">0.4</span>, <span class="dt">y =</span> <span class="fl">0.77</span>,<span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;top&quot;</span>), <span class="dt">gp=</span><span class="kw">gpar</span>(<span class="dt">fontsize=</span><span class="dv">15</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>))
+} else {
+  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
+  <span class="kw">grid.text</span>(<span class="dt">label=</span><span class="st">&#39;Not Rick&#39;</span>,<span class="dt">x =</span> <span class="fl">0.4</span>, <span class="dt">y =</span> <span class="fl">0.77</span>,<span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;top&quot;</span>), <span class="dt">gp=</span><span class="kw">gpar</span>(<span class="dt">fontsize=</span><span class="dv">15</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>))
+}</code></pre></div>
+<p><img src="21-mlnn_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">choice =<span class="st"> </span><span class="dv">16</span>
+if (predictY[choice]==<span class="dv">0</span>) {
+  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
+  <span class="kw">grid.text</span>(<span class="dt">label=</span><span class="st">&#39;Rick&#39;</span>,<span class="dt">x =</span> <span class="fl">0.4</span>, <span class="dt">y =</span> <span class="fl">0.77</span>,<span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;top&quot;</span>), <span class="dt">gp=</span><span class="kw">gpar</span>(<span class="dt">fontsize=</span><span class="dv">15</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>))
+} else {
+  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
+  <span class="kw">grid.text</span>(<span class="dt">label=</span><span class="st">&#39;Not Rick: must be a Jerry&#39;</span>,<span class="dt">x =</span> <span class="fl">0.2</span>, <span class="dt">y =</span> <span class="fl">0.77</span>,<span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;top&quot;</span>), <span class="dt">gp=</span><span class="kw">gpar</span>(<span class="dt">fontsize=</span><span class="dv">15</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>))
+}</code></pre></div>
+<p><img src="21-mlnn_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<div id="data-augmentation" class="section level3">
+<h3><span class="header-section-number">J.2.1</span> Data augmentation</h3>
+<p>Although we saw some imporovements in the previous section using convolutional neural networks, the end results were not particularly convincing. After all, previous applications in the recognition of handwritten digits (0-9) showed above human accuracy, see e.g., <a href="http://neuralnetworksanddeeplearning.com/chap3.html">Neural Networks and Deep Learning</a>. Our accuracy of approximately <span class="math inline">\(80\)</span> percent is nowhere near human levels of accuracy. So where are we gong wrong?</p>
+<p>We should, of course, start by considering the number of parameters versus the size of the training dataset. In our final model we had <span class="math inline">\(69506\)</span> parameters, and only <span class="math inline">\(2000\)</span> training images, so it is perhaps not surprising that our model is doing relatively poorly. In previous examples of digit recognition more than <span class="math inline">\(10000\)</span> images were used, whilst better known examples of <em>Deep Learning</em> for image classification make use of millions of images. Our task is also, arguably, a lot harder than digit recognition. After all, a handwritten <span class="math inline">\(0\)</span> is relatively similar regardless of who wrote it. Rick Sanchez, on the other hand, can come in a diverse range of guises, with different postures, facial expressions, clothing, and even in pickle-Rick form. We may well need a vastly increased number of training; with more training data, we can begin to learn more robustly what features define a <em>Rick</em>. Whilst we could simply download more data from <a href="https://masterofallscience.com">Master of All Science</a>, an alternative approach is to atrificially increase our pool of training data by manipulating the images. For example, we could shear, warp or rotate some of the images in our training set; we could add noise and we could manipulate the colouring.</p>
+<p>For example, when we artifically increase the training size in a Python implementation to <span class="math inline">\(10000\)</span> we achieve an accuracy to <span class="math inline">\(0.8770\)</span> on the validation data; when we artifically increase the training dataset to <span class="math inline">\(30000\)</span> we pushed this above <span class="math inline">\(0.9\)</span>. Again, not quite human-level, but a reasonable accuracy, all things considered.</p>
+</div>
+<div id="asking-more-precise-questions" class="section level3">
+<h3><span class="header-section-number">J.2.2</span> Asking more precise questions</h3>
+<p>Another way we could improve our accuracy is to ask more precise questions. In our application we have focused on what makes a <em>Rick</em>, and what makes a <em>not Rick</em>. Whilst there may be definable features for <em>Rick</em>, such as his hair and his white coat, the class <em>not Rick</em> is an amalgamation of all other characters and scenes in the series. A better approach would be to develop algorithms that classify <em>Rick</em> versus <em>Morty</em>. In this case we would need to tweak our training and validation datasets.</p>
+</div>
+<div id="more-complex-networks" class="section level3">
+<h3><span class="header-section-number">J.2.3</span> More complex networks</h3>
+<p>More complex learning algorithms can easily be built using keras using the Model class API rather than the Sequential API. This allows, for example, learning from multiple inputs and/or outputs, with more interconnection between different layers. We might, for example, want to include additional contextual information about the image that could serve to augment the predictions.</p>
+<p>Another approach is to use transfer learning. This is where we make use of existing neural networks to make predictions on our specific datasets, usually fixing the top layers in place and fine tuning the lower layers to our dataset. For example, for image recognition we could make use of top perfoming neural networks on the <a href="http://www.image-net.org">ImageNet</a> database. Whilst none of these networks would have been designed to identify <em>Rick</em> they would have been trained on millions of images, and the top levels would have been able to extract useful general features of an image.</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="solutions-ann.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="further-reading-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/bioinformatics-training/intro-machine-learning/edit/master/21-mlnn.Rmd",
+"text": "Edit"
+},
+"download": ["intro-machine-learning.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

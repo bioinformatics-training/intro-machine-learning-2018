@@ -1,4 +1,4 @@
-# Solutions ch. 7 - Support vector machines {#solutions-svm}
+# Solutions ch. 9 - Support vector machines {#solutions-svm}
 
 Solutions to exercises of chapter \@ref(svm).
 
@@ -127,7 +127,7 @@ getDoParWorkers()
 ```
 
 ```
-## [1] 2
+## [1] 4
 ```
 
 Load data
@@ -196,7 +196,7 @@ svmTune
 ## Support Vector Machines with Radial Kernel - e1071 
 ## 
 ## 1010 samples
-##   58 predictor
+##   58 predictors
 ##    2 classes: 'PS', 'WS' 
 ## 
 ## Pre-processing: centered (58), scaled (58) 
@@ -215,7 +215,7 @@ svmTune
 ##   32.00  0.8593291  0.8449231  0.7033333
 ##   64.00  0.8590043  0.8440000  0.6994444
 ## 
-## ROC was used to select the optimal model using  the largest value.
+## ROC was used to select the optimal model using the largest value.
 ## The final value used for the model was cost = 1.
 ```
 

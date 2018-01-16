@@ -177,7 +177,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="6.7" data-path="clustering.html"><a href="clustering.html#exercises"><i class="fa fa-check"></i><b>6.7</b> Exercises</a><ul>
 <li class="chapter" data-level="6.7.1" data-path="clustering.html"><a href="clustering.html#clusteringEx1"><i class="fa fa-check"></i><b>6.7.1</b> Exercise 1</a></li>
-<li class="chapter" data-level="6.7.2" data-path="clustering.html"><a href="clustering.html#clusteringEx2"><i class="fa fa-check"></i><b>6.7.2</b> Exercise 2</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="supervised-learning.html"><a href="supervised-learning.html"><i class="fa fa-check"></i><b>7</b> Supervised Learning</a></li>
@@ -262,10 +261,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="E" data-path="solutions-clustering.html"><a href="solutions-clustering.html"><i class="fa fa-check"></i><b>E</b> Solutions ch. 6 - Clustering</a><ul>
 <li class="chapter" data-level="E.1" data-path="solutions-clustering.html"><a href="solutions-clustering.html#exercise-1-1"><i class="fa fa-check"></i><b>E.1</b> Exercise 1</a></li>
 </ul></li>
-<li class="chapter" data-level="F" data-path="solutions-nearest-neighbours.html"><a href="solutions-nearest-neighbours.html"><i class="fa fa-check"></i><b>F</b> Solutions ch. 5 - Nearest neighbours</a><ul>
+<li class="chapter" data-level="F" data-path="solutions-nearest-neighbours.html"><a href="solutions-nearest-neighbours.html"><i class="fa fa-check"></i><b>F</b> Solutions ch. 8 - Nearest neighbours</a><ul>
 <li class="chapter" data-level="F.1" data-path="solutions-nearest-neighbours.html"><a href="solutions-nearest-neighbours.html#exercise-1-2"><i class="fa fa-check"></i><b>F.1</b> Exercise 1</a></li>
 </ul></li>
-<li class="chapter" data-level="G" data-path="solutions-svm.html"><a href="solutions-svm.html"><i class="fa fa-check"></i><b>G</b> Solutions ch. 7 - Support vector machines</a><ul>
+<li class="chapter" data-level="G" data-path="solutions-svm.html"><a href="solutions-svm.html"><i class="fa fa-check"></i><b>G</b> Solutions ch. 9 - Support vector machines</a><ul>
 <li class="chapter" data-level="G.1" data-path="solutions-svm.html"><a href="solutions-svm.html#exercise-1-3"><i class="fa fa-check"></i><b>G.1</b> Exercise 1</a></li>
 </ul></li>
 <li class="chapter" data-level="H" data-path="solutions-decision-trees.html"><a href="solutions-decision-trees.html"><i class="fa fa-check"></i><b>H</b> Solutions ch. 6 - Decision trees and random forests</a><ul>
@@ -274,6 +273,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="I" data-path="solutions-ann.html"><a href="solutions-ann.html"><i class="fa fa-check"></i><b>I</b> Solutions ch. 8 - Artificial neural networks</a><ul>
 <li class="chapter" data-level="I.1" data-path="solutions-ann.html"><a href="solutions-ann.html#exercise-1-5"><i class="fa fa-check"></i><b>I.1</b> Exercise 1</a></li>
 </ul></li>
+<li class="chapter" data-level="J" data-path="mlnn.html"><a href="mlnn.html"><i class="fa fa-check"></i><b>J</b> Artificial neural networks</a><ul>
+<li class="chapter" data-level="J.1" data-path="mlnn.html"><a href="mlnn.html#multilayer-neural-networks"><i class="fa fa-check"></i><b>J.1</b> Multilayer Neural Networks</a><ul>
+<li class="chapter" data-level="J.1.1" data-path="mlnn.html"><a href="mlnn.html#constructing-layers-in-kerasr"><i class="fa fa-check"></i><b>J.1.1</b> Constructing layers in kerasR</a></li>
+<li class="chapter" data-level="J.1.2" data-path="mlnn.html"><a href="mlnn.html#reading-in-images"><i class="fa fa-check"></i><b>J.1.2</b> Reading in images</a></li>
+<li class="chapter" data-level="J.1.3" data-path="mlnn.html"><a href="mlnn.html#rick-and-morty-classifier-using-deep-learning"><i class="fa fa-check"></i><b>J.1.3</b> Rick and Morty classifier using Deep Learning</a></li>
+</ul></li>
+<li class="chapter" data-level="J.2" data-path="mlnn.html"><a href="mlnn.html#convolutional-neural-networks"><i class="fa fa-check"></i><b>J.2</b> Convolutional neural networks</a><ul>
+<li class="chapter" data-level="J.2.1" data-path="mlnn.html"><a href="mlnn.html#data-augmentation"><i class="fa fa-check"></i><b>J.2.1</b> Data augmentation</a></li>
+<li class="chapter" data-level="J.2.2" data-path="mlnn.html"><a href="mlnn.html#asking-more-precise-questions"><i class="fa fa-check"></i><b>J.2.2</b> Asking more precise questions</a></li>
+<li class="chapter" data-level="J.2.3" data-path="mlnn.html"><a href="mlnn.html#more-complex-networks"><i class="fa fa-check"></i><b>J.2.3</b> More complex networks</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="K" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>K</b> Further reading</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -321,8 +333,8 @@ img &lt;-<span class="st"> </span><span class="kw">readImage</span>(<span class=
 imgDim &lt;-<span class="st"> </span><span class="kw">dim</span>(img)
 
 imgDF &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
-  <span class="dt">x =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>imgDim[<span class="dv">1</span>], imgDim[<span class="dv">2</span>]),
-  <span class="dt">y =</span> <span class="kw">rep</span>(imgDim[<span class="dv">2</span>]<span class="op">:</span><span class="dv">1</span>, <span class="dt">each=</span>imgDim[<span class="dv">1</span>]),
+  <span class="dt">x =</span> <span class="kw">rep</span>(<span class="dv">1</span>:imgDim[<span class="dv">1</span>], imgDim[<span class="dv">2</span>]),
+  <span class="dt">y =</span> <span class="kw">rep</span>(imgDim[<span class="dv">2</span>]:<span class="dv">1</span>, <span class="dt">each=</span>imgDim[<span class="dv">1</span>]),
   <span class="dt">r =</span> <span class="kw">as.vector</span>(img[,,<span class="dv">1</span>]),
   <span class="dt">g =</span> <span class="kw">as.vector</span>(img[,,<span class="dv">2</span>]),
   <span class="dt">b =</span> <span class="kw">as.vector</span>(img[,,<span class="dv">3</span>])
@@ -333,16 +345,16 @@ imgDF &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
 <pre><code>## Loading required package: iterators</code></pre>
 <pre><code>## Loading required package: parallel</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">registerDoMC</span>()
-k=<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>
+k=<span class="dv">1</span>:<span class="dv">9</span>
 <span class="kw">set.seed</span>(<span class="dv">42</span>)
 res &lt;-<span class="st"> </span><span class="kw">foreach</span>(
   <span class="dt">i=</span>k, 
-  <span class="dt">.options.multicore=</span><span class="kw">list</span>(<span class="dt">set.seed=</span><span class="ot">FALSE</span>)) <span class="op">%dopar%</span><span class="st"> </span><span class="kw">kmeans</span>(imgDF[,<span class="kw">c</span>(<span class="st">&quot;r&quot;</span>, <span class="st">&quot;g&quot;</span>, <span class="st">&quot;b&quot;</span>)], i, <span class="dt">nstart=</span><span class="dv">50</span>)</code></pre></div>
+  <span class="dt">.options.multicore=</span><span class="kw">list</span>(<span class="dt">set.seed=</span><span class="ot">FALSE</span>)) %dopar%<span class="st"> </span><span class="kw">kmeans</span>(imgDF[,<span class="kw">c</span>(<span class="st">&quot;r&quot;</span>, <span class="st">&quot;g&quot;</span>, <span class="st">&quot;b&quot;</span>)], i, <span class="dt">nstart=</span><span class="dv">50</span>)</code></pre></div>
 <p>We can now plot total within-cluster sum of squares against k:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot_tot_withinss &lt;-<span class="st"> </span><span class="cf">function</span>(kmeans_output){
-  tot_withinss &lt;-<span class="st"> </span><span class="kw">sapply</span>(k, <span class="cf">function</span>(i){kmeans_output[[i]]<span class="op">$</span>tot.withinss})
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot_tot_withinss &lt;-<span class="st"> </span>function(kmeans_output){
+  tot_withinss &lt;-<span class="st"> </span><span class="kw">sapply</span>(k, function(i){kmeans_output[[i]]$tot.withinss})
   <span class="kw">qplot</span>(k, tot_withinss, <span class="dt">geom=</span><span class="kw">c</span>(<span class="st">&quot;point&quot;</span>, <span class="st">&quot;line&quot;</span>), 
-        <span class="dt">ylab=</span><span class="st">&quot;Total within-cluster sum of squares&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()
+        <span class="dt">ylab=</span><span class="st">&quot;Total within-cluster sum of squares&quot;</span>) +<span class="st"> </span><span class="kw">theme_bw</span>()
 }
 
 <span class="kw">plot_tot_withinss</span>(res)</code></pre></div>
@@ -353,11 +365,11 @@ Figure E.1: Variance within the clusters of pixels. Total within-cluster sum of 
 </p>
 </div>
 <p>The plot of total within-cluster sum of squares against k (figure <a href="solutions-clustering.html#fig:imageAnalysisElbowPlot">E.1</a>) shows an elbow at k=2, indicating that most of the variance in the image can be described by just two clusters. Let’s plot the clusters for k=2.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterColours &lt;-<span class="st"> </span><span class="kw">rgb</span>(res[[<span class="dv">2</span>]]<span class="op">$</span>centers) 
-<span class="kw">ggplot</span>(<span class="dt">data =</span> imgDF, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> clusterColours[res[[<span class="dv">2</span>]]<span class="op">$</span>cluster]) <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;x&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;y&quot;</span>) <span class="op">+</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterColours &lt;-<span class="st"> </span><span class="kw">rgb</span>(res[[<span class="dv">2</span>]]$centers) 
+<span class="kw">ggplot</span>(<span class="dt">data =</span> imgDF, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> clusterColours[res[[<span class="dv">2</span>]]$cluster]) +
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;x&quot;</span>) +
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;y&quot;</span>) +
 <span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:pixelClustersK2"></span>
 <img src="16-solutions-clustering_files/figure-html/pixelClustersK2-1.png" alt="Result of k-means clustering of pixels based on colour for k=2." width="80%" />
@@ -367,11 +379,11 @@ Figure E.2: Result of k-means clustering of pixels based on colour for k=2.
 </div>
 <p>Segmentation of the image with k=2 separates air-spaces from all other objects (figure <a href="solutions-clustering.html#fig:pixelClustersK2">E.2</a>). Therefore, the difference in pixel colour between the air-spaces and other objects accounts for most of the variance in the data-set (image).</p>
 <p>Let’s now take a look at a segmentation of the image using k=4.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterColours &lt;-<span class="st"> </span><span class="kw">rgb</span>(res[[<span class="dv">4</span>]]<span class="op">$</span>centers) 
-<span class="kw">ggplot</span>(<span class="dt">data =</span> imgDF, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> clusterColours[res[[<span class="dv">4</span>]]<span class="op">$</span>cluster]) <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;x&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;y&quot;</span>) <span class="op">+</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterColours &lt;-<span class="st"> </span><span class="kw">rgb</span>(res[[<span class="dv">4</span>]]$centers) 
+<span class="kw">ggplot</span>(<span class="dt">data =</span> imgDF, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> clusterColours[res[[<span class="dv">4</span>]]$cluster]) +
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;x&quot;</span>) +
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;y&quot;</span>) +
 <span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:pixelClustersK4"></span>
 <img src="16-solutions-clustering_files/figure-html/pixelClustersK4-1.png" alt="Result of k-means clustering of pixels based on colour for k=4." width="80%" />

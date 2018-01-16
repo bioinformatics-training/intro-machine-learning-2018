@@ -208,6 +208,10 @@ library(caret) # useful tools for machine learning
 library(corrplot)
 ```
 
+```
+## corrplot 0.84 loaded
+```
+
 
 
 ```r

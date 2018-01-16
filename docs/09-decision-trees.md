@@ -290,7 +290,7 @@ dtree_fit
 ## CART 
 ## 
 ## 1212 samples
-##    6 predictor
+##    6 predictors
 ##    4 classes: 'acc', 'good', 'unacc', 'vgood' 
 ## 
 ## No pre-processing
@@ -310,7 +310,7 @@ dtree_fit
 ##   0.07584270  0.7524613  0.4213615
 ##   0.08426966  0.7164441  0.1425639
 ## 
-## Accuracy was used to select the optimal model using  the largest value.
+## Accuracy was used to select the optimal model using the largest value.
 ## The final value used for the model was cp = 0.01123596.
 ```
 *Plotting the decision tress*
@@ -406,7 +406,7 @@ dtree_fit_gini
 ## CART 
 ## 
 ## 1212 samples
-##    6 predictor
+##    6 predictors
 ##    4 classes: 'acc', 'good', 'unacc', 'vgood' 
 ## 
 ## No pre-processing
@@ -426,7 +426,7 @@ dtree_fit_gini
 ##   0.07584270  0.7524613  0.4213615
 ##   0.08426966  0.7164441  0.1425639
 ## 
-## Accuracy was used to select the optimal model using  the largest value.
+## Accuracy was used to select the optimal model using the largest value.
 ## The final value used for the model was cp = 0.01123596.
 ```
 
