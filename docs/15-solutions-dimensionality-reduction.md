@@ -1,8 +1,8 @@
-# Solutions ch. 9 - Dimensionality reduction {#solutions-dimensionality-reduction}
+# Solutions ch. 5 - Dimensionality reduction {#solutions-dimensionality-reduction}
 
 Solutions to exercises of chapter \@ref(dimensionality-reduction).
 
-## Exercise 8.1
+## Exercise 5.1
 
 We can read the data in using the following command:
 
@@ -15,7 +15,7 @@ genenames <- genenames[4:nrow(D)]
 
 This reads in the corresponding spreadsheet into the R environment as a data frame variable. 
 
-## Exercise 8.2
+## Exercise 5.2
 
 We will first run PCA on the data. Recall that the data is already log_2 normalised, with expression values beginning from row 4. Within R we would run:
 
@@ -51,7 +51,7 @@ legend(-95, 50, legend=c("ESC", "preimp", "PGC", "soma"), col=c("red", "black", 
 
 From the plot, we can see PCA has done a reasonable job of separating out various cells. For example, a cluster of PGCs appears at the top of the plot, with somatic cells towards the lower right hand side. Pre-implantation embryos and ESCs appear to cluster together: perhaps this is not surprising as the ESCs are derived from blastocyst cells. Loosely, we can interpret the PC1 as dividing pre-implantation cells from somatic cells, with PC2 separating out PGCs.
 
-## Exercise 8.3. 
+## Exercise 5.3. 
 
 In the previous exercise we used PCA to reduce the dimensionality of our data from thousands of genes down to two principle components. By eye, PCA appeared to do a reasonable job separating out different cell types. A useful next step might therefore be to perform clustering on the reduced dimensional space, which can be done using:
 
@@ -93,57 +93,34 @@ clusterresults[1,which(clusterresults[2,]==1)]
 ##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
 ## preimp.33 preimp.34 preimp.35 preimp.36 preimp.37 preimp.38 preimp.39 
 ##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.40 preimp.41 preimp.42 preimp.43 preimp.44 preimp.45 preimp.47 
+## preimp.40 preimp.41 preimp.42 preimp.43 preimp.44 preimp.45 preimp.46 
 ##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.48 preimp.49 preimp.50 preimp.52 preimp.53 preimp.54 preimp.55 
+## preimp.47 preimp.48 preimp.49 preimp.50 preimp.52 preimp.53 preimp.54 
 ##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.56 preimp.57 preimp.58 preimp.59 preimp.60 preimp.61 preimp.62 
+## preimp.55 preimp.56 preimp.57 preimp.58 preimp.59 preimp.60 preimp.61 
 ##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.63 preimp.64 preimp.65 preimp.66 preimp.67 preimp.68 preimp.69 
+## preimp.62 preimp.63 preimp.64 preimp.65 preimp.66 preimp.67 preimp.68 
 ##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.70 preimp.71 preimp.72 preimp.73 preimp.74 preimp.75 preimp.76 
+## preimp.69 preimp.70 preimp.71 preimp.72 preimp.73 preimp.74 preimp.75 
 ##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.77 preimp.78 preimp.79 preimp.80 preimp.81 preimp.83 preimp.84 
+## preimp.76 preimp.77 preimp.78 preimp.79 preimp.80 preimp.81 preimp.82 
 ##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.85 preimp.86 preimp.88 preimp.89     ESC.2     ESC.3     ESC.4 
-##  "preimp"  "preimp"  "preimp"  "preimp"     "ESC"     "ESC"     "ESC" 
-##     ESC.5     ESC.6     ESC.7     ESC.8     ESC.9    ESC.10    ESC.11 
+## preimp.83 preimp.84 preimp.85 preimp.86 preimp.87 preimp.88 preimp.89 
+##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
+##     ESC.2     ESC.3     ESC.4     ESC.5     ESC.6     ESC.7     ESC.8 
 ##     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC" 
-##    ESC.12    ESC.13    ESC.14    ESC.15    ESC.17    ESC.19    ESC.20 
+##     ESC.9    ESC.10    ESC.11    ESC.12    ESC.13    ESC.14    ESC.15 
 ##     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC" 
-##    ESC.21    ESC.22    ESC.23    ESC.24    ESC.25    ESC.26    ESC.27 
+##    ESC.16    ESC.17    ESC.18    ESC.19    ESC.20    ESC.21    ESC.22 
 ##     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC" 
-##    ESC.28    ESC.29    ESC.30    ESC.32   PGC.145   PGC.202   PGC.203 
-##     "ESC"     "ESC"     "ESC"     "ESC"     "PGC"     "PGC"     "PGC" 
-##   PGC.204   PGC.206   PGC.208   PGC.209   PGC.210   PGC.211   PGC.212 
-##     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC" 
-##   PGC.213   PGC.214   PGC.215   PGC.216   PGC.218   PGC.219   PGC.220 
-##     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC" 
-##   PGC.221   PGC.222   PGC.223   PGC.224   PGC.225   PGC.226   PGC.227 
-##     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC" 
-##   PGC.228   PGC.229   PGC.230   PGC.232 
-##     "PGC"     "PGC"     "PGC"     "PGC"
+##    ESC.23    ESC.24    ESC.25    ESC.26    ESC.27    ESC.28    ESC.29 
+##     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC" 
+##    ESC.30    ESC.32    ESC.33   soma.48   soma.49   soma.51   soma.52 
+##     "ESC"     "ESC"     "ESC"    "soma"    "soma"    "soma"    "soma"
 ```
 
 ```r
 clusterresults[1,which(clusterresults[2,]==2)]
-```
-
-```
-## preimp.46 preimp.51 preimp.82 preimp.87    ESC.16    ESC.18    ESC.31 
-##  "preimp"  "preimp"  "preimp"  "preimp"     "ESC"     "ESC"     "ESC" 
-##    ESC.33    soma.3    soma.4    soma.6    soma.8   soma.12   soma.13 
-##     "ESC"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.14   soma.15   soma.20   soma.23   soma.25   soma.27   soma.48 
-##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.49   soma.50   soma.51   soma.52   soma.53   soma.54   soma.58 
-##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.70   soma.81 
-##    "soma"    "soma"
-```
-
-```r
-clusterresults[1,which(clusterresults[2,]==3)]
 ```
 
 ```
@@ -171,28 +148,63 @@ clusterresults[1,which(clusterresults[2,]==3)]
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
 ##  PGC.99 PGC.100 PGC.101 PGC.102 PGC.103 PGC.104 PGC.105 PGC.106 PGC.107 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.108 PGC.109 PGC.110 PGC.111 PGC.112 PGC.113 PGC.114 PGC.115 PGC.116 
+## PGC.108 PGC.110 PGC.112 PGC.113 PGC.114 PGC.115 PGC.116 PGC.117 PGC.118 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.117 PGC.118 PGC.119 PGC.120 PGC.121 PGC.122 PGC.123 PGC.124 PGC.125 
+## PGC.119 PGC.120 PGC.121 PGC.122 PGC.123 PGC.124 PGC.125 PGC.126 PGC.127 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.126 PGC.127 PGC.128 PGC.129 PGC.130 PGC.131 PGC.132 PGC.133 PGC.134 
+## PGC.128 PGC.129 PGC.130 PGC.131 PGC.132 PGC.133 PGC.134 PGC.135 PGC.136 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.135 PGC.136 PGC.137 PGC.138 PGC.139 PGC.140 PGC.141 PGC.142 PGC.143 
+## PGC.137 PGC.138 PGC.139 PGC.140 PGC.141 PGC.142 PGC.143 PGC.146 PGC.147 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.144 PGC.146 PGC.147 PGC.148 PGC.149 PGC.150 PGC.151 PGC.152 PGC.153 
+## PGC.148 PGC.149 PGC.150 PGC.151 PGC.152 PGC.153 PGC.154 PGC.155 PGC.156 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.154 PGC.155 PGC.156 PGC.157 PGC.158 PGC.159 PGC.160 PGC.161 PGC.162 
+## PGC.157 PGC.158 PGC.159 PGC.160 PGC.161 PGC.162 PGC.163 PGC.164 PGC.165 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.163 PGC.164 PGC.165 PGC.166 PGC.167 PGC.168 PGC.169 PGC.170 PGC.171 
+## PGC.166 PGC.167 PGC.168 PGC.169 PGC.170 PGC.171 PGC.172 PGC.173 PGC.174 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.172 PGC.173 PGC.174 PGC.175 PGC.176 PGC.177 PGC.178 PGC.179 PGC.180 
+## PGC.175 PGC.176 PGC.177 PGC.178 PGC.179 PGC.180 PGC.181 PGC.182 PGC.183 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.181 PGC.182 PGC.183 PGC.184 PGC.185 PGC.186 PGC.187 PGC.188 PGC.189 
+## PGC.184 PGC.185 PGC.186 PGC.187 PGC.188 PGC.189 PGC.190 PGC.191 PGC.195 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.190 PGC.191 PGC.195 PGC.198 PGC.205 PGC.207 PGC.217 PGC.231 PGC.233 
+## PGC.198 PGC.205 PGC.207 PGC.217 PGC.233 PGC.234 PGC.235 PGC.236 PGC.237 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.234 PGC.235 PGC.236 PGC.237 PGC.238 PGC.239 PGC.240 PGC.241 
-##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"
+## PGC.238 PGC.239 PGC.240 PGC.241 
+##   "PGC"   "PGC"   "PGC"   "PGC"
+```
+
+```r
+clusterresults[1,which(clusterresults[2,]==3)]
+```
+
+```
+## preimp.51    ESC.31   PGC.192   PGC.193   PGC.194   PGC.196   PGC.197 
+##  "preimp"     "ESC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC" 
+##   PGC.199   PGC.200   PGC.201      soma    soma.1    soma.2    soma.3 
+##     "PGC"     "PGC"     "PGC"    "soma"    "soma"    "soma"    "soma" 
+##    soma.4    soma.5    soma.6    soma.7    soma.8    soma.9   soma.10 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.11   soma.12   soma.13   soma.14   soma.15   soma.16   soma.17 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.18   soma.19   soma.20   soma.21   soma.22   soma.23   soma.24 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.25   soma.26   soma.27   soma.28   soma.29   soma.30   soma.31 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.32   soma.33   soma.34   soma.35   soma.36   soma.37   soma.38 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.39   soma.40   soma.41   soma.42   soma.43   soma.44   soma.45 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.46   soma.47   soma.50   soma.53   soma.54   soma.55   soma.56 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.57   soma.58   soma.59   soma.60   soma.61   soma.62   soma.63 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.64   soma.65   soma.66   soma.67   soma.68   soma.69   soma.70 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.71   soma.72   soma.73   soma.74   soma.75   soma.76   soma.77 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.78   soma.79   soma.80   soma.81   soma.82   soma.83   soma.84 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.85 
+##    "soma"
 ```
 
 ```r
@@ -200,25 +212,17 @@ clusterresults[1,which(clusterresults[2,]==4)]
 ```
 
 ```
-## PGC.192 PGC.193 PGC.194 PGC.196 PGC.197 PGC.199 PGC.200 PGC.201    soma 
-##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"  "soma" 
-##  soma.1  soma.2  soma.5  soma.7  soma.9 soma.10 soma.11 soma.16 soma.17 
-##  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma" 
-## soma.18 soma.19 soma.21 soma.22 soma.24 soma.26 soma.28 soma.29 soma.30 
-##  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma" 
-## soma.31 soma.32 soma.33 soma.34 soma.35 soma.36 soma.37 soma.38 soma.39 
-##  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma" 
-## soma.40 soma.41 soma.42 soma.43 soma.44 soma.45 soma.46 soma.47 soma.55 
-##  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma" 
-## soma.56 soma.57 soma.59 soma.60 soma.61 soma.62 soma.63 soma.64 soma.65 
-##  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma" 
-## soma.66 soma.67 soma.68 soma.69 soma.71 soma.72 soma.73 soma.74 soma.75 
-##  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma" 
-## soma.76 soma.77 soma.78 soma.79 soma.80 soma.82 soma.83 soma.84 soma.85 
-##  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"
+## PGC.109 PGC.111 PGC.144 PGC.145 PGC.202 PGC.203 PGC.204 PGC.206 PGC.208 
+##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
+## PGC.209 PGC.210 PGC.211 PGC.212 PGC.213 PGC.214 PGC.215 PGC.216 PGC.218 
+##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
+## PGC.219 PGC.220 PGC.221 PGC.222 PGC.223 PGC.224 PGC.225 PGC.226 PGC.227 
+##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
+## PGC.228 PGC.229 PGC.230 PGC.231 PGC.232 
+##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"
 ```
 
-## Exercise 8.4.
+## Exercise 5.4.
 
 In our previous section we identified clusters associated with various groups. In our application cluster 1 was associated primarily with pre-implantation cells, with cluster 3 associated with PGCs. We could therefore empirically look for genes that are differentially expressed. Since we know SOX17 is associated with PGC specification [@irie2015sox17,@tang2015unique] let's first compare the expression levels of SOX17 in the two groups:
 
@@ -232,13 +236,13 @@ t.test(D[which(genenames=="SOX17")+3, which(clusterresults[2,]==1)],D[which(gene
 ## 	Welch Two Sample t-test
 ## 
 ## data:  D[which(genenames == "SOX17") + 3, which(clusterresults[2, ] ==  and D[which(genenames == "SOX17") + 3, which(clusterresults[2, ] ==     1)] and     3)]
-## t = -11.069, df = 344.66, p-value < 2.2e-16
+## t = 1.7662, df = 192.74, p-value = 0.07895
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -2.250895 -1.571663
+##  -0.01860731  0.33739709
 ## sample estimates:
-## mean of x mean of y 
-## 0.4210437 2.3323228
+##  mean of x  mean of y 
+## 0.23823367 0.07883878
 ```
 
 Typically we won't always know the important genes, but can perform an unbiased analysis by testing all genes.
@@ -253,7 +257,7 @@ pvalstore[i]  <-  pvals$p.value
 sortedgenes <- genenames[order(pvalstore)]
 ```
 
-## Exercise 8.4
+## Exercise 5.5
 
 Within our example, the original axes of our data have very obvious solutions: the axes represent the expression levels of individual genes. The PCs, however, represent linear combinations of various genes, and do not have obvious interpretations. To find an intuition, we can project the original axes (genes) into the new co-ordinate system. This is stored in \texttt{pcaresult$rotation} variable.
 
@@ -293,7 +297,7 @@ text(pcaresult$rotation[,1:2], genenames, , cex = .4)
 
 This appears to identify a number of genes associated with embryogenesis, for example, DPPA3, which encodes for a maternally inherited factor, Stella, required for normal pre-implantation development [@bortvin2004dppa3,@payer2003stella] as well as regulation of transcriptional and endogenous retrovirus programs during maternal-to-zygotic transition [@Huang2017stella].
 
-## Exercise 8.6. 
+## Exercise 5.6. 
 
 We can run tSNE using the following command:
 
@@ -322,7 +326,7 @@ legend(-40, 40, legend=c("ESC", "preimp", "PGC", "soma"), col=c("red", "black", 
 
 <img src="15-solutions-dimensionality-reduction_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
-## Exercise 8.7.
+## Exercise 5.7.
 
 We can plot the expression patterns for pre-implantation embryos:
 
@@ -349,7 +353,7 @@ legend(-10, 10, legend=c("Ooc", "Zyg", "2C", "4C","8C","Mor","Blast"), col=c("to
 <img src="15-solutions-dimensionality-reduction_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 
-## Exercise 8.8.
+## Exercise 5.8.
 
 Before we perform any clustering let's generate labels for the pre-implantation data.
 

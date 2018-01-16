@@ -1,4 +1,4 @@
-# Solutions ch. 8 - Nearest neighbours {#solutions-nearest-neighbours}
+# Solutions ch. 7 - Nearest neighbours {#solutions-nearest-neighbours}
 
 Solutions to exercises of chapter \@ref(nearest-neighbours).
 

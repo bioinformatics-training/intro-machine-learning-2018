@@ -1,4 +1,4 @@
-# Artificial neural networks {#mlnn}
+# Deep Learning {#mlnn}
 
 <!-- Chris -->
 
@@ -90,7 +90,7 @@ im <- readJPEG("data/RickandMorty/data/train/Rick/Rick_001.jpg")
 grid.raster(im, interpolate=FALSE)
 ```
 
-<img src="21-mlnn_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="11-deep-learning_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 Each image is stored as a jpeg file with $90 \times 160$ pixel resolution and $3$ colour channels (RGB). The input data is therefore a tensor/array of dimension $90 \times 160 \times 3$. Keras expects inputs in the form of Numpy arrays, and we can construct the training dataset by loading all $1000$ *Rick* and all $1000$ *not Rick* images. We first get a list of all the *Rick* images in the directory {train/Rick}:
 
@@ -349,7 +349,7 @@ if (predictY[choice]==0) {
 }
 ```
 
-<img src="21-mlnn_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+<img src="11-deep-learning_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 
 
 ```r
@@ -363,7 +363,7 @@ if (predictY[choice]==0) {
 }
 ```
 
-<img src="21-mlnn_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+<img src="11-deep-learning_files/figure-html/unnamed-chunk-29-1.png" width="672" />
 
 
 
@@ -378,7 +378,7 @@ if (predictY[choice]==0) {
 }
 ```
 
-<img src="21-mlnn_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+<img src="11-deep-learning_files/figure-html/unnamed-chunk-30-1.png" width="672" />
 
 
 ```r
@@ -392,7 +392,7 @@ if (predictY[choice]==0) {
 }
 ```
 
-<img src="21-mlnn_files/figure-html/unnamed-chunk-31-1.png" width="672" />
+<img src="11-deep-learning_files/figure-html/unnamed-chunk-31-1.png" width="672" />
 
 ### Data augmentation
 
@@ -412,7 +412,7 @@ More complex learning algorithms can easily be built using keras using the Model
 
 Another approach is to use transfer learning. This is where we make use of existing neural networks to make predictions on our specific datasets, usually fixing the top layers in place and fine tuning the lower layers to our dataset. For example, for image recognition we could make use of top perfoming neural networks on the [ImageNet](http://www.image-net.org) database. Whilst none of these networks would have been designed to identify *Rick* they would have been trained on millions of images, and the top levels would have been able to extract useful general features of an image. 
 
-# Further reading
+## Further reading
 
 A particularly comprehensive introduction to *Deep Learning* can be found in the e-book [Neural Networks and Deep Learning](http://neuralnetworksanddeeplearning.com/chap3.html), written by Michael Nielsen.
 
