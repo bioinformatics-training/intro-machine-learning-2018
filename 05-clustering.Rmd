@@ -1128,8 +1128,7 @@ ggplot(data = imgDF, aes(x = x, y = y)) +
 
 This should be all the information you need to perform this exercise.
 
-### Exercise 2 {#clusteringEx2}
-Try applying clustering to one of the data sets that was used for classification earlier in the course. Do any clusters found correspond to the classes defined for those data sets?
+
 
 **Solutions to exercises can be found in appendix \@ref(solutions-clustering).**
 
