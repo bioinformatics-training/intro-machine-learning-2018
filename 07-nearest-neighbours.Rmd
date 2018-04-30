@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Nearest neighbours {#nearest-neighbours}
 
 <!-- Matt -->
@@ -106,7 +111,7 @@ Let us perform _k_-nn on the training set with _k_=1. We will use the **confusio
 ```{r echo=T}
 library(caret)
 knn1train <- class::knn(train=xtrain, test=xtrain, cl=ytrain, k=1)
-confusionMatrix(knn1train, ytrain)
+confusionMatrix(knn1train, as.factor(ytrain))
 ```
 The classifier performs perfectly on the training set, because with _k_=1, each observation is being predicted by itself!
 <!--
@@ -117,7 +122,7 @@ cat("KNN prediction error for training set: ", 1-mean(as.numeric(as.vector(knn1t
 Now let use the training set to predict on the test set.
 ```{r echo=T}
 knn1test <- class::knn(train=xtrain, test=xtest, cl=ytrain, k=1)
-confusionMatrix(knn1test, ytest)
+confusionMatrix(knn1test, as.factor(ytest))
 ```
 Performance on the test set is not so good. This is an example of a classifier being over-fitted to the training set. 
 <!--
@@ -302,7 +307,7 @@ plot(knnFit, metric="Kappa")
 Let us now evaluate how our classifier performs on the test set.
 ```{r echo=T}
 test_pred <- predict(knnFit, xtest)
-confusionMatrix(test_pred, ytest)
+confusionMatrix(test_pred, as.factor(ytest))
 
 ```
 
