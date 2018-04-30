@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>An Introduction to Machine Learning</title>
   <meta name="description" content="Course materials for An Introduction to Machine Learning">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="An Introduction to Machine Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-01-16">
+<meta name="date" content="2018-04-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -317,33 +317,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span><span class="fl">9.8</span> ##meters per second
 n &lt;-<span class="st"> </span><span class="dv">25</span>
 tt &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="fl">3.4</span>,<span class="dt">len=</span>n) ##time in secs, t is a base function
-f &lt;-<span class="st"> </span><span class="fl">56.67</span>  -<span class="st"> </span><span class="fl">0.5</span>*g*tt^<span class="dv">2</span>
-y &lt;-<span class="st">  </span>f +<span class="st"> </span><span class="kw">rnorm</span>(n,<span class="dt">sd=</span><span class="dv">1</span>)
+f &lt;-<span class="st"> </span><span class="fl">56.67</span>  <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span><span class="op">*</span>g<span class="op">*</span>tt<span class="op">^</span><span class="dv">2</span>
+y &lt;-<span class="st">  </span>f <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(n,<span class="dt">sd=</span><span class="dv">1</span>)
 <span class="kw">plot</span>(tt,y,<span class="dt">ylab=</span><span class="st">&quot;Distance in meters&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;Time in seconds&quot;</span>)
 <span class="kw">lines</span>(tt,f,<span class="dt">col=</span><span class="dv">2</span>)</code></pre></div>
 <p><img src="13-solutions-linear-models_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>In R we can fit this model by simply using the lm function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tt2 &lt;-tt^<span class="dv">2</span>
-fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y~tt+tt2)
-<span class="kw">summary</span>(fit)$coef</code></pre></div>
-<pre><code>##               Estimate Std. Error     t value     Pr(&gt;|t|)
-## (Intercept) 56.6739058  0.7060161  80.2728205 1.192156e-28
-## tt          -0.2760785  0.9617428  -0.2870606 7.767522e-01
-## tt2         -4.8141353  0.2732172 -17.6201796 1.848203e-14</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tt2 &lt;-tt<span class="op">^</span><span class="dv">2</span>
+fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>tt<span class="op">+</span>tt2)
+<span class="kw">summary</span>(fit)<span class="op">$</span>coef</code></pre></div>
+<pre><code>##                Estimate Std. Error      t value     Pr(&gt;|t|)
+## (Intercept) 57.00762139  0.4768011 119.56269256 1.898014e-32
+## tt          -0.02952415  0.6495036  -0.04545648 9.641536e-01
+## tt2         -4.88365147  0.1845145 -26.46757096 3.557645e-18</code></pre>
 </div>
 <div id="example-2-1" class="section level2">
 <h2><span class="header-section-number">B.2</span> Example 2</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(father.son,<span class="dt">package=</span><span class="st">&quot;UsingR&quot;</span>)
-x=father.son$fheight
-y=father.son$sheight
+x=father.son<span class="op">$</span>fheight
+y=father.son<span class="op">$</span>sheight
 X &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dv">1</span>,x)
-thetahat &lt;-<span class="st"> </span><span class="kw">solve</span>( <span class="kw">t</span>(X) %*%<span class="st"> </span>X ) %*%<span class="st"> </span><span class="kw">t</span>(X) %*%<span class="st"> </span>y
+thetahat &lt;-<span class="st"> </span><span class="kw">solve</span>( <span class="kw">t</span>(X) <span class="op">%*%</span><span class="st"> </span>X ) <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(X) <span class="op">%*%</span><span class="st"> </span>y
 ###or
-thetahat &lt;-<span class="st"> </span><span class="kw">solve</span>( <span class="kw">crossprod</span>(X) ) %*%<span class="st"> </span><span class="kw">crossprod</span>( X, y )</code></pre></div>
+thetahat &lt;-<span class="st"> </span><span class="kw">solve</span>( <span class="kw">crossprod</span>(X) ) <span class="op">%*%</span><span class="st"> </span><span class="kw">crossprod</span>( X, y )</code></pre></div>
 <p>We can see the results of this by computing the estimated <span class="math inline">\(\hat{\theta}_0+\hat{\theta}_1 x\)</span> for any value of <span class="math inline">\(x\)</span>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newx &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(x),<span class="kw">max</span>(x),<span class="dt">len=</span><span class="dv">100</span>)
 X &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dv">1</span>,newx)
-fitted &lt;-<span class="st"> </span>X%*%thetahat
+fitted &lt;-<span class="st"> </span>X<span class="op">%*%</span>thetahat
 <span class="kw">plot</span>(x,y,<span class="dt">xlab=</span><span class="st">&quot;Father&#39;s height&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Son&#39;s height&quot;</span>)
 <span class="kw">lines</span>(newx,fitted,<span class="dt">col=</span><span class="dv">2</span>)</code></pre></div>
 <p><img src="13-solutions-linear-models_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
@@ -375,10 +375,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -402,9 +403,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

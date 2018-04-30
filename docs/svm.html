@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>An Introduction to Machine Learning</title>
   <meta name="description" content="Course materials for An Introduction to Machine Learning">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="An Introduction to Machine Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-01-16">
+<meta name="date" content="2018-04-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -436,14 +436,14 @@ Figure 8.9: Left: SVM with polynomial kernel of degree 3. Right: SVM with radial
 <p>V1 and V2 are the predictors; V3 is the class.</p>
 <p>Partition data into training and test set</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-trainIndex &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y=</span>moons$V3, <span class="dt">times=</span><span class="dv">1</span>, <span class="dt">p=</span><span class="fl">0.7</span>, <span class="dt">list=</span>F)
+trainIndex &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y=</span>moons<span class="op">$</span>V3, <span class="dt">times=</span><span class="dv">1</span>, <span class="dt">p=</span><span class="fl">0.7</span>, <span class="dt">list=</span>F)
 moonsTrain &lt;-<span class="st"> </span>moons[trainIndex,]
-moonsTest &lt;-<span class="st"> </span>moons[-trainIndex,]
+moonsTest &lt;-<span class="st"> </span>moons[<span class="op">-</span>trainIndex,]
 
-<span class="kw">summary</span>(moonsTrain$V3)</code></pre></div>
+<span class="kw">summary</span>(moonsTrain<span class="op">$</span>V3)</code></pre></div>
 <pre><code>##   A   B 
 ## 140 140</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(moonsTest$V3)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(moonsTest<span class="op">$</span>V3)</code></pre></div>
 <pre><code>##  A  B 
 ## 60 60</code></pre>
 </div>
@@ -451,15 +451,15 @@ moonsTest &lt;-<span class="st"> </span>moons[-trainIndex,]
 <h3><span class="header-section-number">8.4.3</span> Visualize training data</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">point_shapes &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">15</span>,<span class="dv">17</span>)
 bp &lt;-<span class="st"> </span><span class="kw">brewer.pal</span>(<span class="dv">3</span>,<span class="st">&quot;Dark2&quot;</span>)
-point_colours &lt;-<span class="st"> </span><span class="kw">ifelse</span>(moonsTrain$V3==<span class="st">&quot;A&quot;</span>, bp[<span class="dv">1</span>], bp[<span class="dv">2</span>])
-point_shapes &lt;-<span class="st"> </span><span class="kw">ifelse</span>(moonsTrain$V3==<span class="st">&quot;A&quot;</span>, <span class="dv">15</span>, <span class="dv">17</span>)
+point_colours &lt;-<span class="st"> </span><span class="kw">ifelse</span>(moonsTrain<span class="op">$</span>V3<span class="op">==</span><span class="st">&quot;A&quot;</span>, bp[<span class="dv">1</span>], bp[<span class="dv">2</span>])
+point_shapes &lt;-<span class="st"> </span><span class="kw">ifelse</span>(moonsTrain<span class="op">$</span>V3<span class="op">==</span><span class="st">&quot;A&quot;</span>, <span class="dv">15</span>, <span class="dv">17</span>)
 
 point_size =<span class="st"> </span><span class="dv">2</span>
 
-<span class="kw">ggplot</span>(moonsTrain, <span class="kw">aes</span>(V1,V2)) +<span class="st"> </span>
+<span class="kw">ggplot</span>(moonsTrain, <span class="kw">aes</span>(V1,V2)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">col=</span>point_colours, <span class="dt">shape=</span>point_shapes, 
-             <span class="dt">size=</span>point_size) +<span class="st"> </span>
-<span class="st">  </span><span class="kw">theme_bw</span>() +
+             <span class="dt">size=</span>point_size) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">25</span>, <span class="dt">face=</span><span class="st">&quot;bold&quot;</span>), <span class="dt">axis.text=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">15</span>),
         <span class="dt">axis.title=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">20</span>,<span class="dt">face=</span><span class="st">&quot;bold&quot;</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:svmMoonsTrainSet"></span>
@@ -480,54 +480,54 @@ Figure 8.10: Scatterplot of the training data
   <span class="dt">parameters =</span> <span class="kw">data.frame</span>(<span class="dt">parameter=</span><span class="st">&quot;cost&quot;</span>,
                           <span class="dt">class=</span><span class="st">&quot;numeric&quot;</span>,
                           <span class="dt">label=</span><span class="st">&quot;Cost&quot;</span>),
-  <span class="dt">grid =</span> function (x, y, <span class="dt">len =</span> <span class="ot">NULL</span>, <span class="dt">search =</span> <span class="st">&quot;grid&quot;</span>) 
+  <span class="dt">grid =</span> <span class="cf">function</span> (x, y, <span class="dt">len =</span> <span class="ot">NULL</span>, <span class="dt">search =</span> <span class="st">&quot;grid&quot;</span>) 
     {
-      if (search ==<span class="st"> &quot;grid&quot;</span>) {
-        out &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">cost =</span> <span class="dv">2</span>^((<span class="dv">1</span>:len) -<span class="st"> </span><span class="dv">3</span>))
+      <span class="cf">if</span> (search <span class="op">==</span><span class="st"> &quot;grid&quot;</span>) {
+        out &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">cost =</span> <span class="dv">2</span><span class="op">^</span>((<span class="dv">1</span><span class="op">:</span>len) <span class="op">-</span><span class="st"> </span><span class="dv">3</span>))
       }
-      else {
-        out &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">cost =</span> <span class="dv">2</span>^<span class="kw">runif</span>(len, <span class="dt">min =</span> -<span class="dv">5</span>, <span class="dt">max =</span> <span class="dv">10</span>))
+      <span class="cf">else</span> {
+        out &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">cost =</span> <span class="dv">2</span><span class="op">^</span><span class="kw">runif</span>(len, <span class="dt">min =</span> <span class="op">-</span><span class="dv">5</span>, <span class="dt">max =</span> <span class="dv">10</span>))
       }
       out
     },
   <span class="dt">loop=</span><span class="ot">NULL</span>,
-  <span class="dt">fit=</span>function (x, y, wts, param, lev, last, classProbs, ...) 
+  <span class="dt">fit=</span><span class="cf">function</span> (x, y, wts, param, lev, last, classProbs, ...) 
     {
-      if (<span class="kw">any</span>(<span class="kw">names</span>(<span class="kw">list</span>(...)) ==<span class="st"> &quot;probability&quot;</span>) |<span class="st"> </span><span class="kw">is.numeric</span>(y)) {
-        out &lt;-<span class="st"> </span>e1071::<span class="kw">svm</span>(<span class="dt">x =</span> <span class="kw">as.matrix</span>(x), <span class="dt">y =</span> y, <span class="dt">kernel =</span> <span class="st">&quot;radial&quot;</span>, 
-                          <span class="dt">cost =</span> param$cost, ...)
+      <span class="cf">if</span> (<span class="kw">any</span>(<span class="kw">names</span>(<span class="kw">list</span>(...)) <span class="op">==</span><span class="st"> &quot;probability&quot;</span>) <span class="op">|</span><span class="st"> </span><span class="kw">is.numeric</span>(y)) {
+        out &lt;-<span class="st"> </span>e1071<span class="op">::</span><span class="kw">svm</span>(<span class="dt">x =</span> <span class="kw">as.matrix</span>(x), <span class="dt">y =</span> y, <span class="dt">kernel =</span> <span class="st">&quot;radial&quot;</span>, 
+                          <span class="dt">cost =</span> param<span class="op">$</span>cost, ...)
       }
-      else {
-        out &lt;-<span class="st"> </span>e1071::<span class="kw">svm</span>(<span class="dt">x =</span> <span class="kw">as.matrix</span>(x), <span class="dt">y =</span> y, <span class="dt">kernel =</span> <span class="st">&quot;radial&quot;</span>, 
-                          <span class="dt">cost =</span> param$cost, <span class="dt">probability =</span> classProbs, ...)
+      <span class="cf">else</span> {
+        out &lt;-<span class="st"> </span>e1071<span class="op">::</span><span class="kw">svm</span>(<span class="dt">x =</span> <span class="kw">as.matrix</span>(x), <span class="dt">y =</span> y, <span class="dt">kernel =</span> <span class="st">&quot;radial&quot;</span>, 
+                          <span class="dt">cost =</span> param<span class="op">$</span>cost, <span class="dt">probability =</span> classProbs, ...)
       }
       out
     },
-  <span class="dt">predict =</span> function (modelFit, newdata, <span class="dt">submodels =</span> <span class="ot">NULL</span>) 
+  <span class="dt">predict =</span> <span class="cf">function</span> (modelFit, newdata, <span class="dt">submodels =</span> <span class="ot">NULL</span>) 
     {
       <span class="kw">predict</span>(modelFit, newdata)
     },
-  <span class="dt">prob =</span> function (modelFit, newdata, <span class="dt">submodels =</span> <span class="ot">NULL</span>) 
+  <span class="dt">prob =</span> <span class="cf">function</span> (modelFit, newdata, <span class="dt">submodels =</span> <span class="ot">NULL</span>) 
     {
       out &lt;-<span class="st"> </span><span class="kw">predict</span>(modelFit, newdata, <span class="dt">probability =</span> <span class="ot">TRUE</span>)
       <span class="kw">attr</span>(out, <span class="st">&quot;probabilities&quot;</span>)
     },
-  <span class="dt">predictors =</span> function (x, ...) 
+  <span class="dt">predictors =</span> <span class="cf">function</span> (x, ...) 
     {
-      out &lt;-<span class="st"> </span>if (!<span class="kw">is.null</span>(x$terms)) 
-        <span class="kw">predictors.terms</span>(x$terms)
-      else x$xNames
-      if (<span class="kw">is.null</span>(out)) 
-        out &lt;-<span class="st"> </span><span class="kw">names</span>(<span class="kw">attr</span>(x, <span class="st">&quot;scaling&quot;</span>)$x.scale$<span class="st">`</span><span class="dt">scaled:center</span><span class="st">`</span>)
-      if (<span class="kw">is.null</span>(out)) 
+      out &lt;-<span class="st"> </span><span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(x<span class="op">$</span>terms)) 
+        <span class="kw">predictors.terms</span>(x<span class="op">$</span>terms)
+      <span class="cf">else</span> x<span class="op">$</span>xNames
+      <span class="cf">if</span> (<span class="kw">is.null</span>(out)) 
+        out &lt;-<span class="st"> </span><span class="kw">names</span>(<span class="kw">attr</span>(x, <span class="st">&quot;scaling&quot;</span>)<span class="op">$</span>x.scale<span class="op">$</span><span class="st">`</span><span class="dt">scaled:center</span><span class="st">`</span>)
+      <span class="cf">if</span> (<span class="kw">is.null</span>(out)) 
         out &lt;-<span class="st"> </span><span class="ot">NA</span>
       out
     },
   <span class="dt">tags =</span> <span class="kw">c</span>(<span class="st">&quot;Kernel Methods&quot;</span>, <span class="st">&quot;Support Vector Machines&quot;</span>, <span class="st">&quot;Regression&quot;</span>, <span class="st">&quot;Classifier&quot;</span>, <span class="st">&quot;Robust Methods&quot;</span>),
-  <span class="dt">levels =</span> function(x) x$levels,
-  <span class="dt">sort =</span> function(x)
+  <span class="dt">levels =</span> <span class="cf">function</span>(x) x<span class="op">$</span>levels,
+  <span class="dt">sort =</span> <span class="cf">function</span>(x)
   {
-    x[<span class="kw">order</span>(x$cost), ]
+    x[<span class="kw">order</span>(x<span class="op">$</span>cost), ]
   }
 )</code></pre></div>
 <p>Note that the radial SVM model we have defined has only one tuning parameter, cost (<em>C</em>). If we do not define the kernel parameter <em>gamma</em>, e1071 will automatically calculate it as 1/(data dimension); <em>i.e.</em> if we have 58 predictors, <em>gamma</em> will be 1/58 = 0.01724.</p>
@@ -537,7 +537,7 @@ Figure 8.10: Scatterplot of the training data
 <p>Set seeds for reproducibility. We will be trying 9 values of the tuning parameter with 10 repeats of 10 fold cross-validation, so we need the following list of seeds.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
 seeds &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="dv">26</span>)
-for(i in <span class="dv">1</span>:<span class="dv">25</span>) seeds[[i]] &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="dv">1000</span>, <span class="dv">9</span>)
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">25</span>) seeds[[i]] &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="dv">1000</span>, <span class="dv">9</span>)
 seeds[[<span class="dv">26</span>]] &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="dv">1000</span>,<span class="dv">1</span>)</code></pre></div>
 <p>We will pass the twoClassSummary function into model training through trainControl. Additionally we would like the model to predict class probabilities so that we can calculate the ROC curve, so we use the classProbs option.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cvCtrl &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;repeatedcv&quot;</span>, 
@@ -547,7 +547,7 @@ seeds[[<span class="dv">26</span>]] &lt;-<span class="st"> </span><span class="k
                        <span class="dt">classProbs =</span> <span class="ot">TRUE</span>,
                        <span class="dt">seeds=</span>seeds)</code></pre></div>
 <p>We set the <strong>method</strong> of the <strong>train</strong> function to <strong>svmRadial</strong> to specify a radial kernel SVM. In this implementation we only have to tune one parameter, <strong>cost</strong>. The default grid of cost parameters start at 0.25 and double at each iteration. Choosing tuneLength = 9 will give us cost parameters of 0.25, 0.5, 1, 2, 4, 8, 16, 32 and 64.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svmTune &lt;-<span class="st"> </span><span class="kw">train</span>(<span class="dt">x =</span> moonsTrain[,<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">2</span>)],
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svmTune &lt;-<span class="st"> </span><span class="kw">train</span>(<span class="dt">x =</span> moonsTrain[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)],
                  <span class="dt">y =</span> moonsTrain[,<span class="dv">3</span>],
                  <span class="dt">method =</span> svmRadialE1071,
                  <span class="dt">tuneLength =</span> <span class="dv">9</span>,
@@ -580,7 +580,7 @@ svmTune</code></pre></div>
 ## 
 ## ROC was used to select the optimal model using the largest value.
 ## The final value used for the model was cost = 16.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svmTune$finalModel</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svmTune<span class="op">$</span>finalModel</code></pre></div>
 <pre><code>## 
 ## Call:
 ## svm.default(x = as.matrix(x), y = y, kernel = &quot;radial&quot;, cost = param$cost, 
@@ -606,7 +606,7 @@ Figure 8.11: SVM accuracy profile for moons data set.
 </p>
 </div>
 <p>Predictions on test set.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svmPred &lt;-<span class="st"> </span><span class="kw">predict</span>(svmTune, moonsTest[,<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">2</span>)])
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svmPred &lt;-<span class="st"> </span><span class="kw">predict</span>(svmTune, moonsTest[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)])
 <span class="kw">confusionMatrix</span>(svmPred, moonsTest[,<span class="dv">3</span>])</code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
@@ -635,7 +635,7 @@ Figure 8.11: SVM accuracy profile for moons data set.
 ##        &#39;Positive&#39; Class : A               
 ## </code></pre>
 <p>Get predicted class probabilities so we can build ROC curve.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svmProbs &lt;-<span class="st"> </span><span class="kw">predict</span>(svmTune, moonsTest[,<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">2</span>)], <span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svmProbs &lt;-<span class="st"> </span><span class="kw">predict</span>(svmTune, moonsTest[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)], <span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)
 <span class="kw">head</span>(svmProbs)</code></pre></div>
 <pre><code>##             A          B
 ## 2 0.006794294 0.99320571
@@ -672,12 +672,12 @@ Figure 8.12: SVM accuracy profile.
 <h3><span class="header-section-number">8.4.7</span> Plot decision boundary</h3>
 <p>Create a grid so we can predict across the full range of our variables V1 and V2.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gridSize &lt;-<span class="st"> </span><span class="dv">150</span> 
-v1limits &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">min</span>(moons$V1),<span class="kw">max</span>(moons$V1))
+v1limits &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">min</span>(moons<span class="op">$</span>V1),<span class="kw">max</span>(moons<span class="op">$</span>V1))
 tmpV1 &lt;-<span class="st"> </span><span class="kw">seq</span>(v1limits[<span class="dv">1</span>],v1limits[<span class="dv">2</span>],<span class="dt">len=</span>gridSize)
-v2limits &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">min</span>(moons$V2), <span class="kw">max</span>(moons$V2))
+v2limits &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">min</span>(moons<span class="op">$</span>V2), <span class="kw">max</span>(moons<span class="op">$</span>V2))
 tmpV2 &lt;-<span class="st"> </span><span class="kw">seq</span>(v2limits[<span class="dv">1</span>],v2limits[<span class="dv">2</span>],<span class="dt">len=</span>gridSize)
 xgrid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(tmpV1,tmpV2)
-<span class="kw">names</span>(xgrid) &lt;-<span class="st"> </span><span class="kw">names</span>(moons)[<span class="dv">1</span>:<span class="dv">2</span>]</code></pre></div>
+<span class="kw">names</span>(xgrid) &lt;-<span class="st"> </span><span class="kw">names</span>(moons)[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</code></pre></div>
 <p>Predict values of all elements of grid.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">V3 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">predict</span>(svmTune, xgrid))
 xgrid &lt;-<span class="st"> </span><span class="kw">cbind</span>(xgrid, V3)</code></pre></div>
@@ -686,26 +686,26 @@ xgrid &lt;-<span class="st"> </span><span class="kw">cbind</span>(xgrid, V3)</co
 point_colours &lt;-<span class="st"> </span><span class="kw">brewer.pal</span>(<span class="dv">3</span>,<span class="st">&quot;Dark2&quot;</span>)
 point_size =<span class="st"> </span><span class="dv">2</span>
 
-trainClassNumeric &lt;-<span class="st"> </span><span class="kw">ifelse</span>(moonsTrain$V3==<span class="st">&quot;A&quot;</span>, <span class="dv">1</span>, <span class="dv">2</span>)
-testClassNumeric &lt;-<span class="st"> </span><span class="kw">ifelse</span>(moonsTest$V3==<span class="st">&quot;A&quot;</span>, <span class="dv">1</span>, <span class="dv">2</span>)
+trainClassNumeric &lt;-<span class="st"> </span><span class="kw">ifelse</span>(moonsTrain<span class="op">$</span>V3<span class="op">==</span><span class="st">&quot;A&quot;</span>, <span class="dv">1</span>, <span class="dv">2</span>)
+testClassNumeric &lt;-<span class="st"> </span><span class="kw">ifelse</span>(moonsTest<span class="op">$</span>V3<span class="op">==</span><span class="st">&quot;A&quot;</span>, <span class="dv">1</span>, <span class="dv">2</span>)
 
-<span class="kw">ggplot</span>(xgrid, <span class="kw">aes</span>(V1,V2)) +
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">col=</span>point_colours[V3], <span class="dt">shape=</span><span class="dv">16</span>, <span class="dt">size=</span><span class="fl">0.3</span>) +
+<span class="kw">ggplot</span>(xgrid, <span class="kw">aes</span>(V1,V2)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">col=</span>point_colours[V3], <span class="dt">shape=</span><span class="dv">16</span>, <span class="dt">size=</span><span class="fl">0.3</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>moonsTrain, <span class="kw">aes</span>(V1,V2), <span class="dt">col=</span>point_colours[trainClassNumeric],
-             <span class="dt">shape=</span>point_shapes[trainClassNumeric], <span class="dt">size=</span>point_size) +
-<span class="st">  </span><span class="kw">geom_contour</span>(<span class="dt">data=</span>xgrid, <span class="kw">aes</span>(<span class="dt">x=</span>V1, <span class="dt">y=</span>V2, <span class="dt">z=</span>V3), <span class="dt">breaks=</span><span class="fl">1.5</span>, <span class="dt">col=</span><span class="st">&quot;grey30&quot;</span>) +
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;train&quot;</span>) +
-<span class="st">  </span><span class="kw">theme_bw</span>() +
+             <span class="dt">shape=</span>point_shapes[trainClassNumeric], <span class="dt">size=</span>point_size) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_contour</span>(<span class="dt">data=</span>xgrid, <span class="kw">aes</span>(<span class="dt">x=</span>V1, <span class="dt">y=</span>V2, <span class="dt">z=</span>V3), <span class="dt">breaks=</span><span class="fl">1.5</span>, <span class="dt">col=</span><span class="st">&quot;grey30&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;train&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">25</span>, <span class="dt">face=</span><span class="st">&quot;bold&quot;</span>), <span class="dt">axis.text=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">15</span>),
         <span class="dt">axis.title=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">20</span>,<span class="dt">face=</span><span class="st">&quot;bold&quot;</span>))
 
-<span class="kw">ggplot</span>(xgrid, <span class="kw">aes</span>(V1,V2)) +
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">col=</span>point_colours[V3], <span class="dt">shape=</span><span class="dv">16</span>, <span class="dt">size=</span><span class="fl">0.3</span>) +
+<span class="kw">ggplot</span>(xgrid, <span class="kw">aes</span>(V1,V2)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">col=</span>point_colours[V3], <span class="dt">shape=</span><span class="dv">16</span>, <span class="dt">size=</span><span class="fl">0.3</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>moonsTest, <span class="kw">aes</span>(V1,V2), <span class="dt">col=</span>point_colours[testClassNumeric],
-             <span class="dt">shape=</span>point_shapes[testClassNumeric], <span class="dt">size=</span>point_size) +
-<span class="st">  </span><span class="kw">geom_contour</span>(<span class="dt">data=</span>xgrid, <span class="kw">aes</span>(<span class="dt">x=</span>V1, <span class="dt">y=</span>V2, <span class="dt">z=</span>V3), <span class="dt">breaks=</span><span class="fl">1.5</span>, <span class="dt">col=</span><span class="st">&quot;grey30&quot;</span>) +
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;test&quot;</span>) +
-<span class="st">  </span><span class="kw">theme_bw</span>() +
+             <span class="dt">shape=</span>point_shapes[testClassNumeric], <span class="dt">size=</span>point_size) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_contour</span>(<span class="dt">data=</span>xgrid, <span class="kw">aes</span>(<span class="dt">x=</span>V1, <span class="dt">y=</span>V2, <span class="dt">z=</span>V3), <span class="dt">breaks=</span><span class="fl">1.5</span>, <span class="dt">col=</span><span class="st">&quot;grey30&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;test&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">25</span>, <span class="dt">face=</span><span class="st">&quot;bold&quot;</span>), <span class="dt">axis.text=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">15</span>),
         <span class="dt">axis.title=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">20</span>,<span class="dt">face=</span><span class="st">&quot;bold&quot;</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:simDataBinClassDecisionBoundarySVM"></span>
@@ -726,8 +726,8 @@ Figure 8.13: Decision boundary created by radial kernel SVM.
 trainIndex &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y=</span>logBBB, <span class="dt">times=</span><span class="dv">1</span>, <span class="dt">p=</span><span class="fl">0.8</span>, <span class="dt">list=</span>F)
 descrTrain &lt;-<span class="st"> </span>bbbDescr[trainIndex,]
 concRatioTrain &lt;-<span class="st"> </span>logBBB[trainIndex]
-descrTest &lt;-<span class="st"> </span>bbbDescr[-trainIndex,]
-concRatioTest &lt;-<span class="st"> </span>logBBB[-trainIndex]
+descrTest &lt;-<span class="st"> </span>bbbDescr[<span class="op">-</span>trainIndex,]
+concRatioTest &lt;-<span class="st"> </span>logBBB[<span class="op">-</span>trainIndex]
 
 transformations &lt;-<span class="st"> </span><span class="kw">preProcess</span>(descrTrain,
                               <span class="dt">method=</span><span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>, <span class="st">&quot;corr&quot;</span>, <span class="st">&quot;nzv&quot;</span>),
@@ -736,7 +736,7 @@ descrTrain &lt;-<span class="st"> </span><span class="kw">predict</span>(transfo
 
 <span class="kw">set.seed</span>(<span class="dv">42</span>)
 seeds &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="dv">26</span>)
-for(i in <span class="dv">1</span>:<span class="dv">25</span>) seeds[[i]] &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="dv">1000</span>, <span class="dv">50</span>)
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">25</span>) seeds[[i]] &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="dv">1000</span>, <span class="dv">50</span>)
 seeds[[<span class="dv">26</span>]] &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="dv">1000</span>,<span class="dv">1</span>)</code></pre></div>
 <p>In the arguments to the <code>train</code> function we change <code>method</code> from <code>knn</code> to <code>svmRadialE1071</code>. The <code>tunegrid</code> parameter is replaced with <code>tuneLength = 9</code>. Now we are ready to fit an SVM model.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svmTune2 &lt;-<span class="st"> </span><span class="kw">train</span>(descrTrain,
@@ -786,9 +786,9 @@ Figure 8.14: Root Mean Squared Error as a function of cost.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">descrTest &lt;-<span class="st"> </span><span class="kw">predict</span>(transformations, descrTest)
 test_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(svmTune2, descrTest)</code></pre></div>
 <p>Prediction performance can be visualized in a scatterplot.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(concRatioTest, test_pred) +<span class="st"> </span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;observed&quot;</span>) +
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;predicted&quot;</span>) +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(concRatioTest, test_pred) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;observed&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;predicted&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:obsPredConcRatiosSVM"></span>
 <img src="08-svm_files/figure-html/obsPredConcRatiosSVM-1.png" alt="Concordance between observed concentration ratios and those predicted by radial kernel SVM." width="80%" />
@@ -845,10 +845,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -872,9 +873,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

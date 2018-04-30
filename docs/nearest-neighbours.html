@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>An Introduction to Machine Learning</title>
   <meta name="description" content="Course materials for An Introduction to Machine Learning">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="An Introduction to Machine Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-01-16">
+<meta name="date" content="2018-04-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -370,19 +370,19 @@ point_shapes &lt;-<span class="st"> </span><span class="kw">c</span>(<span class
 point_colours &lt;-<span class="st"> </span><span class="kw">brewer.pal</span>(<span class="dv">3</span>,<span class="st">&quot;Dark2&quot;</span>)
 point_size =<span class="st"> </span><span class="dv">2</span>
 
-<span class="kw">ggplot</span>(xtrain, <span class="kw">aes</span>(V1,V2)) +<span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">col=</span>point_colours[ytrain<span class="dv">+1</span>], <span class="dt">shape=</span>point_shapes[ytrain<span class="dv">+1</span>], 
-             <span class="dt">size=</span>point_size) +<span class="st"> </span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;train&quot;</span>) +
-<span class="st">  </span><span class="kw">theme_bw</span>() +
+<span class="kw">ggplot</span>(xtrain, <span class="kw">aes</span>(V1,V2)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">col=</span>point_colours[ytrain<span class="op">+</span><span class="dv">1</span>], <span class="dt">shape=</span>point_shapes[ytrain<span class="op">+</span><span class="dv">1</span>], 
+             <span class="dt">size=</span>point_size) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;train&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">25</span>, <span class="dt">face=</span><span class="st">&quot;bold&quot;</span>), <span class="dt">axis.text=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">15</span>),
         <span class="dt">axis.title=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">20</span>,<span class="dt">face=</span><span class="st">&quot;bold&quot;</span>))
 
-<span class="kw">ggplot</span>(xtest, <span class="kw">aes</span>(V1,V2)) +<span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">col=</span>point_colours[ytest<span class="dv">+1</span>], <span class="dt">shape=</span>point_shapes[ytest<span class="dv">+1</span>], 
-             <span class="dt">size=</span>point_size) +<span class="st"> </span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;test&quot;</span>) +
-<span class="st">  </span><span class="kw">theme_bw</span>() +
+<span class="kw">ggplot</span>(xtest, <span class="kw">aes</span>(V1,V2)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">col=</span>point_colours[ytest<span class="op">+</span><span class="dv">1</span>], <span class="dt">shape=</span>point_shapes[ytest<span class="op">+</span><span class="dv">1</span>], 
+             <span class="dt">size=</span>point_size) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;test&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">25</span>, <span class="dt">face=</span><span class="st">&quot;bold&quot;</span>), <span class="dt">axis.text=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">15</span>),
         <span class="dt">axis.title=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">20</span>,<span class="dt">face=</span><span class="st">&quot;bold&quot;</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:simDataBinClassTrainTest"></span>
@@ -408,8 +408,8 @@ Figure 7.2: Scatterplots of the simulated training and test data sets that will 
 <p>Let us perform <em>k</em>-nn on the training set with <em>k</em>=1. We will use the <strong>confusionMatrix</strong> function from the <a href="http://cran.r-project.org/web/packages/caret/index.html">caret</a> package to summarize performance of the classifier.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)</code></pre></div>
 <pre><code>## Loading required package: lattice</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knn1train &lt;-<span class="st"> </span>class::<span class="kw">knn</span>(<span class="dt">train=</span>xtrain, <span class="dt">test=</span>xtrain, <span class="dt">cl=</span>ytrain, <span class="dt">k=</span><span class="dv">1</span>)
-<span class="kw">confusionMatrix</span>(knn1train, ytrain)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knn1train &lt;-<span class="st"> </span>class<span class="op">::</span><span class="kw">knn</span>(<span class="dt">train=</span>xtrain, <span class="dt">test=</span>xtrain, <span class="dt">cl=</span>ytrain, <span class="dt">k=</span><span class="dv">1</span>)
+<span class="kw">confusionMatrix</span>(knn1train, <span class="kw">as.factor</span>(ytrain))</code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -441,8 +441,8 @@ table(ytrain,knn1train)
 cat("KNN prediction error for training set: ", 1-mean(as.numeric(as.vector(knn1train))==ytrain), "\n")
 --></p>
 <p>Now let use the training set to predict on the test set.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knn1test &lt;-<span class="st"> </span>class::<span class="kw">knn</span>(<span class="dt">train=</span>xtrain, <span class="dt">test=</span>xtest, <span class="dt">cl=</span>ytrain, <span class="dt">k=</span><span class="dv">1</span>)
-<span class="kw">confusionMatrix</span>(knn1test, ytest)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knn1test &lt;-<span class="st"> </span>class<span class="op">::</span><span class="kw">knn</span>(<span class="dt">train=</span>xtrain, <span class="dt">test=</span>xtest, <span class="dt">cl=</span>ytrain, <span class="dt">k=</span><span class="dv">1</span>)
+<span class="kw">confusionMatrix</span>(knn1test, <span class="kw">as.factor</span>(ytest))</code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -486,7 +486,7 @@ tmpV2 &lt;-<span class="st"> </span><span class="kw">seq</span>(v2limits[<span c
 xgrid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(tmpV1,tmpV2)
 <span class="kw">names</span>(xgrid) &lt;-<span class="st"> </span><span class="kw">names</span>(xtrain)</code></pre></div>
 <p>Predict values of all elements of grid.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knn1grid &lt;-<span class="st"> </span>class::<span class="kw">knn</span>(<span class="dt">train=</span>xtrain, <span class="dt">test=</span>xgrid, <span class="dt">cl=</span>ytrain, <span class="dt">k=</span><span class="dv">1</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knn1grid &lt;-<span class="st"> </span>class<span class="op">::</span><span class="kw">knn</span>(<span class="dt">train=</span>xtrain, <span class="dt">test=</span>xgrid, <span class="dt">cl=</span>ytrain, <span class="dt">k=</span><span class="dv">1</span>)
 V3 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.vector</span>(knn1grid))
 xgrid &lt;-<span class="st"> </span><span class="kw">cbind</span>(xgrid, V3)</code></pre></div>
 <p>Plot</p>
@@ -494,23 +494,23 @@ xgrid &lt;-<span class="st"> </span><span class="kw">cbind</span>(xgrid, V3)</co
 point_colours &lt;-<span class="st"> </span><span class="kw">brewer.pal</span>(<span class="dv">3</span>,<span class="st">&quot;Dark2&quot;</span>)
 point_size =<span class="st"> </span><span class="dv">2</span>
 
-<span class="kw">ggplot</span>(xgrid, <span class="kw">aes</span>(V1,V2)) +
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">col=</span>point_colours[knn1grid], <span class="dt">shape=</span><span class="dv">16</span>, <span class="dt">size=</span><span class="fl">0.3</span>) +
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>xtrain, <span class="kw">aes</span>(V1,V2), <span class="dt">col=</span>point_colours[ytrain<span class="dv">+1</span>],
-             <span class="dt">shape=</span>point_shapes[ytrain<span class="dv">+1</span>], <span class="dt">size=</span>point_size) +
-<span class="st">  </span><span class="kw">geom_contour</span>(<span class="dt">data=</span>xgrid, <span class="kw">aes</span>(<span class="dt">x=</span>V1, <span class="dt">y=</span>V2, <span class="dt">z=</span>V3), <span class="dt">breaks=</span><span class="fl">0.5</span>, <span class="dt">col=</span><span class="st">&quot;grey30&quot;</span>) +
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;train&quot;</span>) +
-<span class="st">  </span><span class="kw">theme_bw</span>() +
+<span class="kw">ggplot</span>(xgrid, <span class="kw">aes</span>(V1,V2)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">col=</span>point_colours[knn1grid], <span class="dt">shape=</span><span class="dv">16</span>, <span class="dt">size=</span><span class="fl">0.3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>xtrain, <span class="kw">aes</span>(V1,V2), <span class="dt">col=</span>point_colours[ytrain<span class="op">+</span><span class="dv">1</span>],
+             <span class="dt">shape=</span>point_shapes[ytrain<span class="op">+</span><span class="dv">1</span>], <span class="dt">size=</span>point_size) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_contour</span>(<span class="dt">data=</span>xgrid, <span class="kw">aes</span>(<span class="dt">x=</span>V1, <span class="dt">y=</span>V2, <span class="dt">z=</span>V3), <span class="dt">breaks=</span><span class="fl">0.5</span>, <span class="dt">col=</span><span class="st">&quot;grey30&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;train&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">25</span>, <span class="dt">face=</span><span class="st">&quot;bold&quot;</span>), <span class="dt">axis.text=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">15</span>),
         <span class="dt">axis.title=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">20</span>,<span class="dt">face=</span><span class="st">&quot;bold&quot;</span>))
 
-<span class="kw">ggplot</span>(xgrid, <span class="kw">aes</span>(V1,V2)) +
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">col=</span>point_colours[knn1grid], <span class="dt">shape=</span><span class="dv">16</span>, <span class="dt">size=</span><span class="fl">0.3</span>) +
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>xtest, <span class="kw">aes</span>(V1,V2), <span class="dt">col=</span>point_colours[ytest<span class="dv">+1</span>],
-             <span class="dt">shape=</span>point_shapes[ytrain<span class="dv">+1</span>], <span class="dt">size=</span>point_size) +
-<span class="st">  </span><span class="kw">geom_contour</span>(<span class="dt">data=</span>xgrid, <span class="kw">aes</span>(<span class="dt">x=</span>V1, <span class="dt">y=</span>V2, <span class="dt">z=</span>V3), <span class="dt">breaks=</span><span class="fl">0.5</span>, <span class="dt">col=</span><span class="st">&quot;grey30&quot;</span>) +
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;test&quot;</span>) +
-<span class="st">  </span><span class="kw">theme_bw</span>() +
+<span class="kw">ggplot</span>(xgrid, <span class="kw">aes</span>(V1,V2)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">col=</span>point_colours[knn1grid], <span class="dt">shape=</span><span class="dv">16</span>, <span class="dt">size=</span><span class="fl">0.3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>xtest, <span class="kw">aes</span>(V1,V2), <span class="dt">col=</span>point_colours[ytest<span class="op">+</span><span class="dv">1</span>],
+             <span class="dt">shape=</span>point_shapes[ytrain<span class="op">+</span><span class="dv">1</span>], <span class="dt">size=</span>point_size) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_contour</span>(<span class="dt">data=</span>xgrid, <span class="kw">aes</span>(<span class="dt">x=</span>V1, <span class="dt">y=</span>V2, <span class="dt">z=</span>V3), <span class="dt">breaks=</span><span class="fl">0.5</span>, <span class="dt">col=</span><span class="st">&quot;grey30&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;test&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">25</span>, <span class="dt">face=</span><span class="st">&quot;bold&quot;</span>), <span class="dt">axis.text=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">15</span>),
         <span class="dt">axis.title=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">20</span>,<span class="dt">face=</span><span class="st">&quot;bold&quot;</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:simDataBinClassDecisionBoundaryK1"></span>
@@ -528,32 +528,32 @@ Figure 7.3: Binary classification of the simulated training and test sets with <
 <li>The variance is error from sensitivity to small fluctuations in the training set. High variance can cause an algorithm to model the random noise in the training data, rather than the intended outputs (overfitting).</li>
 </ul>
 <p>To demonstrate this phenomenon, let us look at the performance of the <em>k</em>-nn classifier over a range of values of <em>k</em>. First we will define a function to create a sequence of log spaced values. This is the <strong>lseq</strong> function from the <a href="https://cran.r-project.org/package=emdbook">emdbook</a> package:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lseq &lt;-<span class="st"> </span>function(from, to, length.out) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lseq &lt;-<span class="st"> </span><span class="cf">function</span>(from, to, length.out) {
   <span class="kw">exp</span>(<span class="kw">seq</span>(<span class="kw">log</span>(from), <span class="kw">log</span>(to), <span class="dt">length.out =</span> length.out))
 }</code></pre></div>
 <p>Get log spaced sequence of length 20, round and then remove any duplicates resulting from rounding.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">round</span>(<span class="kw">lseq</span>(<span class="dv">1</span>,<span class="dv">400</span>,<span class="dv">20</span>)))
 <span class="kw">length</span>(s)</code></pre></div>
 <pre><code>## [1] 19</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_error &lt;-<span class="st"> </span><span class="kw">sapply</span>(s, function(i){
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_error &lt;-<span class="st"> </span><span class="kw">sapply</span>(s, <span class="cf">function</span>(i){
   yhat &lt;-<span class="st"> </span><span class="kw">knn</span>(xtrain, xtrain, ytrain, i)
-  <span class="kw">return</span>(<span class="dv">1</span>-<span class="kw">mean</span>(<span class="kw">as.numeric</span>(<span class="kw">as.vector</span>(yhat))==ytrain))
+  <span class="kw">return</span>(<span class="dv">1</span><span class="op">-</span><span class="kw">mean</span>(<span class="kw">as.numeric</span>(<span class="kw">as.vector</span>(yhat))<span class="op">==</span>ytrain))
 })
 
-test_error &lt;-<span class="st"> </span><span class="kw">sapply</span>(s, function(i){
+test_error &lt;-<span class="st"> </span><span class="kw">sapply</span>(s, <span class="cf">function</span>(i){
   yhat &lt;-<span class="st"> </span><span class="kw">knn</span>(xtrain, xtest, ytrain, i)
-  <span class="kw">return</span>(<span class="dv">1</span>-<span class="kw">mean</span>(<span class="kw">as.numeric</span>(<span class="kw">as.vector</span>(yhat))==ytest))
+  <span class="kw">return</span>(<span class="dv">1</span><span class="op">-</span><span class="kw">mean</span>(<span class="kw">as.numeric</span>(<span class="kw">as.vector</span>(yhat))<span class="op">==</span>ytest))
 })
 
 k &lt;-<span class="st"> </span><span class="kw">rep</span>(s, <span class="dv">2</span>)
 set &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;train&quot;</span>, <span class="kw">length</span>(s)), <span class="kw">rep</span>(<span class="st">&quot;test&quot;</span>, <span class="kw">length</span>(s)))
 error &lt;-<span class="st"> </span><span class="kw">c</span>(train_error, test_error)
 misclass_errors &lt;-<span class="st"> </span><span class="kw">data.frame</span>(k, set, error)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(misclass_errors, <span class="kw">aes</span>(<span class="dt">x=</span>k, <span class="dt">y=</span>error, <span class="dt">group=</span>set)) +<span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">colour=</span>set, <span class="dt">linetype=</span>set), <span class="dt">size=</span><span class="fl">1.5</span>) +
-<span class="st">  </span><span class="kw">scale_x_log10</span>() +
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Misclassification Errors&quot;</span>) +
-<span class="st">  </span><span class="kw">theme_bw</span>() +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(misclass_errors, <span class="kw">aes</span>(<span class="dt">x=</span>k, <span class="dt">y=</span>error, <span class="dt">group=</span>set)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">colour=</span>set, <span class="dt">linetype=</span>set), <span class="dt">size=</span><span class="fl">1.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Misclassification Errors&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.25</span>), <span class="dt">legend.title=</span><span class="kw">element_blank</span>(),
         <span class="dt">legend.text=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">12</span>), 
         <span class="dt">axis.title.x=</span><span class="kw">element_text</span>(<span class="dt">face=</span><span class="st">&quot;italic&quot;</span>, <span class="dt">size=</span><span class="dv">12</span>))</code></pre></div>
@@ -583,7 +583,7 @@ Figure 7.4: Misclassification errors as a function of neighbourhood size.
 <p>First we generate our list of seeds.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
 seeds &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="dv">101</span>)
-for(i in <span class="dv">1</span>:<span class="dv">100</span>) seeds[[i]] &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="dv">1000</span>, <span class="dv">19</span>)
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) seeds[[i]] &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="dv">1000</span>, <span class="dv">19</span>)
 seeds[[<span class="dv">101</span>]] &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="dv">1000</span>,<span class="dv">1</span>)</code></pre></div>
 <p>We can now use <strong>trainControl</strong> to create a list of computational options for resampling.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tc &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;repeatedcv&quot;</span>,
@@ -663,7 +663,7 @@ Figure 7.6: Cohen’s Kappa (repeated cross-validation) as a function of neighbo
 </div>
 <p>Let us now evaluate how our classifier performs on the test set.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(knnFit, xtest)
-<span class="kw">confusionMatrix</span>(test_pred, ytest)</code></pre></div>
+<span class="kw">confusionMatrix</span>(test_pred, <span class="kw">as.factor</span>(ytest))</code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -707,23 +707,23 @@ xgrid &lt;-<span class="st"> </span><span class="kw">cbind</span>(xgrid, V3)</co
 point_colours &lt;-<span class="st"> </span><span class="kw">brewer.pal</span>(<span class="dv">3</span>,<span class="st">&quot;Dark2&quot;</span>)
 point_size =<span class="st"> </span><span class="dv">2</span>
 
-<span class="kw">ggplot</span>(xgrid, <span class="kw">aes</span>(V1,V2)) +
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">col=</span>point_colours[knn1grid], <span class="dt">shape=</span><span class="dv">16</span>, <span class="dt">size=</span><span class="fl">0.3</span>) +
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>xtrain, <span class="kw">aes</span>(V1,V2), <span class="dt">col=</span>point_colours[ytrain<span class="dv">+1</span>],
-             <span class="dt">shape=</span>point_shapes[ytrain<span class="dv">+1</span>], <span class="dt">size=</span>point_size) +
-<span class="st">  </span><span class="kw">geom_contour</span>(<span class="dt">data=</span>xgrid, <span class="kw">aes</span>(<span class="dt">x=</span>V1, <span class="dt">y=</span>V2, <span class="dt">z=</span>V3), <span class="dt">breaks=</span><span class="fl">0.5</span>, <span class="dt">col=</span><span class="st">&quot;grey30&quot;</span>) +
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;train&quot;</span>) +
-<span class="st">  </span><span class="kw">theme_bw</span>() +
+<span class="kw">ggplot</span>(xgrid, <span class="kw">aes</span>(V1,V2)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">col=</span>point_colours[knn1grid], <span class="dt">shape=</span><span class="dv">16</span>, <span class="dt">size=</span><span class="fl">0.3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>xtrain, <span class="kw">aes</span>(V1,V2), <span class="dt">col=</span>point_colours[ytrain<span class="op">+</span><span class="dv">1</span>],
+             <span class="dt">shape=</span>point_shapes[ytrain<span class="op">+</span><span class="dv">1</span>], <span class="dt">size=</span>point_size) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_contour</span>(<span class="dt">data=</span>xgrid, <span class="kw">aes</span>(<span class="dt">x=</span>V1, <span class="dt">y=</span>V2, <span class="dt">z=</span>V3), <span class="dt">breaks=</span><span class="fl">0.5</span>, <span class="dt">col=</span><span class="st">&quot;grey30&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;train&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">25</span>, <span class="dt">face=</span><span class="st">&quot;bold&quot;</span>), <span class="dt">axis.text=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">15</span>),
         <span class="dt">axis.title=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">20</span>,<span class="dt">face=</span><span class="st">&quot;bold&quot;</span>))
 
-<span class="kw">ggplot</span>(xgrid, <span class="kw">aes</span>(V1,V2)) +
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">col=</span>point_colours[knn1grid], <span class="dt">shape=</span><span class="dv">16</span>, <span class="dt">size=</span><span class="fl">0.3</span>) +
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>xtest, <span class="kw">aes</span>(V1,V2), <span class="dt">col=</span>point_colours[ytest<span class="dv">+1</span>],
-             <span class="dt">shape=</span>point_shapes[ytrain<span class="dv">+1</span>], <span class="dt">size=</span>point_size) +
-<span class="st">  </span><span class="kw">geom_contour</span>(<span class="dt">data=</span>xgrid, <span class="kw">aes</span>(<span class="dt">x=</span>V1, <span class="dt">y=</span>V2, <span class="dt">z=</span>V3), <span class="dt">breaks=</span><span class="fl">0.5</span>, <span class="dt">col=</span><span class="st">&quot;grey30&quot;</span>) +
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;test&quot;</span>) +
-<span class="st">  </span><span class="kw">theme_bw</span>() +
+<span class="kw">ggplot</span>(xgrid, <span class="kw">aes</span>(V1,V2)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">col=</span>point_colours[knn1grid], <span class="dt">shape=</span><span class="dv">16</span>, <span class="dt">size=</span><span class="fl">0.3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>xtest, <span class="kw">aes</span>(V1,V2), <span class="dt">col=</span>point_colours[ytest<span class="op">+</span><span class="dv">1</span>],
+             <span class="dt">shape=</span>point_shapes[ytrain<span class="op">+</span><span class="dv">1</span>], <span class="dt">size=</span>point_size) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_contour</span>(<span class="dt">data=</span>xgrid, <span class="kw">aes</span>(<span class="dt">x=</span>V1, <span class="dt">y=</span>V2, <span class="dt">z=</span>V3), <span class="dt">breaks=</span><span class="fl">0.5</span>, <span class="dt">col=</span><span class="st">&quot;grey30&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;test&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">25</span>, <span class="dt">face=</span><span class="st">&quot;bold&quot;</span>), <span class="dt">axis.text=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">15</span>),
         <span class="dt">axis.title=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">20</span>,<span class="dt">face=</span><span class="st">&quot;bold&quot;</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:simDataBinClassDecisionBoundaryK83"></span>
@@ -813,8 +813,8 @@ Figure 7.8: Image segmentation in high content screening. Images <strong>b</stro
 ##  $ YCentroid              : int  14 347 252 295 159 127 138 181 467 468 ...</code></pre>
 <p>The first column of <strong>segmentationData</strong> is a unique identifier for each cell and the second column is a factor indicating how the observations were characterized into training and test sets in the original study; these two variables are irrelevant for the purposes of this demonstration and so can be discarded.</p>
 <p>The third column <em>Case</em> contains the class labels: <em>PS</em> (poorly-segmented) and <em>WS</em> (well-segmented). Columns 4-61 are the 58 morphological measurements available to be used as predictors. Let’s put the class labels in a vector and the predictors in their own data.frame.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">segClass &lt;-<span class="st"> </span>segmentationData$Class
-segData &lt;-<span class="st"> </span>segmentationData[,<span class="dv">4</span>:<span class="dv">61</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">segClass &lt;-<span class="st"> </span>segmentationData<span class="op">$</span>Class
+segData &lt;-<span class="st"> </span>segmentationData[,<span class="dv">4</span><span class="op">:</span><span class="dv">61</span>]</code></pre></div>
 </div>
 <div id="data-splitting" class="section level3">
 <h3><span class="header-section-number">7.3.2</span> Data splitting</h3>
@@ -822,9 +822,9 @@ segData &lt;-<span class="st"> </span>segmentationData[,<span class="dv">4</span
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
 trainIndex &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y=</span>segClass, <span class="dt">times=</span><span class="dv">1</span>, <span class="dt">p=</span><span class="fl">0.5</span>, <span class="dt">list=</span>F)
 segDataTrain &lt;-<span class="st"> </span>segData[trainIndex,]
-segDataTest &lt;-<span class="st"> </span>segData[-trainIndex,]
+segDataTest &lt;-<span class="st"> </span>segData[<span class="op">-</span>trainIndex,]
 segClassTrain &lt;-<span class="st"> </span>segClass[trainIndex]
-segClassTest &lt;-<span class="st"> </span>segClass[-trainIndex]</code></pre></div>
+segClassTest &lt;-<span class="st"> </span>segClass[<span class="op">-</span>trainIndex]</code></pre></div>
 <p>This results in balanced class distributions within the splits:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(segClassTrain)</code></pre></div>
 <pre><code>##  PS  WS 
@@ -910,10 +910,10 @@ nzv</code></pre></div>
 <div id="scaling" class="section level4">
 <h4><span class="header-section-number">7.3.3.2</span> Scaling</h4>
 <p>The variables in this data set are on different scales, for example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(segDataTrain$IntenCoocASMCh4)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(segDataTrain<span class="op">$</span>IntenCoocASMCh4)</code></pre></div>
 <pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
 ## 0.004874 0.017253 0.049458 0.101586 0.121245 0.867845</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(segDataTrain$TotalIntenCh2)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(segDataTrain<span class="op">$</span>TotalIntenCh2)</code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##       1   15846   49648   53143   72304  362465</code></pre>
 <p>In this situation it is important to centre and scale each predictor. A predictor variable is centered by subtracting the mean of the predictor from each value. To scale a predictor variable, each value is divided by its standard deviation. After centring and scaling the predictor variable has a mean of 0 and a standard deviation of 1.</p>
@@ -921,8 +921,8 @@ nzv</code></pre></div>
 <div id="skewness" class="section level4">
 <h4><span class="header-section-number">7.3.3.3</span> Skewness</h4>
 <p>Many of the predictors in the segmentation data set exhibit skewness, <em>i.e.</em> the distribution of their values is asymmetric, for example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(segDataTrain$IntenCoocASMCh3, <span class="dt">binwidth=</span><span class="fl">0.1</span>) +<span class="st"> </span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;IntenCoocASMCh3&quot;</span>) +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(segDataTrain<span class="op">$</span>IntenCoocASMCh3, <span class="dt">binwidth=</span><span class="fl">0.1</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;IntenCoocASMCh3&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:segDataSkewness"></span>
 <img src="07-nearest-neighbours_files/figure-html/segDataSkewness-1.png" alt="Example of a predictor from the segmentation data set showing skewness." width="75%" />
@@ -976,7 +976,7 @@ seeds[[101]] <- sample.int(1000,1)
 <p>Generate a list of seeds.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
 seeds &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="dv">26</span>)
-for(i in <span class="dv">1</span>:<span class="dv">25</span>) seeds[[i]] &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="dv">1000</span>, <span class="dv">50</span>)
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">25</span>) seeds[[i]] &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="dv">1000</span>, <span class="dv">50</span>)
 seeds[[<span class="dv">26</span>]] &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="dv">1000</span>,<span class="dv">1</span>)</code></pre></div>
 <p>Create a list of computational options for resampling. In the interest of speed for this demonstration, we will perform 5-fold cross-validation a total of 5 times. In practice we would use a larger number of folds and repetitions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_ctrl &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;repeatedcv&quot;</span>,
@@ -1115,15 +1115,15 @@ Figure 7.11: Accuracy (repeated cross-validation) as a function of neighbourhood
                    )</code></pre></div>
 <p>Let’s define a filter using Caret’s Selection By Filter (SBF) function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mySBF &lt;-<span class="st"> </span>caretSBF
-mySBF$summary &lt;-<span class="st"> </span>twoClassSummary</code></pre></div>
+mySBF<span class="op">$</span>summary &lt;-<span class="st"> </span>twoClassSummary</code></pre></div>
 <p>We will use a simple t-test to eliminate the predictors that differ the least between classes. Since we are performing many hypothesis tests we will use Holm’s method to control the family wise error rate.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mySBF$score &lt;-<span class="st"> </span>function(x, y) {
-  out &lt;-<span class="st"> </span><span class="kw">t.test</span>(x ~<span class="st"> </span>y)$p.value 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mySBF<span class="op">$</span>score &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
+  out &lt;-<span class="st"> </span><span class="kw">t.test</span>(x <span class="op">~</span><span class="st"> </span>y)<span class="op">$</span>p.value 
   out &lt;-<span class="st"> </span><span class="kw">p.adjust</span>(out, <span class="dt">method=</span><span class="st">&quot;holm&quot;</span>)
   out
 }</code></pre></div>
 <p>Now to set a p-value threshold for our t-test filter.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mySBF$filter &lt;-<span class="st"> </span>function(score, x, y) { score &lt;=<span class="st"> </span><span class="fl">0.01</span> }</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mySBF<span class="op">$</span>filter &lt;-<span class="st"> </span><span class="cf">function</span>(score, x, y) { score <span class="op">&lt;=</span><span class="st"> </span><span class="fl">0.01</span> }</code></pre></div>
 <p>Let’s run the cross-validation. The cross-validation will run in two nested loops. Feature selection will occur in the outer loop. Features selected at each iteration of the outer loop will be passed to the inner loop, where the optimum value of k will be found for that set of features.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sbf_ctrl &lt;-<span class="st"> </span><span class="kw">sbfControl</span>(<span class="dt">functions =</span> mySBF,
                                 <span class="dt">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,
@@ -1146,8 +1146,8 @@ knn_sbf</code></pre></div>
 ## 
 ## Resampling performance:
 ## 
-##     ROC   Sens  Spec   ROCSD SensSD  SpecSD
-##  0.8829 0.8323 0.775 0.02298 0.0235 0.06968
+##     ROC   Sens   Spec  ROCSD  SensSD  SpecSD
+##  0.8847 0.8295 0.7672 0.0217 0.02509 0.07062
 ## 
 ## Using the training set, 16 variables were selected:
 ##    ConvexHullPerimRatioCh1, EntropyIntenCh1, FiberWidthCh1, IntenCoocASMCh4, IntenCoocContrastCh3...
@@ -1167,16 +1167,16 @@ knn_sbf</code></pre></div>
 ## [13] &quot;TotalIntenCh2&quot;           &quot;VarIntenCh1&quot;            
 ## [15] &quot;VarIntenCh4&quot;             &quot;WidthCh1&quot;</code></pre>
 <p>Here are some performance metrics for the final model:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knn_sbf$results</code></pre></div>
-<pre><code>##         ROC      Sens  Spec      ROCSD     SensSD     SpecSD
-## 1 0.8829444 0.8323077 0.775 0.02297999 0.02350039 0.06967554</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knn_sbf<span class="op">$</span>results</code></pre></div>
+<pre><code>##         ROC      Sens      Spec      ROCSD     SensSD     SpecSD
+## 1 0.8846902 0.8295385 0.7672222 0.02170272 0.02509155 0.07062424</code></pre>
 <p>To retrieve the optimum value of k found during training run:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knn_sbf$fit$finalModel$k</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knn_sbf<span class="op">$</span>fit<span class="op">$</span>finalModel<span class="op">$</span>k</code></pre></div>
 <pre><code>## [1] 25</code></pre>
 <p>Let’s predict our test set using our final model.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">segDataTest &lt;-<span class="st"> </span><span class="kw">predict</span>(transformations, segDataTest)
 test_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(knn_sbf, segDataTest)
-<span class="kw">confusionMatrix</span>(test_pred$pred, segClassTest)</code></pre></div>
+<span class="kw">confusionMatrix</span>(test_pred<span class="op">$</span>pred, segClassTest)</code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -1326,8 +1326,8 @@ test_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(knn_sbf,
 trainIndex &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y=</span>logBBB, <span class="dt">times=</span><span class="dv">1</span>, <span class="dt">p=</span><span class="fl">0.8</span>, <span class="dt">list=</span>F)
 descrTrain &lt;-<span class="st"> </span>bbbDescr[trainIndex,]
 concRatioTrain &lt;-<span class="st"> </span>logBBB[trainIndex]
-descrTest &lt;-<span class="st"> </span>bbbDescr[-trainIndex,]
-concRatioTest &lt;-<span class="st"> </span>logBBB[-trainIndex]</code></pre></div>
+descrTest &lt;-<span class="st"> </span>bbbDescr[<span class="op">-</span>trainIndex,]
+concRatioTest &lt;-<span class="st"> </span>logBBB[<span class="op">-</span>trainIndex]</code></pre></div>
 </div>
 <div id="data-pre-processing" class="section level3">
 <h3><span class="header-section-number">7.4.2</span> Data pre-processing</h3>
@@ -1362,13 +1362,13 @@ Figure 7.12: Correlogram of the chemical compound descriptors.
 <p>The optimum value of <em>k</em> can be found by cross-validation, following similar methodology to that used to find the best <em>k</em> for classification. We’ll start by generating seeds to make this example reproducible.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
 seeds &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="dv">26</span>)
-for(i in <span class="dv">1</span>:<span class="dv">25</span>) seeds[[i]] &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="dv">1000</span>, <span class="dv">10</span>)
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">25</span>) seeds[[i]] &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="dv">1000</span>, <span class="dv">10</span>)
 seeds[[<span class="dv">26</span>]] &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="dv">1000</span>,<span class="dv">1</span>)</code></pre></div>
 <p>Ten values of <em>k</em> will be evaluated using 5 repeats of 5-fold cross-validation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knnTune &lt;-<span class="st"> </span><span class="kw">train</span>(descrTrain,
                  concRatioTrain,
                  <span class="dt">method=</span><span class="st">&quot;knn&quot;</span>,
-                 <span class="dt">tuneGrid =</span> <span class="kw">data.frame</span>(<span class="dt">.k=</span><span class="dv">1</span>:<span class="dv">10</span>),
+                 <span class="dt">tuneGrid =</span> <span class="kw">data.frame</span>(<span class="dt">.k=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>),
                  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;repeatedcv&quot;</span>,
                                           <span class="dt">number =</span> <span class="dv">5</span>,
                                           <span class="dt">repeats =</span> <span class="dv">5</span>,
@@ -1417,9 +1417,9 @@ Figure 7.13: Root Mean Squared Error as a function of neighbourhood size.
 <p>Use model to predict outcomes (concentration ratios) of the test set.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(knnTune, descrTest)</code></pre></div>
 <p>Prediction performance can be visualized in a scatterplot.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(concRatioTest, test_pred) +<span class="st"> </span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;observed&quot;</span>) +
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;predicted&quot;</span>) +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(concRatioTest, test_pred) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;observed&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;predicted&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:obsPredConcRatios"></span>
 <img src="07-nearest-neighbours_files/figure-html/obsPredConcRatios-1.png" alt="Concordance between observed concentration ratios and those predicted by _k_-nn regression." width="80%" />
@@ -1497,10 +1497,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -1524,9 +1525,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

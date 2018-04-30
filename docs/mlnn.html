@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>An Introduction to Machine Learning</title>
   <meta name="description" content="Course materials for An Introduction to Machine Learning">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="An Introduction to Machine Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-01-16">
+<meta name="date" content="2018-04-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -327,22 +327,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">Sequential</span>()</code></pre></div>
 <p>This tells keras that we’re using the Sequential API i.e., with the first layer connected to the second, the second to the thrid and so forth, which duistuinguishes it from more complex networks possible using the Model API. Once we’ve specified a sequential model, we have to specifiy the layers of the neural network.</p>
 <p>A standard layer of neurons can be specified using the {Dense} command; the first layer of our network must also include the dimension of the input. So, for example, if our input data was a vector of dimension <span class="math inline">\(1 \times 40\)</span>, we could add an input layer via:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">40</span>)))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">40</span>)))</code></pre></div>
 <p>We also need to specfy the activation function to the next level. This can be done via {Activation()}, so our snippet of code using a Rectified Linear Unit (relu) activation would look something like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">40</span>)))
-mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">40</span>)))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))</code></pre></div>
 <p>We could add another layer of 120 neurons in (adding activation functions):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">40</span>)))
-mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
-mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">120</span>))
-mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">40</span>)))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">120</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))</code></pre></div>
 <p>Finally, we should add the output neurons. If we had, for example, a binary classification algorithm, we could have two nodes, with a sigmoid activation function. Our final model would look like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">40</span>)))
-mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
-mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">120</span>))
-mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
-mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">2</span>))
-mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;sigmoid&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">40</span>)))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">120</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">2</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;sigmoid&quot;</span>))</code></pre></div>
 <p>That’s it. Simple!</p>
 </div>
 <div id="reading-in-images" class="section level3">
@@ -356,13 +356,13 @@ mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="
 <p>We next preallocate an empty array to store these training images for the <em>Rick</em> and <em>not Rick</em> images (an array of dimension <span class="math inline">\(2000 \times 90 \times 160 \times 3\)</span>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trainX  &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>, <span class="dt">dim=</span><span class="kw">c</span>(<span class="dv">2000</span>,<span class="dv">90</span>,<span class="dv">160</span>,<span class="dv">3</span>))</code></pre></div>
 <p>We can load images using the {readJPEG} function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">for (i in <span class="dv">1</span>:<span class="dv">1000</span>){
-  trainX[i,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">readJPEG</span>(<span class="kw">paste</span>(<span class="st">&quot;data/RickandMorty/data/train/Rick/&quot;</span>, files[i], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>){
+  trainX[i,<span class="dv">1</span><span class="op">:</span><span class="dv">90</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">160</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">readJPEG</span>(<span class="kw">paste</span>(<span class="st">&quot;data/RickandMorty/data/train/Rick/&quot;</span>, files[i], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))
 }</code></pre></div>
 <p>Similarly, we can load the <em>not Rick</em> images and store in the same array:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">files &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path =</span> <span class="st">&quot;data/RickandMorty/data/train/Morty/&quot;</span>,<span class="dt">pattern =</span> <span class="st">&quot;jpg&quot;</span>)
-for (i in <span class="dv">1001</span>:<span class="dv">2000</span>){
-  trainX[i,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">readJPEG</span>(<span class="kw">paste</span>(<span class="st">&quot;data/RickandMorty/data/train/Morty/&quot;</span>, files[i<span class="dv">-1000</span>], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1001</span><span class="op">:</span><span class="dv">2000</span>){
+  trainX[i,<span class="dv">1</span><span class="op">:</span><span class="dv">90</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">160</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">readJPEG</span>(<span class="kw">paste</span>(<span class="st">&quot;data/RickandMorty/data/train/Morty/&quot;</span>, files[i<span class="op">-</span><span class="dv">1000</span>], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))
 }</code></pre></div>
 <p>Next we can construct a vector of length <span class="math inline">\(2000\)</span> containing the classification for each of these <span class="math inline">\(2000\)</span> images e.g., <span class="math inline">\(0\)</span> if the image is a <em>Rick</em> and <span class="math inline">\(1\)</span> if it is <em>not Rick</em>. This is simple enough using the function {rbind}, as we know the first <span class="math inline">\(1000\)</span> images were <em>Rick</em> and the second <span class="math inline">\(1000\)</span> images <em>not Rick</em>. Since we are dealing with a classification algorithm, we next convert the data to binary categorical output (that is, a <em>Rick</em> is now represented as <span class="math inline">\([1, 0]\)</span> and a <em>not Rick</em> is a <span class="math inline">\([0, 1]\)</span>), which we can do using the {to_categorical} conversion function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trainY &lt;-<span class="st"> </span><span class="kw">to_categorical</span>(<span class="kw">rbind</span>(<span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dv">1000</span>, <span class="dv">1</span>), <span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dv">1000</span>, <span class="dv">1</span>)), <span class="dv">2</span>)</code></pre></div>
@@ -372,35 +372,35 @@ for (i in <span class="dv">1001</span>:<span class="dv">2000</span>){
 
 validateX  &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>, <span class="dt">dim=</span><span class="kw">c</span>(<span class="dv">400</span>,<span class="dv">90</span>,<span class="dv">160</span>,<span class="dv">3</span>))
 
-for (i in <span class="dv">1</span>:<span class="dv">200</span>){
-  validateX[i,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">readJPEG</span>(<span class="kw">paste</span>(<span class="st">&quot;data/RickandMorty/data/validation/Rick/&quot;</span>, files[i], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">200</span>){
+  validateX[i,<span class="dv">1</span><span class="op">:</span><span class="dv">90</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">160</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">readJPEG</span>(<span class="kw">paste</span>(<span class="st">&quot;data/RickandMorty/data/validation/Rick/&quot;</span>, files[i], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))
 }
 
 files &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path =</span> <span class="st">&quot;data/RickandMorty/data/validation/Morty/&quot;</span>,<span class="dt">pattern =</span> <span class="st">&quot;jpg&quot;</span>)
-for (i in <span class="dv">201</span>:<span class="dv">400</span>){
-  validateX[i,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">readJPEG</span>(<span class="kw">paste</span>(<span class="st">&quot;data/RickandMorty/data/validation/Morty/&quot;</span>, files[i<span class="dv">-200</span>], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">201</span><span class="op">:</span><span class="dv">400</span>){
+  validateX[i,<span class="dv">1</span><span class="op">:</span><span class="dv">90</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">160</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">readJPEG</span>(<span class="kw">paste</span>(<span class="st">&quot;data/RickandMorty/data/validation/Morty/&quot;</span>, files[i<span class="op">-</span><span class="dv">200</span>], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))
 }
 validateY &lt;-<span class="st"> </span><span class="kw">to_categorical</span>(<span class="kw">rbind</span>(<span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dv">200</span>, <span class="dv">1</span>),<span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="dv">1</span>)),<span class="dv">2</span>)</code></pre></div>
 </div>
 <div id="rick-and-morty-classifier-using-deep-learning" class="section level3">
 <h3><span class="header-section-number">11.1.3</span> Rick and Morty classifier using Deep Learning</h3>
 <p>Let us return to our example of image classification. Our data is slightly different to the usual inputs we’ve been dealing with: that is, we’re not dealing with an input vector, but instead have an image. In this case each image is a <span class="math inline">\(90 \times 160 \time 3\)</span> array, so for our first layer we have to flatten this down. This can be done using {Flatten()}:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod$<span class="kw">add</span>(<span class="kw">Flatten</span>(<span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">90</span>, <span class="dv">160</span>, <span class="dv">3</span>)))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Flatten</span>(<span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">90</span>, <span class="dv">160</span>, <span class="dv">3</span>)))</code></pre></div>
 <p>This should turn our <span class="math inline">\(90 \times \160 \times 3\)</span> input into a <span class="math inline">\(1 \times 43200\)</span> node input. We now add an intermediate layer containing <span class="math inline">\(100\)</span> neurons, connected to the input layer with rectified linear units ({relu}):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
-mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>))</code></pre></div>
 <p>Finally we connect this layer over the final output layer (two neurons) with sigmoid activation: <a href="https://keras.io/activations/">activation</a></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
-mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">2</span>))
-mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;sigmoid&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">2</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;sigmoid&quot;</span>))</code></pre></div>
 <p>The complete model should look something like:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">Sequential</span>()
-mod$<span class="kw">add</span>(<span class="kw">Flatten</span>(<span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">90</span>, <span class="dv">160</span>, <span class="dv">3</span>)))
-mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
-mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>))
-mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
-mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">2</span>))
-mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;sigmoid&quot;</span>))</code></pre></div>
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Flatten</span>(<span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">90</span>, <span class="dv">160</span>, <span class="dv">3</span>)))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">2</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;sigmoid&quot;</span>))</code></pre></div>
 <p>We can visualise this model using the {plot_model} function (Figure <a href="mlnn.html#fig:examplenet">11.1</a>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot_model</span>(mod,<span class="st">&#39;images/DNN1.png&#39;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:examplenet"></span>
@@ -424,14 +424,14 @@ Figure 11.1: Example of a multilayer convolutional neural network
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">keras_fit</span>(mod, trainX, trainY, <span class="dt">validation_data =</span> <span class="kw">list</span>(validateX, validateY), <span class="dt">batch_size =</span> <span class="dv">32</span>, <span class="dt">epochs =</span> <span class="dv">25</span>, <span class="dt">verbose =</span> <span class="dv">1</span>)</code></pre></div>
 <p>For this model we achieved an accuracy of <span class="math inline">\(0.5913\)</span> on the validation dataset at epoch <span class="math inline">\(23\)</span> (which had a corresponding accuracy of <span class="math inline">\(0.5938\)</span> on the training set). Not great is an understatement. In fact it’s barely better than random (which would be <span class="math inline">\(0.5\)</span>, with <span class="math inline">\(1\)</span> being perfect)! Let’s try adding in another layer to the network. In this case we add in a layer containing <span class="math inline">\(70\)</span> neurons, connected with {relu} activations:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">Sequential</span>()
-mod$<span class="kw">add</span>(<span class="kw">Flatten</span>(<span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">90</span>, <span class="dv">160</span>, <span class="dv">3</span>)))
-mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
-mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>))
-mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
-mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">70</span>))
-mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
-mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">2</span>))
-mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;sigmoid&quot;</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Flatten</span>(<span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">90</span>, <span class="dv">160</span>, <span class="dv">3</span>)))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">70</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">2</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;sigmoid&quot;</span>))
 <span class="kw">keras_compile</span>(mod,  <span class="dt">loss =</span> <span class="st">&#39;binary_crossentropy&#39;</span>, <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">&#39;accuracy&#39;</span>), <span class="dt">optimizer =</span> <span class="kw">RMSprop</span>())
 <span class="kw">keras_fit</span>(mod, trainX, trainY, <span class="dt">validation_data =</span> <span class="kw">list</span>(validateX, validateY), <span class="dt">batch_size =</span> <span class="dv">32</span>, <span class="dt">epochs =</span> <span class="dv">25</span>, <span class="dt">verbose =</span> <span class="dv">1</span>)</code></pre></div>
 <p>We can again visualise the model:</p>
@@ -456,21 +456,21 @@ Figure 11.3: Example of a multilayer convolutional neural network
 </div>
 <p>In kerasR we can add a convolutional layer using {Conv2D}. A multilayer convolutional neural network might look something like:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">Sequential</span>()
-mod$<span class="kw">add</span>(<span class="kw">Conv2D</span>(<span class="dt">filters =</span> <span class="dv">20</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>),<span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">90</span>, <span class="dv">160</span>, <span class="dv">3</span>)))
-mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
-mod$<span class="kw">add</span>(<span class="kw">MaxPooling2D</span>(<span class="dt">pool_size=</span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>)))
-mod$<span class="kw">add</span>(<span class="kw">Conv2D</span>(<span class="dt">filters =</span> <span class="dv">20</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>)))
-mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
-mod$<span class="kw">add</span>(<span class="kw">MaxPooling2D</span>(<span class="dt">pool_size=</span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>)))
-mod$<span class="kw">add</span>(<span class="kw">Conv2D</span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>)))
-mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
-mod$<span class="kw">add</span>(<span class="kw">MaxPooling2D</span>(<span class="dt">pool_size=</span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>)))
-mod$<span class="kw">add</span>(<span class="kw">Flatten</span>())
-mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>))
-mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
-mod$<span class="kw">add</span>(<span class="kw">Dropout</span>(<span class="fl">0.6</span>))
-mod$<span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">2</span>))
-mod$<span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;sigmoid&quot;</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Conv2D</span>(<span class="dt">filters =</span> <span class="dv">20</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>),<span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">90</span>, <span class="dv">160</span>, <span class="dv">3</span>)))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">MaxPooling2D</span>(<span class="dt">pool_size=</span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>)))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Conv2D</span>(<span class="dt">filters =</span> <span class="dv">20</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>)))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">MaxPooling2D</span>(<span class="dt">pool_size=</span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>)))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Conv2D</span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>)))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">MaxPooling2D</span>(<span class="dt">pool_size=</span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>)))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Flatten</span>())
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">100</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;relu&quot;</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Dropout</span>(<span class="fl">0.6</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Dense</span>(<span class="dv">2</span>))
+mod<span class="op">$</span><span class="kw">add</span>(<span class="kw">Activation</span>(<span class="st">&quot;sigmoid&quot;</span>))
 
 <span class="kw">keras_compile</span>(mod,  <span class="dt">loss =</span> <span class="st">&#39;binary_crossentropy&#39;</span>, <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">&#39;accuracy&#39;</span>), <span class="dt">optimizer =</span> <span class="kw">RMSprop</span>())
 <span class="kw">keras_fit</span>(mod, trainX, trainY, <span class="dt">validation_data =</span> <span class="kw">list</span>(validateX, validateY), <span class="dt">batch_size =</span> <span class="dv">32</span>, <span class="dt">epochs =</span> <span class="dv">25</span>, <span class="dt">verbose =</span> <span class="dv">1</span>)</code></pre></div>
@@ -485,47 +485,47 @@ Figure 11.4: Example of a multilayer convolutional neural network
 <p>Okay, so now we have achieved a better accuracy: we have an accuracy of <span class="math inline">\(0.8462\)</span> on the validation dataset at epoch <span class="math inline">\(23\)</span>, with a training accuracy of <span class="math inline">\(0.9688\)</span>. Whilst this is still not great, it’s accurate enough to begin useuflly making predictions and visualising the results. We have a trained model for classification of Rick, we can use it to make predictions for images not present in either the training or validation datasets. First load in the new set of images, which can be found in the {predictions} subfolder:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">files &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path =</span> <span class="st">&quot;data/RickandMorty/data/predictions/&quot;</span>,<span class="dt">pattern =</span> <span class="st">&quot;jpg&quot;</span>)
 predictX  &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>,<span class="dt">dim=</span><span class="kw">c</span>(<span class="kw">length</span>(files),<span class="dv">90</span>,<span class="dv">160</span>,<span class="dv">3</span>))
-for (i in <span class="dv">1</span>:<span class="kw">length</span>(files)){
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(files)){
   x &lt;-<span class="st"> </span><span class="kw">readJPEG</span>(<span class="kw">paste</span>(<span class="st">&quot;data/RickandMorty/data/predictions/&quot;</span>, files[i],<span class="dt">sep=</span><span class="st">&quot;&quot;</span>))
-  predictX[i,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>] &lt;-<span class="st"> </span>x[<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>]
+  predictX[i,<span class="dv">1</span><span class="op">:</span><span class="dv">90</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">160</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] &lt;-<span class="st"> </span>x[<span class="dv">1</span><span class="op">:</span><span class="dv">90</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">160</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]
 }</code></pre></div>
 <p>A hard classification can be assigned using the {keras_predict_classes} function, whilst the probability of assignment to either class can be evaluated using {keras_predict_proba} (this can be useful for images that might be ambiguous).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">probY &lt;-<span class="st"> </span><span class="kw">keras_predict_proba</span>(mod, predictX)
 predictY &lt;-<span class="st"> </span><span class="kw">keras_predict_classes</span>(mod, predictX)</code></pre></div>
 <p>We can plot an example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">choice =<span class="st"> </span><span class="dv">13</span>
-if (predictY[choice]==<span class="dv">0</span>) {
-  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
+<span class="cf">if</span> (predictY[choice]<span class="op">==</span><span class="dv">0</span>) {
+  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span><span class="op">:</span><span class="dv">90</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">160</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
   <span class="kw">grid.text</span>(<span class="dt">label=</span><span class="st">&#39;Rick&#39;</span>,<span class="dt">x =</span> <span class="fl">0.4</span>, <span class="dt">y =</span> <span class="fl">0.77</span>,<span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;top&quot;</span>), <span class="dt">gp=</span><span class="kw">gpar</span>(<span class="dt">fontsize=</span><span class="dv">15</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>))
-} else {
-  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
+} <span class="cf">else</span> {
+  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span><span class="op">:</span><span class="dv">90</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">160</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
   <span class="kw">grid.text</span>(<span class="dt">label=</span><span class="st">&#39;Not Rick&#39;</span>,<span class="dt">x =</span> <span class="fl">0.4</span>, <span class="dt">y =</span> <span class="fl">0.77</span>,<span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;top&quot;</span>), <span class="dt">gp=</span><span class="kw">gpar</span>(<span class="dt">fontsize=</span><span class="dv">15</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>))
 }</code></pre></div>
 <p><img src="11-deep-learning_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">choice =<span class="st"> </span><span class="dv">1</span>
-if (predictY[choice]==<span class="dv">0</span>) {
-  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
+<span class="cf">if</span> (predictY[choice]<span class="op">==</span><span class="dv">0</span>) {
+  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span><span class="op">:</span><span class="dv">90</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">160</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
   <span class="kw">grid.text</span>(<span class="dt">label=</span><span class="st">&#39;Rick&#39;</span>,<span class="dt">x =</span> <span class="fl">0.4</span>, <span class="dt">y =</span> <span class="fl">0.77</span>,<span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;top&quot;</span>), <span class="dt">gp=</span><span class="kw">gpar</span>(<span class="dt">fontsize=</span><span class="dv">15</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>))
-} else {
-  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
+} <span class="cf">else</span> {
+  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span><span class="op">:</span><span class="dv">90</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">160</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
   <span class="kw">grid.text</span>(<span class="dt">label=</span><span class="st">&#39;Not Rick&#39;</span>,<span class="dt">x =</span> <span class="fl">0.4</span>, <span class="dt">y =</span> <span class="fl">0.77</span>,<span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;top&quot;</span>), <span class="dt">gp=</span><span class="kw">gpar</span>(<span class="dt">fontsize=</span><span class="dv">15</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>))
 }</code></pre></div>
 <p><img src="11-deep-learning_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">choice =<span class="st"> </span><span class="dv">6</span>
-if (predictY[choice]==<span class="dv">0</span>) {
-  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
+<span class="cf">if</span> (predictY[choice]<span class="op">==</span><span class="dv">0</span>) {
+  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span><span class="op">:</span><span class="dv">90</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">160</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
   <span class="kw">grid.text</span>(<span class="dt">label=</span><span class="st">&#39;Rick&#39;</span>,<span class="dt">x =</span> <span class="fl">0.4</span>, <span class="dt">y =</span> <span class="fl">0.77</span>,<span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;top&quot;</span>), <span class="dt">gp=</span><span class="kw">gpar</span>(<span class="dt">fontsize=</span><span class="dv">15</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>))
-} else {
-  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
+} <span class="cf">else</span> {
+  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span><span class="op">:</span><span class="dv">90</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">160</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
   <span class="kw">grid.text</span>(<span class="dt">label=</span><span class="st">&#39;Not Rick&#39;</span>,<span class="dt">x =</span> <span class="fl">0.4</span>, <span class="dt">y =</span> <span class="fl">0.77</span>,<span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;top&quot;</span>), <span class="dt">gp=</span><span class="kw">gpar</span>(<span class="dt">fontsize=</span><span class="dv">15</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>))
 }</code></pre></div>
 <p><img src="11-deep-learning_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">choice =<span class="st"> </span><span class="dv">16</span>
-if (predictY[choice]==<span class="dv">0</span>) {
-  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
+<span class="cf">if</span> (predictY[choice]<span class="op">==</span><span class="dv">0</span>) {
+  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span><span class="op">:</span><span class="dv">90</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">160</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
   <span class="kw">grid.text</span>(<span class="dt">label=</span><span class="st">&#39;Rick&#39;</span>,<span class="dt">x =</span> <span class="fl">0.4</span>, <span class="dt">y =</span> <span class="fl">0.77</span>,<span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;top&quot;</span>), <span class="dt">gp=</span><span class="kw">gpar</span>(<span class="dt">fontsize=</span><span class="dv">15</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>))
-} else {
-  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span>:<span class="dv">90</span>,<span class="dv">1</span>:<span class="dv">160</span>,<span class="dv">1</span>:<span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
+} <span class="cf">else</span> {
+  <span class="kw">grid.raster</span>(predictX[choice,<span class="dv">1</span><span class="op">:</span><span class="dv">90</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">160</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">interpolate=</span><span class="ot">FALSE</span>)
   <span class="kw">grid.text</span>(<span class="dt">label=</span><span class="st">&#39;Not Rick: must be a Jerry&#39;</span>,<span class="dt">x =</span> <span class="fl">0.2</span>, <span class="dt">y =</span> <span class="fl">0.77</span>,<span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;top&quot;</span>), <span class="dt">gp=</span><span class="kw">gpar</span>(<span class="dt">fontsize=</span><span class="dv">15</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>))
 }</code></pre></div>
 <p><img src="11-deep-learning_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
@@ -582,10 +582,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -609,9 +610,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

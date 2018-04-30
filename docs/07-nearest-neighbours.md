@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Nearest neighbours {#nearest-neighbours}
 
 <!-- Matt -->
@@ -147,7 +152,7 @@ library(caret)
 
 ```r
 knn1train <- class::knn(train=xtrain, test=xtrain, cl=ytrain, k=1)
-confusionMatrix(knn1train, ytrain)
+confusionMatrix(knn1train, as.factor(ytrain))
 ```
 
 ```
@@ -188,7 +193,7 @@ Now let use the training set to predict on the test set.
 
 ```r
 knn1test <- class::knn(train=xtrain, test=xtest, cl=ytrain, k=1)
-confusionMatrix(knn1test, ytest)
+confusionMatrix(knn1test, as.factor(ytest))
 ```
 
 ```
@@ -499,7 +504,7 @@ Let us now evaluate how our classifier performs on the test set.
 
 ```r
 test_pred <- predict(knnFit, xtest)
-confusionMatrix(test_pred, ytest)
+confusionMatrix(test_pred, as.factor(ytest))
 ```
 
 ```
@@ -1115,8 +1120,8 @@ knn_sbf
 ## 
 ## Resampling performance:
 ## 
-##     ROC   Sens  Spec   ROCSD SensSD  SpecSD
-##  0.8829 0.8323 0.775 0.02298 0.0235 0.06968
+##     ROC   Sens   Spec  ROCSD  SensSD  SpecSD
+##  0.8847 0.8295 0.7672 0.0217 0.02509 0.07062
 ## 
 ## Using the training set, 16 variables were selected:
 ##    ConvexHullPerimRatioCh1, EntropyIntenCh1, FiberWidthCh1, IntenCoocASMCh4, IntenCoocContrastCh3...
@@ -1151,8 +1156,8 @@ knn_sbf$results
 ```
 
 ```
-##         ROC      Sens  Spec      ROCSD     SensSD     SpecSD
-## 1 0.8829444 0.8323077 0.775 0.02297999 0.02350039 0.06967554
+##         ROC      Sens      Spec      ROCSD     SensSD     SpecSD
+## 1 0.8846902 0.8295385 0.7672222 0.02170272 0.02509155 0.07062424
 ```
 
 To retrieve the optimum value of k found during training run:

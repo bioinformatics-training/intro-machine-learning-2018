@@ -109,7 +109,7 @@ library(dendextend)
 ```
 ## 
 ## ---------------------
-## Welcome to dendextend version 1.6.0
+## Welcome to dendextend version 1.7.0
 ## Type citation('dendextend') for how to cite the package.
 ## 
 ## Type browseVignettes(package = 'dendextend') for the package vignette.

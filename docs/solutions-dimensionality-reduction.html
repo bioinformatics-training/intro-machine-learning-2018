@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>An Introduction to Machine Learning</title>
   <meta name="description" content="Course materials for An Introduction to Machine Learning">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="An Introduction to Machine Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-01-16">
+<meta name="date" content="2018-04-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -313,42 +313,51 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>We can read the data in using the following command:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">D &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;data/PGC_transcriptomics/PGC_transcriptomics.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">row.names=</span><span class="dv">1</span>)
 genenames &lt;-<span class="st"> </span><span class="kw">rownames</span>(D)
-genenames &lt;-<span class="st"> </span>genenames[<span class="dv">4</span>:<span class="kw">nrow</span>(D)]</code></pre></div>
+genenames &lt;-<span class="st"> </span>genenames[<span class="dv">4</span><span class="op">:</span><span class="kw">nrow</span>(D)]</code></pre></div>
 <p>This reads in the corresponding spreadsheet into the R environment as a data frame variable.</p>
 </div>
 <div id="exercise-5.2" class="section level2">
 <h2><span class="header-section-number">D.2</span> Exercise 5.2</h2>
 <p>We will first run PCA on the data. Recall that the data is already log_2 normalised, with expression values beginning from row 4. Within R we would run:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pcaresult &lt;-<span class="st"> </span><span class="kw">prcomp</span>(<span class="kw">t</span>(D[<span class="dv">4</span>:<span class="kw">nrow</span>(D),<span class="dv">1</span>:<span class="kw">ncol</span>(D)]), <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale. =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pcaresult &lt;-<span class="st"> </span><span class="kw">prcomp</span>(<span class="kw">t</span>(D[<span class="dv">4</span><span class="op">:</span><span class="kw">nrow</span>(D),<span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(D)]), <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale. =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p>Here we have opted to centre the data, but have not normalised each gene to be zero-mean. This is beacuse we are dealing entirely with gene expression, rather than a variety of variables that may exist on different scales.</p>
 <p>We can extract the positions of individual cells from the  variable. In the snipped below we index the different cells types (ESC, pre-implantation cells, primordial germ cells and somatic cells) for easier plotting.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y1 &lt;-<span class="st"> </span>pcaresult$x[<span class="kw">which</span>(D[<span class="dv">1</span>,]==-<span class="dv">1</span>),<span class="dv">1</span>:<span class="dv">2</span>] <span class="co"># PCA</span>
-y2 &lt;-<span class="st"> </span>pcaresult$x[<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">0</span>),<span class="dv">1</span>:<span class="dv">2</span>]  <span class="co">#</span>
-y3 &lt;-<span class="st"> </span>pcaresult$x[<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">1</span>),<span class="dv">1</span>:<span class="dv">2</span>]  <span class="co">#</span>
-y4 &lt;-<span class="st"> </span>pcaresult$x[<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">2</span>),<span class="dv">1</span>:<span class="dv">2</span>]  <span class="co">#</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y1 &lt;-<span class="st"> </span>pcaresult<span class="op">$</span>x[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==-</span><span class="dv">1</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="co"># PCA</span>
+y2 &lt;-<span class="st"> </span>pcaresult<span class="op">$</span>x[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">0</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]  <span class="co">#</span>
+y3 &lt;-<span class="st"> </span>pcaresult<span class="op">$</span>x[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">1</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]  <span class="co">#</span>
+y4 &lt;-<span class="st"> </span>pcaresult<span class="op">$</span>x[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">2</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]  <span class="co">#</span></code></pre></div>
 <p>Finally, we can plot the data as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(y1,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(-<span class="dv">100</span>, <span class="dv">100</span>),<span class="dt">ylim=</span><span class="kw">c</span>(-<span class="dv">50</span>, <span class="dv">50</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(y1,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">100</span>, <span class="dv">100</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">50</span>, <span class="dv">50</span>))
 <span class="kw">points</span>(y2,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)
 <span class="kw">points</span>(y3,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)
 <span class="kw">points</span>(y4,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)
-<span class="kw">legend</span>(-<span class="dv">95</span>, <span class="dv">50</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;ESC&quot;</span>, <span class="st">&quot;preimp&quot;</span>, <span class="st">&quot;PGC&quot;</span>, <span class="st">&quot;soma&quot;</span>), <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>), <span class="dt">pch=</span><span class="st">&quot;o&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">cex=</span><span class="fl">0.8</span>)</code></pre></div>
+<span class="kw">legend</span>(<span class="op">-</span><span class="dv">95</span>, <span class="dv">50</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;ESC&quot;</span>, <span class="st">&quot;preimp&quot;</span>, <span class="st">&quot;PGC&quot;</span>, <span class="st">&quot;soma&quot;</span>), <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>), <span class="dt">pch=</span><span class="st">&quot;o&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">cex=</span><span class="fl">0.8</span>)</code></pre></div>
 <p><img src="15-solutions-dimensionality-reduction_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>From the plot, we can see PCA has done a reasonable job of separating out various cells. For example, a cluster of PGCs appears at the top of the plot, with somatic cells towards the lower right hand side. Pre-implantation embryos and ESCs appear to cluster together: perhaps this is not surprising as the ESCs are derived from blastocyst cells. Loosely, we can interpret the PC1 as dividing pre-implantation cells from somatic cells, with PC2 separating out PGCs.</p>
 </div>
 <div id="exercise-5.3." class="section level2">
 <h2><span class="header-section-number">D.3</span> Exercise 5.3.</h2>
 <p>In the previous exercise we used PCA to reduce the dimensionality of our data from thousands of genes down to two principle components. By eye, PCA appeared to do a reasonable job separating out different cell types. A useful next step might therefore be to perform clustering on the reduced dimensional space, which can be done using:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clust &lt;-<span class="st"> </span><span class="kw">kmeans</span>(pcaresult$x[,<span class="dv">1</span>:<span class="dv">2</span>], <span class="dv">4</span>, <span class="dt">iter.max =</span> <span class="dv">1000</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clust &lt;-<span class="st"> </span><span class="kw">kmeans</span>(pcaresult<span class="op">$</span>x[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dv">4</span>, <span class="dt">iter.max =</span> <span class="dv">1000</span>)</code></pre></div>
 <p>We can now compare the cluster assignment to the known cell types:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Labels &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;character&quot;</span>, <span class="kw">ncol</span>(D))
-Labels[<span class="kw">which</span>(D[<span class="dv">1</span>,]==-<span class="dv">1</span>)] =<span class="st"> &quot;ESC&quot;</span>
-Labels[<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">0</span>)] =<span class="st"> &quot;preimp&quot;</span>
-Labels[<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">1</span>)] =<span class="st"> &quot;PGC&quot;</span>
-Labels[<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">2</span>)] =<span class="st"> &quot;soma&quot;</span>
+Labels[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==-</span><span class="dv">1</span>)] =<span class="st"> &quot;ESC&quot;</span>
+Labels[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">0</span>)] =<span class="st"> &quot;preimp&quot;</span>
+Labels[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">1</span>)] =<span class="st"> &quot;PGC&quot;</span>
+Labels[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">2</span>)] =<span class="st"> &quot;soma&quot;</span>
 
-clusterresults &lt;-<span class="st"> </span><span class="kw">rbind</span>(Labels,clust$cluster)</code></pre></div>
+clusterresults &lt;-<span class="st"> </span><span class="kw">rbind</span>(Labels,clust<span class="op">$</span>cluster)</code></pre></div>
 <p>We note that, in general PGCs fall into one or more separate clusters, with soma also separating out well. ESCs and pre-implantation tend to fall into identical clusters. We can take a look at what cell types fall into a specific cluster:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterresults[<span class="dv">1</span>,<span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]==<span class="dv">1</span>)]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterresults[<span class="dv">1</span>,<span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]<span class="op">==</span><span class="dv">1</span>)]</code></pre></div>
+<pre><code>## PGC.109 PGC.111 PGC.144 PGC.145 PGC.202 PGC.203 PGC.204 PGC.206 PGC.208 
+##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
+## PGC.209 PGC.210 PGC.211 PGC.212 PGC.213 PGC.214 PGC.215 PGC.216 PGC.218 
+##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
+## PGC.219 PGC.220 PGC.221 PGC.222 PGC.223 PGC.224 PGC.225 PGC.226 PGC.227 
+##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
+## PGC.228 PGC.229 PGC.230 PGC.231 PGC.232 
+##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterresults[<span class="dv">1</span>,<span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]<span class="op">==</span><span class="dv">2</span>)]</code></pre></div>
 <pre><code>##    preimp  preimp.1  preimp.2  preimp.3  preimp.4  preimp.5  preimp.6 
 ##  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot; 
 ##  preimp.7  preimp.8  preimp.9 preimp.10 preimp.11       ESC     ESC.1 
@@ -385,7 +394,36 @@ clusterresults &lt;-<span class="st"> </span><span class="kw">rbind</span>(Label
 ##     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot; 
 ##    ESC.30    ESC.32    ESC.33   soma.48   soma.49   soma.51   soma.52 
 ##     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterresults[<span class="dv">1</span>,<span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]==<span class="dv">2</span>)]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterresults[<span class="dv">1</span>,<span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]<span class="op">==</span><span class="dv">3</span>)]</code></pre></div>
+<pre><code>## preimp.51    ESC.31   PGC.192   PGC.193   PGC.194   PGC.196   PGC.197 
+##  &quot;preimp&quot;     &quot;ESC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot; 
+##   PGC.199   PGC.200   PGC.201      soma    soma.1    soma.2    soma.3 
+##     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
+##    soma.4    soma.5    soma.6    soma.7    soma.8    soma.9   soma.10 
+##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
+##   soma.11   soma.12   soma.13   soma.14   soma.15   soma.16   soma.17 
+##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
+##   soma.18   soma.19   soma.20   soma.21   soma.22   soma.23   soma.24 
+##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
+##   soma.25   soma.26   soma.27   soma.28   soma.29   soma.30   soma.31 
+##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
+##   soma.32   soma.33   soma.34   soma.35   soma.36   soma.37   soma.38 
+##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
+##   soma.39   soma.40   soma.41   soma.42   soma.43   soma.44   soma.45 
+##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
+##   soma.46   soma.47   soma.50   soma.53   soma.54   soma.55   soma.56 
+##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
+##   soma.57   soma.58   soma.59   soma.60   soma.61   soma.62   soma.63 
+##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
+##   soma.64   soma.65   soma.66   soma.67   soma.68   soma.69   soma.70 
+##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
+##   soma.71   soma.72   soma.73   soma.74   soma.75   soma.76   soma.77 
+##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
+##   soma.78   soma.79   soma.80   soma.81   soma.82   soma.83   soma.84 
+##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
+##   soma.85 
+##    &quot;soma&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterresults[<span class="dv">1</span>,<span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]<span class="op">==</span><span class="dv">4</span>)]</code></pre></div>
 <pre><code>##     PGC   PGC.1   PGC.2   PGC.3   PGC.4   PGC.5   PGC.6   PGC.7   PGC.8 
 ##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
 ##   PGC.9  PGC.10  PGC.11  PGC.12  PGC.13  PGC.14  PGC.15  PGC.16  PGC.17 
@@ -432,86 +470,48 @@ clusterresults &lt;-<span class="st"> </span><span class="kw">rbind</span>(Label
 ##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
 ## PGC.238 PGC.239 PGC.240 PGC.241 
 ##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterresults[<span class="dv">1</span>,<span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]==<span class="dv">3</span>)]</code></pre></div>
-<pre><code>## preimp.51    ESC.31   PGC.192   PGC.193   PGC.194   PGC.196   PGC.197 
-##  &quot;preimp&quot;     &quot;ESC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot; 
-##   PGC.199   PGC.200   PGC.201      soma    soma.1    soma.2    soma.3 
-##     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##    soma.4    soma.5    soma.6    soma.7    soma.8    soma.9   soma.10 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.11   soma.12   soma.13   soma.14   soma.15   soma.16   soma.17 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.18   soma.19   soma.20   soma.21   soma.22   soma.23   soma.24 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.25   soma.26   soma.27   soma.28   soma.29   soma.30   soma.31 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.32   soma.33   soma.34   soma.35   soma.36   soma.37   soma.38 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.39   soma.40   soma.41   soma.42   soma.43   soma.44   soma.45 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.46   soma.47   soma.50   soma.53   soma.54   soma.55   soma.56 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.57   soma.58   soma.59   soma.60   soma.61   soma.62   soma.63 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.64   soma.65   soma.66   soma.67   soma.68   soma.69   soma.70 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.71   soma.72   soma.73   soma.74   soma.75   soma.76   soma.77 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.78   soma.79   soma.80   soma.81   soma.82   soma.83   soma.84 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.85 
-##    &quot;soma&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterresults[<span class="dv">1</span>,<span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]==<span class="dv">4</span>)]</code></pre></div>
-<pre><code>## PGC.109 PGC.111 PGC.144 PGC.145 PGC.202 PGC.203 PGC.204 PGC.206 PGC.208 
-##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
-## PGC.209 PGC.210 PGC.211 PGC.212 PGC.213 PGC.214 PGC.215 PGC.216 PGC.218 
-##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
-## PGC.219 PGC.220 PGC.221 PGC.222 PGC.223 PGC.224 PGC.225 PGC.226 PGC.227 
-##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
-## PGC.228 PGC.229 PGC.230 PGC.231 PGC.232 
-##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;</code></pre>
 </div>
 <div id="exercise-5.4." class="section level2">
 <h2><span class="header-section-number">D.4</span> Exercise 5.4.</h2>
 <p>In our previous section we identified clusters associated with various groups. In our application cluster 1 was associated primarily with pre-implantation cells, with cluster 3 associated with PGCs. We could therefore empirically look for genes that are differentially expressed. Since we know SOX17 is associated with PGC specification <span class="citation">(Irie et al. <a href="#ref-irie2015sox17">2015</a>,<span class="citation">Tang et al. (<a href="#ref-tang2015unique">2015</a>)</span>)</span> let’s first compare the expression levels of SOX17 in the two groups:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(D[<span class="kw">which</span>(genenames==<span class="st">&quot;SOX17&quot;</span>)+<span class="dv">3</span>, <span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]==<span class="dv">1</span>)],D[<span class="kw">which</span>(genenames==<span class="st">&quot;SOX17&quot;</span>)+<span class="dv">3</span>, <span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]==<span class="dv">3</span>)])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(D[<span class="kw">which</span>(genenames<span class="op">==</span><span class="st">&quot;SOX17&quot;</span>)<span class="op">+</span><span class="dv">3</span>, <span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]<span class="op">==</span><span class="dv">1</span>)],D[<span class="kw">which</span>(genenames<span class="op">==</span><span class="st">&quot;SOX17&quot;</span>)<span class="op">+</span><span class="dv">3</span>, <span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]<span class="op">==</span><span class="dv">3</span>)])</code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
 ## data:  D[which(genenames == &quot;SOX17&quot;) + 3, which(clusterresults[2, ] ==  and D[which(genenames == &quot;SOX17&quot;) + 3, which(clusterresults[2, ] ==     1)] and     3)]
-## t = 1.7662, df = 192.74, p-value = 0.07895
+## t = 3.7991, df = 31.722, p-value = 0.0006198
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.01860731  0.33739709
+##  0.7417196 2.4577549
 ## sample estimates:
 ##  mean of x  mean of y 
-## 0.23823367 0.07883878</code></pre>
+## 1.67857600 0.07883878</code></pre>
 <p>Typically we won’t always know the important genes, but can perform an unbiased analysis by testing all genes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pvalstore &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode=</span><span class="st">&quot;numeric&quot;</span>, <span class="dt">length=</span><span class="kw">length</span>(genenames))
-for (i in <span class="kw">c</span>(<span class="dv">1</span>:<span class="kw">length</span>(genenames))){
-pvals &lt;-<span class="st"> </span><span class="kw">t.test</span>(D[<span class="kw">which</span>(genenames==genenames[i])+<span class="dv">3</span>, <span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]==<span class="dv">1</span>)],D[<span class="kw">which</span>(genenames==genenames[i])+<span class="dv">3</span>, <span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]==<span class="dv">3</span>)])
-pvalstore[i]  &lt;-<span class="st">  </span>pvals$p.value
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(genenames))){
+pvals &lt;-<span class="st"> </span><span class="kw">t.test</span>(D[<span class="kw">which</span>(genenames<span class="op">==</span>genenames[i])<span class="op">+</span><span class="dv">3</span>, <span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]<span class="op">==</span><span class="dv">1</span>)],D[<span class="kw">which</span>(genenames<span class="op">==</span>genenames[i])<span class="op">+</span><span class="dv">3</span>, <span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]<span class="op">==</span><span class="dv">3</span>)])
+pvalstore[i]  &lt;-<span class="st">  </span>pvals<span class="op">$</span>p.value
 }
 sortedgenes &lt;-<span class="st"> </span>genenames[<span class="kw">order</span>(pvalstore)]</code></pre></div>
 </div>
 <div id="exercise-5.5" class="section level2">
 <h2><span class="header-section-number">D.5</span> Exercise 5.5</h2>
 <p>Within our example, the original axes of our data have very obvious solutions: the axes represent the expression levels of individual genes. The PCs, however, represent linear combinations of various genes, and do not have obvious interpretations. To find an intuition, we can project the original axes (genes) into the new co-ordinate system. This is stored in  variable.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pcaresult$rotation[,<span class="dv">1</span>:<span class="dv">2</span>],<span class="dt">type=</span><span class="st">&quot;n&quot;</span>)
-<span class="kw">text</span>(pcaresult$rotation[,<span class="dv">1</span>:<span class="dv">2</span>], genenames, <span class="dt">cex =</span> .<span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pcaresult<span class="op">$</span>rotation[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],<span class="dt">type=</span><span class="st">&quot;n&quot;</span>)
+<span class="kw">text</span>(pcaresult<span class="op">$</span>rotation[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], genenames, <span class="dt">cex =</span> .<span class="dv">4</span>)</code></pre></div>
 <p><img src="15-solutions-dimensionality-reduction_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>Okay, this plot is a little busy, so let’s focus in on a particular region. Recall that PGCs seemed to lie towards the upper section of the plot (that is PC2 separated out PGCs from other cell types), so we’ll take a look at the top section:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pcaresult$rotation[,<span class="dv">1</span>:<span class="dv">2</span>],<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(-<span class="fl">0.07</span>, <span class="fl">0.07</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="fl">0.04</span>, <span class="fl">0.1</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pcaresult<span class="op">$</span>rotation[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.07</span>, <span class="fl">0.07</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="fl">0.04</span>, <span class="fl">0.1</span>))
 genenames &lt;-<span class="st"> </span><span class="kw">rownames</span>(D)
-genenames &lt;-<span class="st"> </span>genenames[<span class="dv">4</span>:<span class="kw">nrow</span>(D)]
-<span class="kw">text</span>(pcaresult$rotation[,<span class="dv">1</span>:<span class="dv">2</span>], genenames, , <span class="dt">cex =</span> .<span class="dv">4</span>)</code></pre></div>
+genenames &lt;-<span class="st"> </span>genenames[<span class="dv">4</span><span class="op">:</span><span class="kw">nrow</span>(D)]
+<span class="kw">text</span>(pcaresult<span class="op">$</span>rotation[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], genenames, , <span class="dt">cex =</span> .<span class="dv">4</span>)</code></pre></div>
 <p><img src="15-solutions-dimensionality-reduction_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>We now see a number of genes that are potentially associated with PGCs. These include a number of known PGCs, for example, both SOX17 and PRDM1 (which can be found at co-ordinates PC1=0, PC2= 0.04) represent two key specifiers of human PGC fate <span class="citation">(Irie et al. <a href="#ref-irie2015sox17">2015</a>,<span class="citation">Tang et al. (<a href="#ref-tang2015unique">2015</a>)</span>,<span class="citation">Kobayashi et al. (<a href="#ref-kobayashi2017principles">2017</a>)</span>)</span>. We further note a number of other key regulators, such as DAZL, have been implicated in germ cell development, with DAZL over expressed ESCs forming spermatogonia-like colonies in a rare instance upon xenotransplantation <span class="citation">(Panula et al. <a href="#ref-panula2016over">2016</a>)</span>.</p>
 <p>We can similarly look at regions associated with early embryogenesis by concentrating on the lower half of the plot:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pcaresult$rotation[,<span class="dv">1</span>:<span class="dv">2</span>],<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="fl">0.0</span>, <span class="fl">0.07</span>),<span class="dt">ylim=</span><span class="kw">c</span>(-<span class="fl">0.07</span>, -<span class="fl">0.03</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pcaresult<span class="op">$</span>rotation[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="fl">0.0</span>, <span class="fl">0.07</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.07</span>, <span class="op">-</span><span class="fl">0.03</span>))
 genenames &lt;-<span class="st"> </span><span class="kw">rownames</span>(D)
-genenames &lt;-<span class="st"> </span>genenames[<span class="dv">4</span>:<span class="kw">nrow</span>(D)]
-<span class="kw">text</span>(pcaresult$rotation[,<span class="dv">1</span>:<span class="dv">2</span>], genenames, , <span class="dt">cex =</span> .<span class="dv">4</span>)</code></pre></div>
+genenames &lt;-<span class="st"> </span>genenames[<span class="dv">4</span><span class="op">:</span><span class="kw">nrow</span>(D)]
+<span class="kw">text</span>(pcaresult<span class="op">$</span>rotation[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], genenames, , <span class="dt">cex =</span> .<span class="dv">4</span>)</code></pre></div>
 <p><img src="15-solutions-dimensionality-reduction_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>This appears to identify a number of genes associated with embryogenesis, for example, DPPA3, which encodes for a maternally inherited factor, Stella, required for normal pre-implantation development <span class="citation">(Bortvin et al. <a href="#ref-bortvin2004dppa3">2004</a>,<span class="citation">Payer et al. (<a href="#ref-payer2003stella">2003</a>)</span>)</span> as well as regulation of transcriptional and endogenous retrovirus programs during maternal-to-zygotic transition <span class="citation">(Huang et al. <a href="#ref-Huang2017stella">2017</a>)</span>.</p>
 </div>
@@ -520,91 +520,91 @@ genenames &lt;-<span class="st"> </span>genenames[<span class="dv">4</span>:<spa
 <p>We can run tSNE using the following command:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Rtsne)
 <span class="kw">set.seed</span>(<span class="dv">1</span>)
-tsne_model_1 =<span class="st"> </span><span class="kw">Rtsne</span>(<span class="kw">as.matrix</span>(<span class="kw">t</span>(D)), <span class="dt">check_duplicates=</span><span class="ot">FALSE</span>, <span class="dt">pca=</span><span class="ot">TRUE</span>, <span class="dt">perplexity=</span><span class="dv">100</span>, <span class="dt">theta=</span><span class="fl">0.5</span>, <span class="dt">dims=</span><span class="dv">2</span>)</code></pre></div>
+tsne_model_<span class="dv">1</span> =<span class="st"> </span><span class="kw">Rtsne</span>(<span class="kw">as.matrix</span>(<span class="kw">t</span>(D)), <span class="dt">check_duplicates=</span><span class="ot">FALSE</span>, <span class="dt">pca=</span><span class="ot">TRUE</span>, <span class="dt">perplexity=</span><span class="dv">100</span>, <span class="dt">theta=</span><span class="fl">0.5</span>, <span class="dt">dims=</span><span class="dv">2</span>)</code></pre></div>
 <p>As we did previously, we can plot the results using:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y1 &lt;-<span class="st"> </span>tsne_model_1$Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]==-<span class="dv">1</span>),<span class="dv">1</span>:<span class="dv">2</span>]
-y2 &lt;-<span class="st"> </span>tsne_model_1$Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">0</span>),<span class="dv">1</span>:<span class="dv">2</span>]
-y3 &lt;-<span class="st"> </span>tsne_model_1$Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">1</span>),<span class="dv">1</span>:<span class="dv">2</span>]
-y4 &lt;-<span class="st"> </span>tsne_model_1$Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">2</span>),<span class="dv">1</span>:<span class="dv">2</span>]
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y1 &lt;-<span class="st"> </span>tsne_model_<span class="dv">1</span><span class="op">$</span>Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==-</span><span class="dv">1</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
+y2 &lt;-<span class="st"> </span>tsne_model_<span class="dv">1</span><span class="op">$</span>Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">0</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
+y3 &lt;-<span class="st"> </span>tsne_model_<span class="dv">1</span><span class="op">$</span>Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">1</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
+y4 &lt;-<span class="st"> </span>tsne_model_<span class="dv">1</span><span class="op">$</span>Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">2</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
 
-<span class="kw">plot</span>(y1,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(-<span class="dv">45</span>, <span class="dv">45</span>),<span class="dt">ylim=</span><span class="kw">c</span>(-<span class="dv">45</span>, <span class="dv">45</span>))
+<span class="kw">plot</span>(y1,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">45</span>, <span class="dv">45</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">45</span>, <span class="dv">45</span>))
 <span class="kw">points</span>(y2,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)
 <span class="kw">points</span>(y3,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)
 <span class="kw">points</span>(y4,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)
-<span class="kw">legend</span>(-<span class="dv">40</span>, <span class="dv">40</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;ESC&quot;</span>, <span class="st">&quot;preimp&quot;</span>, <span class="st">&quot;PGC&quot;</span>, <span class="st">&quot;soma&quot;</span>), <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>),<span class="dt">pch=</span><span class="st">&quot;o&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">cex=</span><span class="fl">0.8</span>)</code></pre></div>
+<span class="kw">legend</span>(<span class="op">-</span><span class="dv">40</span>, <span class="dv">40</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;ESC&quot;</span>, <span class="st">&quot;preimp&quot;</span>, <span class="st">&quot;PGC&quot;</span>, <span class="st">&quot;soma&quot;</span>), <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>),<span class="dt">pch=</span><span class="st">&quot;o&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">cex=</span><span class="fl">0.8</span>)</code></pre></div>
 <p><img src="15-solutions-dimensionality-reduction_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 </div>
 <div id="exercise-5.7." class="section level2">
 <h2><span class="header-section-number">D.7</span> Exercise 5.7.</h2>
 <p>We can plot the expression patterns for pre-implantation embryos:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y2_0 &lt;-<span class="st"> </span>tsne_model_1$Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">0</span> &amp;<span class="st"> </span>D[<span class="dv">3</span>,]==<span class="dv">0</span>),<span class="dv">1</span>:<span class="dv">2</span>]
-y2_1 &lt;-<span class="st"> </span>tsne_model_1$Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">0</span> &amp;<span class="st"> </span>D[<span class="dv">3</span>,]==<span class="dv">1</span>),<span class="dv">1</span>:<span class="dv">2</span>]
-y2_2 &lt;-<span class="st"> </span>tsne_model_1$Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">0</span> &amp;<span class="st"> </span>D[<span class="dv">3</span>,]==<span class="dv">2</span>),<span class="dv">1</span>:<span class="dv">2</span>]
-y2_3 &lt;-<span class="st"> </span>tsne_model_1$Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">0</span> &amp;<span class="st"> </span>D[<span class="dv">3</span>,]==<span class="dv">3</span>),<span class="dv">1</span>:<span class="dv">2</span>]
-y2_4 &lt;-<span class="st"> </span>tsne_model_1$Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">0</span> &amp;<span class="st"> </span>D[<span class="dv">3</span>,]==<span class="dv">4</span>),<span class="dv">1</span>:<span class="dv">2</span>]
-y2_5 &lt;-<span class="st"> </span>tsne_model_1$Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">0</span> &amp;<span class="st"> </span>D[<span class="dv">3</span>,]==<span class="dv">5</span>),<span class="dv">1</span>:<span class="dv">2</span>]
-y2_6 &lt;-<span class="st"> </span>tsne_model_1$Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">0</span> &amp;<span class="st"> </span>D[<span class="dv">3</span>,]==<span class="dv">6</span>),<span class="dv">1</span>:<span class="dv">2</span>]
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y2_<span class="dv">0</span> &lt;-<span class="st"> </span>tsne_model_<span class="dv">1</span><span class="op">$</span>Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>D[<span class="dv">3</span>,]<span class="op">==</span><span class="dv">0</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
+y2_<span class="dv">1</span> &lt;-<span class="st"> </span>tsne_model_<span class="dv">1</span><span class="op">$</span>Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>D[<span class="dv">3</span>,]<span class="op">==</span><span class="dv">1</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
+y2_<span class="dv">2</span> &lt;-<span class="st"> </span>tsne_model_<span class="dv">1</span><span class="op">$</span>Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>D[<span class="dv">3</span>,]<span class="op">==</span><span class="dv">2</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
+y2_<span class="dv">3</span> &lt;-<span class="st"> </span>tsne_model_<span class="dv">1</span><span class="op">$</span>Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>D[<span class="dv">3</span>,]<span class="op">==</span><span class="dv">3</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
+y2_<span class="dv">4</span> &lt;-<span class="st"> </span>tsne_model_<span class="dv">1</span><span class="op">$</span>Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>D[<span class="dv">3</span>,]<span class="op">==</span><span class="dv">4</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
+y2_<span class="dv">5</span> &lt;-<span class="st"> </span>tsne_model_<span class="dv">1</span><span class="op">$</span>Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>D[<span class="dv">3</span>,]<span class="op">==</span><span class="dv">5</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
+y2_<span class="dv">6</span> &lt;-<span class="st"> </span>tsne_model_<span class="dv">1</span><span class="op">$</span>Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>D[<span class="dv">3</span>,]<span class="op">==</span><span class="dv">6</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
 
-<span class="kw">plot</span>(y2_0,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;tomato&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(-<span class="dv">10</span>, <span class="dv">0</span>),<span class="dt">ylim=</span><span class="kw">c</span>(-<span class="dv">10</span>, <span class="dv">10</span>))
-<span class="kw">points</span>(y2_2,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;tomato&quot;</span>)
-<span class="kw">points</span>(y2_2,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;tomato1&quot;</span>)
-<span class="kw">points</span>(y2_3,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;tomato1&quot;</span>)
-<span class="kw">points</span>(y2_4,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;tomato2&quot;</span>)
-<span class="kw">points</span>(y2_5,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;tomato3&quot;</span>)
-<span class="kw">points</span>(y2_6,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;tomato4&quot;</span>)
-<span class="kw">legend</span>(-<span class="dv">10</span>, <span class="dv">10</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;Ooc&quot;</span>, <span class="st">&quot;Zyg&quot;</span>, <span class="st">&quot;2C&quot;</span>, <span class="st">&quot;4C&quot;</span>,<span class="st">&quot;8C&quot;</span>,<span class="st">&quot;Mor&quot;</span>,<span class="st">&quot;Blast&quot;</span>), <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;tomato&quot;</span>, <span class="st">&quot;tomato&quot;</span>, <span class="st">&quot;tomato1&quot;</span>, <span class="st">&quot;tomato1&quot;</span>, <span class="st">&quot;tomato2&quot;</span>,<span class="st">&quot;tomato3&quot;</span>,<span class="st">&quot;tomato4&quot;</span>),<span class="dt">pch=</span><span class="st">&quot;o&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">cex=</span><span class="fl">0.8</span>)</code></pre></div>
+<span class="kw">plot</span>(y2_<span class="dv">0</span>,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;tomato&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">0</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>))
+<span class="kw">points</span>(y2_<span class="dv">2</span>,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;tomato&quot;</span>)
+<span class="kw">points</span>(y2_<span class="dv">2</span>,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;tomato1&quot;</span>)
+<span class="kw">points</span>(y2_<span class="dv">3</span>,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;tomato1&quot;</span>)
+<span class="kw">points</span>(y2_<span class="dv">4</span>,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;tomato2&quot;</span>)
+<span class="kw">points</span>(y2_<span class="dv">5</span>,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;tomato3&quot;</span>)
+<span class="kw">points</span>(y2_<span class="dv">6</span>,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;tomato4&quot;</span>)
+<span class="kw">legend</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;Ooc&quot;</span>, <span class="st">&quot;Zyg&quot;</span>, <span class="st">&quot;2C&quot;</span>, <span class="st">&quot;4C&quot;</span>,<span class="st">&quot;8C&quot;</span>,<span class="st">&quot;Mor&quot;</span>,<span class="st">&quot;Blast&quot;</span>), <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;tomato&quot;</span>, <span class="st">&quot;tomato&quot;</span>, <span class="st">&quot;tomato1&quot;</span>, <span class="st">&quot;tomato1&quot;</span>, <span class="st">&quot;tomato2&quot;</span>,<span class="st">&quot;tomato3&quot;</span>,<span class="st">&quot;tomato4&quot;</span>),<span class="dt">pch=</span><span class="st">&quot;o&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">cex=</span><span class="fl">0.8</span>)</code></pre></div>
 <p><img src="15-solutions-dimensionality-reduction_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
 <div id="exercise-5.8." class="section level2">
 <h2><span class="header-section-number">D.8</span> Exercise 5.8.</h2>
 <p>Before we perform any clustering let’s generate labels for the pre-implantation data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Type  &lt;-<span class="st"> </span>D[<span class="dv">1</span>,<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">0</span> &amp;<span class="st"> </span>D[<span class="dv">3</span>,]&lt;<span class="dv">7</span> &amp;<span class="st"> </span>D[<span class="dv">3</span>,]&gt;-<span class="dv">1</span>)]
-TPs    &lt;-<span class="st"> </span>D[<span class="dv">3</span>,<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">0</span> &amp;<span class="st"> </span>D[<span class="dv">3</span>,]&lt;<span class="dv">7</span> &amp;<span class="st"> </span>D[<span class="dv">3</span>,]&gt;-<span class="dv">1</span>)]
-Labels &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;character&quot;</span>, <span class="kw">length</span>(<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">0</span> &amp;<span class="st"> </span>D[<span class="dv">3</span>,]&lt;<span class="dv">7</span> &amp;<span class="st"> </span>D[<span class="dv">3</span>,]&gt;-<span class="dv">1</span>)))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Type  &lt;-<span class="st"> </span>D[<span class="dv">1</span>,<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>D[<span class="dv">3</span>,]<span class="op">&lt;</span><span class="dv">7</span> <span class="op">&amp;</span><span class="st"> </span>D[<span class="dv">3</span>,]<span class="op">&gt;-</span><span class="dv">1</span>)]
+TPs    &lt;-<span class="st"> </span>D[<span class="dv">3</span>,<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>D[<span class="dv">3</span>,]<span class="op">&lt;</span><span class="dv">7</span> <span class="op">&amp;</span><span class="st"> </span>D[<span class="dv">3</span>,]<span class="op">&gt;-</span><span class="dv">1</span>)]
+Labels &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;character&quot;</span>, <span class="kw">length</span>(<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>D[<span class="dv">3</span>,]<span class="op">&lt;</span><span class="dv">7</span> <span class="op">&amp;</span><span class="st"> </span>D[<span class="dv">3</span>,]<span class="op">&gt;-</span><span class="dv">1</span>)))
 
-Labels[<span class="kw">which</span>(Type==<span class="dv">0</span> &amp;<span class="st"> </span>TPs==<span class="dv">0</span>)] =<span class="st"> &quot;Oocyte&quot;</span>
-Labels[<span class="kw">which</span>(Type==<span class="dv">0</span> &amp;<span class="st"> </span>TPs==<span class="dv">1</span>)] =<span class="st"> &quot;Zygote&quot;</span>
-Labels[<span class="kw">which</span>(Type==<span class="dv">0</span> &amp;<span class="st"> </span>TPs==<span class="dv">2</span>)] =<span class="st"> &quot;2C&quot;</span>
-Labels[<span class="kw">which</span>(Type==<span class="dv">0</span> &amp;<span class="st"> </span>TPs==<span class="dv">3</span>)] =<span class="st"> &quot;4C&quot;</span>
-Labels[<span class="kw">which</span>(Type==<span class="dv">0</span> &amp;<span class="st"> </span>TPs==<span class="dv">4</span>)] =<span class="st"> &quot;8C&quot;</span>
-Labels[<span class="kw">which</span>(Type==<span class="dv">0</span> &amp;<span class="st"> </span>TPs==<span class="dv">5</span>)] =<span class="st"> &quot;morula&quot;</span>
-Labels[<span class="kw">which</span>(Type==<span class="dv">0</span> &amp;<span class="st"> </span>TPs==<span class="dv">6</span>)] =<span class="st"> &quot;blast&quot;</span></code></pre></div>
+Labels[<span class="kw">which</span>(Type<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>TPs<span class="op">==</span><span class="dv">0</span>)] =<span class="st"> &quot;Oocyte&quot;</span>
+Labels[<span class="kw">which</span>(Type<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>TPs<span class="op">==</span><span class="dv">1</span>)] =<span class="st"> &quot;Zygote&quot;</span>
+Labels[<span class="kw">which</span>(Type<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>TPs<span class="op">==</span><span class="dv">2</span>)] =<span class="st"> &quot;2C&quot;</span>
+Labels[<span class="kw">which</span>(Type<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>TPs<span class="op">==</span><span class="dv">3</span>)] =<span class="st"> &quot;4C&quot;</span>
+Labels[<span class="kw">which</span>(Type<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>TPs<span class="op">==</span><span class="dv">4</span>)] =<span class="st"> &quot;8C&quot;</span>
+Labels[<span class="kw">which</span>(Type<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>TPs<span class="op">==</span><span class="dv">5</span>)] =<span class="st"> &quot;morula&quot;</span>
+Labels[<span class="kw">which</span>(Type<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>TPs<span class="op">==</span><span class="dv">6</span>)] =<span class="st"> &quot;blast&quot;</span></code></pre></div>
 <p>Now generate some clusters:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clust &lt;-<span class="st"> </span><span class="kw">kmeans</span>(tsne_model_1$Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]==<span class="dv">0</span> &amp;<span class="st"> </span>D[<span class="dv">3</span>,]&lt;<span class="dv">7</span> &amp;<span class="st"> </span>D[<span class="dv">3</span>,]&gt;-<span class="dv">1</span>),<span class="dv">1</span>:<span class="dv">2</span>], <span class="dv">4</span>, <span class="dt">iter.max =</span> <span class="dv">1000</span>)
-<span class="kw">rbind</span>(Labels,clust$cluster)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clust &lt;-<span class="st"> </span><span class="kw">kmeans</span>(tsne_model_<span class="dv">1</span><span class="op">$</span>Y[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>D[<span class="dv">3</span>,]<span class="op">&lt;</span><span class="dv">7</span> <span class="op">&amp;</span><span class="st"> </span>D[<span class="dv">3</span>,]<span class="op">&gt;-</span><span class="dv">1</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dv">4</span>, <span class="dt">iter.max =</span> <span class="dv">1000</span>)
+<span class="kw">rbind</span>(Labels,clust<span class="op">$</span>cluster)</code></pre></div>
 <pre><code>##        [,1]     [,2]     [,3]     [,4]     [,5]     [,6]     [,7] [,8]
 ## Labels &quot;Oocyte&quot; &quot;Oocyte&quot; &quot;Oocyte&quot; &quot;Zygote&quot; &quot;Zygote&quot; &quot;Zygote&quot; &quot;2C&quot; &quot;2C&quot;
-##        &quot;4&quot;      &quot;4&quot;      &quot;4&quot;      &quot;4&quot;      &quot;4&quot;      &quot;4&quot;      &quot;4&quot;  &quot;4&quot; 
+##        &quot;1&quot;      &quot;1&quot;      &quot;1&quot;      &quot;1&quot;      &quot;1&quot;      &quot;1&quot;      &quot;1&quot;  &quot;1&quot; 
 ##        [,9] [,10] [,11] [,12] [,13] [,14] [,15] [,16] [,17] [,18] [,19]
 ## Labels &quot;2C&quot; &quot;2C&quot;  &quot;2C&quot;  &quot;2C&quot;  &quot;4C&quot;  &quot;4C&quot;  &quot;4C&quot;  &quot;4C&quot;  &quot;4C&quot;  &quot;4C&quot;  &quot;4C&quot; 
-##        &quot;4&quot;  &quot;4&quot;   &quot;4&quot;   &quot;4&quot;   &quot;4&quot;   &quot;4&quot;   &quot;4&quot;   &quot;4&quot;   &quot;4&quot;   &quot;4&quot;   &quot;4&quot;  
+##        &quot;1&quot;  &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;  
 ##        [,20] [,21] [,22] [,23] [,24] [,25] [,26] [,27] [,28] [,29] [,30]
 ## Labels &quot;4C&quot;  &quot;4C&quot;  &quot;4C&quot;  &quot;4C&quot;  &quot;4C&quot;  &quot;8C&quot;  &quot;8C&quot;  &quot;8C&quot;  &quot;8C&quot;  &quot;8C&quot;  &quot;8C&quot; 
-##        &quot;4&quot;   &quot;4&quot;   &quot;4&quot;   &quot;4&quot;   &quot;4&quot;   &quot;2&quot;   &quot;2&quot;   &quot;2&quot;   &quot;2&quot;   &quot;2&quot;   &quot;2&quot;  
+##        &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;  
 ##        [,31] [,32] [,33] [,34] [,35] [,36] [,37] [,38] [,39] [,40] [,41]
 ## Labels &quot;8C&quot;  &quot;8C&quot;  &quot;8C&quot;  &quot;8C&quot;  &quot;8C&quot;  &quot;8C&quot;  &quot;8C&quot;  &quot;8C&quot;  &quot;8C&quot;  &quot;8C&quot;  &quot;8C&quot; 
-##        &quot;2&quot;   &quot;2&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;2&quot;   &quot;2&quot;   &quot;2&quot;   &quot;2&quot;   &quot;2&quot;  
+##        &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;  
 ##        [,42] [,43] [,44] [,45]    [,46]    [,47]    [,48]    [,49]   
 ## Labels &quot;8C&quot;  &quot;8C&quot;  &quot;8C&quot;  &quot;morula&quot; &quot;morula&quot; &quot;morula&quot; &quot;morula&quot; &quot;morula&quot;
-##        &quot;2&quot;   &quot;2&quot;   &quot;2&quot;   &quot;2&quot;      &quot;2&quot;      &quot;1&quot;      &quot;2&quot;      &quot;2&quot;     
+##        &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;      &quot;1&quot;      &quot;1&quot;      &quot;1&quot;      &quot;1&quot;     
 ##        [,50]    [,51]    [,52]    [,53]    [,54]    [,55]    [,56]   
 ## Labels &quot;morula&quot; &quot;morula&quot; &quot;morula&quot; &quot;morula&quot; &quot;morula&quot; &quot;morula&quot; &quot;morula&quot;
-##        &quot;2&quot;      &quot;2&quot;      &quot;1&quot;      &quot;2&quot;      &quot;2&quot;      &quot;2&quot;      &quot;2&quot;     
+##        &quot;1&quot;      &quot;1&quot;      &quot;1&quot;      &quot;1&quot;      &quot;1&quot;      &quot;1&quot;      &quot;1&quot;     
 ##        [,57]    [,58]    [,59]    [,60]    [,61]   [,62]   [,63]   [,64]  
 ## Labels &quot;morula&quot; &quot;morula&quot; &quot;morula&quot; &quot;morula&quot; &quot;blast&quot; &quot;blast&quot; &quot;blast&quot; &quot;blast&quot;
-##        &quot;2&quot;      &quot;2&quot;      &quot;2&quot;      &quot;2&quot;      &quot;3&quot;     &quot;3&quot;     &quot;3&quot;     &quot;3&quot;    
+##        &quot;1&quot;      &quot;1&quot;      &quot;1&quot;      &quot;1&quot;      &quot;3&quot;     &quot;3&quot;     &quot;3&quot;     &quot;3&quot;    
 ##        [,65]   [,66]   [,67]   [,68]   [,69]   [,70]   [,71]   [,72]  
 ## Labels &quot;blast&quot; &quot;blast&quot; &quot;blast&quot; &quot;blast&quot; &quot;blast&quot; &quot;blast&quot; &quot;blast&quot; &quot;blast&quot;
 ##        &quot;3&quot;     &quot;3&quot;     &quot;3&quot;     &quot;3&quot;     &quot;3&quot;     &quot;3&quot;     &quot;3&quot;     &quot;3&quot;    
 ##        [,73]   [,74]   [,75]   [,76]   [,77]   [,78]   [,79]   [,80]  
 ## Labels &quot;blast&quot; &quot;blast&quot; &quot;blast&quot; &quot;blast&quot; &quot;blast&quot; &quot;blast&quot; &quot;blast&quot; &quot;blast&quot;
-##        &quot;3&quot;     &quot;3&quot;     &quot;3&quot;     &quot;3&quot;     &quot;3&quot;     &quot;3&quot;     &quot;3&quot;     &quot;3&quot;    
+##        &quot;4&quot;     &quot;2&quot;     &quot;2&quot;     &quot;3&quot;     &quot;3&quot;     &quot;3&quot;     &quot;3&quot;     &quot;4&quot;    
 ##        [,81]   [,82]   [,83]   [,84]   [,85]   [,86]   [,87]   [,88]  
 ## Labels &quot;blast&quot; &quot;blast&quot; &quot;blast&quot; &quot;blast&quot; &quot;blast&quot; &quot;blast&quot; &quot;blast&quot; &quot;blast&quot;
-##        &quot;3&quot;     &quot;3&quot;     &quot;3&quot;     &quot;3&quot;     &quot;3&quot;     &quot;3&quot;     &quot;3&quot;     &quot;3&quot;    
+##        &quot;4&quot;     &quot;3&quot;     &quot;2&quot;     &quot;4&quot;     &quot;3&quot;     &quot;2&quot;     &quot;2&quot;     &quot;4&quot;    
 ##        [,89]   [,90]  
 ## Labels &quot;blast&quot; &quot;blast&quot;
-##        &quot;3&quot;     &quot;3&quot;</code></pre>
+##        &quot;3&quot;     &quot;4&quot;</code></pre>
 <p>Note that, using tSNE we appear to have identified clear structure separating out the majority of blastocyst cells from other. Separate clusters appear to exist for other cell types as well, that were not immediately obvious in the PCA analyses of these datasets. In general, the PCA analysis separated out early-embryogenesis from soma and PGCs, due to large differences in the expression patterns of those cell types; comparatively, the expression patterns for the pre-implantation embryos were close together in the reduced dimensionality space. Due to its nonlinear nature, tSNE was able, in this case to more accurately separate out different cells types.</p>
 
 </div>
@@ -630,7 +630,7 @@ Labels[<span class="kw">which</span>(Type==<span class="dv">0</span> &amp;<span 
 <p>Payer, Bernhard, Mitinori Saitou, Sheila C Barton, Rosemary Thresher, John PC Dixon, Dirk Zahn, William H Colledge, Mark BL Carlton, Toru Nakano, and M Azim Surani. 2003. “Stella Is a Maternal Effect Gene Required for Normal Early Development in Mice.” <em>Current Biology</em> 13 (23). Elsevier: 2110–7.</p>
 </div>
 <div id="ref-Huang2017stella">
-<p>Huang, Yun, Kyoung Kim Jong, Dang V Do, Caroline Lee, Christopher A. Penfold, Jan J Zylicz, John C. Marioni, Jamie A. Hackett, and M. Azim Surani. 2017. “Stella Controls Transcriptional and Endogenous Retrovirus Programmes During Maternal-to-Zygotic Transition.” <em>ELife</em> 1 (1). eLife: 1.</p>
+<p>Huang, Yun, Kyoung Kim Jong, Dang V Do, Caroline Lee, Christopher A. Penfold, Jan J Zylicz, John C. Marioni, Jamie A. Hackett, and M. Azim Surani. 2017. “Stella Controls Transcriptional and Endogenous Retrovirus Programmes During Maternal-to-Zygotic Transition.” <em>eLife</em> 1 (1). eLife: 1.</p>
 </div>
 </div>
             </section>
@@ -657,10 +657,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -684,9 +685,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

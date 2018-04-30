@@ -531,7 +531,7 @@ library(randomForest)
 ```
 
 ```
-## randomForest 4.6-12
+## randomForest 4.6-14
 ```
 
 ```
@@ -679,26 +679,26 @@ var.imp[order(var.imp$MeanDecreaseGini,decreasing = T),]
 
 ```
 ##                MeanDecreaseGini      Variables
-## duration             132.170002       duration
-## euribor3m             54.037698      euribor3m
-## age                   31.883597            age
-## nr.employed           31.856977    nr.employed
-## job                   31.235785            job
-## month                 23.156160          month
-## education             20.877757      education
-## day_of_week           20.807229    day_of_week
-## pdays                 19.023638          pdays
-## cons.conf.idx         16.144862  cons.conf.idx
-## campaign              15.879762       campaign
-## poutcome              13.030978       poutcome
-## cons.price.idx        12.786923 cons.price.idx
-## emp.var.rate          10.932736   emp.var.rate
-## previous               7.761329       previous
-## marital                7.685444        marital
-## housing                6.540181        housing
-## loan                   4.493377           loan
-## contact                4.232160        contact
-## default                2.943642        default
+## duration             131.064241       duration
+## euribor3m             51.767706      euribor3m
+## nr.employed           33.282654    nr.employed
+## job                   33.202606            job
+## age                   30.542239            age
+## education             21.817563      education
+## month                 21.481160          month
+## day_of_week           21.449264    day_of_week
+## pdays                 19.153022          pdays
+## cons.conf.idx         15.695240  cons.conf.idx
+## campaign              15.283873       campaign
+## poutcome              13.860486       poutcome
+## cons.price.idx        13.175296 cons.price.idx
+## emp.var.rate          10.957252   emp.var.rate
+## marital                8.270943        marital
+## previous               7.556246       previous
+## housing                7.012238        housing
+## loan                   5.045711           loan
+## contact                4.187090        contact
+## default                3.104346        default
 ```
 
 Based on Random Forest variable importance, the variables could be selected for any other predictive modelling techniques or machine learning.
@@ -778,27 +778,27 @@ confusionMatrix(data=Example.val$predicted.response,
 ## 
 ##           Reference
 ## Prediction   no  yes
-##        no  1477   96
-##        yes   63   87
-##                                          
-##                Accuracy : 0.9077         
-##                  95% CI : (0.8931, 0.921)
-##     No Information Rate : 0.8938         
-##     P-Value [Acc > NIR] : 0.03119        
-##                                          
-##                   Kappa : 0.472          
-##  Mcnemar's Test P-Value : 0.01116        
-##                                          
-##             Sensitivity : 0.47541        
-##             Specificity : 0.95909        
-##          Pos Pred Value : 0.58000        
-##          Neg Pred Value : 0.93897        
-##              Prevalence : 0.10621        
-##          Detection Rate : 0.05049        
-##    Detection Prevalence : 0.08706        
-##       Balanced Accuracy : 0.71725        
-##                                          
-##        'Positive' Class : yes            
+##        no  1476   98
+##        yes   64   85
+##                                           
+##                Accuracy : 0.906           
+##                  95% CI : (0.8912, 0.9193)
+##     No Information Rate : 0.8938          
+##     P-Value [Acc > NIR] : 0.052603        
+##                                           
+##                   Kappa : 0.4606          
+##  Mcnemar's Test P-Value : 0.009522        
+##                                           
+##             Sensitivity : 0.46448         
+##             Specificity : 0.95844         
+##          Pos Pred Value : 0.57047         
+##          Neg Pred Value : 0.93774         
+##              Prevalence : 0.10621         
+##          Detection Rate : 0.04933         
+##    Detection Prevalence : 0.08648         
+##       Balanced Accuracy : 0.71146         
+##                                           
+##        'Positive' Class : yes             
 ## 
 ```
 Accuracy level has dropped to 91.8% but still significantly higher. 

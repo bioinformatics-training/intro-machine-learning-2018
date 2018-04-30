@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>An Introduction to Machine Learning</title>
   <meta name="description" content="Course materials for An Introduction to Machine Learning">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="An Introduction to Machine Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-01-16">
+<meta name="date" content="2018-04-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -334,54 +334,54 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   <span class="dt">parameters =</span> <span class="kw">data.frame</span>(<span class="dt">parameter=</span><span class="st">&quot;cost&quot;</span>,
                           <span class="dt">class=</span><span class="st">&quot;numeric&quot;</span>,
                           <span class="dt">label=</span><span class="st">&quot;Cost&quot;</span>),
-  <span class="dt">grid =</span> function (x, y, <span class="dt">len =</span> <span class="ot">NULL</span>, <span class="dt">search =</span> <span class="st">&quot;grid&quot;</span>) 
+  <span class="dt">grid =</span> <span class="cf">function</span> (x, y, <span class="dt">len =</span> <span class="ot">NULL</span>, <span class="dt">search =</span> <span class="st">&quot;grid&quot;</span>) 
     {
-      if (search ==<span class="st"> &quot;grid&quot;</span>) {
-        out &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">cost =</span> <span class="dv">2</span>^((<span class="dv">1</span>:len) -<span class="st"> </span><span class="dv">3</span>))
+      <span class="cf">if</span> (search <span class="op">==</span><span class="st"> &quot;grid&quot;</span>) {
+        out &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">cost =</span> <span class="dv">2</span><span class="op">^</span>((<span class="dv">1</span><span class="op">:</span>len) <span class="op">-</span><span class="st"> </span><span class="dv">3</span>))
       }
-      else {
-        out &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">cost =</span> <span class="dv">2</span>^<span class="kw">runif</span>(len, <span class="dt">min =</span> -<span class="dv">5</span>, <span class="dt">max =</span> <span class="dv">10</span>))
+      <span class="cf">else</span> {
+        out &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">cost =</span> <span class="dv">2</span><span class="op">^</span><span class="kw">runif</span>(len, <span class="dt">min =</span> <span class="op">-</span><span class="dv">5</span>, <span class="dt">max =</span> <span class="dv">10</span>))
       }
       out
     },
   <span class="dt">loop=</span><span class="ot">NULL</span>,
-  <span class="dt">fit=</span>function (x, y, wts, param, lev, last, classProbs, ...) 
+  <span class="dt">fit=</span><span class="cf">function</span> (x, y, wts, param, lev, last, classProbs, ...) 
     {
-      if (<span class="kw">any</span>(<span class="kw">names</span>(<span class="kw">list</span>(...)) ==<span class="st"> &quot;probability&quot;</span>) |<span class="st"> </span><span class="kw">is.numeric</span>(y)) {
-        out &lt;-<span class="st"> </span>e1071::<span class="kw">svm</span>(<span class="dt">x =</span> <span class="kw">as.matrix</span>(x), <span class="dt">y =</span> y, <span class="dt">kernel =</span> <span class="st">&quot;radial&quot;</span>, 
-                          <span class="dt">cost =</span> param$cost, ...)
+      <span class="cf">if</span> (<span class="kw">any</span>(<span class="kw">names</span>(<span class="kw">list</span>(...)) <span class="op">==</span><span class="st"> &quot;probability&quot;</span>) <span class="op">|</span><span class="st"> </span><span class="kw">is.numeric</span>(y)) {
+        out &lt;-<span class="st"> </span>e1071<span class="op">::</span><span class="kw">svm</span>(<span class="dt">x =</span> <span class="kw">as.matrix</span>(x), <span class="dt">y =</span> y, <span class="dt">kernel =</span> <span class="st">&quot;radial&quot;</span>, 
+                          <span class="dt">cost =</span> param<span class="op">$</span>cost, ...)
       }
-      else {
-        out &lt;-<span class="st"> </span>e1071::<span class="kw">svm</span>(<span class="dt">x =</span> <span class="kw">as.matrix</span>(x), <span class="dt">y =</span> y, <span class="dt">kernel =</span> <span class="st">&quot;radial&quot;</span>, 
-                          <span class="dt">cost =</span> param$cost, <span class="dt">probability =</span> classProbs, ...)
+      <span class="cf">else</span> {
+        out &lt;-<span class="st"> </span>e1071<span class="op">::</span><span class="kw">svm</span>(<span class="dt">x =</span> <span class="kw">as.matrix</span>(x), <span class="dt">y =</span> y, <span class="dt">kernel =</span> <span class="st">&quot;radial&quot;</span>, 
+                          <span class="dt">cost =</span> param<span class="op">$</span>cost, <span class="dt">probability =</span> classProbs, ...)
       }
       out
     },
-  <span class="dt">predict =</span> function (modelFit, newdata, <span class="dt">submodels =</span> <span class="ot">NULL</span>) 
+  <span class="dt">predict =</span> <span class="cf">function</span> (modelFit, newdata, <span class="dt">submodels =</span> <span class="ot">NULL</span>) 
     {
       <span class="kw">predict</span>(modelFit, newdata)
     },
-  <span class="dt">prob =</span> function (modelFit, newdata, <span class="dt">submodels =</span> <span class="ot">NULL</span>) 
+  <span class="dt">prob =</span> <span class="cf">function</span> (modelFit, newdata, <span class="dt">submodels =</span> <span class="ot">NULL</span>) 
     {
       out &lt;-<span class="st"> </span><span class="kw">predict</span>(modelFit, newdata, <span class="dt">probability =</span> <span class="ot">TRUE</span>)
       <span class="kw">attr</span>(out, <span class="st">&quot;probabilities&quot;</span>)
     },
-  <span class="dt">predictors =</span> function (x, ...) 
+  <span class="dt">predictors =</span> <span class="cf">function</span> (x, ...) 
     {
-      out &lt;-<span class="st"> </span>if (!<span class="kw">is.null</span>(x$terms)) 
-        <span class="kw">predictors.terms</span>(x$terms)
-      else x$xNames
-      if (<span class="kw">is.null</span>(out)) 
-        out &lt;-<span class="st"> </span><span class="kw">names</span>(<span class="kw">attr</span>(x, <span class="st">&quot;scaling&quot;</span>)$x.scale$<span class="st">`</span><span class="dt">scaled:center</span><span class="st">`</span>)
-      if (<span class="kw">is.null</span>(out)) 
+      out &lt;-<span class="st"> </span><span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(x<span class="op">$</span>terms)) 
+        <span class="kw">predictors.terms</span>(x<span class="op">$</span>terms)
+      <span class="cf">else</span> x<span class="op">$</span>xNames
+      <span class="cf">if</span> (<span class="kw">is.null</span>(out)) 
+        out &lt;-<span class="st"> </span><span class="kw">names</span>(<span class="kw">attr</span>(x, <span class="st">&quot;scaling&quot;</span>)<span class="op">$</span>x.scale<span class="op">$</span><span class="st">`</span><span class="dt">scaled:center</span><span class="st">`</span>)
+      <span class="cf">if</span> (<span class="kw">is.null</span>(out)) 
         out &lt;-<span class="st"> </span><span class="ot">NA</span>
       out
     },
   <span class="dt">tags =</span> <span class="kw">c</span>(<span class="st">&quot;Kernel Methods&quot;</span>, <span class="st">&quot;Support Vector Machines&quot;</span>, <span class="st">&quot;Regression&quot;</span>, <span class="st">&quot;Classifier&quot;</span>, <span class="st">&quot;Robust Methods&quot;</span>),
-  <span class="dt">levels =</span> function(x) x$levels,
-  <span class="dt">sort =</span> function(x)
+  <span class="dt">levels =</span> <span class="cf">function</span>(x) x<span class="op">$</span>levels,
+  <span class="dt">sort =</span> <span class="cf">function</span>(x)
   {
-    x[<span class="kw">order</span>(x$cost), ]
+    x[<span class="kw">order</span>(x<span class="op">$</span>cost), ]
   }
 )</code></pre></div>
 <p>Setup parallel processing</p>
@@ -390,20 +390,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## [1] 4</code></pre>
 <p>Load data</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(segmentationData)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">segClass &lt;-<span class="st"> </span>segmentationData$Class</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">segClass &lt;-<span class="st"> </span>segmentationData<span class="op">$</span>Class</code></pre></div>
 <p>Extract predictors from segmentationData</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">segData &lt;-<span class="st"> </span>segmentationData[,<span class="dv">4</span>:<span class="dv">61</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">segData &lt;-<span class="st"> </span>segmentationData[,<span class="dv">4</span><span class="op">:</span><span class="dv">61</span>]</code></pre></div>
 <p>Partition data</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
 trainIndex &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y=</span>segClass, <span class="dt">times=</span><span class="dv">1</span>, <span class="dt">p=</span><span class="fl">0.5</span>, <span class="dt">list=</span>F)
 segDataTrain &lt;-<span class="st"> </span>segData[trainIndex,]
-segDataTest &lt;-<span class="st"> </span>segData[-trainIndex,]
+segDataTest &lt;-<span class="st"> </span>segData[<span class="op">-</span>trainIndex,]
 segClassTrain &lt;-<span class="st"> </span>segClass[trainIndex]
-segClassTest &lt;-<span class="st"> </span>segClass[-trainIndex]</code></pre></div>
+segClassTest &lt;-<span class="st"> </span>segClass[<span class="op">-</span>trainIndex]</code></pre></div>
 <p>Set seeds for reproducibility (optional). We will be trying 9 values of the tuning parameter with 5 repeats of 10 fold cross-validation, so we need the following list of seeds.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
 seeds &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="dv">51</span>)
-for(i in <span class="dv">1</span>:<span class="dv">50</span>) seeds[[i]] &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="dv">1000</span>, <span class="dv">9</span>)
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>) seeds[[i]] &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="dv">1000</span>, <span class="dv">9</span>)
 seeds[[<span class="dv">51</span>]] &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="dv">1000</span>,<span class="dv">1</span>)</code></pre></div>
 <p>We will pass the twoClassSummary function into model training through <strong>trainControl</strong>. Additionally we would like the model to predict class probabilities so that we can calculate the ROC curve, so we use the <strong>classProbs</strong> option.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cvCtrl &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;repeatedcv&quot;</span>, 
@@ -446,7 +446,7 @@ svmTune</code></pre></div>
 ## 
 ## ROC was used to select the optimal model using the largest value.
 ## The final value used for the model was cost = 1.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svmTune$finalModel</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svmTune<span class="op">$</span>finalModel</code></pre></div>
 <pre><code>## 
 ## Call:
 ## svm.default(x = as.matrix(x), y = y, kernel = &quot;radial&quot;, cost = param$cost, 
@@ -554,10 +554,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -581,9 +582,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

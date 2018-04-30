@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>An Introduction to Machine Learning</title>
   <meta name="description" content="Course materials for An Introduction to Machine Learning">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="An Introduction to Machine Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-01-16">
+<meta name="date" content="2018-04-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -451,9 +451,9 @@ The more homogenous something is the less information is needed to describe it a
 <p><em>Data Slicing</em></p>
 <p>Data slicing is a step to split data into train and test set. Training data set can be used specifically for our model building. Test dataset should not be mixed up while building model. Even during standardization, we should not standardize our test set.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">3033</span>)
-intrain &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> car_df$V1, <span class="dt">p=</span> <span class="fl">0.7</span>, <span class="dt">list =</span> <span class="ot">FALSE</span>)
+intrain &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> car_df<span class="op">$</span>V1, <span class="dt">p=</span> <span class="fl">0.7</span>, <span class="dt">list =</span> <span class="ot">FALSE</span>)
 training &lt;-<span class="st"> </span>car_df[intrain,]
-testing &lt;-<span class="st"> </span>car_df[-intrain,]</code></pre></div>
+testing &lt;-<span class="st"> </span>car_df[<span class="op">-</span>intrain,]</code></pre></div>
 <p>The “p” parameter holds a decimal value in the range of 0-1. It’s to show that percentage of the split. We are using p=0.7. It means that data split should be done in 70:30 ratio.</p>
 <p><em>Data Preprocessing</em></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#check dimensions of train &amp; test set</span>
@@ -476,7 +476,7 @@ testing &lt;-<span class="st"> </span>car_df[-intrain,]</code></pre></div>
 <p><em>Training the Decision Tree classifier with criterion as INFORMATION GAIN</em></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trctrl &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;repeatedcv&quot;</span>, <span class="dt">number =</span> <span class="dv">10</span>, <span class="dt">repeats =</span> <span class="dv">3</span>)
 <span class="kw">set.seed</span>(<span class="dv">3333</span>)
-dtree_fit &lt;-<span class="st"> </span><span class="kw">train</span>(V7 ~., <span class="dt">data =</span> training, <span class="dt">method =</span> <span class="st">&quot;rpart&quot;</span>,
+dtree_fit &lt;-<span class="st"> </span><span class="kw">train</span>(V7 <span class="op">~</span>., <span class="dt">data =</span> training, <span class="dt">method =</span> <span class="st">&quot;rpart&quot;</span>,
                    <span class="dt">parms =</span> <span class="kw">list</span>(<span class="dt">split =</span> <span class="st">&quot;information&quot;</span>),
                    <span class="dt">trControl=</span>trctrl,
                    <span class="dt">tuneLength =</span> <span class="dv">10</span>)</code></pre></div>
@@ -508,7 +508,7 @@ dtree_fit &lt;-<span class="st"> </span><span class="kw">train</span>(V7 ~., <sp
 ## Accuracy was used to select the optimal model using the largest value.
 ## The final value used for the model was cp = 0.01123596.</code></pre>
 <p><em>Plotting the decision tress</em></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prp</span>(dtree_fit$finalModel, <span class="dt">box.palette =</span> <span class="st">&quot;Reds&quot;</span>, <span class="dt">tweak =</span> <span class="fl">1.2</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prp</span>(dtree_fit<span class="op">$</span>finalModel, <span class="dt">box.palette =</span> <span class="st">&quot;Reds&quot;</span>, <span class="dt">tweak =</span> <span class="fl">1.2</span>)</code></pre></div>
 <p><img src="09-decision-trees_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p><em>Prediction</em></p>
 <p>The model is trained with cp = 0.01123596. cp is complexity parameter for our dtree. We are ready to predict classes for our test set. We can use predict() method. Let’s try to predict target variable for test set’s 1st record.</p>
@@ -520,7 +520,7 @@ dtree_fit &lt;-<span class="st"> </span><span class="kw">train</span>(V7 ~., <sp
 ## Levels: acc good unacc vgood</code></pre>
 <p>For our 1st record of testing data classifier is predicting class variable as “unacc”. Now, its time to predict target variable for the whole test set.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(dtree_fit, <span class="dt">newdata =</span> testing)
-<span class="kw">confusionMatrix</span>(test_pred, testing$V7 )  <span class="co">#check accuracy</span></code></pre></div>
+<span class="kw">confusionMatrix</span>(test_pred, testing<span class="op">$</span>V7 )  <span class="co">#check accuracy</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -555,7 +555,7 @@ dtree_fit &lt;-<span class="st"> </span><span class="kw">train</span>(V7 ~., <sp
 <p><em>Training the Decision Tree classifier with criterion as GINI INDEX</em></p>
 <p>Let’s try to program a decision tree classifier using splitting criterion as gini index.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">3333</span>)
-dtree_fit_gini &lt;-<span class="st"> </span><span class="kw">train</span>(V7 ~., <span class="dt">data =</span> training, <span class="dt">method =</span> <span class="st">&quot;rpart&quot;</span>,
+dtree_fit_gini &lt;-<span class="st"> </span><span class="kw">train</span>(V7 <span class="op">~</span>., <span class="dt">data =</span> training, <span class="dt">method =</span> <span class="st">&quot;rpart&quot;</span>,
                    <span class="dt">parms =</span> <span class="kw">list</span>(<span class="dt">split =</span> <span class="st">&quot;gini&quot;</span>),
                    <span class="dt">trControl=</span>trctrl,
                    <span class="dt">tuneLength =</span> <span class="dv">10</span>)
@@ -587,12 +587,12 @@ dtree_fit_gini</code></pre></div>
 ## The final value used for the model was cp = 0.01123596.</code></pre>
 <p>It is showing us the accuracy metrics for different values of cp.</p>
 <p><em>Plotting decision tree</em></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prp</span>(dtree_fit_gini$finalModel, <span class="dt">box.palette =</span> <span class="st">&quot;Blues&quot;</span>, <span class="dt">tweak =</span> <span class="fl">1.2</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prp</span>(dtree_fit_gini<span class="op">$</span>finalModel, <span class="dt">box.palette =</span> <span class="st">&quot;Blues&quot;</span>, <span class="dt">tweak =</span> <span class="fl">1.2</span>)</code></pre></div>
 <p><img src="09-decision-trees_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p><em>Prediction</em></p>
 <p>Our model is trained with cp = 0.01123596. Now, it’s time to predict target variable for the whole test set.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_pred_gini &lt;-<span class="st"> </span><span class="kw">predict</span>(dtree_fit_gini, <span class="dt">newdata =</span> testing)
-<span class="kw">confusionMatrix</span>(test_pred_gini, testing$V7 )  <span class="co">#check accuracy</span></code></pre></div>
+<span class="kw">confusionMatrix</span>(test_pred_gini, testing<span class="op">$</span>V7 )  <span class="co">#check accuracy</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -647,7 +647,7 @@ dtree_fit_gini</code></pre></div>
 <p><em>Install and load randomForest library</em></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load library</span>
 <span class="kw">library</span>(randomForest)</code></pre></div>
-<pre><code>## randomForest 4.6-12</code></pre>
+<pre><code>## randomForest 4.6-14</code></pre>
 <pre><code>## Type rfNews() to see new features/changes/bug fixes.</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;randomForest&#39;</code></pre>
@@ -664,7 +664,7 @@ Example&lt;-<span class="kw">read.csv</span>(<span class="dt">file=</span><span 
 ## [13] &quot;pdays&quot;          &quot;previous&quot;       &quot;poutcome&quot;       &quot;emp.var.rate&quot;  
 ## [17] &quot;cons.price.idx&quot; &quot;cons.conf.idx&quot;  &quot;euribor3m&quot;      &quot;nr.employed&quot;   
 ## [21] &quot;y&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(Example$y)/<span class="kw">nrow</span>(Example)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(Example<span class="op">$</span>y)<span class="op">/</span><span class="kw">nrow</span>(Example)</code></pre></div>
 <pre><code>## 
 ##        no       yes 
 ## 0.8905074 0.1094926</code></pre>
@@ -674,21 +674,21 @@ Example&lt;-<span class="kw">read.csv</span>(<span class="dt">file=</span><span 
                      <span class="kw">nrow</span>(Example),
                      <span class="dt">replace =</span> T,
                      <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.6</span>,<span class="fl">0.4</span>))
-Example.dev &lt;-<span class="st"> </span>Example[sample.ind==<span class="dv">1</span>,]
-Example.val &lt;-<span class="st"> </span>Example[sample.ind==<span class="dv">2</span>,]
+Example.dev &lt;-<span class="st"> </span>Example[sample.ind<span class="op">==</span><span class="dv">1</span>,]
+Example.val &lt;-<span class="st"> </span>Example[sample.ind<span class="op">==</span><span class="dv">2</span>,]
 
-<span class="kw">table</span>(Example.dev$y)/<span class="kw">nrow</span>(Example.dev)</code></pre></div>
+<span class="kw">table</span>(Example.dev<span class="op">$</span>y)<span class="op">/</span><span class="kw">nrow</span>(Example.dev)</code></pre></div>
 <pre><code>## 
 ##        no       yes 
 ## 0.8881469 0.1118531</code></pre>
 <p>Both development and validation samples have similar target variable distribution. This is just a sample validation.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(Example.dev$y)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(Example.dev<span class="op">$</span>y)</code></pre></div>
 <pre><code>## [1] &quot;factor&quot;</code></pre>
 <p>Class of target or response variable is factor, so a classification Random Forest will be built. The current data frame has a list of independent variables, so we can make it formula and then pass as a parameter value for randomForest.</p>
 <p><em>Make Formula</em></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">varNames &lt;-<span class="st"> </span><span class="kw">names</span>(Example.dev)
 <span class="co"># Exclude ID or Response variable</span>
-varNames &lt;-<span class="st"> </span>varNames[!varNames %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;y&quot;</span>)]
+varNames &lt;-<span class="st"> </span>varNames[<span class="op">!</span>varNames <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;y&quot;</span>)]
 
 <span class="co"># add + sign between exploratory variables</span>
 varNames1 &lt;-<span class="st"> </span><span class="kw">paste</span>(varNames, <span class="dt">collapse =</span> <span class="st">&quot;+&quot;</span>)
@@ -716,34 +716,34 @@ rf.form &lt;-<span class="st"> </span><span class="kw">as.formula</span>(<span c
 var.imp &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">importance</span>(Example.rf,
            <span class="dt">type=</span><span class="dv">2</span>))
 <span class="co"># make row names as columns</span>
-var.imp$Variables &lt;-<span class="st"> </span><span class="kw">row.names</span>(var.imp)
-var.imp[<span class="kw">order</span>(var.imp$MeanDecreaseGini,<span class="dt">decreasing =</span> T),]</code></pre></div>
+var.imp<span class="op">$</span>Variables &lt;-<span class="st"> </span><span class="kw">row.names</span>(var.imp)
+var.imp[<span class="kw">order</span>(var.imp<span class="op">$</span>MeanDecreaseGini,<span class="dt">decreasing =</span> T),]</code></pre></div>
 <pre><code>##                MeanDecreaseGini      Variables
-## duration             132.170002       duration
-## euribor3m             54.037698      euribor3m
-## age                   31.883597            age
-## nr.employed           31.856977    nr.employed
-## job                   31.235785            job
-## month                 23.156160          month
-## education             20.877757      education
-## day_of_week           20.807229    day_of_week
-## pdays                 19.023638          pdays
-## cons.conf.idx         16.144862  cons.conf.idx
-## campaign              15.879762       campaign
-## poutcome              13.030978       poutcome
-## cons.price.idx        12.786923 cons.price.idx
-## emp.var.rate          10.932736   emp.var.rate
-## previous               7.761329       previous
-## marital                7.685444        marital
-## housing                6.540181        housing
-## loan                   4.493377           loan
-## contact                4.232160        contact
-## default                2.943642        default</code></pre>
+## duration             131.064241       duration
+## euribor3m             51.767706      euribor3m
+## nr.employed           33.282654    nr.employed
+## job                   33.202606            job
+## age                   30.542239            age
+## education             21.817563      education
+## month                 21.481160          month
+## day_of_week           21.449264    day_of_week
+## pdays                 19.153022          pdays
+## cons.conf.idx         15.695240  cons.conf.idx
+## campaign              15.283873       campaign
+## poutcome              13.860486       poutcome
+## cons.price.idx        13.175296 cons.price.idx
+## emp.var.rate          10.957252   emp.var.rate
+## marital                8.270943        marital
+## previous               7.556246       previous
+## housing                7.012238        housing
+## loan                   5.045711           loan
+## contact                4.187090        contact
+## default                3.104346        default</code></pre>
 <p>Based on Random Forest variable importance, the variables could be selected for any other predictive modelling techniques or machine learning.</p>
 <p><em>Predict Response Variable Value using Random Forest</em></p>
 <p>Generic predict function can be used for predicting response variable using Random Forest object.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Predicting response variable</span>
-Example.dev$predicted.response &lt;-<span class="st"> </span><span class="kw">predict</span>(Example.rf ,Example.dev)</code></pre></div>
+Example.dev<span class="op">$</span>predicted.response &lt;-<span class="st"> </span><span class="kw">predict</span>(Example.rf ,Example.dev)</code></pre></div>
 <p>confusionMatrix function from caret package can be used for creating confusion matrix based on actual response variable and predicted value.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load Library or packages</span>
 <span class="kw">library</span>(e1071)
@@ -751,8 +751,8 @@ Example.dev$predicted.response &lt;-<span class="st"> </span><span class="kw">pr
 ## Loading required package: lattice
 ## Loading required package: ggplot2
 <span class="co"># Create Confusion Matrix</span>
-<span class="kw">confusionMatrix</span>(<span class="dt">data=</span>Example.dev$predicted.response,
-                <span class="dt">reference=</span>Example.dev$y,
+<span class="kw">confusionMatrix</span>(<span class="dt">data=</span>Example.dev<span class="op">$</span>predicted.response,
+                <span class="dt">reference=</span>Example.dev<span class="op">$</span>y,
                 <span class="dt">positive=</span><span class="st">&#39;yes&#39;</span>)</code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
@@ -782,37 +782,37 @@ Example.dev$predicted.response &lt;-<span class="st"> </span><span class="kw">pr
 ## </code></pre>
 <p>It has accuracy of 99.81%. Now we can predict response for the validation sample and calculate model accuracy for the sample.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Predicting response variable</span>
-Example.val$predicted.response &lt;-<span class="st"> </span><span class="kw">predict</span>(Example.rf ,Example.val)
+Example.val<span class="op">$</span>predicted.response &lt;-<span class="st"> </span><span class="kw">predict</span>(Example.rf ,Example.val)
 
 <span class="co"># Create Confusion Matrix</span>
-<span class="kw">confusionMatrix</span>(<span class="dt">data=</span>Example.val$predicted.response,
-                <span class="dt">reference=</span>Example.val$y,
+<span class="kw">confusionMatrix</span>(<span class="dt">data=</span>Example.val<span class="op">$</span>predicted.response,
+                <span class="dt">reference=</span>Example.val<span class="op">$</span>y,
                 <span class="dt">positive=</span><span class="st">&#39;yes&#39;</span>)</code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
 ## Prediction   no  yes
-##        no  1477   96
-##        yes   63   87
-##                                          
-##                Accuracy : 0.9077         
-##                  95% CI : (0.8931, 0.921)
-##     No Information Rate : 0.8938         
-##     P-Value [Acc &gt; NIR] : 0.03119        
-##                                          
-##                   Kappa : 0.472          
-##  Mcnemar&#39;s Test P-Value : 0.01116        
-##                                          
-##             Sensitivity : 0.47541        
-##             Specificity : 0.95909        
-##          Pos Pred Value : 0.58000        
-##          Neg Pred Value : 0.93897        
-##              Prevalence : 0.10621        
-##          Detection Rate : 0.05049        
-##    Detection Prevalence : 0.08706        
-##       Balanced Accuracy : 0.71725        
-##                                          
-##        &#39;Positive&#39; Class : yes            
+##        no  1476   98
+##        yes   64   85
+##                                           
+##                Accuracy : 0.906           
+##                  95% CI : (0.8912, 0.9193)
+##     No Information Rate : 0.8938          
+##     P-Value [Acc &gt; NIR] : 0.052603        
+##                                           
+##                   Kappa : 0.4606          
+##  Mcnemar&#39;s Test P-Value : 0.009522        
+##                                           
+##             Sensitivity : 0.46448         
+##             Specificity : 0.95844         
+##          Pos Pred Value : 0.57047         
+##          Neg Pred Value : 0.93774         
+##              Prevalence : 0.10621         
+##          Detection Rate : 0.04933         
+##    Detection Prevalence : 0.08648         
+##       Balanced Accuracy : 0.71146         
+##                                           
+##        &#39;Positive&#39; Class : yes             
 ## </code></pre>
 <p>Accuracy level has dropped to 91.8% but still significantly higher.</p>
 <p><em>Acknowledgement: the above data is from a machine-learning database and the code is discusses</em>: <a href="http://dni-institute.in/blogs/random-forest-using-r-step-by-step-tutorial/*" class="uri">http://dni-institute.in/blogs/random-forest-using-r-step-by-step-tutorial/*</a></p>
@@ -849,10 +849,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -876,9 +877,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

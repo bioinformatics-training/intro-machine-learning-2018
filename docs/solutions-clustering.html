@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>An Introduction to Machine Learning</title>
   <meta name="description" content="Course materials for An Introduction to Machine Learning">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="An Introduction to Machine Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-01-16">
+<meta name="date" content="2018-04-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -331,8 +331,8 @@ img &lt;-<span class="st"> </span><span class="kw">readImage</span>(<span class=
 imgDim &lt;-<span class="st"> </span><span class="kw">dim</span>(img)
 
 imgDF &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
-  <span class="dt">x =</span> <span class="kw">rep</span>(<span class="dv">1</span>:imgDim[<span class="dv">1</span>], imgDim[<span class="dv">2</span>]),
-  <span class="dt">y =</span> <span class="kw">rep</span>(imgDim[<span class="dv">2</span>]:<span class="dv">1</span>, <span class="dt">each=</span>imgDim[<span class="dv">1</span>]),
+  <span class="dt">x =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>imgDim[<span class="dv">1</span>], imgDim[<span class="dv">2</span>]),
+  <span class="dt">y =</span> <span class="kw">rep</span>(imgDim[<span class="dv">2</span>]<span class="op">:</span><span class="dv">1</span>, <span class="dt">each=</span>imgDim[<span class="dv">1</span>]),
   <span class="dt">r =</span> <span class="kw">as.vector</span>(img[,,<span class="dv">1</span>]),
   <span class="dt">g =</span> <span class="kw">as.vector</span>(img[,,<span class="dv">2</span>]),
   <span class="dt">b =</span> <span class="kw">as.vector</span>(img[,,<span class="dv">3</span>])
@@ -343,16 +343,16 @@ imgDF &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
 <pre><code>## Loading required package: iterators</code></pre>
 <pre><code>## Loading required package: parallel</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">registerDoMC</span>()
-k=<span class="dv">1</span>:<span class="dv">9</span>
+k=<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>
 <span class="kw">set.seed</span>(<span class="dv">42</span>)
 res &lt;-<span class="st"> </span><span class="kw">foreach</span>(
   <span class="dt">i=</span>k, 
-  <span class="dt">.options.multicore=</span><span class="kw">list</span>(<span class="dt">set.seed=</span><span class="ot">FALSE</span>)) %dopar%<span class="st"> </span><span class="kw">kmeans</span>(imgDF[,<span class="kw">c</span>(<span class="st">&quot;r&quot;</span>, <span class="st">&quot;g&quot;</span>, <span class="st">&quot;b&quot;</span>)], i, <span class="dt">nstart=</span><span class="dv">50</span>)</code></pre></div>
+  <span class="dt">.options.multicore=</span><span class="kw">list</span>(<span class="dt">set.seed=</span><span class="ot">FALSE</span>)) <span class="op">%dopar%</span><span class="st"> </span><span class="kw">kmeans</span>(imgDF[,<span class="kw">c</span>(<span class="st">&quot;r&quot;</span>, <span class="st">&quot;g&quot;</span>, <span class="st">&quot;b&quot;</span>)], i, <span class="dt">nstart=</span><span class="dv">50</span>)</code></pre></div>
 <p>We can now plot total within-cluster sum of squares against k:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot_tot_withinss &lt;-<span class="st"> </span>function(kmeans_output){
-  tot_withinss &lt;-<span class="st"> </span><span class="kw">sapply</span>(k, function(i){kmeans_output[[i]]$tot.withinss})
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot_tot_withinss &lt;-<span class="st"> </span><span class="cf">function</span>(kmeans_output){
+  tot_withinss &lt;-<span class="st"> </span><span class="kw">sapply</span>(k, <span class="cf">function</span>(i){kmeans_output[[i]]<span class="op">$</span>tot.withinss})
   <span class="kw">qplot</span>(k, tot_withinss, <span class="dt">geom=</span><span class="kw">c</span>(<span class="st">&quot;point&quot;</span>, <span class="st">&quot;line&quot;</span>), 
-        <span class="dt">ylab=</span><span class="st">&quot;Total within-cluster sum of squares&quot;</span>) +<span class="st"> </span><span class="kw">theme_bw</span>()
+        <span class="dt">ylab=</span><span class="st">&quot;Total within-cluster sum of squares&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()
 }
 
 <span class="kw">plot_tot_withinss</span>(res)</code></pre></div>
@@ -363,11 +363,11 @@ Figure E.1: Variance within the clusters of pixels. Total within-cluster sum of 
 </p>
 </div>
 <p>The plot of total within-cluster sum of squares against k (figure <a href="solutions-clustering.html#fig:imageAnalysisElbowPlot">E.1</a>) shows an elbow at k=2, indicating that most of the variance in the image can be described by just two clusters. Let’s plot the clusters for k=2.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterColours &lt;-<span class="st"> </span><span class="kw">rgb</span>(res[[<span class="dv">2</span>]]$centers) 
-<span class="kw">ggplot</span>(<span class="dt">data =</span> imgDF, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) +<span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> clusterColours[res[[<span class="dv">2</span>]]$cluster]) +
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;x&quot;</span>) +
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;y&quot;</span>) +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterColours &lt;-<span class="st"> </span><span class="kw">rgb</span>(res[[<span class="dv">2</span>]]<span class="op">$</span>centers) 
+<span class="kw">ggplot</span>(<span class="dt">data =</span> imgDF, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> clusterColours[res[[<span class="dv">2</span>]]<span class="op">$</span>cluster]) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;x&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;y&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:pixelClustersK2"></span>
 <img src="16-solutions-clustering_files/figure-html/pixelClustersK2-1.png" alt="Result of k-means clustering of pixels based on colour for k=2." width="80%" />
@@ -377,11 +377,11 @@ Figure E.2: Result of k-means clustering of pixels based on colour for k=2.
 </div>
 <p>Segmentation of the image with k=2 separates air-spaces from all other objects (figure <a href="solutions-clustering.html#fig:pixelClustersK2">E.2</a>). Therefore, the difference in pixel colour between the air-spaces and other objects accounts for most of the variance in the data-set (image).</p>
 <p>Let’s now take a look at a segmentation of the image using k=4.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterColours &lt;-<span class="st"> </span><span class="kw">rgb</span>(res[[<span class="dv">4</span>]]$centers) 
-<span class="kw">ggplot</span>(<span class="dt">data =</span> imgDF, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) +<span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> clusterColours[res[[<span class="dv">4</span>]]$cluster]) +
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;x&quot;</span>) +
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;y&quot;</span>) +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterColours &lt;-<span class="st"> </span><span class="kw">rgb</span>(res[[<span class="dv">4</span>]]<span class="op">$</span>centers) 
+<span class="kw">ggplot</span>(<span class="dt">data =</span> imgDF, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> clusterColours[res[[<span class="dv">4</span>]]<span class="op">$</span>cluster]) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;x&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;y&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:pixelClustersK4"></span>
 <img src="16-solutions-clustering_files/figure-html/pixelClustersK4-1.png" alt="Result of k-means clustering of pixels based on colour for k=4." width="80%" />
@@ -418,10 +418,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -445,9 +446,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

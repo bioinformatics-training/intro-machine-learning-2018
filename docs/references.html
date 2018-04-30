@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>An Introduction to Machine Learning</title>
   <meta name="description" content="Course materials for An Introduction to Machine Learning">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="An Introduction to Machine Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-01-16">
+<meta name="date" content="2018-04-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -340,7 +340,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Hotelling, Harold. 1933. “Analysis of a Complex of Statistical Variables into Principal Components.” <em>Journal of Educational Psychology</em> 24 (6). Warwick &amp; York: 417.</p>
 </div>
 <div>
-<p>Huang, Yun, Kyoung Kim Jong, Dang V Do, Caroline Lee, Christopher A. Penfold, Jan J Zylicz, John C. Marioni, Jamie A. Hackett, and M. Azim Surani. 2017. “Stella Controls Transcriptional and Endogenous Retrovirus Programmes During Maternal-to-Zygotic Transition.” <em>ELife</em> 1 (1). eLife: 1.</p>
+<p>Huang, Yun, Kyoung Kim Jong, Dang V Do, Caroline Lee, Christopher A. Penfold, Jan J Zylicz, John C. Marioni, Jamie A. Hackett, and M. Azim Surani. 2017. “Stella Controls Transcriptional and Endogenous Retrovirus Programmes During Maternal-to-Zygotic Transition.” <em>eLife</em> 1 (1). eLife: 1.</p>
 </div>
 <div>
 <p>Irie, Naoko, Leehee Weinberger, Walfred WC Tang, Toshihiro Kobayashi, Sergey Viukov, Yair S Manor, Sabine Dietmann, Jacob H Hanna, and M Azim Surani. 2015. “SOX17 Is a Critical Specifier of Human Primordial Germ Cell Fate.” <em>Cell</em> 160 (1). Elsevier: 253–68.</p>
@@ -376,7 +376,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Pearson, Karl. 1901. “LIII. on Lines and Planes of Closest Fit to Systems of Points in Space.” <em>The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science</em> 2 (11). Taylor &amp; Francis: 559–72.</p>
 </div>
 <div>
-<p>Penfold, Christopher Andrew, Anastasiya Sybirna, John Reid, Yun Huang, Lorenz Wernisch, Zoubin Ghahramani, Murray Grant, and M Azim Surani. 2017. “Nonparametric Bayesian Inference of Transcriptional Branching and Recombination Identifies Regulators of Early Human Germ Cell Development.” <em>BioRxiv</em>. Cold Spring Harbor Labs Journals, 167684.</p>
+<p>Penfold, Christopher Andrew, Anastasiya Sybirna, John Reid, Yun Huang, Lorenz Wernisch, Zoubin Ghahramani, Murray Grant, and M Azim Surani. 2017. “Nonparametric Bayesian Inference of Transcriptional Branching and Recombination Identifies Regulators of Early Human Germ Cell Development.” <em>bioRxiv</em>. Cold Spring Harbor Labs Journals, 167684.</p>
 </div>
 <div>
 <p>Reich, David, Alkes L Price, and Nick Patterson. 2008. “Principal Component Analysis of Genetic Data.” <em>Nature Genetics</em> 40 (5). Nature Publishing Group: 491–92.</p>
@@ -397,7 +397,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Stegle, Oliver, Katherine J Denby, Emma J Cooke, David L Wild, Zoubin Ghahramani, and Karsten M Borgwardt. 2010. “A Robust Bayesian Two-Sample Test for Detecting Intervals of Differential Gene Expression in Microarray Time Series.” <em>Journal of Computational Biology</em> 17 (3). Mary Ann Liebert, Inc. 140 Huguenot Street, 3rd Floor New Rochelle, NY 10801 USA: 355–67. <a href="http://online.liebertpub.com/doi/abs/10.1089/cmb.2009.0175" class="uri">http://online.liebertpub.com/doi/abs/10.1089/cmb.2009.0175</a>.</p>
 </div>
 <div>
-<p>Svensson, Valentine, Roser Vento-Tormo, and Sarah A Teichmann. 2017. “Moore’s Law in Single Cell Transcriptomics.” <em>ArXiv Preprint ArXiv:1704.01379</em>.</p>
+<p>Svensson, Valentine, Roser Vento-Tormo, and Sarah A Teichmann. 2017. “Moore’s Law in Single Cell Transcriptomics.” <em>arXiv Preprint arXiv:1704.01379</em>.</p>
 </div>
 <div>
 <p>Tang, Fuchou, Catalin Barbacioru, Yangzhou Wang, Ellen Nordman, Clarence Lee, Nanlan Xu, Xiaohui Wang, et al. 2009. “MRNA-Seq Whole-Transcriptome Analysis of a Single Cell.” <em>Nature Methods</em> 6 (5). Nature Publishing Group: 377–82.</p>
@@ -461,10 +461,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -488,9 +489,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

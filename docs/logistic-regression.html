@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>An Introduction to Machine Learning</title>
   <meta name="description" content="Course materials for An Introduction to Machine Learning">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="An Introduction to Machine Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-01-16">
+<meta name="date" content="2018-04-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -319,7 +319,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">D &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;data/Arabidopsis/Arabidopsis_Botrytis_transpose_3.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">row.names=</span><span class="dv">1</span>)</code></pre></div>
 <p>We can also extract out the names of the variables (gene names), and the unique vector of measurment times:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">genenames &lt;-<span class="st"> </span><span class="kw">colnames</span>(D)
-Xs &lt;-<span class="st"> </span>D$Time[<span class="dv">1</span>:<span class="dv">24</span>]</code></pre></div>
+Xs &lt;-<span class="st"> </span>D<span class="op">$</span>Time[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>]</code></pre></div>
 <p>Exercise 3.1. Plot the gene expression profiles to familiarise yourself with the data.</p>
 <div id="linear-regression" class="section level3">
 <h3><span class="header-section-number">4.1.1</span> Linear regression</h3>
@@ -327,7 +327,7 @@ Xs &lt;-<span class="st"> </span>D$Time[<span class="dv">1</span>:<span class="d
 <p><span class="math inline">\(y = m x + c.\)</span></p>
 <p>For a typical set of data, we have a vector of observations, <span class="math inline">\(\mathbf{y} = (y_1,y_2,\ldots,y_n)\)</span> with a corresponding set of explanatory variables. For now we can assume that the explanatory variable is scalar, for example time (in hours), such that we have a set of observations, <span class="math inline">\(\mathbf{X} = (t_1,t_2,\ldots,t_n)\)</span>. Using linear regression we aim to infer the parameters <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>, which will tell us something about the relationship between the two variables, and allow us to make predictions at a new set of locations, <span class="math inline">\(\mathbf{X}*\)</span>.</p>
 <p>Within {R}, linear regression can be implemented via the {lm} function. In the example below, we perform linear regression for the gene expression of AT2G28890 as a function of time, using the infection time series only (hence we use only the first <span class="math inline">\(24\)</span> datapoints):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(AT2G28890~Time, <span class="dt">data =</span> D[<span class="dv">25</span>:<span class="kw">nrow</span>(D),])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(AT2G28890<span class="op">~</span>Time, <span class="dt">data =</span> D[<span class="dv">25</span><span class="op">:</span><span class="kw">nrow</span>(D),])</code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = AT2G28890 ~ Time, data = D[25:nrow(D), ])
@@ -342,9 +342,9 @@ Xs &lt;-<span class="st"> </span>D$Time[<span class="dv">1</span>:<span class="d
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mlbench)
 <span class="kw">set.seed</span>(<span class="dv">1</span>)
 
-geneindex &lt;-<span class="st"> </span><span class="kw">which</span>(genenames==<span class="st">&quot;AT2G28890&quot;</span>)
+geneindex &lt;-<span class="st"> </span><span class="kw">which</span>(genenames<span class="op">==</span><span class="st">&quot;AT2G28890&quot;</span>)
 
-lrfit &lt;-<span class="st"> </span><span class="kw">train</span>(y~., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>Xs,<span class="dt">y=</span>D[<span class="dv">25</span>:<span class="kw">nrow</span>(D),geneindex]), <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)
+lrfit &lt;-<span class="st"> </span><span class="kw">train</span>(y<span class="op">~</span>., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>Xs,<span class="dt">y=</span>D[<span class="dv">25</span><span class="op">:</span><span class="kw">nrow</span>(D),geneindex]), <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)
 predictedValues&lt;-<span class="kw">predict</span>(lrfit)</code></pre></div>
 <p>A summary of the model, including parameters, can be printed out to screen using the {summary} function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(lrfit)</code></pre></div>
@@ -367,11 +367,11 @@ predictedValues&lt;-<span class="kw">predict</span>(lrfit)</code></pre></div>
 ## Multiple R-squared:  0.826,  Adjusted R-squared:  0.8181 
 ## F-statistic: 104.4 on 1 and 22 DF,  p-value: 8.136e-10</code></pre>
 <p>Finally, we can fit a linear model to the control dataset, and plot the inferred results alongside the observation data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit2 &lt;-<span class="st"> </span><span class="kw">train</span>(y~., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>Xs,<span class="dt">y=</span>D[<span class="dv">1</span>:<span class="dv">24</span>,geneindex]), <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit2 &lt;-<span class="st"> </span><span class="kw">train</span>(y<span class="op">~</span>., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>Xs,<span class="dt">y=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex]), <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)
 predictedValues2&lt;-<span class="kw">predict</span>(lrfit2)
 
-<span class="kw">plot</span>(Xs,D[<span class="dv">25</span>:<span class="kw">nrow</span>(D),geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(D[,geneindex])-<span class="fl">0.2</span>, <span class="kw">max</span>(D[,geneindex]+<span class="fl">0.2</span>)),<span class="dt">main=</span>genenames[geneindex])
-<span class="kw">points</span>(Xs,D[<span class="dv">1</span>:<span class="dv">24</span>,geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">plot</span>(Xs,D[<span class="dv">25</span><span class="op">:</span><span class="kw">nrow</span>(D),geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(D[,geneindex])<span class="op">-</span><span class="fl">0.2</span>, <span class="kw">max</span>(D[,geneindex]<span class="op">+</span><span class="fl">0.2</span>)),<span class="dt">main=</span>genenames[geneindex])
+<span class="kw">points</span>(Xs,D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">points</span>(Xs,predictedValues,<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)
 <span class="kw">points</span>(Xs,predictedValues2,<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
 <p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
@@ -384,13 +384,13 @@ predictedValues2&lt;-<span class="kw">predict</span>(lrfit2)
 <p>where <span class="math inline">\(m = [m_1,m_2,c]\)</span> represent the parameters we’re interested in inferring. An <span class="math inline">\(n\)</span>th-order polynomial has the form:</p>
 <p><span class="math inline">\(y = \sum_{i=1}^{n} m_i x^i + c.\)</span></p>
 <p>where <span class="math inline">\(m = [m_1,\ldots,m_n,c]\)</span> are the free parameters. Within {R} we can infer more complex polynomials to the data using the {lm} package by calling the {poly} function when specififying the symbolic model. In the example below we fit a <span class="math inline">\(3\)</span>rd order polynomial (the order of the polynomial is specified via the {degree} variable):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit3 &lt;-<span class="st"> </span><span class="kw">lm</span>(y~<span class="kw">poly</span>(x,<span class="dt">degree=</span><span class="dv">3</span>), <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span>:<span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span>:<span class="dv">24</span>,geneindex]))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit3 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span><span class="kw">poly</span>(x,<span class="dt">degree=</span><span class="dv">3</span>), <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex]))</code></pre></div>
 <p>We can do this within {caret}: in the snippet, below, we fit <span class="math inline">\(3\)</span>rd order polynomials to the control and infected datasets, and plot the fits alongside the data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit3 &lt;-<span class="st"> </span><span class="kw">train</span>(y~<span class="kw">poly</span>(x,<span class="dt">degree=</span><span class="dv">3</span>), <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span>:<span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span>:<span class="dv">24</span>,geneindex]), <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)
-lrfit4 &lt;-<span class="st"> </span><span class="kw">train</span>(y~<span class="kw">poly</span>(x,<span class="dt">degree=</span><span class="dv">3</span>), <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">25</span>:<span class="kw">nrow</span>(D),<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">25</span>:<span class="kw">nrow</span>(D),geneindex]), <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit3 &lt;-<span class="st"> </span><span class="kw">train</span>(y<span class="op">~</span><span class="kw">poly</span>(x,<span class="dt">degree=</span><span class="dv">3</span>), <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex]), <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)
+lrfit4 &lt;-<span class="st"> </span><span class="kw">train</span>(y<span class="op">~</span><span class="kw">poly</span>(x,<span class="dt">degree=</span><span class="dv">3</span>), <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">25</span><span class="op">:</span><span class="kw">nrow</span>(D),<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">25</span><span class="op">:</span><span class="kw">nrow</span>(D),geneindex]), <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)
 
-<span class="kw">plot</span>(Xs,D[<span class="dv">25</span>:<span class="kw">nrow</span>(D),geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(D[,geneindex])-<span class="fl">0.2</span>, <span class="kw">max</span>(D[,geneindex]+<span class="fl">0.2</span>)),<span class="dt">main=</span>genenames[geneindex])
-<span class="kw">points</span>(Xs,D[<span class="dv">1</span>:<span class="dv">24</span>,geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">plot</span>(Xs,D[<span class="dv">25</span><span class="op">:</span><span class="kw">nrow</span>(D),geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(D[,geneindex])<span class="op">-</span><span class="fl">0.2</span>, <span class="kw">max</span>(D[,geneindex]<span class="op">+</span><span class="fl">0.2</span>)),<span class="dt">main=</span>genenames[geneindex])
+<span class="kw">points</span>(Xs,D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">lines</span>(Xs,<span class="kw">fitted</span>(lrfit3),<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">lines</span>(Xs,<span class="kw">fitted</span>(lrfit4),<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</code></pre></div>
 <p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
@@ -402,17 +402,17 @@ lrfit4 &lt;-<span class="st"> </span><span class="kw">train</span>(y~<span class
 <div id="distributions-of-fits" class="section level3">
 <h3><span class="header-section-number">4.1.3</span> Distributions of fits</h3>
 <p>In the previous section we explored fitting a polynomial function to the data. Recall that we can fit a <span class="math inline">\(4\)</span>th order polynomial to the control datasets as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit3    &lt;-<span class="st"> </span><span class="kw">lm</span>(y~<span class="kw">poly</span>(x,<span class="dt">degree=</span><span class="dv">4</span>), <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span>:<span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span>:<span class="dv">24</span>,geneindex]))
-<span class="kw">plot</span>(Xs,D[<span class="dv">1</span>:<span class="dv">24</span>,geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(D[,geneindex])-<span class="fl">0.2</span>, <span class="kw">max</span>(D[,geneindex]+<span class="fl">0.2</span>)),<span class="dt">main=</span>genenames[geneindex])
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit3    &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span><span class="kw">poly</span>(x,<span class="dt">degree=</span><span class="dv">4</span>), <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex]))
+<span class="kw">plot</span>(Xs,D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(D[,geneindex])<span class="op">-</span><span class="fl">0.2</span>, <span class="kw">max</span>(D[,geneindex]<span class="op">+</span><span class="fl">0.2</span>)),<span class="dt">main=</span>genenames[geneindex])
 <span class="kw">lines</span>(Xs,<span class="kw">fitted</span>(lrfit3),<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
 <p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>It looks reasonable, but how does it compare to the following shown in blue?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit4 &lt;-<span class="st">  </span>lrfit3
-lrfit4$coefficients &lt;-<span class="st"> </span>lrfit4$coefficients +<span class="st"> </span><span class="fl">0.1</span>*<span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="kw">length</span>(lrfit4$coefficients)),<span class="kw">length</span>(lrfit4$coefficients));
-pred1&lt;-<span class="kw">predict</span>(lrfit4, <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span>:<span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span>:<span class="dv">24</span>,geneindex]))
+lrfit4<span class="op">$</span>coefficients &lt;-<span class="st"> </span>lrfit4<span class="op">$</span>coefficients <span class="op">+</span><span class="st"> </span><span class="fl">0.1</span><span class="op">*</span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="kw">length</span>(lrfit4<span class="op">$</span>coefficients)),<span class="kw">length</span>(lrfit4<span class="op">$</span>coefficients));
+pred1&lt;-<span class="kw">predict</span>(lrfit4, <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex]))
 
 
-<span class="kw">plot</span>(Xs,D[<span class="dv">1</span>:<span class="dv">24</span>,geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(D[,geneindex])-<span class="fl">0.2</span>, <span class="kw">max</span>(D[,geneindex]+<span class="fl">0.2</span>)),<span class="dt">main=</span>genenames[geneindex])
+<span class="kw">plot</span>(Xs,D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(D[,geneindex])<span class="op">-</span><span class="fl">0.2</span>, <span class="kw">max</span>(D[,geneindex]<span class="op">+</span><span class="fl">0.2</span>)),<span class="dt">main=</span>genenames[geneindex])
 <span class="kw">lines</span>(Xs,<span class="kw">fitted</span>(lrfit3),<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">lines</span>(Xs,pred1,<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</code></pre></div>
 <p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
@@ -423,24 +423,24 @@ pred1&lt;-<span class="kw">predict</span>(lrfit4, <span class="dt">data=</span><
 <pre><code>## Loading required package: lme4</code></pre>
 <pre><code>## Loading required package: methods</code></pre>
 <pre><code>## 
-## arm (Version 1.9-3, built: 2016-11-21)</code></pre>
-<pre><code>## Working directory is /home/participant/matt/intro-machine-learning-2018-master</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit4    &lt;-<span class="st"> </span><span class="kw">lm</span>(y~<span class="kw">poly</span>(x,<span class="dt">degree=</span><span class="dv">4</span>), <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span>:<span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span>:<span class="dv">24</span>,geneindex]))
+## arm (Version 1.10-1, built: 2018-4-12)</code></pre>
+<pre><code>## Working directory is /home/participant/Matt/intro-machine-learning-2018-master</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit4    &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span><span class="kw">poly</span>(x,<span class="dt">degree=</span><span class="dv">4</span>), <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex]))
 simulate  &lt;-<span class="st"> </span><span class="kw">coef</span>(<span class="kw">sim</span>(lrfit4))
 paramsamp &lt;-<span class="st"> </span><span class="kw">head</span>(simulate,<span class="dv">10</span>)</code></pre></div>
 <p>This will sample model parameters that are likely to be explaining the dataset, in this case we have produced <span class="math inline">\(10\)</span> different set of sample parameters. In the code, below, we plot these <span class="math inline">\(10\)</span> sample polynomials:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(Xs,D[<span class="dv">1</span>:<span class="dv">24</span>,geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(D[,geneindex])-<span class="fl">0.2</span>, <span class="kw">max</span>(D[,geneindex]+<span class="fl">0.2</span>)),<span class="dt">main=</span>genenames[geneindex])
-for (i in <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>)){
-lrfit4$coefficients &lt;-<span class="st"> </span>paramsamp[i,]
-pred1&lt;-<span class="kw">predict</span>(lrfit4, <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span>:<span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span>:<span class="dv">24</span>,geneindex]))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(Xs,D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(D[,geneindex])<span class="op">-</span><span class="fl">0.2</span>, <span class="kw">max</span>(D[,geneindex]<span class="op">+</span><span class="fl">0.2</span>)),<span class="dt">main=</span>genenames[geneindex])
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>)){
+lrfit4<span class="op">$</span>coefficients &lt;-<span class="st"> </span>paramsamp[i,]
+pred1&lt;-<span class="kw">predict</span>(lrfit4, <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex]))
 <span class="kw">lines</span>(Xs,pred1,<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 }</code></pre></div>
 <p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Alternatively, we can visualise the confidence bounds directly:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit4    &lt;-<span class="st"> </span><span class="kw">lm</span>(y~<span class="kw">poly</span>(x,<span class="dt">degree=</span><span class="dv">4</span>), <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span>:<span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span>:<span class="dv">24</span>,geneindex]))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit4    &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span><span class="kw">poly</span>(x,<span class="dt">degree=</span><span class="dv">4</span>), <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex]))
 pred1&lt;-<span class="kw">predict</span>(lrfit4, <span class="dt">interval=</span><span class="st">&quot;predict&quot;</span>)</code></pre></div>
 <pre><code>## Warning in predict.lm(lrfit4, interval = &quot;predict&quot;): predictions on current data refer to _future_ responses</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(Xs,D[<span class="dv">1</span>:<span class="dv">24</span>,geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(D[,geneindex])-<span class="fl">0.2</span>, <span class="kw">max</span>(D[,geneindex]+<span class="fl">0.2</span>)),<span class="dt">main=</span>genenames[geneindex])
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(Xs,D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex],<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(D[,geneindex])<span class="op">-</span><span class="fl">0.2</span>, <span class="kw">max</span>(D[,geneindex]<span class="op">+</span><span class="fl">0.2</span>)),<span class="dt">main=</span>genenames[geneindex])
 <span class="kw">lines</span>(Xs,pred1[,<span class="dv">1</span>],<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">lines</span>(Xs,pred1[,<span class="dv">2</span>],<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">lines</span>(Xs,pred1[,<span class="dv">3</span>],<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
@@ -494,17 +494,17 @@ K(\mathbf{x}^*,\mathbf{x}) &amp; K(\mathbf{x}^*,\mathbf{x}^*) \\
 <p>Recall that the GP is completely defined by its <em>mean function</em> and <em>covariance function</em>. We can assume a zero-mean function without loss of generality. Until this point, we have not said much about what the covariance function is. In general, the covariance function encodes all information about the <em>type</em> of functions we’re interested in: is it smooth? Periodic? Does it have more complex structure? Does it branching? A good starting point, and the most commonly used covariance function, is the squared exponential covariance function:</p>
 <p><span class="math inline">\(k(X,X^\prime) = \sigma^2 \exp\biggl{(}\frac{(X-X^\prime)^2}{2l^2}\biggr{)}\)</span>.</p>
 <p>This encodes for smooth functions (functions that are infinitely differentiable), and has two hyperparameters: a length-scale hyperparameter <span class="math inline">\(l\)</span>, which defines how fast the functions change over the input space (in our example this would <em>time</em>), and a process variance hyperparameter, <span class="math inline">\(\sigma\)</span>, which encodes the amplitude of the function (in our examples this represents roughly the amplitude of gene expression levels). In the snippet of code, below, we implement a squared exponential covariance function</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">covSE &lt;-<span class="st"> </span>function(X1,X2,<span class="dt">l=</span><span class="dv">1</span>,<span class="dt">sig=</span><span class="dv">1</span>) {
-  K &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(X1)*<span class="kw">length</span>(X2)), <span class="dt">nrow=</span><span class="kw">length</span>(X1))
-  for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(K)) {
-    for (j in <span class="dv">1</span>:<span class="kw">ncol</span>(K)) {
-      K[i,j] &lt;-<span class="st"> </span>sig^<span class="dv">2</span>*<span class="kw">exp</span>(-<span class="fl">0.5</span>*(<span class="kw">abs</span>(X1[i]-X2[j]))^<span class="dv">2</span> /l^<span class="dv">2</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">covSE &lt;-<span class="st"> </span><span class="cf">function</span>(X1,X2,<span class="dt">l=</span><span class="dv">1</span>,<span class="dt">sig=</span><span class="dv">1</span>) {
+  K &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(X1)<span class="op">*</span><span class="kw">length</span>(X2)), <span class="dt">nrow=</span><span class="kw">length</span>(X1))
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(K)) {
+    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(K)) {
+      K[i,j] &lt;-<span class="st"> </span>sig<span class="op">^</span><span class="dv">2</span><span class="op">*</span><span class="kw">exp</span>(<span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>(<span class="kw">abs</span>(X1[i]<span class="op">-</span>X2[j]))<span class="op">^</span><span class="dv">2</span> <span class="op">/</span>l<span class="op">^</span><span class="dv">2</span>)
     }
   }
   <span class="kw">return</span>(K)
 }</code></pre></div>
 <p>To get an idea of what this means, we can generate samples from the GP prior at a set of defined positions along <span class="math inline">\(X\)</span>. Recall that due to the nature of GPs this is Gaussian distributed:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.star &lt;-<span class="st"> </span><span class="kw">seq</span>(-<span class="dv">5</span>,<span class="dv">5</span>,<span class="dt">len=</span><span class="dv">500</span>) ####Define a set of points at which to evaluate the functions
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.star &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">5</span>,<span class="dt">len=</span><span class="dv">500</span>) ####Define a set of points at which to evaluate the functions
 sigma  &lt;-<span class="st"> </span><span class="kw">covSE</span>(x.star,x.star) ###Evaluate the covariance function at those locations, to give the covariance matrix.
 y1 &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(x.star)), sigma)
 y2 &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(x.star)), sigma)
@@ -527,61 +527,61 @@ y3 &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dv
 <p><span class="math inline">\(\hat{f}^* = K(\mathbf{X},\mathbf{X}^*)^\top(K(\mathbf{X},\mathbf{X})+\sigma^2\mathbb{I})^{-1} \mathbf{y}\)</span>,</p>
 <p><span class="math inline">\(\hat{K}^* = K(\mathbf{X}^*,\mathbf{X}^*)^{-1} - K(\mathbf{X},\mathbf{X}^*)^\top (K(\mathbf{X},\mathbf{X})+\sigma^2\mathbb{I})^{-1} K(\mathbf{X},\mathbf{X}^*)\)</span>.</p>
 <p>To demonstrate this, let’s assume we have an unknown function we want to infer. In our example, for data generation, we will assume this to be <span class="math inline">\(y = \sin(X)\)</span> as an illustrative example of a nonlinear function (although we know this, the GP will only ever see samples from this function, never the function itself). We might have some observations from this function at a set of input positions <span class="math inline">\(X\)</span> e.g., one observation at <span class="math inline">\(x=-2\)</span>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span><span class="kw">c</span>(-<span class="dv">2</span>),
-                <span class="dt">y=</span><span class="kw">sin</span>(<span class="kw">c</span>(-<span class="dv">2</span>)))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>),
+                <span class="dt">y=</span><span class="kw">sin</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>)))</code></pre></div>
 <p>We can infer a posterior GP (and plot this against the true underlying function in red):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>f$x
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>f<span class="op">$</span>x
 k.xx &lt;-<span class="st"> </span><span class="kw">covSE</span>(x,x)
 k.xxs &lt;-<span class="st"> </span><span class="kw">covSE</span>(x,x.star)
 k.xsx &lt;-<span class="st"> </span><span class="kw">covSE</span>(x.star,x)
 k.xsxs &lt;-<span class="st"> </span><span class="kw">covSE</span>(x.star,x.star)
 
-f.star.bar &lt;-<span class="st"> </span>k.xsx%*%<span class="kw">solve</span>(k.xx)%*%f$y  ###Mean
-cov.f.star &lt;-<span class="st"> </span>k.xsxs -<span class="st"> </span>k.xsx%*%<span class="kw">solve</span>(k.xx)%*%k.xxs ###Var
+f.star.bar &lt;-<span class="st"> </span>k.xsx<span class="op">%*%</span><span class="kw">solve</span>(k.xx)<span class="op">%*%</span>f<span class="op">$</span>y  ###Mean
+cov.f.star &lt;-<span class="st"> </span>k.xsxs <span class="op">-</span><span class="st"> </span>k.xsx<span class="op">%*%</span><span class="kw">solve</span>(k.xx)<span class="op">%*%</span>k.xxs ###Var
 
-<span class="kw">plot</span>(x.star,<span class="kw">sin</span>(x.star),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(-<span class="fl">2.2</span>, <span class="fl">2.2</span>))
+<span class="kw">plot</span>(x.star,<span class="kw">sin</span>(x.star),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">2.2</span>, <span class="fl">2.2</span>))
 <span class="kw">points</span>(f,<span class="dt">type=</span><span class="st">&#39;o&#39;</span>)
 <span class="kw">lines</span>(x.star,f.star.bar,<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>)
-<span class="kw">lines</span>(x.star,f.star.bar<span class="dv">+2</span>*<span class="kw">sqrt</span>(<span class="kw">diag</span>(cov.f.star)),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">pch=</span><span class="dv">22</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)
-<span class="kw">lines</span>(x.star,f.star.bar<span class="dv">-2</span>*<span class="kw">sqrt</span>(<span class="kw">diag</span>(cov.f.star)),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">pch=</span><span class="dv">22</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</code></pre></div>
+<span class="kw">lines</span>(x.star,f.star.bar<span class="op">+</span><span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(<span class="kw">diag</span>(cov.f.star)),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">pch=</span><span class="dv">22</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)
+<span class="kw">lines</span>(x.star,f.star.bar<span class="op">-</span><span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(<span class="kw">diag</span>(cov.f.star)),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">pch=</span><span class="dv">22</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</code></pre></div>
 <p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>We can see that the GP has pinned down functions that pass close to the datapoint. Of course, at this stage, the fit is not particularly good, but that’s not surprising as we only had one observation. Crucially, we can see that the GP encodes the idea of <em>uncertainty</em>. Although the model fit is not particularly good, we can see exactly <em>where</em> it is no good.</p>
 <p>Exercise 3.5 (optional): Try plotting some sample function from the posterior GP. Hint: these will be Gaussian distributed with mean {f.star.bar} and covariance {cov.f.star}.</p>
 <p>Let’s start by adding more observations. Here’s what the posterior fit looks like if we include 4 observations (at <span class="math inline">\(x \in [-4,-2,0,1]\)</span>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span><span class="kw">c</span>(-<span class="dv">4</span>,-<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>),
-                <span class="dt">y=</span><span class="kw">sin</span>(<span class="kw">c</span>(-<span class="dv">4</span>,-<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>)))
-x &lt;-<span class="st"> </span>f$x
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="op">-</span><span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>),
+                <span class="dt">y=</span><span class="kw">sin</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="op">-</span><span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>)))
+x &lt;-<span class="st"> </span>f<span class="op">$</span>x
 k.xx &lt;-<span class="st"> </span><span class="kw">covSE</span>(x,x)
 k.xxs &lt;-<span class="st"> </span><span class="kw">covSE</span>(x,x.star)
 k.xsx &lt;-<span class="st"> </span><span class="kw">covSE</span>(x.star,x)
 k.xsxs &lt;-<span class="st"> </span><span class="kw">covSE</span>(x.star,x.star)
 
-f.star.bar &lt;-<span class="st"> </span>k.xsx%*%<span class="kw">solve</span>(k.xx)%*%f$y  ###Mean
-cov.f.star &lt;-<span class="st"> </span>k.xsxs -<span class="st"> </span>k.xsx%*%<span class="kw">solve</span>(k.xx)%*%k.xxs ###Var
+f.star.bar &lt;-<span class="st"> </span>k.xsx<span class="op">%*%</span><span class="kw">solve</span>(k.xx)<span class="op">%*%</span>f<span class="op">$</span>y  ###Mean
+cov.f.star &lt;-<span class="st"> </span>k.xsxs <span class="op">-</span><span class="st"> </span>k.xsx<span class="op">%*%</span><span class="kw">solve</span>(k.xx)<span class="op">%*%</span>k.xxs ###Var
 
-<span class="kw">plot</span>(x.star,<span class="kw">sin</span>(x.star),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(-<span class="fl">2.2</span>, <span class="fl">2.2</span>))
+<span class="kw">plot</span>(x.star,<span class="kw">sin</span>(x.star),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">2.2</span>, <span class="fl">2.2</span>))
 <span class="kw">points</span>(f,<span class="dt">type=</span><span class="st">&#39;o&#39;</span>)
 <span class="kw">lines</span>(x.star,f.star.bar,<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>)
-<span class="kw">lines</span>(x.star,f.star.bar<span class="dv">+2</span>*<span class="kw">sqrt</span>(<span class="kw">diag</span>(cov.f.star)),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">pch=</span><span class="dv">22</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)
-<span class="kw">lines</span>(x.star,f.star.bar<span class="dv">-2</span>*<span class="kw">sqrt</span>(<span class="kw">diag</span>(cov.f.star)),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">pch=</span><span class="dv">22</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</code></pre></div>
+<span class="kw">lines</span>(x.star,f.star.bar<span class="op">+</span><span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(<span class="kw">diag</span>(cov.f.star)),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">pch=</span><span class="dv">22</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)
+<span class="kw">lines</span>(x.star,f.star.bar<span class="op">-</span><span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(<span class="kw">diag</span>(cov.f.star)),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">pch=</span><span class="dv">22</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</code></pre></div>
 <p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>And with <span class="math inline">\(7\)</span> observations:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span><span class="kw">c</span>(-<span class="dv">4</span>,-<span class="dv">3</span>,-<span class="dv">2</span>,-<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>),
-                <span class="dt">y=</span><span class="kw">sin</span>(<span class="kw">c</span>(-<span class="dv">4</span>,-<span class="dv">3</span>,-<span class="dv">2</span>,-<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)))
-x &lt;-<span class="st"> </span>f$x
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="op">-</span><span class="dv">3</span>,<span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>),
+                <span class="dt">y=</span><span class="kw">sin</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="op">-</span><span class="dv">3</span>,<span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)))
+x &lt;-<span class="st"> </span>f<span class="op">$</span>x
 k.xx &lt;-<span class="st"> </span><span class="kw">covSE</span>(x,x)
 k.xxs &lt;-<span class="st"> </span><span class="kw">covSE</span>(x,x.star)
 k.xsx &lt;-<span class="st"> </span><span class="kw">covSE</span>(x.star,x)
 k.xsxs &lt;-<span class="st"> </span><span class="kw">covSE</span>(x.star,x.star)
 
-f.star.bar &lt;-<span class="st"> </span>k.xsx%*%<span class="kw">solve</span>(k.xx)%*%f$y  ###Mean
-cov.f.star &lt;-<span class="st"> </span>k.xsxs -<span class="st"> </span>k.xsx%*%<span class="kw">solve</span>(k.xx)%*%k.xxs ###Var
+f.star.bar &lt;-<span class="st"> </span>k.xsx<span class="op">%*%</span><span class="kw">solve</span>(k.xx)<span class="op">%*%</span>f<span class="op">$</span>y  ###Mean
+cov.f.star &lt;-<span class="st"> </span>k.xsxs <span class="op">-</span><span class="st"> </span>k.xsx<span class="op">%*%</span><span class="kw">solve</span>(k.xx)<span class="op">%*%</span>k.xxs ###Var
 
-<span class="kw">plot</span>(x.star,<span class="kw">sin</span>(x.star),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(-<span class="fl">2.2</span>, <span class="fl">2.2</span>))
+<span class="kw">plot</span>(x.star,<span class="kw">sin</span>(x.star),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">2.2</span>, <span class="fl">2.2</span>))
 <span class="kw">points</span>(f,<span class="dt">type=</span><span class="st">&#39;o&#39;</span>)
 <span class="kw">lines</span>(x.star,f.star.bar,<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>)
-<span class="kw">lines</span>(x.star,f.star.bar<span class="dv">+2</span>*<span class="kw">sqrt</span>(<span class="kw">diag</span>(cov.f.star)),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">pch=</span><span class="dv">22</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)
-<span class="kw">lines</span>(x.star,f.star.bar<span class="dv">-2</span>*<span class="kw">sqrt</span>(<span class="kw">diag</span>(cov.f.star)),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">pch=</span><span class="dv">22</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</code></pre></div>
+<span class="kw">lines</span>(x.star,f.star.bar<span class="op">+</span><span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(<span class="kw">diag</span>(cov.f.star)),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">pch=</span><span class="dv">22</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)
+<span class="kw">lines</span>(x.star,f.star.bar<span class="op">-</span><span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(<span class="kw">diag</span>(cov.f.star)),<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">pch=</span><span class="dv">22</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</code></pre></div>
 <p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>We can see that with <span class="math inline">\(7\)</span> observations the posterior GP has begun to resemble the true (nonlinear) function very well: the mean of the GP lies very close to the true function and, perhaps more importantly, we continue to have an treatment for the uncertainty.</p>
 </div>
@@ -590,27 +590,27 @@ cov.f.star &lt;-<span class="st"> </span>k.xsxs -<span class="st"> </span>k.xsx%
 <p>Another key aspect of GP regression is the ability to analytically evaluate the marginal likelihood, otherwise referred to as the “model evidence”. The marginal likelihood is the probability of generating the observed datasets under the specified prior. For a GP this would be the probability of seeing the observations <span class="math inline">\(\mathbf{X}\)</span> under a Gaussian distribtion, <span class="math inline">\(\mathcal{N}(\mathbf{0},K(\mathbf{X},\mathbf{X}))\)</span>. The log marginal likelihood for a noise-free model is:</p>
 <p><span class="math inline">\(\ln p(\mathbf{y}|\mathbf{X}) = -\frac{1}{2}\mathbf{y}^\top [K(\mathbf{X},\mathbf{X})+\sigma_n^2\mathbb{I}]^{-1} \mathbf{y} -\frac{1}{2} \ln |K(\mathbf{X},\mathbf{X})+\sigma_n^2\mathbb{I}| - \frac{n}{2}\ln 2\pi\)</span></p>
 <p>We calculate this in the snippet of code, below, hard-coding a small amount of Gaussian noise:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">calcML &lt;-<span class="st"> </span>function(f,<span class="dt">l=</span><span class="dv">1</span>,<span class="dt">sig=</span><span class="dv">1</span>) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">calcML &lt;-<span class="st"> </span><span class="cf">function</span>(f,<span class="dt">l=</span><span class="dv">1</span>,<span class="dt">sig=</span><span class="dv">1</span>) {
   f2 &lt;-<span class="st"> </span><span class="kw">t</span>(f)
   yt &lt;-<span class="st"> </span>f2[<span class="dv">2</span>,]
   y  &lt;-<span class="st"> </span>f[,<span class="dv">2</span>]
   K &lt;-<span class="st"> </span><span class="kw">covSE</span>(f[,<span class="dv">1</span>],f[,<span class="dv">1</span>],l,sig)
-  ML &lt;-<span class="st"> </span>-<span class="fl">0.5</span>*yt%*%<span class="kw">ginv</span>(K<span class="fl">+0.1</span>^<span class="dv">2</span>*<span class="kw">diag</span>(<span class="kw">length</span>(y)))%*%y -<span class="fl">0.5</span>*<span class="kw">log</span>(<span class="kw">det</span>(K)) -(<span class="kw">length</span>(f[,<span class="dv">1</span>])/<span class="dv">2</span>)*<span class="kw">log</span>(<span class="dv">2</span>*pi);
+  ML &lt;-<span class="st"> </span><span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>yt<span class="op">%*%</span><span class="kw">ginv</span>(K<span class="op">+</span><span class="fl">0.1</span><span class="op">^</span><span class="dv">2</span><span class="op">*</span><span class="kw">diag</span>(<span class="kw">length</span>(y)))<span class="op">%*%</span>y <span class="op">-</span><span class="fl">0.5</span><span class="op">*</span><span class="kw">log</span>(<span class="kw">det</span>(K)) <span class="op">-</span>(<span class="kw">length</span>(f[,<span class="dv">1</span>])<span class="op">/</span><span class="dv">2</span>)<span class="op">*</span><span class="kw">log</span>(<span class="dv">2</span><span class="op">*</span>pi);
   <span class="kw">return</span>(ML)
 }</code></pre></div>
 <p>The ability to calculate the marginal likelihood gives us a way to automatically select the <em>hyperparameters</em>. We can increment hyperparameters over a range of values, and choose the values that yield the greatest marginal likelihood. In the example, below, we increment both the length-scale and process variance hyperparameter:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plot3D)
 
 par &lt;-<span class="st"> </span><span class="kw">seq</span>(.<span class="dv">1</span>,<span class="dv">10</span>,<span class="dt">by=</span><span class="fl">0.1</span>)
-ML &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(par)^<span class="dv">2</span>), <span class="dt">nrow=</span><span class="kw">length</span>(par), <span class="dt">ncol=</span><span class="kw">length</span>(par))
-for(i in <span class="dv">1</span>:<span class="kw">length</span>(par)) {
-  for(j in <span class="dv">1</span>:<span class="kw">length</span>(par)) {
+ML &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(par)<span class="op">^</span><span class="dv">2</span>), <span class="dt">nrow=</span><span class="kw">length</span>(par), <span class="dt">ncol=</span><span class="kw">length</span>(par))
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(par)) {
+  <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(par)) {
     ML[i,j] &lt;-<span class="st"> </span><span class="kw">calcML</span>(f,par[i],par[j])
   }
 }
 <span class="kw">persp3D</span>(<span class="dt">z =</span> ML,<span class="dt">theta =</span> <span class="dv">120</span>)</code></pre></div>
 <p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ind&lt;-<span class="kw">which</span>(ML==<span class="kw">max</span>(ML), <span class="dt">arr.ind=</span><span class="ot">TRUE</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ind&lt;-<span class="kw">which</span>(ML<span class="op">==</span><span class="kw">max</span>(ML), <span class="dt">arr.ind=</span><span class="ot">TRUE</span>)
 <span class="kw">print</span>(<span class="kw">c</span>(<span class="st">&quot;length-scale&quot;</span>, par[ind[<span class="dv">1</span>]]))</code></pre></div>
 <pre><code>## [1] &quot;length-scale&quot; &quot;2.4&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">c</span>(<span class="st">&quot;process variance&quot;</span>, par[ind[<span class="dv">2</span>]]))</code></pre></div>
@@ -618,27 +618,27 @@ for(i in <span class="dv">1</span>:<span class="kw">length</span>(par)) {
 <p>Here we have performed a grid search to identify the optimal hyperparameters. In practice, the derivative of the marginal likelihood with respect to the hyperparameters is analytically tractable, allowing us to optimise using gradient search algorithms.</p>
 <p>Exercise 3.6: Try plotting the GP using the optimised hyperparameter values.</p>
 <p>Exercise 3.7: Now try fitting a Gaussian process to one of the gene expression profiles in the Botrytis dataset. Hint: You may need to normalise the time axis. Since this data also contains a high level of noise you will also need to use a covariance function/ML calculation that incorporates noise. The snippet of code, below, does this, with the noise now representing a <span class="math inline">\(3\)</span>rd hyperparameter.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">covSEn &lt;-<span class="st"> </span>function(X1,X2,<span class="dt">l=</span><span class="dv">1</span>,<span class="dt">sig=</span><span class="dv">1</span>,<span class="dt">sigman=</span><span class="fl">0.1</span>) {
-  K &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(X1)*<span class="kw">length</span>(X2)), <span class="dt">nrow=</span><span class="kw">length</span>(X1))
-  for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(K)) {
-    for (j in <span class="dv">1</span>:<span class="kw">ncol</span>(K)) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">covSEn &lt;-<span class="st"> </span><span class="cf">function</span>(X1,X2,<span class="dt">l=</span><span class="dv">1</span>,<span class="dt">sig=</span><span class="dv">1</span>,<span class="dt">sigman=</span><span class="fl">0.1</span>) {
+  K &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(X1)<span class="op">*</span><span class="kw">length</span>(X2)), <span class="dt">nrow=</span><span class="kw">length</span>(X1))
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(K)) {
+    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(K)) {
       
-      K[i,j] &lt;-<span class="st"> </span>sig^<span class="dv">2</span>*<span class="kw">exp</span>(-<span class="fl">0.5</span>*(<span class="kw">abs</span>(X1[i]-X2[j]))^<span class="dv">2</span> /l^<span class="dv">2</span>)
+      K[i,j] &lt;-<span class="st"> </span>sig<span class="op">^</span><span class="dv">2</span><span class="op">*</span><span class="kw">exp</span>(<span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>(<span class="kw">abs</span>(X1[i]<span class="op">-</span>X2[j]))<span class="op">^</span><span class="dv">2</span> <span class="op">/</span>l<span class="op">^</span><span class="dv">2</span>)
       
-      if (i==j){
-      K[i,j] &lt;-<span class="st"> </span>K[i,j] +<span class="st"> </span>sigman^<span class="dv">2</span>
+      <span class="cf">if</span> (i<span class="op">==</span>j){
+      K[i,j] &lt;-<span class="st"> </span>K[i,j] <span class="op">+</span><span class="st"> </span>sigman<span class="op">^</span><span class="dv">2</span>
       }
       
     }
   }
   <span class="kw">return</span>(K)
 }</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">calcMLn &lt;-<span class="st"> </span>function(f,<span class="dt">l=</span><span class="dv">1</span>,<span class="dt">sig=</span><span class="dv">1</span>,<span class="dt">sigman=</span><span class="fl">0.1</span>) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">calcMLn &lt;-<span class="st"> </span><span class="cf">function</span>(f,<span class="dt">l=</span><span class="dv">1</span>,<span class="dt">sig=</span><span class="dv">1</span>,<span class="dt">sigman=</span><span class="fl">0.1</span>) {
   f2 &lt;-<span class="st"> </span><span class="kw">t</span>(f)
   yt &lt;-<span class="st"> </span>f2[<span class="dv">2</span>,]
   y  &lt;-<span class="st"> </span>f[,<span class="dv">2</span>]
   K &lt;-<span class="st"> </span><span class="kw">covSE</span>(f[,<span class="dv">1</span>],f[,<span class="dv">1</span>],l,sig)
-  ML &lt;-<span class="st"> </span>-<span class="fl">0.5</span>*yt%*%<span class="kw">ginv</span>(K+<span class="kw">diag</span>(<span class="kw">length</span>(y))*sigman^<span class="dv">2</span>)%*%y -<span class="fl">0.5</span>*<span class="kw">log</span>(<span class="kw">det</span>(K+<span class="kw">diag</span>(<span class="kw">length</span>(y))*sigman^<span class="dv">2</span>)) -(<span class="kw">length</span>(f[,<span class="dv">1</span>])/<span class="dv">2</span>)*<span class="kw">log</span>(<span class="dv">2</span>*pi);
+  ML &lt;-<span class="st"> </span><span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>yt<span class="op">%*%</span><span class="kw">ginv</span>(K<span class="op">+</span><span class="kw">diag</span>(<span class="kw">length</span>(y))<span class="op">*</span>sigman<span class="op">^</span><span class="dv">2</span>)<span class="op">%*%</span>y <span class="op">-</span><span class="fl">0.5</span><span class="op">*</span><span class="kw">log</span>(<span class="kw">det</span>(K<span class="op">+</span><span class="kw">diag</span>(<span class="kw">length</span>(y))<span class="op">*</span>sigman<span class="op">^</span><span class="dv">2</span>)) <span class="op">-</span>(<span class="kw">length</span>(f[,<span class="dv">1</span>])<span class="op">/</span><span class="dv">2</span>)<span class="op">*</span><span class="kw">log</span>(<span class="dv">2</span><span class="op">*</span>pi);
   <span class="kw">return</span>(ML)
 }</code></pre></div>
 </div>
@@ -670,11 +670,11 @@ Figure 4.1: Differential expression analysis for time series. Here we have two t
 ###import(DEtime)
 <span class="kw">library</span>(DEtime)</code></pre></div>
 <p>Within {DEtime}, we can call the function {DEtime_rank} to calculate marginal likelihood ratios for two time series, similar to our application in the previous section. Note that here, the hyperparameters are optimised by gradient search rather than grid searches.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res_rank &lt;-<span class="st"> </span><span class="kw">DEtime_rank</span>(<span class="dt">ControlTimes =</span> Xs, <span class="dt">ControlData =</span> D[<span class="dv">1</span>:<span class="dv">24</span>,<span class="dv">3</span>], <span class="dt">PerturbedTimes =</span> Xs, <span class="dt">PerturbedData =</span> D[<span class="dv">25</span>:<span class="dv">48</span>,<span class="dv">3</span>], <span class="dt">savefile=</span><span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res_rank &lt;-<span class="st"> </span><span class="kw">DEtime_rank</span>(<span class="dt">ControlTimes =</span> Xs, <span class="dt">ControlData =</span> D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,<span class="dv">3</span>], <span class="dt">PerturbedTimes =</span> Xs, <span class="dt">PerturbedData =</span> D[<span class="dv">25</span><span class="op">:</span><span class="dv">48</span>,<span class="dv">3</span>], <span class="dt">savefile=</span><span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## [1] &quot;gene IDs are not provided. Numbers are used instead&quot;
 ## rank list saved in DEtime_rank.txt</code></pre>
 <p>For genes that are DE, we identify the timing of divergence between two time series using the function {DEtime_infer} and visualise the plot using the {plot_DEtime} function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw">DEtime_infer</span>(<span class="dt">ControlTimes =</span> Xs, <span class="dt">ControlData =</span> D[<span class="dv">1</span>:<span class="dv">24</span>,<span class="dv">3</span>], <span class="dt">PerturbedTimes =</span> Xs, <span class="dt">PerturbedData =</span> D[<span class="dv">25</span>:<span class="dv">48</span>,<span class="dv">3</span>])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw">DEtime_infer</span>(<span class="dt">ControlTimes =</span> Xs, <span class="dt">ControlData =</span> D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,<span class="dv">3</span>], <span class="dt">PerturbedTimes =</span> Xs, <span class="dt">PerturbedData =</span> D[<span class="dv">25</span><span class="op">:</span><span class="dv">48</span>,<span class="dv">3</span>])</code></pre></div>
 <pre><code>## gene IDs are not provided. Numbers are used instead.
 ## Testing perturbation time points are not provided. Default one is used.
 ## gene 1 is done
@@ -693,7 +693,7 @@ Figure 4.1: Differential expression analysis for time series. Here we have two t
 <pre><code>## All genes will be plotted 
 ## 1 is plotted</code></pre>
 <p>We can do it for all genes using the example below:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw">DEtime_infer</span>(<span class="dt">ControlTimes =</span> Xs, <span class="dt">ControlData =</span> <span class="kw">t</span>(D[<span class="dv">1</span>:<span class="dv">24</span>,]), <span class="dt">PerturbedTimes =</span> Xs, <span class="dt">PerturbedData =</span> <span class="kw">t</span>(D[<span class="dv">25</span>:<span class="dv">48</span>,]))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw">DEtime_infer</span>(<span class="dt">ControlTimes =</span> Xs, <span class="dt">ControlData =</span> <span class="kw">t</span>(D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,]), <span class="dt">PerturbedTimes =</span> Xs, <span class="dt">PerturbedData =</span> <span class="kw">t</span>(D[<span class="dv">25</span><span class="op">:</span><span class="dv">48</span>,]))</code></pre></div>
 <pre><code>## ControlData is accepted
 ## PerturbedData is accepted
 ## gene IDs are not provided. Numbers are used instead.
@@ -865,7 +865,7 @@ Figure 4.1: Differential expression analysis for time series. Here we have two t
 ## DEtime inference is done.
 ## Please use print_DEtime or plot_DEtime to view the results.</code></pre>
 <p>By systematically evaluating the time of divergence for all genes (and visualising the results as a histogram), we can we can begin to shed light on the temporal progression of the infection process.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">as.numeric</span>(res$result[,<span class="dv">2</span>]),<span class="dt">breaks=</span><span class="dv">20</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">as.numeric</span>(res<span class="op">$</span>result[,<span class="dv">2</span>]),<span class="dt">breaks=</span><span class="dv">20</span>)</code></pre></div>
 <p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 </div>
 <div id="scalability" class="section level4">
@@ -903,37 +903,37 @@ Figure 4.1: Differential expression analysis for time series. Here we have two t
 <pre><code>## The following object is masked from &#39;package:stats&#39;:
 ## 
 ##     lowess</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">warn=</span>-<span class="dv">1</span>)
-mod_fit &lt;-<span class="st"> </span><span class="kw">train</span>(y ~<span class="st"> </span>., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D$Time, <span class="dt">y =</span> <span class="kw">as.factor</span>(D$Class)), <span class="dt">method=</span><span class="st">&quot;glm&quot;</span>, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">warn=</span><span class="op">-</span><span class="dv">1</span>)
+mod_fit &lt;-<span class="st"> </span><span class="kw">train</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D<span class="op">$</span>Time, <span class="dt">y =</span> <span class="kw">as.factor</span>(D<span class="op">$</span>Class)), <span class="dt">method=</span><span class="st">&quot;glm&quot;</span>, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)</code></pre></div>
 <p>To evaluate the model, we will load in a second (related) dataset, containnig a new set of observations not seen by the model, and predict infection status.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Dpred &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;data/Arabidopsis/Arabidopsis_Botrytis_pred_transpose_3.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">row.names=</span><span class="dv">1</span>)
 
-prob &lt;-<span class="st"> </span><span class="kw">predict</span>(mod_fit, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> Dpred$Time, <span class="dt">y =</span> <span class="kw">as.factor</span>(Dpred$Class)), <span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)
-pred &lt;-<span class="st"> </span><span class="kw">prediction</span>(prob$<span class="st">`</span><span class="dt">1</span><span class="st">`</span>, <span class="kw">as.factor</span>(Dpred$Class))</code></pre></div>
+prob &lt;-<span class="st"> </span><span class="kw">predict</span>(mod_fit, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> Dpred<span class="op">$</span>Time, <span class="dt">y =</span> <span class="kw">as.factor</span>(Dpred<span class="op">$</span>Class)), <span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)
+pred &lt;-<span class="st"> </span><span class="kw">prediction</span>(prob<span class="op">$</span><span class="st">`</span><span class="dt">1</span><span class="st">`</span>, <span class="kw">as.factor</span>(Dpred<span class="op">$</span>Class))</code></pre></div>
 <p>To evaluate how well the algorithm has done, we can calculate a variety of summary statistics. For example the number of true positives, true negatives, false positive and false negatives. A useful summary is to plot the ROC curve (false positive rate versus true positive rate) and calculate the area under the curve. For a perfect algorithm, the area under this curve (AUC) will be equal to <span class="math inline">\(1\)</span>, whereas random assignment would give an area of <span class="math inline">\(0.5\)</span>. In the example below, we will calculate the AUC for a logistic regression model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;tpr&quot;</span>, <span class="dt">x.measure =</span> <span class="st">&quot;fpr&quot;</span>)
 <span class="kw">plot</span>(perf)</code></pre></div>
 <p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">auc &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;auc&quot;</span>)
-auc &lt;-<span class="st"> </span>auc@y.values[[<span class="dv">1</span>]]
+auc &lt;-<span class="st"> </span>auc<span class="op">@</span>y.values[[<span class="dv">1</span>]]
 auc</code></pre></div>
 <pre><code>## [1] 0.6111111</code></pre>
 <p>Okay, so a score of <span class="math inline">\(0.61\)</span> is certainly better than random, but not particularly good. This is perhaps not surprising, as half the time series (the control) is uninfected over the entirety of the time series, whilst in the second times series <em>Botrytis</em> is able to infect from around time point 8 onwards. The slighty better than random performence therefore arises due the slight bias in the number of instances of each class.</p>
 <p>In the example, below, we instead try to regress infection status against individual gene expression levels. The idea is to identify genes that have expression values indicative of <em>Botrytis</em> infection: marker genes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aucscore &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">164</span>), <span class="dv">1</span>, <span class="dv">164</span>)
-for (i in <span class="kw">seq</span>(<span class="dv">3</span>,<span class="dv">164</span>)){
-mod_fit &lt;-<span class="st"> </span><span class="kw">train</span>(y ~<span class="st"> </span>., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D[,i], <span class="dt">y =</span> <span class="kw">as.factor</span>(D$Class)), <span class="dt">method=</span><span class="st">&quot;glm&quot;</span>, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)
-prob &lt;-<span class="st"> </span><span class="kw">predict</span>(mod_fit, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> Dpred[,i], <span class="dt">y =</span> <span class="kw">as.factor</span>(Dpred$Class)), <span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)
-pred &lt;-<span class="st"> </span><span class="kw">prediction</span>(prob$<span class="st">`</span><span class="dt">1</span><span class="st">`</span>, <span class="kw">as.factor</span>(Dpred$Class))
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq</span>(<span class="dv">3</span>,<span class="dv">164</span>)){
+mod_fit &lt;-<span class="st"> </span><span class="kw">train</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D[,i], <span class="dt">y =</span> <span class="kw">as.factor</span>(D<span class="op">$</span>Class)), <span class="dt">method=</span><span class="st">&quot;glm&quot;</span>, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)
+prob &lt;-<span class="st"> </span><span class="kw">predict</span>(mod_fit, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> Dpred[,i], <span class="dt">y =</span> <span class="kw">as.factor</span>(Dpred<span class="op">$</span>Class)), <span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)
+pred &lt;-<span class="st"> </span><span class="kw">prediction</span>(prob<span class="op">$</span><span class="st">`</span><span class="dt">1</span><span class="st">`</span>, <span class="kw">as.factor</span>(Dpred<span class="op">$</span>Class))
 perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;tpr&quot;</span>, <span class="dt">x.measure =</span> <span class="st">&quot;fpr&quot;</span>)
 auc &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;auc&quot;</span>)
-aucscore[i] &lt;-<span class="st"> </span>auc@y.values[[<span class="dv">1</span>]]
+aucscore[i] &lt;-<span class="st"> </span>auc<span class="op">@</span>y.values[[<span class="dv">1</span>]]
 }
 
-<span class="kw">plot</span>(aucscore[<span class="dv">1</span>,<span class="dv">3</span>:<span class="kw">ncol</span>(aucscore)],<span class="dt">ylab=</span><span class="st">&quot;AUC&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;gene index&quot;</span>)</code></pre></div>
+<span class="kw">plot</span>(aucscore[<span class="dv">1</span>,<span class="dv">3</span><span class="op">:</span><span class="kw">ncol</span>(aucscore)],<span class="dt">ylab=</span><span class="st">&quot;AUC&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;gene index&quot;</span>)</code></pre></div>
 <p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <p>We note that, several genes in the list apear to have AUC scores much greater than <span class="math inline">\(0.6\)</span>. We can take a look at some of the genes with high predictive power:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">genenames[<span class="kw">which</span>(aucscore&gt;<span class="fl">0.8</span>)]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">genenames[<span class="kw">which</span>(aucscore<span class="op">&gt;</span><span class="fl">0.8</span>)]</code></pre></div>
 <pre><code>##  [1] &quot;AT1G29990&quot; &quot;AT1G67170&quot; &quot;AT2G21380&quot; &quot;AT2G28890&quot; &quot;AT2G35500&quot;
 ##  [6] &quot;AT2G45660&quot; &quot;AT3G09980&quot; &quot;AT3G11590&quot; &quot;AT3G13720&quot; &quot;AT3G25710&quot;
 ## [11] &quot;AT3G44720&quot; &quot;AT3G48150&quot; &quot;AT4G00710&quot; &quot;AT4G02150&quot; &quot;AT4G16380&quot;
@@ -1025,18 +1025,18 @@ aucscore[i] &lt;-<span class="st"> </span>auc@y.values[[<span class="dv">1</span
 </table>
 <p>Table 3.1: Genes predictive of infection status of <em>Botrytis cinerea</em> whose proteins are targeted by effectors of a variety of pathogens</p>
 <p>Let’s take a look at what the data looks like. In this case we plot the training data labels and the fit from the logistic regression i.e., <span class="math inline">\(p(\mathbf{y}=1|\mathbf{x})\)</span>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bestpredictor &lt;-<span class="st"> </span><span class="kw">which</span>(aucscore==<span class="kw">max</span>(aucscore))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bestpredictor &lt;-<span class="st"> </span><span class="kw">which</span>(aucscore<span class="op">==</span><span class="kw">max</span>(aucscore))
 
-best_mod_fit &lt;-<span class="st"> </span><span class="kw">train</span>(y ~., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D[,bestpredictor], <span class="dt">y =</span> <span class="kw">as.factor</span>(D$Class)), <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>, <span class="dt">method=</span><span class="st">&quot;glm&quot;</span>)
+best_mod_fit &lt;-<span class="st"> </span><span class="kw">train</span>(y <span class="op">~</span>., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D[,bestpredictor], <span class="dt">y =</span> <span class="kw">as.factor</span>(D<span class="op">$</span>Class)), <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>, <span class="dt">method=</span><span class="st">&quot;glm&quot;</span>)
 
-<span class="kw">plot</span>(D[,bestpredictor],D$Class,<span class="dt">xlab=</span>genenames[bestpredictor],<span class="dt">ylab=</span><span class="st">&quot;Class&quot;</span>)
+<span class="kw">plot</span>(D[,bestpredictor],D<span class="op">$</span>Class,<span class="dt">xlab=</span>genenames[bestpredictor],<span class="dt">ylab=</span><span class="st">&quot;Class&quot;</span>)
 <span class="kw">lines</span>(<span class="kw">seq</span>(<span class="kw">min</span>(D[,bestpredictor]),<span class="kw">max</span>(D[,bestpredictor]),<span class="dt">length=</span><span class="dv">200</span>),<span class="kw">predict</span>(best_mod_fit,<span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="kw">min</span>(D[,bestpredictor]),<span class="kw">max</span>(D[,bestpredictor]),<span class="dt">length=</span><span class="dv">200</span>)),<span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)[,<span class="dv">2</span>])</code></pre></div>
 <p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 </div>
 <div id="gp-classification" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> GP classification</h3>
 <p>Classification approaches using Gaussian processes are also possible. Unlike Gaussian process regression, Gaussian process classification is not analytically tractable, and we must instead use approximations. A GP classifier has been implemented in {caret} using a polynomial kernel, and can be called using the following code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_fit2 &lt;-<span class="st"> </span><span class="kw">train</span>(y~., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D$Time, <span class="dt">y =</span> <span class="kw">as.factor</span>(D$Class)), <span class="dt">method=</span><span class="st">&quot;gaussprPoly&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_fit2 &lt;-<span class="st"> </span><span class="kw">train</span>(y<span class="op">~</span>., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D<span class="op">$</span>Time, <span class="dt">y =</span> <span class="kw">as.factor</span>(D<span class="op">$</span>Class)), <span class="dt">method=</span><span class="st">&quot;gaussprPoly&quot;</span>)</code></pre></div>
 <p>Again, we can systematically evaluate how well different genes predict the observed phenotype.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(kernlab)</code></pre></div>
 <pre><code>## 
@@ -1045,13 +1045,13 @@ best_mod_fit &lt;-<span class="st"> </span><span class="kw">train</span>(y ~., <
 ## 
 ##     alpha</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aucscore2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">164</span>), <span class="dv">1</span>, <span class="dv">164</span>)
-for (i in <span class="kw">seq</span>(<span class="dv">3</span>,<span class="dv">164</span>)){
-mod_fit2 &lt;-<span class="st"> </span><span class="kw">gausspr</span>(D[,i], <span class="kw">as.factor</span>(D$Class), <span class="dt">scaled =</span> <span class="ot">TRUE</span>, <span class="dt">type=</span> <span class="ot">NULL</span>, <span class="dt">kernel=</span><span class="st">&quot;rbfdot&quot;</span>, <span class="dt">kpar=</span><span class="st">&quot;automatic&quot;</span>, <span class="dt">variance.model =</span> <span class="ot">FALSE</span>, <span class="dt">tol=</span><span class="fl">0.0005</span>, <span class="dt">cross=</span><span class="dv">0</span>, <span class="dt">fit=</span><span class="ot">TRUE</span>) 
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq</span>(<span class="dv">3</span>,<span class="dv">164</span>)){
+mod_fit2 &lt;-<span class="st"> </span><span class="kw">gausspr</span>(D[,i], <span class="kw">as.factor</span>(D<span class="op">$</span>Class), <span class="dt">scaled =</span> <span class="ot">TRUE</span>, <span class="dt">type=</span> <span class="ot">NULL</span>, <span class="dt">kernel=</span><span class="st">&quot;rbfdot&quot;</span>, <span class="dt">kpar=</span><span class="st">&quot;automatic&quot;</span>, <span class="dt">variance.model =</span> <span class="ot">FALSE</span>, <span class="dt">tol=</span><span class="fl">0.0005</span>, <span class="dt">cross=</span><span class="dv">0</span>, <span class="dt">fit=</span><span class="ot">TRUE</span>) 
 prob&lt;-<span class="kw">predict</span>(mod_fit2, Dpred[,i], <span class="dt">type=</span><span class="st">&quot;probabilities&quot;</span>)
-pred &lt;-<span class="st"> </span><span class="kw">prediction</span>(prob[,<span class="dv">2</span>], <span class="kw">as.factor</span>(Dpred$Class))
+pred &lt;-<span class="st"> </span><span class="kw">prediction</span>(prob[,<span class="dv">2</span>], <span class="kw">as.factor</span>(Dpred<span class="op">$</span>Class))
 perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;tpr&quot;</span>, <span class="dt">x.measure =</span> <span class="st">&quot;fpr&quot;</span>)
 auc &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;auc&quot;</span>)
-aucscore2[i] &lt;-<span class="st"> </span>auc@y.values[[<span class="dv">1</span>]]
+aucscore2[i] &lt;-<span class="st"> </span>auc<span class="op">@</span>y.values[[<span class="dv">1</span>]]
 }</code></pre></div>
 <pre><code>## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
 ## Using automatic sigma estimation (sigest) for RBF or laplace kernel 
@@ -1222,46 +1222,46 @@ aucscore2[i] &lt;-<span class="st"> </span>auc@y.values[[<span class="dv">1</spa
 <p>The power of GPs and other nonlinear approaches will not be clear unless the data is nonlinear. To illustrate this we will construct an artifical dataset in which low expression levels of a gene indicates no infection, with moderate levels indicating infection; very high levels of the gene, however, do not indicate infected status, but only arise artifically, due to e.g., inducible overexpression. For this dataset very high levels are thus labelled as uninfected. Below we construct this <em>in silico</em> dataset based loosley on the expression levels of AT3G44720.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xtrain =<span class="st"> </span>D[,bestpredictor] 
 
-ytrain =<span class="st"> </span><span class="kw">as.numeric</span>(D$Class)
-ytrain[<span class="kw">which</span>(xtrain&gt;<span class="fl">12.5</span>)]=<span class="dv">0</span>
-ytrain[<span class="kw">which</span>(xtrain&lt;<span class="dv">10</span>)]=<span class="dv">0</span>
+ytrain =<span class="st"> </span><span class="kw">as.numeric</span>(D<span class="op">$</span>Class)
+ytrain[<span class="kw">which</span>(xtrain<span class="op">&gt;</span><span class="fl">12.5</span>)]=<span class="dv">0</span>
+ytrain[<span class="kw">which</span>(xtrain<span class="op">&lt;</span><span class="dv">10</span>)]=<span class="dv">0</span>
 ytrain =<span class="st"> </span><span class="kw">as.factor</span>(ytrain)
 
 xpred =<span class="st"> </span>Dpred[,bestpredictor] 
-ypred =<span class="st"> </span><span class="kw">as.numeric</span>(Dpred$Class)
-ypred[<span class="kw">which</span>(xpred&gt;<span class="fl">12.5</span>)]=<span class="dv">0</span>
-ypred[<span class="kw">which</span>(xpred&lt;<span class="dv">10</span>)]=<span class="dv">0</span>
+ypred =<span class="st"> </span><span class="kw">as.numeric</span>(Dpred<span class="op">$</span>Class)
+ypred[<span class="kw">which</span>(xpred<span class="op">&gt;</span><span class="fl">12.5</span>)]=<span class="dv">0</span>
+ypred[<span class="kw">which</span>(xpred<span class="op">&lt;</span><span class="dv">10</span>)]=<span class="dv">0</span>
 ypred =<span class="st"> </span><span class="kw">as.factor</span>(ypred)</code></pre></div>
 <p>Let’s first fit a logistic model and visualise the result:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_fit3 &lt;-<span class="st"> </span><span class="kw">train</span>(y ~., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> xtrain, <span class="dt">y=</span> <span class="kw">as.factor</span>(ytrain)), <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;glm&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_fit3 &lt;-<span class="st"> </span><span class="kw">train</span>(y <span class="op">~</span>., <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> xtrain, <span class="dt">y=</span> <span class="kw">as.factor</span>(ytrain)), <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;glm&quot;</span>)
 
-<span class="kw">plot</span>(xtrain,<span class="kw">as.numeric</span>(ytrain)-<span class="dv">1</span>,<span class="dt">xlab=</span><span class="st">&quot;Marker gene&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Class&quot;</span>)
+<span class="kw">plot</span>(xtrain,<span class="kw">as.numeric</span>(ytrain)<span class="op">-</span><span class="dv">1</span>,<span class="dt">xlab=</span><span class="st">&quot;Marker gene&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Class&quot;</span>)
 
 <span class="kw">lines</span>(<span class="kw">seq</span>(<span class="kw">min</span>(xtrain),<span class="kw">max</span>(xtrain),<span class="dt">length=</span><span class="dv">200</span>),<span class="kw">predict</span>(mod_fit3,<span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="kw">min</span>(xtrain),<span class="kw">max</span>(xtrain),<span class="dt">length=</span><span class="dv">200</span>),<span class="dt">y=</span> <span class="kw">matrix</span>(<span class="dv">200</span>,<span class="dv">1</span>,<span class="dv">1</span>)),<span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)[,<span class="dv">2</span>])</code></pre></div>
 <p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_fit3$results$Accuracy</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_fit3<span class="op">$</span>results<span class="op">$</span>Accuracy</code></pre></div>
 <pre><code>## [1] 0.8660466</code></pre>
 <p>We can see from the plot that the model fit is very poor. However, if we look at the accuracy (printed at the bottom) the result appears to be good. This is due to the skewed number of samples from each class: there are far more non infected samples than there are infected, which means that if the model predicts uninfected for every instance, it will be correct more than it’s incorrect. We can similary check the result on our test dataset:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prob&lt;-<span class="kw">predict</span>(mod_fit3, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">x =</span>xpred, <span class="dt">y =</span> <span class="kw">as.factor</span>(ypred)), <span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)
 pred &lt;-<span class="st"> </span><span class="kw">prediction</span>(prob[,<span class="dv">2</span>], ypred)
 perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;tpr&quot;</span>, <span class="dt">x.measure =</span> <span class="st">&quot;fpr&quot;</span>)
 auc &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;auc&quot;</span>)
-auc &lt;-<span class="st"> </span>auc@y.values[[<span class="dv">1</span>]]
+auc &lt;-<span class="st"> </span>auc<span class="op">@</span>y.values[[<span class="dv">1</span>]]
 auc</code></pre></div>
 <pre><code>## [1] 0.7104377</code></pre>
 <p>We can now instead attempt to take advantage the extra flexibility of GPs.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_fit2 &lt;-<span class="st"> </span><span class="kw">gausspr</span>(y~x,<span class="dt">x=</span>xtrain, <span class="dt">y=</span>ytrain, <span class="dt">scaled =</span> <span class="ot">TRUE</span>, <span class="dt">type=</span> <span class="ot">NULL</span>, <span class="dt">kernel=</span><span class="st">&quot;rbfdot&quot;</span>, <span class="dt">kpar=</span><span class="st">&quot;automatic&quot;</span>, <span class="dt">variance.model =</span> <span class="ot">FALSE</span>, <span class="dt">tol=</span><span class="fl">0.0005</span>, <span class="dt">cross=</span><span class="dv">0</span>, <span class="dt">fit=</span><span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_fit2 &lt;-<span class="st"> </span><span class="kw">gausspr</span>(y<span class="op">~</span>x,<span class="dt">x=</span>xtrain, <span class="dt">y=</span>ytrain, <span class="dt">scaled =</span> <span class="ot">TRUE</span>, <span class="dt">type=</span> <span class="ot">NULL</span>, <span class="dt">kernel=</span><span class="st">&quot;rbfdot&quot;</span>, <span class="dt">kpar=</span><span class="st">&quot;automatic&quot;</span>, <span class="dt">variance.model =</span> <span class="ot">FALSE</span>, <span class="dt">tol=</span><span class="fl">0.0005</span>, <span class="dt">cross=</span><span class="dv">0</span>, <span class="dt">fit=</span><span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## Using automatic sigma estimation (sigest) for RBF or laplace kernel</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(xtrain,<span class="kw">as.numeric</span>(ytrain)-<span class="dv">1</span>,<span class="dt">xlab=</span><span class="st">&quot;Marker gene&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Class&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(xtrain,<span class="kw">as.numeric</span>(ytrain)<span class="op">-</span><span class="dv">1</span>,<span class="dt">xlab=</span><span class="st">&quot;Marker gene&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Class&quot;</span>)
 <span class="kw">lines</span>(<span class="kw">seq</span>(<span class="kw">min</span>(xtrain),<span class="kw">max</span>(xtrain),<span class="dt">length=</span><span class="dv">200</span>),<span class="kw">predict</span>(mod_fit3,<span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="kw">min</span>(xtrain),<span class="kw">max</span>(xtrain),<span class="dt">length=</span><span class="dv">200</span>),<span class="dt">y=</span> <span class="kw">matrix</span>(<span class="dv">200</span>,<span class="dv">1</span>,<span class="dv">1</span>)),<span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)[,<span class="dv">2</span>])
 <span class="kw">lines</span>(<span class="kw">seq</span>(<span class="kw">min</span>(xtrain),<span class="kw">max</span>(xtrain),<span class="dt">length=</span><span class="dv">200</span>),<span class="kw">predict</span>(mod_fit2,<span class="kw">seq</span>(<span class="kw">min</span>(xtrain),<span class="kw">max</span>(xtrain),<span class="dt">length=</span><span class="dv">200</span>), <span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)[,<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
 <p><img src="03-logistic-regression_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prob2&lt;-kernlab::<span class="kw">predict</span>(mod_fit2, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">x =</span>xpred), <span class="dt">type=</span><span class="st">&quot;probabilities&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prob2&lt;-kernlab<span class="op">::</span><span class="kw">predict</span>(mod_fit2, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">x =</span>xpred), <span class="dt">type=</span><span class="st">&quot;probabilities&quot;</span>)
 prob&lt;-<span class="kw">predict</span>(mod_fit2, xpred, <span class="dt">type=</span><span class="st">&quot;probabilities&quot;</span>)
 pred &lt;-<span class="st"> </span><span class="kw">prediction</span>(prob2[,<span class="dv">2</span>], ypred)
 perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;tpr&quot;</span>, <span class="dt">x.measure =</span> <span class="st">&quot;fpr&quot;</span>)
 auc &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="dt">measure =</span> <span class="st">&quot;auc&quot;</span>)
-auc &lt;-<span class="st"> </span>auc@y.values[[<span class="dv">1</span>]]
+auc &lt;-<span class="st"> </span>auc<span class="op">@</span>y.values[[<span class="dv">1</span>]]
 auc</code></pre></div>
 <pre><code>## [1] 0.8193042</code></pre>
 <p>Boom! We can see that this is a much better model, both in terms of the model fit, which has found a nonlinear classifier, and in terms of the AUC score.</p>
@@ -1296,11 +1296,11 @@ auc</code></pre></div>
 ##     as.Date, as.Date.numeric</code></pre>
 <pre><code>## Loading required package: sandwich</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;kernlab&quot;</span>)
-mod_fit1 &lt;-<span class="st"> </span><span class="kw">train</span>(y ~<span class="st"> </span>x, <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D$AT3G44720, <span class="dt">y =</span> <span class="kw">as.factor</span>(D$Class)), <span class="dt">method=</span><span class="st">&quot;plr&quot;</span>)</code></pre></div>
+mod_fit1 &lt;-<span class="st"> </span><span class="kw">train</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D<span class="op">$</span>AT3G44720, <span class="dt">y =</span> <span class="kw">as.factor</span>(D<span class="op">$</span>Class)), <span class="dt">method=</span><span class="st">&quot;plr&quot;</span>)</code></pre></div>
 <pre><code>## 
 ## Convergence warning in plr: 6</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_fit2 &lt;-<span class="st"> </span><span class="kw">train</span>(y ~<span class="st"> </span>x, <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D$AT3G44720, <span class="dt">y =</span> <span class="kw">as.factor</span>(D$Class)), <span class="dt">method=</span><span class="st">&quot;cforest&quot;</span>)
-mod_fit3 &lt;-<span class="st"> </span><span class="kw">train</span>(y ~<span class="st"> </span>x, <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D$AT3G44720, <span class="dt">y =</span> <span class="kw">as.factor</span>(D$Class)), <span class="dt">method=</span><span class="st">&quot;svmRadialWeights&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#mod_fit2 &lt;- train(y ~ x, data=data.frame(x = D$AT3G44720, y = as.factor(D$Class)), method=&quot;cforest&quot;)</span>
+mod_fit3 &lt;-<span class="st"> </span><span class="kw">train</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x =</span> D<span class="op">$</span>AT3G44720, <span class="dt">y =</span> <span class="kw">as.factor</span>(D<span class="op">$</span>Class)), <span class="dt">method=</span><span class="st">&quot;svmRadialWeights&quot;</span>)</code></pre></div>
 <p>Although we can run a variety of algorithms and check the accuracy of their predictions seperately, another approach would be to combine predicitons to achieve increased accuracy. More information on ensemble learning is available from <a href="https://cran.r-project.org/web/packages/caretEnsemble/vignettes/caretEnsemble-intro.html">CRAN</a>.</p>
 </div>
 </div>
@@ -1329,7 +1329,7 @@ mod_fit3 &lt;-<span class="st"> </span><span class="kw">train</span>(y ~<span cl
 <p>Yang, Jing, Christopher A Penfold, Murray R Grant, and Magnus Rattray. 2016. “Inferring the Perturbation Time from Biological Time Course Data.” <em>Bioinformatics</em>. Oxford Univ Press, btw329.</p>
 </div>
 <div id="ref-penfold2017nonparametric">
-<p>Penfold, Christopher Andrew, Anastasiya Sybirna, John Reid, Yun Huang, Lorenz Wernisch, Zoubin Ghahramani, Murray Grant, and M Azim Surani. 2017. “Nonparametric Bayesian Inference of Transcriptional Branching and Recombination Identifies Regulators of Early Human Germ Cell Development.” <em>BioRxiv</em>. Cold Spring Harbor Labs Journals, 167684.</p>
+<p>Penfold, Christopher Andrew, Anastasiya Sybirna, John Reid, Yun Huang, Lorenz Wernisch, Zoubin Ghahramani, Murray Grant, and M Azim Surani. 2017. “Nonparametric Bayesian Inference of Transcriptional Branching and Recombination Identifies Regulators of Early Human Germ Cell Development.” <em>bioRxiv</em>. Cold Spring Harbor Labs Journals, 167684.</p>
 </div>
 </div>
             </section>
@@ -1356,10 +1356,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -1383,9 +1384,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

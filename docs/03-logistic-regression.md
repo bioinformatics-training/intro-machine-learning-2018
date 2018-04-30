@@ -220,11 +220,11 @@ library("arm")
 
 ```
 ## 
-## arm (Version 1.9-3, built: 2016-11-21)
+## arm (Version 1.10-1, built: 2018-4-12)
 ```
 
 ```
-## Working directory is /home/participant/matt/intro-machine-learning-2018-master
+## Working directory is /home/participant/Matt/intro-machine-learning-2018-master
 ```
 
 ```r
@@ -1419,7 +1419,7 @@ mod_fit1 <- train(y ~ x, data=data.frame(x = D$AT3G44720, y = as.factor(D$Class)
 ```
 
 ```r
-mod_fit2 <- train(y ~ x, data=data.frame(x = D$AT3G44720, y = as.factor(D$Class)), method="cforest")
+#mod_fit2 <- train(y ~ x, data=data.frame(x = D$AT3G44720, y = as.factor(D$Class)), method="cforest")
 mod_fit3 <- train(y ~ x, data=data.frame(x = D$AT3G44720, y = as.factor(D$Class)), method="svmRadialWeights")
 ```
 

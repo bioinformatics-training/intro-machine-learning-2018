@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>An Introduction to Machine Learning</title>
   <meta name="description" content="Course materials for An Introduction to Machine Learning">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="An Introduction to Machine Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-01-16">
+<meta name="date" content="2018-04-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -357,10 +357,10 @@ sibsp: Number of Siblings/Spouses Aboard<br />
 parch: Number of Parents/Children Aboard<br />
 fare: Fare Payed</p>
 <p><strong>Make categorical features should be made into factors</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">titanic3 &lt;-<span class="st"> &quot;https://goo.gl/At238b&quot;</span> %&gt;%
-<span class="st">  </span>read_csv %&gt;%<span class="st"> </span><span class="co"># read in the data</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">titanic3 &lt;-<span class="st"> &quot;https://goo.gl/At238b&quot;</span> <span class="op">%&gt;%</span>
+<span class="st">  </span>read_csv <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># read in the data</span>
 <span class="st">  </span><span class="kw">select</span>(survived, embarked, sex, 
-         sibsp, parch, fare) %&gt;%
+         sibsp, parch, fare) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">embarked =</span> <span class="kw">factor</span>(embarked),
          <span class="dt">sex =</span> <span class="kw">factor</span>(sex))</code></pre></div>
 <pre><code>## Parsed with column specification:
@@ -382,23 +382,23 @@ fare: Fare Payed</p>
 ## )</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#load(&quot;/Users/robertness/Downloads/titanic.Rdata&quot;)</span></code></pre></div>
 <p><strong>Split data into training and test sets</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">.data &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;training&quot;</span>, <span class="st">&quot;test&quot;</span>) %&gt;%
-<span class="st">  </span><span class="kw">sample</span>(<span class="kw">nrow</span>(titanic3), <span class="dt">replace =</span> T) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">.data &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;training&quot;</span>, <span class="st">&quot;test&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">sample</span>(<span class="kw">nrow</span>(titanic3), <span class="dt">replace =</span> T) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">split</span>(titanic3, .)</code></pre></div>
 <p><strong>Recursive partitioning is implemented in “rpart” package</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rtree_fit &lt;-<span class="st"> </span><span class="kw">rpart</span>(survived ~<span class="st"> </span>., 
-          .data$training) 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rtree_fit &lt;-<span class="st"> </span><span class="kw">rpart</span>(survived <span class="op">~</span><span class="st"> </span>., 
+          .data<span class="op">$</span>training) 
 <span class="kw">rpart.plot</span>(rtree_fit)</code></pre></div>
 <p><img src="19-solutions-decision-trees_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p><strong>Conditional partitioning is implemented in the “ctree” method</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tree_fit &lt;-<span class="st"> </span><span class="kw">ctree</span>(survived ~<span class="st"> </span>., 
-                  <span class="dt">data =</span> .data$training)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tree_fit &lt;-<span class="st"> </span><span class="kw">ctree</span>(survived <span class="op">~</span><span class="st"> </span>., 
+                  <span class="dt">data =</span> .data<span class="op">$</span>training)
 <span class="kw">plot</span>(tree_fit)</code></pre></div>
 <p><img src="19-solutions-decision-trees_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p><strong>Use ROCR package to visualize ROC Curve and compare methods</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tree_roc &lt;-<span class="st"> </span>tree_fit %&gt;%
-<span class="st">  </span><span class="kw">predict</span>(<span class="dt">newdata =</span> .data$test) %&gt;%
-<span class="st">  </span><span class="kw">prediction</span>(.data$test$survived) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tree_roc &lt;-<span class="st"> </span>tree_fit <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">predict</span>(<span class="dt">newdata =</span> .data<span class="op">$</span>test) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">prediction</span>(.data<span class="op">$</span>test<span class="op">$</span>survived) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">performance</span>(<span class="st">&quot;tpr&quot;</span>, <span class="st">&quot;fpr&quot;</span>)
 <span class="kw">plot</span>(tree_roc)</code></pre></div>
 <p><img src="19-solutions-decision-trees_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
@@ -430,10 +430,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -457,9 +458,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

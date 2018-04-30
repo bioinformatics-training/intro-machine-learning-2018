@@ -155,7 +155,7 @@ library(UsingR)
 ```
 ## The following objects are masked from 'package:base':
 ## 
-##     format.pval, round.POSIXt, trunc.POSIXt, units
+##     format.pval, units
 ```
 
 ```

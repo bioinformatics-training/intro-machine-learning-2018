@@ -81,6 +81,21 @@ clusterresults[1,which(clusterresults[2,]==1)]
 ```
 
 ```
+## PGC.109 PGC.111 PGC.144 PGC.145 PGC.202 PGC.203 PGC.204 PGC.206 PGC.208 
+##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
+## PGC.209 PGC.210 PGC.211 PGC.212 PGC.213 PGC.214 PGC.215 PGC.216 PGC.218 
+##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
+## PGC.219 PGC.220 PGC.221 PGC.222 PGC.223 PGC.224 PGC.225 PGC.226 PGC.227 
+##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
+## PGC.228 PGC.229 PGC.230 PGC.231 PGC.232 
+##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"
+```
+
+```r
+clusterresults[1,which(clusterresults[2,]==2)]
+```
+
+```
 ##    preimp  preimp.1  preimp.2  preimp.3  preimp.4  preimp.5  preimp.6 
 ##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
 ##  preimp.7  preimp.8  preimp.9 preimp.10 preimp.11       ESC     ESC.1 
@@ -120,7 +135,42 @@ clusterresults[1,which(clusterresults[2,]==1)]
 ```
 
 ```r
-clusterresults[1,which(clusterresults[2,]==2)]
+clusterresults[1,which(clusterresults[2,]==3)]
+```
+
+```
+## preimp.51    ESC.31   PGC.192   PGC.193   PGC.194   PGC.196   PGC.197 
+##  "preimp"     "ESC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC" 
+##   PGC.199   PGC.200   PGC.201      soma    soma.1    soma.2    soma.3 
+##     "PGC"     "PGC"     "PGC"    "soma"    "soma"    "soma"    "soma" 
+##    soma.4    soma.5    soma.6    soma.7    soma.8    soma.9   soma.10 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.11   soma.12   soma.13   soma.14   soma.15   soma.16   soma.17 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.18   soma.19   soma.20   soma.21   soma.22   soma.23   soma.24 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.25   soma.26   soma.27   soma.28   soma.29   soma.30   soma.31 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.32   soma.33   soma.34   soma.35   soma.36   soma.37   soma.38 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.39   soma.40   soma.41   soma.42   soma.43   soma.44   soma.45 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.46   soma.47   soma.50   soma.53   soma.54   soma.55   soma.56 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.57   soma.58   soma.59   soma.60   soma.61   soma.62   soma.63 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.64   soma.65   soma.66   soma.67   soma.68   soma.69   soma.70 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.71   soma.72   soma.73   soma.74   soma.75   soma.76   soma.77 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.78   soma.79   soma.80   soma.81   soma.82   soma.83   soma.84 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.85 
+##    "soma"
+```
+
+```r
+clusterresults[1,which(clusterresults[2,]==4)]
 ```
 
 ```
@@ -172,56 +222,6 @@ clusterresults[1,which(clusterresults[2,]==2)]
 ##   "PGC"   "PGC"   "PGC"   "PGC"
 ```
 
-```r
-clusterresults[1,which(clusterresults[2,]==3)]
-```
-
-```
-## preimp.51    ESC.31   PGC.192   PGC.193   PGC.194   PGC.196   PGC.197 
-##  "preimp"     "ESC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC" 
-##   PGC.199   PGC.200   PGC.201      soma    soma.1    soma.2    soma.3 
-##     "PGC"     "PGC"     "PGC"    "soma"    "soma"    "soma"    "soma" 
-##    soma.4    soma.5    soma.6    soma.7    soma.8    soma.9   soma.10 
-##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.11   soma.12   soma.13   soma.14   soma.15   soma.16   soma.17 
-##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.18   soma.19   soma.20   soma.21   soma.22   soma.23   soma.24 
-##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.25   soma.26   soma.27   soma.28   soma.29   soma.30   soma.31 
-##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.32   soma.33   soma.34   soma.35   soma.36   soma.37   soma.38 
-##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.39   soma.40   soma.41   soma.42   soma.43   soma.44   soma.45 
-##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.46   soma.47   soma.50   soma.53   soma.54   soma.55   soma.56 
-##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.57   soma.58   soma.59   soma.60   soma.61   soma.62   soma.63 
-##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.64   soma.65   soma.66   soma.67   soma.68   soma.69   soma.70 
-##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.71   soma.72   soma.73   soma.74   soma.75   soma.76   soma.77 
-##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.78   soma.79   soma.80   soma.81   soma.82   soma.83   soma.84 
-##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.85 
-##    "soma"
-```
-
-```r
-clusterresults[1,which(clusterresults[2,]==4)]
-```
-
-```
-## PGC.109 PGC.111 PGC.144 PGC.145 PGC.202 PGC.203 PGC.204 PGC.206 PGC.208 
-##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.209 PGC.210 PGC.211 PGC.212 PGC.213 PGC.214 PGC.215 PGC.216 PGC.218 
-##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.219 PGC.220 PGC.221 PGC.222 PGC.223 PGC.224 PGC.225 PGC.226 PGC.227 
-##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.228 PGC.229 PGC.230 PGC.231 PGC.232 
-##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"
-```
-
 ## Exercise 5.4.
 
 In our previous section we identified clusters associated with various groups. In our application cluster 1 was associated primarily with pre-implantation cells, with cluster 3 associated with PGCs. We could therefore empirically look for genes that are differentially expressed. Since we know SOX17 is associated with PGC specification [@irie2015sox17,@tang2015unique] let's first compare the expression levels of SOX17 in the two groups:
@@ -236,13 +236,13 @@ t.test(D[which(genenames=="SOX17")+3, which(clusterresults[2,]==1)],D[which(gene
 ## 	Welch Two Sample t-test
 ## 
 ## data:  D[which(genenames == "SOX17") + 3, which(clusterresults[2, ] ==  and D[which(genenames == "SOX17") + 3, which(clusterresults[2, ] ==     1)] and     3)]
-## t = 1.7662, df = 192.74, p-value = 0.07895
+## t = 3.7991, df = 31.722, p-value = 0.0006198
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.01860731  0.33739709
+##  0.7417196 2.4577549
 ## sample estimates:
 ##  mean of x  mean of y 
-## 0.23823367 0.07883878
+## 1.67857600 0.07883878
 ```
 
 Typically we won't always know the important genes, but can perform an unbiased analysis by testing all genes.
@@ -383,37 +383,37 @@ rbind(Labels,clust$cluster)
 ```
 ##        [,1]     [,2]     [,3]     [,4]     [,5]     [,6]     [,7] [,8]
 ## Labels "Oocyte" "Oocyte" "Oocyte" "Zygote" "Zygote" "Zygote" "2C" "2C"
-##        "4"      "4"      "4"      "4"      "4"      "4"      "4"  "4" 
+##        "1"      "1"      "1"      "1"      "1"      "1"      "1"  "1" 
 ##        [,9] [,10] [,11] [,12] [,13] [,14] [,15] [,16] [,17] [,18] [,19]
 ## Labels "2C" "2C"  "2C"  "2C"  "4C"  "4C"  "4C"  "4C"  "4C"  "4C"  "4C" 
-##        "4"  "4"   "4"   "4"   "4"   "4"   "4"   "4"   "4"   "4"   "4"  
+##        "1"  "1"   "1"   "1"   "1"   "1"   "1"   "1"   "1"   "1"   "1"  
 ##        [,20] [,21] [,22] [,23] [,24] [,25] [,26] [,27] [,28] [,29] [,30]
 ## Labels "4C"  "4C"  "4C"  "4C"  "4C"  "8C"  "8C"  "8C"  "8C"  "8C"  "8C" 
-##        "4"   "4"   "4"   "4"   "4"   "2"   "2"   "2"   "2"   "2"   "2"  
+##        "1"   "1"   "1"   "1"   "1"   "1"   "1"   "1"   "1"   "1"   "1"  
 ##        [,31] [,32] [,33] [,34] [,35] [,36] [,37] [,38] [,39] [,40] [,41]
 ## Labels "8C"  "8C"  "8C"  "8C"  "8C"  "8C"  "8C"  "8C"  "8C"  "8C"  "8C" 
-##        "2"   "2"   "1"   "1"   "1"   "1"   "2"   "2"   "2"   "2"   "2"  
+##        "1"   "1"   "1"   "1"   "1"   "1"   "1"   "1"   "1"   "1"   "1"  
 ##        [,42] [,43] [,44] [,45]    [,46]    [,47]    [,48]    [,49]   
 ## Labels "8C"  "8C"  "8C"  "morula" "morula" "morula" "morula" "morula"
-##        "2"   "2"   "2"   "2"      "2"      "1"      "2"      "2"     
+##        "1"   "1"   "1"   "1"      "1"      "1"      "1"      "1"     
 ##        [,50]    [,51]    [,52]    [,53]    [,54]    [,55]    [,56]   
 ## Labels "morula" "morula" "morula" "morula" "morula" "morula" "morula"
-##        "2"      "2"      "1"      "2"      "2"      "2"      "2"     
+##        "1"      "1"      "1"      "1"      "1"      "1"      "1"     
 ##        [,57]    [,58]    [,59]    [,60]    [,61]   [,62]   [,63]   [,64]  
 ## Labels "morula" "morula" "morula" "morula" "blast" "blast" "blast" "blast"
-##        "2"      "2"      "2"      "2"      "3"     "3"     "3"     "3"    
+##        "1"      "1"      "1"      "1"      "3"     "3"     "3"     "3"    
 ##        [,65]   [,66]   [,67]   [,68]   [,69]   [,70]   [,71]   [,72]  
 ## Labels "blast" "blast" "blast" "blast" "blast" "blast" "blast" "blast"
 ##        "3"     "3"     "3"     "3"     "3"     "3"     "3"     "3"    
 ##        [,73]   [,74]   [,75]   [,76]   [,77]   [,78]   [,79]   [,80]  
 ## Labels "blast" "blast" "blast" "blast" "blast" "blast" "blast" "blast"
-##        "3"     "3"     "3"     "3"     "3"     "3"     "3"     "3"    
+##        "4"     "2"     "2"     "3"     "3"     "3"     "3"     "4"    
 ##        [,81]   [,82]   [,83]   [,84]   [,85]   [,86]   [,87]   [,88]  
 ## Labels "blast" "blast" "blast" "blast" "blast" "blast" "blast" "blast"
-##        "3"     "3"     "3"     "3"     "3"     "3"     "3"     "3"    
+##        "4"     "3"     "2"     "4"     "3"     "2"     "2"     "4"    
 ##        [,89]   [,90]  
 ## Labels "blast" "blast"
-##        "3"     "3"
+##        "3"     "4"
 ```
 
 Note that, using tSNE we appear to have identified clear structure separating out the majority of blastocyst cells from other. Separate clusters appear to exist for other cell types as well, that were not immediately obvious in the PCA analyses of these datasets. In general, the PCA analysis separated out early-embryogenesis from soma and PGCs, due to large differences in the expression patterns of those cell types; comparatively, the expression patterns for the pre-implantation embryos were close together in the reduced dimensionality space. Due to its nonlinear nature, tSNE was able, in this case to more accurately separate out different cells types.   
