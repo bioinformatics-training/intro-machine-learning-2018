@@ -349,15 +349,34 @@ Labels[<span class="kw">which</span>(D[<span class="dv">1</span>,]<span class="o
 clusterresults &lt;-<span class="st"> </span><span class="kw">rbind</span>(Labels,clust<span class="op">$</span>cluster)</code></pre></div>
 <p>We note that, in general PGCs fall into one or more separate clusters, with soma also separating out well. ESCs and pre-implantation tend to fall into identical clusters. We can take a look at what cell types fall into a specific cluster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterresults[<span class="dv">1</span>,<span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]<span class="op">==</span><span class="dv">1</span>)]</code></pre></div>
-<pre><code>## PGC.109 PGC.111 PGC.144 PGC.145 PGC.202 PGC.203 PGC.204 PGC.206 PGC.208 
-##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
-## PGC.209 PGC.210 PGC.211 PGC.212 PGC.213 PGC.214 PGC.215 PGC.216 PGC.218 
-##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
-## PGC.219 PGC.220 PGC.221 PGC.222 PGC.223 PGC.224 PGC.225 PGC.226 PGC.227 
-##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
-## PGC.228 PGC.229 PGC.230 PGC.231 PGC.232 
-##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;</code></pre>
+<pre><code>## preimp.46 preimp.51 preimp.82 preimp.87    ESC.16    ESC.18    ESC.31 
+##  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot; 
+##    ESC.33    soma.3    soma.4    soma.6    soma.8   soma.12   soma.13 
+##     &quot;ESC&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
+##   soma.14   soma.15   soma.20   soma.23   soma.25   soma.27   soma.48 
+##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
+##   soma.49   soma.50   soma.51   soma.52   soma.53   soma.54   soma.58 
+##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
+##   soma.70   soma.81 
+##    &quot;soma&quot;    &quot;soma&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterresults[<span class="dv">1</span>,<span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]<span class="op">==</span><span class="dv">2</span>)]</code></pre></div>
+<pre><code>## PGC.192 PGC.193 PGC.194 PGC.196 PGC.197 PGC.199 PGC.200 PGC.201    soma 
+##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;  &quot;soma&quot; 
+##  soma.1  soma.2  soma.5  soma.7  soma.9 soma.10 soma.11 soma.16 soma.17 
+##  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot; 
+## soma.18 soma.19 soma.21 soma.22 soma.24 soma.26 soma.28 soma.29 soma.30 
+##  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot; 
+## soma.31 soma.32 soma.33 soma.34 soma.35 soma.36 soma.37 soma.38 soma.39 
+##  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot; 
+## soma.40 soma.41 soma.42 soma.43 soma.44 soma.45 soma.46 soma.47 soma.55 
+##  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot; 
+## soma.56 soma.57 soma.59 soma.60 soma.61 soma.62 soma.63 soma.64 soma.65 
+##  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot; 
+## soma.66 soma.67 soma.68 soma.69 soma.71 soma.72 soma.73 soma.74 soma.75 
+##  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot; 
+## soma.76 soma.77 soma.78 soma.79 soma.80 soma.82 soma.83 soma.84 soma.85 
+##  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;  &quot;soma&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterresults[<span class="dv">1</span>,<span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]<span class="op">==</span><span class="dv">3</span>)]</code></pre></div>
 <pre><code>##    preimp  preimp.1  preimp.2  preimp.3  preimp.4  preimp.5  preimp.6 
 ##  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot; 
 ##  preimp.7  preimp.8  preimp.9 preimp.10 preimp.11       ESC     ESC.1 
@@ -370,59 +389,36 @@ clusterresults &lt;-<span class="st"> </span><span class="kw">rbind</span>(Label
 ##  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot; 
 ## preimp.33 preimp.34 preimp.35 preimp.36 preimp.37 preimp.38 preimp.39 
 ##  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot; 
-## preimp.40 preimp.41 preimp.42 preimp.43 preimp.44 preimp.45 preimp.46 
+## preimp.40 preimp.41 preimp.42 preimp.43 preimp.44 preimp.45 preimp.47 
 ##  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot; 
-## preimp.47 preimp.48 preimp.49 preimp.50 preimp.52 preimp.53 preimp.54 
+## preimp.48 preimp.49 preimp.50 preimp.52 preimp.53 preimp.54 preimp.55 
 ##  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot; 
-## preimp.55 preimp.56 preimp.57 preimp.58 preimp.59 preimp.60 preimp.61 
+## preimp.56 preimp.57 preimp.58 preimp.59 preimp.60 preimp.61 preimp.62 
 ##  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot; 
-## preimp.62 preimp.63 preimp.64 preimp.65 preimp.66 preimp.67 preimp.68 
+## preimp.63 preimp.64 preimp.65 preimp.66 preimp.67 preimp.68 preimp.69 
 ##  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot; 
-## preimp.69 preimp.70 preimp.71 preimp.72 preimp.73 preimp.74 preimp.75 
+## preimp.70 preimp.71 preimp.72 preimp.73 preimp.74 preimp.75 preimp.76 
 ##  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot; 
-## preimp.76 preimp.77 preimp.78 preimp.79 preimp.80 preimp.81 preimp.82 
+## preimp.77 preimp.78 preimp.79 preimp.80 preimp.81 preimp.83 preimp.84 
 ##  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot; 
-## preimp.83 preimp.84 preimp.85 preimp.86 preimp.87 preimp.88 preimp.89 
-##  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot; 
-##     ESC.2     ESC.3     ESC.4     ESC.5     ESC.6     ESC.7     ESC.8 
+## preimp.85 preimp.86 preimp.88 preimp.89     ESC.2     ESC.3     ESC.4 
+##  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;  &quot;preimp&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot; 
+##     ESC.5     ESC.6     ESC.7     ESC.8     ESC.9    ESC.10    ESC.11 
 ##     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot; 
-##     ESC.9    ESC.10    ESC.11    ESC.12    ESC.13    ESC.14    ESC.15 
+##    ESC.12    ESC.13    ESC.14    ESC.15    ESC.17    ESC.19    ESC.20 
 ##     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot; 
-##    ESC.16    ESC.17    ESC.18    ESC.19    ESC.20    ESC.21    ESC.22 
+##    ESC.21    ESC.22    ESC.23    ESC.24    ESC.25    ESC.26    ESC.27 
 ##     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot; 
-##    ESC.23    ESC.24    ESC.25    ESC.26    ESC.27    ESC.28    ESC.29 
-##     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot; 
-##    ESC.30    ESC.32    ESC.33   soma.48   soma.49   soma.51   soma.52 
-##     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterresults[<span class="dv">1</span>,<span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]<span class="op">==</span><span class="dv">3</span>)]</code></pre></div>
-<pre><code>## preimp.51    ESC.31   PGC.192   PGC.193   PGC.194   PGC.196   PGC.197 
-##  &quot;preimp&quot;     &quot;ESC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot; 
-##   PGC.199   PGC.200   PGC.201      soma    soma.1    soma.2    soma.3 
-##     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##    soma.4    soma.5    soma.6    soma.7    soma.8    soma.9   soma.10 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.11   soma.12   soma.13   soma.14   soma.15   soma.16   soma.17 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.18   soma.19   soma.20   soma.21   soma.22   soma.23   soma.24 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.25   soma.26   soma.27   soma.28   soma.29   soma.30   soma.31 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.32   soma.33   soma.34   soma.35   soma.36   soma.37   soma.38 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.39   soma.40   soma.41   soma.42   soma.43   soma.44   soma.45 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.46   soma.47   soma.50   soma.53   soma.54   soma.55   soma.56 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.57   soma.58   soma.59   soma.60   soma.61   soma.62   soma.63 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.64   soma.65   soma.66   soma.67   soma.68   soma.69   soma.70 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.71   soma.72   soma.73   soma.74   soma.75   soma.76   soma.77 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.78   soma.79   soma.80   soma.81   soma.82   soma.83   soma.84 
-##    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot;    &quot;soma&quot; 
-##   soma.85 
-##    &quot;soma&quot;</code></pre>
+##    ESC.28    ESC.29    ESC.30    ESC.32   PGC.145   PGC.202   PGC.203 
+##     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;ESC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot; 
+##   PGC.204   PGC.206   PGC.208   PGC.209   PGC.210   PGC.211   PGC.212 
+##     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot; 
+##   PGC.213   PGC.214   PGC.215   PGC.216   PGC.218   PGC.219   PGC.220 
+##     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot; 
+##   PGC.221   PGC.222   PGC.223   PGC.224   PGC.225   PGC.226   PGC.227 
+##     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot; 
+##   PGC.228   PGC.229   PGC.230   PGC.232 
+##     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;     &quot;PGC&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusterresults[<span class="dv">1</span>,<span class="kw">which</span>(clusterresults[<span class="dv">2</span>,]<span class="op">==</span><span class="dv">4</span>)]</code></pre></div>
 <pre><code>##     PGC   PGC.1   PGC.2   PGC.3   PGC.4   PGC.5   PGC.6   PGC.7   PGC.8 
 ##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
@@ -448,28 +444,28 @@ clusterresults &lt;-<span class="st"> </span><span class="kw">rbind</span>(Label
 ##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
 ##  PGC.99 PGC.100 PGC.101 PGC.102 PGC.103 PGC.104 PGC.105 PGC.106 PGC.107 
 ##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
-## PGC.108 PGC.110 PGC.112 PGC.113 PGC.114 PGC.115 PGC.116 PGC.117 PGC.118 
+## PGC.108 PGC.109 PGC.110 PGC.111 PGC.112 PGC.113 PGC.114 PGC.115 PGC.116 
 ##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
-## PGC.119 PGC.120 PGC.121 PGC.122 PGC.123 PGC.124 PGC.125 PGC.126 PGC.127 
+## PGC.117 PGC.118 PGC.119 PGC.120 PGC.121 PGC.122 PGC.123 PGC.124 PGC.125 
 ##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
-## PGC.128 PGC.129 PGC.130 PGC.131 PGC.132 PGC.133 PGC.134 PGC.135 PGC.136 
+## PGC.126 PGC.127 PGC.128 PGC.129 PGC.130 PGC.131 PGC.132 PGC.133 PGC.134 
 ##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
-## PGC.137 PGC.138 PGC.139 PGC.140 PGC.141 PGC.142 PGC.143 PGC.146 PGC.147 
+## PGC.135 PGC.136 PGC.137 PGC.138 PGC.139 PGC.140 PGC.141 PGC.142 PGC.143 
 ##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
-## PGC.148 PGC.149 PGC.150 PGC.151 PGC.152 PGC.153 PGC.154 PGC.155 PGC.156 
+## PGC.144 PGC.146 PGC.147 PGC.148 PGC.149 PGC.150 PGC.151 PGC.152 PGC.153 
 ##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
-## PGC.157 PGC.158 PGC.159 PGC.160 PGC.161 PGC.162 PGC.163 PGC.164 PGC.165 
+## PGC.154 PGC.155 PGC.156 PGC.157 PGC.158 PGC.159 PGC.160 PGC.161 PGC.162 
 ##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
-## PGC.166 PGC.167 PGC.168 PGC.169 PGC.170 PGC.171 PGC.172 PGC.173 PGC.174 
+## PGC.163 PGC.164 PGC.165 PGC.166 PGC.167 PGC.168 PGC.169 PGC.170 PGC.171 
 ##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
-## PGC.175 PGC.176 PGC.177 PGC.178 PGC.179 PGC.180 PGC.181 PGC.182 PGC.183 
+## PGC.172 PGC.173 PGC.174 PGC.175 PGC.176 PGC.177 PGC.178 PGC.179 PGC.180 
 ##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
-## PGC.184 PGC.185 PGC.186 PGC.187 PGC.188 PGC.189 PGC.190 PGC.191 PGC.195 
+## PGC.181 PGC.182 PGC.183 PGC.184 PGC.185 PGC.186 PGC.187 PGC.188 PGC.189 
 ##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
-## PGC.198 PGC.205 PGC.207 PGC.217 PGC.233 PGC.234 PGC.235 PGC.236 PGC.237 
+## PGC.190 PGC.191 PGC.195 PGC.198 PGC.205 PGC.207 PGC.217 PGC.231 PGC.233 
 ##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot; 
-## PGC.238 PGC.239 PGC.240 PGC.241 
-##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;</code></pre>
+## PGC.234 PGC.235 PGC.236 PGC.237 PGC.238 PGC.239 PGC.240 PGC.241 
+##   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;   &quot;PGC&quot;</code></pre>
 </div>
 <div id="exercise-5.4." class="section level2">
 <h2><span class="header-section-number">D.4</span> Exercise 5.4.</h2>
@@ -479,13 +475,13 @@ clusterresults &lt;-<span class="st"> </span><span class="kw">rbind</span>(Label
 ##  Welch Two Sample t-test
 ## 
 ## data:  D[which(genenames == &quot;SOX17&quot;) + 3, which(clusterresults[2, ] ==  and D[which(genenames == &quot;SOX17&quot;) + 3, which(clusterresults[2, ] ==     1)] and     3)]
-## t = 3.7991, df = 31.722, p-value = 0.0006198
+## t = -0.081071, df = 41.257, p-value = 0.9358
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  0.7417196 2.4577549
+##  -0.5376875  0.4961767
 ## sample estimates:
-##  mean of x  mean of y 
-## 1.67857600 0.07883878</code></pre>
+## mean of x mean of y 
+## 0.4002884 0.4210437</code></pre>
 <p>Typically we won’t always know the important genes, but can perform an unbiased analysis by testing all genes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pvalstore &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode=</span><span class="st">&quot;numeric&quot;</span>, <span class="dt">length=</span><span class="kw">length</span>(genenames))
 <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(genenames))){

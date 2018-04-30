@@ -1120,8 +1120,8 @@ knn_sbf
 ## 
 ## Resampling performance:
 ## 
-##     ROC   Sens   Spec  ROCSD  SensSD  SpecSD
-##  0.8847 0.8295 0.7672 0.0217 0.02509 0.07062
+##     ROC   Sens   Spec   ROCSD  SensSD  SpecSD
+##  0.8844 0.8305 0.7689 0.02017 0.02769 0.07046
 ## 
 ## Using the training set, 16 variables were selected:
 ##    ConvexHullPerimRatioCh1, EntropyIntenCh1, FiberWidthCh1, IntenCoocASMCh4, IntenCoocContrastCh3...
@@ -1157,7 +1157,7 @@ knn_sbf$results
 
 ```
 ##         ROC      Sens      Spec      ROCSD     SensSD     SpecSD
-## 1 0.8846902 0.8295385 0.7672222 0.02170272 0.02509155 0.07062424
+## 1 0.8843675 0.8304615 0.7688889 0.02017254 0.02768875 0.07046473
 ```
 
 To retrieve the optimum value of k found during training run:

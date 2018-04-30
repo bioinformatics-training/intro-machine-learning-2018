@@ -424,7 +424,7 @@ pred1&lt;-<span class="kw">predict</span>(lrfit4, <span class="dt">data=</span><
 <pre><code>## Loading required package: methods</code></pre>
 <pre><code>## 
 ## arm (Version 1.10-1, built: 2018-4-12)</code></pre>
-<pre><code>## Working directory is /home/participant/Matt/intro-machine-learning-2018-master</code></pre>
+<pre><code>## Working directory is /home/participant/Course_Materials</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrfit4    &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span><span class="kw">poly</span>(x,<span class="dt">degree=</span><span class="dv">4</span>), <span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,<span class="dv">1</span>],<span class="dt">y=</span>D[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>,geneindex]))
 simulate  &lt;-<span class="st"> </span><span class="kw">coef</span>(<span class="kw">sim</span>(lrfit4))
 paramsamp &lt;-<span class="st"> </span><span class="kw">head</span>(simulate,<span class="dv">10</span>)</code></pre></div>

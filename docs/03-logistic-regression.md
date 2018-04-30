@@ -224,7 +224,7 @@ library("arm")
 ```
 
 ```
-## Working directory is /home/participant/Matt/intro-machine-learning-2018-master
+## Working directory is /home/participant/Course_Materials
 ```
 
 ```r

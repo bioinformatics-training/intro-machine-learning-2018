@@ -887,6 +887,8 @@ Figure 6.20: K-means clustering of the noisy moons data set: scatterplot of clus
 res &lt;-<span class="st"> </span><span class="kw">lapply</span>(k, <span class="cf">function</span>(i){<span class="kw">kmeans</span>(diff_density[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], i, <span class="dt">nstart=</span><span class="dv">50</span>)})</code></pre></div>
 <pre><code>## Warning: did not converge in 10 iterations
 
+## Warning: did not converge in 10 iterations
+
 ## Warning: did not converge in 10 iterations</code></pre>
 <p>Failure to converge, so increase number of iterations.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw">lapply</span>(k, <span class="cf">function</span>(i){<span class="kw">kmeans</span>(diff_density[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], i, <span class="dt">iter.max=</span><span class="dv">20</span>, <span class="dt">nstart=</span><span class="dv">50</span>)})
