@@ -374,10 +374,10 @@ str(segmentationData)
 ```
 The first column of **segmentationData** is a unique identifier for each cell and the second column is a factor indicating how the observations were characterized into training and test sets in the original study; these two variables are irrelevant for the purposes of this demonstration and so can be discarded. 
 
-The third column *Case* contains the class labels: *PS* (poorly-segmented) and *WS* (well-segmented). Columns 4-61 are the 58 morphological measurements available to be used as predictors. Let's put the class labels in a vector and the predictors in their own data.frame.
+The third column *Class* contains the class labels: *PS* (poorly-segmented) and *WS* (well-segmented). The last two columns are cell centroids and can be ignored. Columns 4-59 are the 58 morphological measurements available to be used as predictors. Let's put the class labels in a vector and the predictors in their own data.frame.
 ```{r echo=T}
 segClass <- segmentationData$Class
-segData <- segmentationData[,4:61]
+segData <- segmentationData[,4:59]
 ```
 
 ### Data splitting
@@ -461,7 +461,7 @@ segDataTrain <- segDataTrain[,-highCorr]
 -->
 
 
-### Fit model without feature selection
+### Fit model
 
 <!-- original settings:
 set.seed(42)
@@ -528,75 +528,22 @@ knnFit
 plot(knnFit)
 ```
 
-
-### Feature selection using filter
-
-We will use the same **trainingControl** settings and **tuning grid** as before. 
+Let's retrieve some information on the final model. To see the optimum value of _k_ found during the grid search, run either of the following lines:
 ```{r echo=T}
-train_ctrl <- trainControl(method="repeatedcv",
-                   number = 5,
-                   repeats = 5
-                   )
+knnFit$finalModel$k
+knnFit$finalModel$tuneValue
 ```
 
-Let's define a filter using Caret's Selection By Filter (SBF) function:
+To find out which variables have been used in the final model, run:
 ```{r echo=T}
-mySBF <- caretSBF
-mySBF$summary <- twoClassSummary
-```
-
-We will use a simple t-test to eliminate the predictors that differ the least between classes. Since we are performing many hypothesis tests we will use Holm's method to control the family wise error rate.
-```{r echo=T}
-mySBF$score <- function(x, y) {
-  out <- t.test(x ~ y)$p.value 
-  out <- p.adjust(out, method="holm")
-  out
-}
-```
-
-Now to set a p-value threshold for our t-test filter.
-```{r echo=T}
-mySBF$filter <- function(score, x, y) { score <= 0.01 }
-```
-
-Let's run the cross-validation. The cross-validation will run in two nested loops. Feature selection will occur in the outer loop. Features selected at each iteration of the outer loop will be passed to the inner loop, where the optimum value of k will be found for that set of features.
-```{r echo=T}
-sbf_ctrl <- sbfControl(functions = mySBF,
-                                method = "repeatedcv",
-                                number = 5,
-                                repeats = 5,
-                                verbose = FALSE)
-
-knn_sbf <- sbf(segDataTrain,
-                segClassTrain,
-                trControl = train_ctrl,
-                sbfControl = sbf_ctrl,
-                ## now arguments to `train`:
-                method = "knn",
-                tuneGrid = tuneParam)
-knn_sbf
-```
-
-Much information about the final model is stored in **knn_sbf**. To reveal the identities of the predictors selected for the final model run:
-```{r echo=T}
-predictors(knn_sbf)
-```
-
-Here are some performance metrics for the final model:
-```{r echo=T}
-knn_sbf$results
-```
-
-To retrieve the optimum value of k found during training run:
-```{r echo=T}
-knn_sbf$fit$finalModel$k
+knnFit$finalModel$xNames
 ```
 
 Let's predict our test set using our final model.
 ```{r echo=T}
 segDataTest <- predict(transformations, segDataTest)
-test_pred <- predict(knn_sbf, segDataTest)
-confusionMatrix(test_pred$pred, segClassTest)
+test_pred <- predict(knnFit, segDataTest)
+confusionMatrix(test_pred, segClassTest)
 
 ```
 

@@ -6,15 +6,15 @@
 
 **What are artificial neural networks (ANNs)?**
 
-*ANN* is actually an old idea but it came back into vogue recently and it is the state of the art technique for machine learning. The goal of ANN algorithms is to mimmick the functions of a neuron (Figure Neuronal Computation) and neuronal networks. 
+*ANN* is actually an old idea but it came back into vogue recently and it is the state of the art technique for machine learning. The goal of ANN algorithms is to mimmick the functions of a neuron (Figure \@ref(fig:neuronalComputation)) and neuronal networks. 
 
-```{r echo = F, fig.cap = 'Neuronal computation', fig.align = 'center', fig.show='hold', out.width = '65%'}
+```{r neuronalComputation, echo = F, fig.cap = 'Neuronal computation', fig.align = 'center', fig.show='hold', out.width = '65%'}
 knitr::include_graphics(c("images/Neuronal computation.png"))
 ```
-Computational representation of a neuron (Figure Perceptron) aims to mimmick the biological input-and-activation architecture of a neuron (Figure Neuronal Computation). A single unit of a computational neuron is also called a **perceptron  or ptrons**. Ptrons have a nonlinear activation function (e.g a logistic function) which determines their output value based upon the values of their inputs.
+Computational representation of a neuron (Figure \@ref(fig:perceptron)) aims to mimmick the biological input-and-activation architecture of a neuron (Figure Neuronal Computation). A single unit of a computational neuron is also called a **perceptron  or ptrons**. Ptrons have a nonlinear activation function (e.g a logistic function) which determines their output value based upon the values of their inputs.
 
 
-```{r echo = F, fig.cap = 'Perceptron', fig.align = 'center', fig.show='hold', out.width = '65%'}
+```{r perceptron, echo = F, fig.cap = 'Perceptron', fig.align = 'center', fig.show='hold', out.width = '65%'}
 knitr::include_graphics(c("images/Perceptron.png"))
 ```
 
@@ -86,7 +86,7 @@ h_\Theta(x) &= a^{(3)} = g(z^{(3)})
 
 Consider the supervised learning problems below. The first two are straight forward cases. 
 ```{r echo = F, fig.cap = 'Why ANN', fig.align = 'center', fig.show='hold', out.width = '85%'}
-knitr::include_graphics(c("images/NN4.png"))
+knitr::include_graphics(c("images/NN4.PNG"))
 ```
 
 

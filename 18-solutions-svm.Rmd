@@ -91,7 +91,7 @@ segClass <- segmentationData$Class
 
 Extract predictors from segmentationData
 ```{r echo=T}
-segData <- segmentationData[,4:61]
+segData <- segmentationData[,4:59]
 ```
 
 Partition data

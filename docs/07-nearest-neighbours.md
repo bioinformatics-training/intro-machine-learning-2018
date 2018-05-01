@@ -384,7 +384,7 @@ getDoParWorkers()
 ```
 
 ```
-## [1] 4
+## [1] 2
 ```
 
 The [caret](http://cran.r-project.org/web/packages/caret/index.html) function **train** is used to fit predictive models over different values of _k_. The function **trainControl** is used to specify a list of computational and resampling options, which will be passed to **train**. We will start by configuring our cross-validation procedure using **trainControl**.
@@ -437,7 +437,7 @@ knnFit
 ## k-Nearest Neighbors 
 ## 
 ## 400 samples
-##   2 predictors
+##   2 predictor
 ##   2 classes: '0', '1' 
 ## 
 ## No pre-processing
@@ -466,7 +466,7 @@ knnFit
 ##   292  0.68825   0.3765
 ##   400  0.51300   0.0260
 ## 
-## Accuracy was used to select the optimal model using the largest value.
+## Accuracy was used to select the optimal model using  the largest value.
 ## The final value used for the model was k = 83.
 ```
 
@@ -844,13 +844,6 @@ A correlogram provides a helpful visualization of the patterns of pairwise corre
 
 ```r
 library(corrplot)
-```
-
-```
-## corrplot 0.84 loaded
-```
-
-```r
 corMat <- cor(segDataTrain)
 corrplot(corMat, order="hclust", tl.cex=0.4)
 ```
@@ -984,7 +977,7 @@ knnFit
 ## k-Nearest Neighbors 
 ## 
 ## 1010 samples
-##   27 predictors
+##   27 predictor
 ##    2 classes: 'PS', 'WS' 
 ## 
 ## No pre-processing
@@ -1044,7 +1037,7 @@ knnFit
 ##   485  0.7091089  0.2460255
 ##   495  0.7017822  0.2169777
 ## 
-## Accuracy was used to select the optimal model using the largest value.
+## Accuracy was used to select the optimal model using  the largest value.
 ## The final value used for the model was k = 25.
 ```
 
@@ -1121,7 +1114,7 @@ knn_sbf
 ## Resampling performance:
 ## 
 ##     ROC   Sens   Spec   ROCSD  SensSD  SpecSD
-##  0.8844 0.8305 0.7689 0.02017 0.02769 0.07046
+##  0.8838 0.8268 0.7683 0.02062 0.02581 0.06848
 ## 
 ## Using the training set, 16 variables were selected:
 ##    ConvexHullPerimRatioCh1, EntropyIntenCh1, FiberWidthCh1, IntenCoocASMCh4, IntenCoocContrastCh3...
@@ -1157,7 +1150,7 @@ knn_sbf$results
 
 ```
 ##         ROC      Sens      Spec      ROCSD     SensSD     SpecSD
-## 1 0.8843675 0.8304615 0.7688889 0.02017254 0.02768875 0.07046473
+## 1 0.8838141 0.8267692 0.7683333 0.02061638 0.02581225 0.06847941
 ```
 
 To retrieve the optimum value of k found during training run:
@@ -1439,26 +1432,26 @@ knnTune
 ## k-Nearest Neighbors 
 ## 
 ## 168 samples
-##  61 predictors
+##  61 predictor
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold, repeated 5 times) 
-## Summary of sample sizes: 135, 135, 134, 135, 133, 135, ... 
+## Summary of sample sizes: 135, 134, 136, 134, 133, 135, ... 
 ## Resampling results across tuning parameters:
 ## 
 ##   k   RMSE       Rsquared   MAE      
-##    1  0.6413320  0.4132466  0.4642574
-##    2  0.5957949  0.4374605  0.4500493
-##    3  0.5888289  0.4382933  0.4410306
-##    4  0.5841354  0.4364264  0.4409199
-##    5  0.5867094  0.4292670  0.4494250
-##    6  0.5988751  0.4038387  0.4593885
-##    7  0.6015944  0.3971522  0.4554279
-##    8  0.6059279  0.3899379  0.4587389
-##    9  0.6108446  0.3813605  0.4622043
-##   10  0.6145065  0.3769979  0.4647581
+##    1  0.6520387  0.3985028  0.4632774
+##    2  0.6113262  0.4259039  0.4627144
+##    3  0.5862976  0.4444624  0.4402393
+##    4  0.5828015  0.4437783  0.4407852
+##    5  0.5933604  0.4209923  0.4516132
+##    6  0.5982192  0.4100908  0.4550370
+##    7  0.6032227  0.4002708  0.4531828
+##    8  0.6078117  0.3936972  0.4583254
+##    9  0.6106399  0.3858548  0.4596576
+##   10  0.6149638  0.3799661  0.4629568
 ## 
-## RMSE was used to select the optimal model using the smallest value.
+## RMSE was used to select the optimal model using  the smallest value.
 ## The final value used for the model was k = 4.
 ```
 
