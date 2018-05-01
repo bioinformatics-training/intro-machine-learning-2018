@@ -6,18 +6,18 @@
 
 **What are artificial neural networks (ANNs)?**
 
-*ANN* is actually an old idea but it came back into vogue recently and it is the state of the art technique for machine learning. The goal of ANN algorithms is to mimmick the functions of a neuron (Figure Neuronal Computation) and neuronal networks. 
+*ANN* is actually an old idea but it came back into vogue recently and it is the state of the art technique for machine learning. The goal of ANN algorithms is to mimmick the functions of a neuron (Figure \@ref(fig:neuronalComputation)) and neuronal networks. 
 
 <div class="figure" style="text-align: center">
-<img src="images/Neuronal computation.png" alt="Neuronal computation" width="65%" />
-<p class="caption">(\#fig:unnamed-chunk-1)Neuronal computation</p>
+<img src="images/neuronal_computation.png" alt="Neuronal computation" width="65%" />
+<p class="caption">(\#fig:neuronalComputation)Neuronal computation</p>
 </div>
-Computational representation of a neuron (Figure Perceptron) aims to mimmick the biological input-and-activation architecture of a neuron (Figure Neuronal Computation). A single unit of a computational neuron is also called a **perceptron  or ptrons**. Ptrons have a nonlinear activation function (e.g a logistic function) which determines their output value based upon the values of their inputs.
+Computational representation of a neuron (Figure \@ref(fig:perceptron)) aims to mimmick the biological input-and-activation architecture of a neuron (Figure \@ref(fig:neuronalComputation)). A single unit of a computational neuron is also called a **perceptron  or ptrons**. Ptrons have a nonlinear activation function (e.g a logistic function) which determines their output value based upon the values of their inputs.
 
 
 <div class="figure" style="text-align: center">
 <img src="images/Perceptron.png" alt="Perceptron" width="65%" />
-<p class="caption">(\#fig:unnamed-chunk-2)Perceptron</p>
+<p class="caption">(\#fig:perceptron)Perceptron</p>
 </div>
 
 **Architecture of ANNs**
@@ -35,13 +35,13 @@ Due to the network-like nature of the ANN a complex, non-linear relationship exi
 
 **Forward propagation**
 
-Figure Neural Network Modeling represents a simple ANN, where we have an input later (layer 1) with three ptrons and a base unit, one hidden layer (layer 2) again with three prtons and a base unit, and an output layer (layer 3) where the $h_{\theta}$(x) is computed. 
+Figure \@ref(fig:neuralNetworkModeling) represents a simple ANN, where we have an input later (layer 1) with three ptrons and a base unit, one hidden layer (layer 2) again with three prtons and a base unit, and an output layer (layer 3) where the $h_{\theta}$(x) is computed. 
 
 This method of computing $h_{\theta}$(x) is called *Forward Propagation*.
 
 <div class="figure" style="text-align: center">
 <img src="images/NN3.png" alt="Neural Network Modeling" width="85%" />
-<p class="caption">(\#fig:unnamed-chunk-3)Neural Network Modeling</p>
+<p class="caption">(\#fig:neuralNetworkModeling)Neural Network Modeling</p>
 </div>
 
 *where*
@@ -87,10 +87,10 @@ h_\Theta(x) &= a^{(3)} = g(z^{(3)})
 
 **Why ANN?**
 
-Consider the supervised learning problems below. The first two are straight forward cases. 
+Consider the supervised learning problems below (Figure \@ref(fig:supervisedLearningProbs)). The first two are straight forward cases. 
 <div class="figure" style="text-align: center">
-<img src="images/NN4.png" alt="Why ANN" width="85%" />
-<p class="caption">(\#fig:unnamed-chunk-4)Why ANN</p>
+<img src="images/NN4.PNG" alt="Why ANN" width="85%" />
+<p class="caption">(\#fig:supervisedLearningProbs)Why ANN</p>
 </div>
 
 
@@ -108,11 +108,11 @@ Because ANN has felixibility to derive complex features from each layer of ptron
 
 Observed data are used to train the neural network and the neural network learns an approximation of the relationship by iteratively adapting its parameters. 
 
-Figure Simple Logical AND ANN shows an example of a simple logical AND ptron architecture. 
+Figure \@ref(fig:simpleLogicalANDANN) shows an example of a simple logical AND ptron architecture. 
 
 <div class="figure" style="text-align: center">
 <img src="images/NN5.png" alt="Simple Logical AND ANN" width="85%" />
-<p class="caption">(\#fig:unnamed-chunk-5)Simple Logical AND ANN</p>
+<p class="caption">(\#fig:simpleLogicalANDANN)Simple Logical AND ANN</p>
 </div>
 
 **Cost function and back propagation**
@@ -374,7 +374,7 @@ abline(0,1,lwd=2)
 legend('bottomright',legend='LM',pch=18,col='blue', bty='n', cex=.95)
 ```
 
-<img src="10-ann_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="10-ann_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 
 The net is doing a better work than the linear model at predicting medv. Once again, be cautious because this result depends on the train-test split performed above. Below, after the visual plot, we are going to perform a fast cross validation in order to be more confident about the results.
@@ -393,7 +393,7 @@ abline(0,1,lwd=2)
 legend('bottomright',legend=c('NN','LM'),pch=18,col=c('red','blue'))
 ```
 
-<img src="10-ann_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="10-ann_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 *Cross validation* is another very important step of building predictive models. While there are different kind of cross validation methods, the basic idea is repeating the following process a number of time:
 
@@ -501,7 +501,7 @@ boxplot(cv.error,xlab='MSE CV',col='cyan',
         main='CV error (MSE) for NN',horizontal=TRUE)
 ```
 
-<img src="10-ann_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="10-ann_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 The average MSE for the neural network (10.33) is lower than the one of the linear model although there seems to be a certain degree of variation in the MSEs of the cross validation. This may depend on the splitting of the data or the random initialization of the weights in the net. By running the simulation different times with different seeds you can get a more precise point estimate for the average MSE.
 

@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-04-30">
+<meta name="date" content="2018-05-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -191,8 +191,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.3.1" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#cell-segmentation-data-set"><i class="fa fa-check"></i><b>7.3.1</b> Cell segmentation data set</a></li>
 <li class="chapter" data-level="7.3.2" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#data-splitting"><i class="fa fa-check"></i><b>7.3.2</b> Data splitting</a></li>
 <li class="chapter" data-level="7.3.3" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#identification-of-data-quality-issues"><i class="fa fa-check"></i><b>7.3.3</b> Identification of data quality issues</a></li>
-<li class="chapter" data-level="7.3.4" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#fit-model-without-feature-selection"><i class="fa fa-check"></i><b>7.3.4</b> Fit model without feature selection</a></li>
-<li class="chapter" data-level="7.3.5" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#feature-selection-using-filter"><i class="fa fa-check"></i><b>7.3.5</b> Feature selection using filter</a></li>
+<li class="chapter" data-level="7.3.4" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#fit-model"><i class="fa fa-check"></i><b>7.3.4</b> Fit model</a></li>
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#knn-regression"><i class="fa fa-check"></i><b>7.4</b> Regression</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#partition-data"><i class="fa fa-check"></i><b>7.4.1</b> Partition data</a></li>
@@ -311,18 +310,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="neural-networks" class="section level2">
 <h2><span class="header-section-number">10.1</span> Neural Networks</h2>
 <p><strong>What are artificial neural networks (ANNs)?</strong></p>
-<p><em>ANN</em> is actually an old idea but it came back into vogue recently and it is the state of the art technique for machine learning. The goal of ANN algorithms is to mimmick the functions of a neuron (Figure Neuronal Computation) and neuronal networks.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
-<img src="images/Neuronal computation.png" alt="Neuronal computation" width="65%" />
+<p><em>ANN</em> is actually an old idea but it came back into vogue recently and it is the state of the art technique for machine learning. The goal of ANN algorithms is to mimmick the functions of a neuron (Figure <a href="ann.html#fig:neuronalComputation">10.1</a>) and neuronal networks.</p>
+<div class="figure" style="text-align: center"><span id="fig:neuronalComputation"></span>
+<img src="images/neuronal_computation.png" alt="Neuronal computation" width="65%" />
 <p class="caption">
-Figure 9.1: Neuronal computation
+Figure 10.1: Neuronal computation
 </p>
 </div>
-<p>Computational representation of a neuron (Figure Perceptron) aims to mimmick the biological input-and-activation architecture of a neuron (Figure Neuronal Computation). A single unit of a computational neuron is also called a <strong>perceptron or ptrons</strong>. Ptrons have a nonlinear activation function (e.g a logistic function) which determines their output value based upon the values of their inputs.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+<p>Computational representation of a neuron (Figure <a href="ann.html#fig:perceptron">10.2</a>) aims to mimmick the biological input-and-activation architecture of a neuron (Figure <a href="ann.html#fig:neuronalComputation">10.1</a>). A single unit of a computational neuron is also called a <strong>perceptron or ptrons</strong>. Ptrons have a nonlinear activation function (e.g a logistic function) which determines their output value based upon the values of their inputs.</p>
+<div class="figure" style="text-align: center"><span id="fig:perceptron"></span>
 <img src="images/Perceptron.png" alt="Perceptron" width="65%" />
 <p class="caption">
-Figure 9.2: Perceptron
+Figure 10.2: Perceptron
 </p>
 </div>
 <p><strong>Architecture of ANNs</strong></p>
@@ -332,12 +331,12 @@ Figure 9.2: Perceptron
 <p>The weights are somewhat analogous to the parameters of a linear model. There is also a bias adjustment that represents the base value of a ptron and is analogous to the intercept in a linear model. If the inputs are near zero, the bias ensures that the output is near average. Due to the network-like nature of the ANN a complex, non-linear relationship exist between the predictors and response.</p>
 <p><em>Acknowledgement: aspects of the above discussion are from</em>: <a href="https://rpubs.com/julianhatwell/annr" class="uri">https://rpubs.com/julianhatwell/annr</a></p>
 <p><strong>Forward propagation</strong></p>
-<p>Figure Neural Network Modeling represents a simple ANN, where we have an input later (layer 1) with three ptrons and a base unit, one hidden layer (layer 2) again with three prtons and a base unit, and an output layer (layer 3) where the <span class="math inline">\(h_{\theta}\)</span>(x) is computed.</p>
+<p>Figure <a href="ann.html#fig:neuralNetworkModeling">10.3</a> represents a simple ANN, where we have an input later (layer 1) with three ptrons and a base unit, one hidden layer (layer 2) again with three prtons and a base unit, and an output layer (layer 3) where the <span class="math inline">\(h_{\theta}\)</span>(x) is computed.</p>
 <p>This method of computing <span class="math inline">\(h_{\theta}\)</span>(x) is called <em>Forward Propagation</em>.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
+<div class="figure" style="text-align: center"><span id="fig:neuralNetworkModeling"></span>
 <img src="images/NN3.png" alt="Neural Network Modeling" width="85%" />
 <p class="caption">
-Figure 10.1: Neural Network Modeling
+Figure 10.3: Neural Network Modeling
 </p>
 </div>
 <p><em>where</em></p>
@@ -371,11 +370,11 @@ z^{(3)} &amp;= \Theta^{(2)} a^{(2)}\\
 h_\Theta(x) &amp;= a^{(3)} = g(z^{(3)})
 \end{align}\]</span></p>
 <p><strong>Why ANN?</strong></p>
-Consider the supervised learning problems below. The first two are straight forward cases.
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
-<img src="images/NN4.png" alt="Why ANN" width="85%" />
+Consider the supervised learning problems below (Figure <a href="ann.html#fig:supervisedLearningProbs">10.4</a>). The first two are straight forward cases.
+<div class="figure" style="text-align: center"><span id="fig:supervisedLearningProbs"></span>
+<img src="images/NN4.PNG" alt="Why ANN" width="85%" />
 <p class="caption">
-Figure 10.2: Why ANN
+Figure 10.4: Why ANN
 </p>
 </div>
 <p>Whereas for the third we could probably apply a logistic regression with a lot of nonlinear features like this</p>
@@ -385,11 +384,11 @@ Figure 10.2: Why ANN
 <p>This would result in overfitting if the number of features increase.</p>
 <p>Because ANN has felixibility to derive complex features from each layer of ptrons, it can be applied to any complex functional relationship and more importantly unlike generalized linear models (GLMs) it is not necessary to prespecify the type of relationship between covariates and response variables as for instance as linear combination. This makes ANN a valuable statistical tool.</p>
 <p>Observed data are used to train the neural network and the neural network learns an approximation of the relationship by iteratively adapting its parameters.</p>
-<p>Figure Simple Logical AND ANN shows an example of a simple logical AND ptron architecture.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<p>Figure <a href="ann.html#fig:simpleLogicalANDANN">10.5</a> shows an example of a simple logical AND ptron architecture.</p>
+<div class="figure" style="text-align: center"><span id="fig:simpleLogicalANDANN"></span>
 <img src="images/NN5.png" alt="Simple Logical AND ANN" width="85%" />
 <p class="caption">
-Figure 10.3: Simple Logical AND ANN
+Figure 10.5: Simple Logical AND ANN
 </p>
 </div>
 <p><strong>Cost function and back propagation</strong></p>
@@ -533,7 +532,7 @@ MSE.nn &lt;-<span class="st"> </span><span class="kw">sum</span>((test.r <span c
 <span class="kw">plot</span>(test<span class="op">$</span>medv,pr.lm,<span class="dt">col=</span><span class="st">&#39;blue&#39;</span>,<span class="dt">main=</span><span class="st">&#39;Real vs predicted lm&#39;</span>,<span class="dt">pch=</span><span class="dv">18</span>, <span class="dt">cex=</span><span class="fl">0.7</span>)
 <span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">lwd=</span><span class="dv">2</span>)
 <span class="kw">legend</span>(<span class="st">&#39;bottomright&#39;</span>,<span class="dt">legend=</span><span class="st">&#39;LM&#39;</span>,<span class="dt">pch=</span><span class="dv">18</span>,<span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>, <span class="dt">cex=</span>.<span class="dv">95</span>)</code></pre></div>
-<p><img src="10-ann_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="10-ann_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>The net is doing a better work than the linear model at predicting medv. Once again, be cautious because this result depends on the train-test split performed above. Below, after the visual plot, we are going to perform a fast cross validation in order to be more confident about the results.</p>
 <p>A first visual approach to the performance of the network and the linear model on the test set is plotted.</p>
 <p>By visually inspecting the plot we can see that the predictions made by the neural network are (in general) more concetrated around the line (a perfect alignment with the line would indicate a MSE of 0 and thus an ideal perfect prediction) than those made by the linear model.</p>
@@ -542,7 +541,7 @@ MSE.nn &lt;-<span class="st"> </span><span class="kw">sum</span>((test.r <span c
 <span class="kw">points</span>(test<span class="op">$</span>medv,pr.lm,<span class="dt">col=</span><span class="st">&#39;blue&#39;</span>,<span class="dt">pch=</span><span class="dv">18</span>,<span class="dt">cex=</span><span class="fl">0.7</span>)
 <span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">lwd=</span><span class="dv">2</span>)
 <span class="kw">legend</span>(<span class="st">&#39;bottomright&#39;</span>,<span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&#39;NN&#39;</span>,<span class="st">&#39;LM&#39;</span>),<span class="dt">pch=</span><span class="dv">18</span>,<span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;red&#39;</span>,<span class="st">&#39;blue&#39;</span>))</code></pre></div>
-<p><img src="10-ann_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="10-ann_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p><em>Cross validation</em> is another very important step of building predictive models. While there are different kind of cross validation methods, the basic idea is repeating the following process a number of time:</p>
 <p><em>Train-test split</em></p>
 <ol style="list-style-type: decimal">
@@ -622,7 +621,7 @@ pbar<span class="op">$</span><span class="kw">init</span>(k)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(cv.error,<span class="dt">xlab=</span><span class="st">&#39;MSE CV&#39;</span>,<span class="dt">col=</span><span class="st">&#39;cyan&#39;</span>,
         <span class="dt">border=</span><span class="st">&#39;blue&#39;</span>,<span class="dt">names=</span><span class="st">&#39;CV error (MSE)&#39;</span>,
         <span class="dt">main=</span><span class="st">&#39;CV error (MSE) for NN&#39;</span>,<span class="dt">horizontal=</span><span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="10-ann_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="10-ann_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>The average MSE for the neural network (10.33) is lower than the one of the linear model although there seems to be a certain degree of variation in the MSEs of the cross validation. This may depend on the splitting of the data or the random initialization of the weights in the net. By running the simulation different times with different seeds you can get a more precise point estimate for the average MSE.</p>
 <p><em>Acknowledgement: the above example is from</em> <a href="https://www.r-bloggers.com/fitting-a-neural-network-in-r-neuralnet-package/" class="uri">https://www.r-bloggers.com/fitting-a-neural-network-in-r-neuralnet-package/</a> ## Exercises</p>
 <p>Using a ANN, take a number and calculate its square root.</p>

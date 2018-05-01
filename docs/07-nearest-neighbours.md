@@ -384,7 +384,7 @@ getDoParWorkers()
 ```
 
 ```
-## [1] 2
+## [1] 4
 ```
 
 The [caret](http://cran.r-project.org/web/packages/caret/index.html) function **train** is used to fit predictive models over different values of _k_. The function **trainControl** is used to specify a list of computational and resampling options, which will be passed to **train**. We will start by configuring our cross-validation procedure using **trainControl**.
@@ -437,7 +437,7 @@ knnFit
 ## k-Nearest Neighbors 
 ## 
 ## 400 samples
-##   2 predictor
+##   2 predictors
 ##   2 classes: '0', '1' 
 ## 
 ## No pre-processing
@@ -466,7 +466,7 @@ knnFit
 ##   292  0.68825   0.3765
 ##   400  0.51300   0.0260
 ## 
-## Accuracy was used to select the optimal model using  the largest value.
+## Accuracy was used to select the optimal model using the largest value.
 ## The final value used for the model was k = 83.
 ```
 
@@ -674,11 +674,11 @@ str(segmentationData)
 ```
 The first column of **segmentationData** is a unique identifier for each cell and the second column is a factor indicating how the observations were characterized into training and test sets in the original study; these two variables are irrelevant for the purposes of this demonstration and so can be discarded. 
 
-The third column *Case* contains the class labels: *PS* (poorly-segmented) and *WS* (well-segmented). Columns 4-61 are the 58 morphological measurements available to be used as predictors. Let's put the class labels in a vector and the predictors in their own data.frame.
+The third column *Class* contains the class labels: *PS* (poorly-segmented) and *WS* (well-segmented). The last two columns are cell centroids and can be ignored. Columns 4-59 are the 58 morphological measurements available to be used as predictors. Let's put the class labels in a vector and the predictors in their own data.frame.
 
 ```r
 segClass <- segmentationData$Class
-segData <- segmentationData[,4:61]
+segData <- segmentationData[,4:59]
 ```
 
 ### Data splitting
@@ -791,8 +791,6 @@ nzv
 ## VarIntenCh3              1.000000    100.000000   FALSE FALSE
 ## VarIntenCh4              1.000000    100.000000   FALSE FALSE
 ## WidthCh1                 1.000000    100.000000   FALSE FALSE
-## XCentroid                1.111111     41.584158   FALSE FALSE
-## YCentroid                1.000000     35.742574   FALSE FALSE
 ```
 
 #### Scaling
@@ -844,6 +842,13 @@ A correlogram provides a helpful visualization of the patterns of pairwise corre
 
 ```r
 library(corrplot)
+```
+
+```
+## corrplot 0.84 loaded
+```
+
+```r
 corMat <- cor(segDataTrain)
 corrplot(corMat, order="hclust", tl.cex=0.4)
 ```
@@ -874,7 +879,7 @@ segDataTrain <- segDataTrain[,-highCorr]
 -->
 
 
-### Fit model without feature selection
+### Fit model
 
 <!-- original settings:
 set.seed(42)
@@ -933,7 +938,7 @@ str(segDataTrain)
 ```
 
 ```
-## 'data.frame':	1010 obs. of  27 variables:
+## 'data.frame':	1010 obs. of  25 variables:
 ##  $ AngleCh1               : num  1.045 0.873 -0.376 -0.994 1.586 ...
 ##  $ ConvexHullPerimRatioCh1: num  0.31 -1.221 -0.363 1.22 1.113 ...
 ##  $ EntropyIntenCh1        : num  -2.443 -0.671 -1.688 0.554 0.425 ...
@@ -959,8 +964,6 @@ str(segDataTrain)
 ##  $ VarIntenCh3            : num  -1.9155 -0.1836 -0.8001 0.0478 -0.3658 ...
 ##  $ VarIntenCh4            : num  -2.304 0.332 -1.092 0.843 0.387 ...
 ##  $ WidthCh1               : num  -1.626 1.845 -0.718 -0.188 -0.333 ...
-##  $ XCentroid              : num  -1.647 -0.241 1.484 -0.412 -0.492 ...
-##  $ YCentroid              : num  -2.098 1.447 1.118 -0.251 -0.138 ...
 ```
 
 Perform cross validation to find best value of _k_.
@@ -977,7 +980,7 @@ knnFit
 ## k-Nearest Neighbors 
 ## 
 ## 1010 samples
-##   27 predictor
+##   25 predictors
 ##    2 classes: 'PS', 'WS' 
 ## 
 ## No pre-processing
@@ -986,59 +989,59 @@ knnFit
 ## Resampling results across tuning parameters:
 ## 
 ##   k    Accuracy   Kappa    
-##     5  0.7883168  0.5449241
-##    15  0.7992079  0.5702967
-##    25  0.8114851  0.5960169
-##    35  0.8033663  0.5780284
-##    45  0.8065347  0.5844876
-##    55  0.8047525  0.5809689
-##    65  0.8097030  0.5903493
-##    75  0.8089109  0.5884100
-##    85  0.8067327  0.5829885
-##    95  0.8059406  0.5798239
-##   105  0.8021782  0.5723636
-##   115  0.8047525  0.5770621
-##   125  0.8011881  0.5681088
-##   135  0.8011881  0.5675244
-##   145  0.8013861  0.5675697
-##   155  0.8031683  0.5703946
-##   165  0.8013861  0.5660457
-##   175  0.8011881  0.5654292
-##   185  0.7996040  0.5610611
-##   195  0.7978218  0.5561759
-##   205  0.7982178  0.5568515
-##   215  0.7972277  0.5539169
-##   225  0.7976238  0.5546920
-##   235  0.7968317  0.5520418
-##   245  0.7968317  0.5517094
-##   255  0.7958416  0.5487693
-##   265  0.7956436  0.5475332
-##   275  0.7958416  0.5467831
-##   285  0.7994059  0.5535346
-##   295  0.7978218  0.5492166
-##   305  0.7984158  0.5488107
-##   315  0.7958416  0.5412723
-##   325  0.7968317  0.5424166
-##   335  0.7908911  0.5264160
-##   345  0.7902970  0.5236154
-##   355  0.7873267  0.5143268
-##   365  0.7861386  0.5101993
-##   375  0.7831683  0.5016861
-##   385  0.7796040  0.4900167
-##   395  0.7778218  0.4836628
-##   405  0.7706931  0.4601307
-##   415  0.7596040  0.4287823
-##   425  0.7489109  0.3946052
-##   435  0.7384158  0.3621238
-##   445  0.7326733  0.3390919
-##   455  0.7251485  0.3140993
-##   465  0.7213861  0.2974286
-##   475  0.7154455  0.2720747
-##   485  0.7091089  0.2460255
-##   495  0.7017822  0.2169777
+##     5  0.7938614  0.5540746
+##    15  0.8053465  0.5829961
+##    25  0.8047525  0.5814369
+##    35  0.8065347  0.5843286
+##    45  0.8037624  0.5786056
+##    55  0.8035644  0.5781528
+##    65  0.8043564  0.5787198
+##    75  0.8037624  0.5777703
+##    85  0.8037624  0.5768178
+##    95  0.8063366  0.5823443
+##   105  0.8057426  0.5797978
+##   115  0.8019802  0.5709231
+##   125  0.7990099  0.5635596
+##   135  0.8001980  0.5653667
+##   145  0.8000000  0.5643285
+##   155  0.8003960  0.5650775
+##   165  0.8007921  0.5653539
+##   175  0.8013861  0.5667665
+##   185  0.8000000  0.5633628
+##   195  0.7996040  0.5623200
+##   205  0.8005941  0.5636922
+##   215  0.8003960  0.5631617
+##   225  0.8023762  0.5676501
+##   235  0.8019802  0.5661531
+##   245  0.8017822  0.5651162
+##   255  0.8011881  0.5631157
+##   265  0.7990099  0.5570764
+##   275  0.7978218  0.5536355
+##   285  0.7992079  0.5554954
+##   295  0.7990099  0.5540500
+##   305  0.7964356  0.5471107
+##   315  0.7940594  0.5401644
+##   325  0.7926733  0.5358168
+##   335  0.7928713  0.5344022
+##   345  0.7900990  0.5260618
+##   355  0.7912871  0.5268895
+##   365  0.7897030  0.5217485
+##   375  0.7877228  0.5153088
+##   385  0.7849505  0.5062599
+##   395  0.7796040  0.4911638
+##   405  0.7716832  0.4675901
+##   415  0.7689109  0.4564594
+##   425  0.7594059  0.4280275
+##   435  0.7504950  0.3989447
+##   445  0.7398020  0.3652969
+##   455  0.7316832  0.3376567
+##   465  0.7247525  0.3112618
+##   475  0.7186139  0.2871843
+##   485  0.7144554  0.2662335
+##   495  0.7059406  0.2341570
 ## 
-## Accuracy was used to select the optimal model using  the largest value.
-## The final value used for the model was k = 25.
+## Accuracy was used to select the optimal model using the largest value.
+## The final value used for the model was k = 35.
 ```
 
 
@@ -1051,124 +1054,53 @@ plot(knnFit)
 <p class="caption">(\#fig:cvAccuracySegDataHighCorRem)Accuracy (repeated cross-validation) as a function of neighbourhood size for the segmentation training data with highly correlated predictors removed.</p>
 </div>
 
-
-### Feature selection using filter
-
-We will use the same **trainingControl** settings and **tuning grid** as before. 
+Let's retrieve some information on the final model. To see the optimum value of _k_ found during the grid search, run either of the following lines:
 
 ```r
-train_ctrl <- trainControl(method="repeatedcv",
-                   number = 5,
-                   repeats = 5
-                   )
+knnFit$finalModel$k
 ```
 
-Let's define a filter using Caret's Selection By Filter (SBF) function:
+```
+## [1] 35
+```
 
 ```r
-mySBF <- caretSBF
-mySBF$summary <- twoClassSummary
+knnFit$finalModel$tuneValue
 ```
 
-We will use a simple t-test to eliminate the predictors that differ the least between classes. Since we are performing many hypothesis tests we will use Holm's method to control the family wise error rate.
+```
+##    k
+## 4 35
+```
+
+To find out which variables have been used in the final model, run:
 
 ```r
-mySBF$score <- function(x, y) {
-  out <- t.test(x ~ y)$p.value 
-  out <- p.adjust(out, method="holm")
-  out
-}
-```
-
-Now to set a p-value threshold for our t-test filter.
-
-```r
-mySBF$filter <- function(score, x, y) { score <= 0.01 }
-```
-
-Let's run the cross-validation. The cross-validation will run in two nested loops. Feature selection will occur in the outer loop. Features selected at each iteration of the outer loop will be passed to the inner loop, where the optimum value of k will be found for that set of features.
-
-```r
-sbf_ctrl <- sbfControl(functions = mySBF,
-                                method = "repeatedcv",
-                                number = 5,
-                                repeats = 5,
-                                verbose = FALSE)
-
-knn_sbf <- sbf(segDataTrain,
-                segClassTrain,
-                trControl = train_ctrl,
-                sbfControl = sbf_ctrl,
-                ## now arguments to `train`:
-                method = "knn",
-                tuneGrid = tuneParam)
-knn_sbf
+knnFit$finalModel$xNames
 ```
 
 ```
-## 
-## Selection By Filter
-## 
-## Outer resampling method: Cross-Validated (5 fold, repeated 5 times) 
-## 
-## Resampling performance:
-## 
-##     ROC   Sens   Spec   ROCSD  SensSD  SpecSD
-##  0.8838 0.8268 0.7683 0.02062 0.02581 0.06848
-## 
-## Using the training set, 16 variables were selected:
-##    ConvexHullPerimRatioCh1, EntropyIntenCh1, FiberWidthCh1, IntenCoocASMCh4, IntenCoocContrastCh3...
-## 
-## During resampling, the top 5 selected variables (out of a possible 19):
-##    ConvexHullPerimRatioCh1 (100%), EntropyIntenCh1 (100%), FiberWidthCh1 (100%), IntenCoocASMCh4 (100%), IntenCoocContrastCh3 (100%)
-## 
-## On average, 15.6 variables were selected (min = 15, max = 17)
-```
-
-Much information about the final model is stored in **knn_sbf**. To reveal the identities of the predictors selected for the final model run:
-
-```r
-predictors(knn_sbf)
-```
-
-```
-##  [1] "ConvexHullPerimRatioCh1" "EntropyIntenCh1"        
-##  [3] "FiberWidthCh1"           "IntenCoocASMCh4"        
-##  [5] "IntenCoocContrastCh3"    "IntenCoocMaxCh3"        
-##  [7] "KurtIntenCh1"            "KurtIntenCh3"           
-##  [9] "KurtIntenCh4"            "ShapeBFRCh1"            
-## [11] "ShapeLWRCh1"             "SkewIntenCh1"           
-## [13] "TotalIntenCh2"           "VarIntenCh1"            
-## [15] "VarIntenCh4"             "WidthCh1"
-```
-
-Here are some performance metrics for the final model:
-
-```r
-knn_sbf$results
-```
-
-```
-##         ROC      Sens      Spec      ROCSD     SensSD     SpecSD
-## 1 0.8838141 0.8267692 0.7683333 0.02061638 0.02581225 0.06847941
-```
-
-To retrieve the optimum value of k found during training run:
-
-```r
-knn_sbf$fit$finalModel$k
-```
-
-```
-## [1] 25
+##  [1] "AngleCh1"                "ConvexHullPerimRatioCh1"
+##  [3] "EntropyIntenCh1"         "EqEllipseOblateVolCh1"  
+##  [5] "FiberAlign2Ch3"          "FiberAlign2Ch4"         
+##  [7] "FiberWidthCh1"           "IntenCoocASMCh4"        
+##  [9] "IntenCoocContrastCh3"    "IntenCoocContrastCh4"   
+## [11] "IntenCoocMaxCh3"         "KurtIntenCh1"           
+## [13] "KurtIntenCh3"            "KurtIntenCh4"           
+## [15] "NeighborAvgDistCh1"      "NeighborMinDistCh1"     
+## [17] "ShapeBFRCh1"             "ShapeLWRCh1"            
+## [19] "SkewIntenCh1"            "SpotFiberCountCh3"      
+## [21] "TotalIntenCh2"           "VarIntenCh1"            
+## [23] "VarIntenCh3"             "VarIntenCh4"            
+## [25] "WidthCh1"
 ```
 
 Let's predict our test set using our final model.
 
 ```r
 segDataTest <- predict(transformations, segDataTest)
-test_pred <- predict(knn_sbf, segDataTest)
-confusionMatrix(test_pred$pred, segClassTest)
+test_pred <- predict(knnFit, segDataTest)
+confusionMatrix(test_pred, segClassTest)
 ```
 
 ```
@@ -1176,25 +1108,25 @@ confusionMatrix(test_pred$pred, segClassTest)
 ## 
 ##           Reference
 ## Prediction  PS  WS
-##         PS 543  98
-##         WS 107 261
+##         PS 540 100
+##         WS 110 259
 ##                                           
-##                Accuracy : 0.7968          
-##                  95% CI : (0.7707, 0.8213)
+##                Accuracy : 0.7919          
+##                  95% CI : (0.7655, 0.8165)
 ##     No Information Rate : 0.6442          
 ##     P-Value [Acc > NIR] : <2e-16          
 ##                                           
-##                   Kappa : 0.5593          
-##  Mcnemar's Test P-Value : 0.5763          
+##                   Kappa : 0.5488          
+##  Mcnemar's Test P-Value : 0.5346          
 ##                                           
-##             Sensitivity : 0.8354          
-##             Specificity : 0.7270          
-##          Pos Pred Value : 0.8471          
-##          Neg Pred Value : 0.7092          
+##             Sensitivity : 0.8308          
+##             Specificity : 0.7214          
+##          Pos Pred Value : 0.8438          
+##          Neg Pred Value : 0.7019          
 ##              Prevalence : 0.6442          
-##          Detection Rate : 0.5382          
-##    Detection Prevalence : 0.6353          
-##       Balanced Accuracy : 0.7812          
+##          Detection Rate : 0.5352          
+##    Detection Prevalence : 0.6343          
+##       Balanced Accuracy : 0.7761          
 ##                                           
 ##        'Positive' Class : PS              
 ## 
@@ -1432,26 +1364,26 @@ knnTune
 ## k-Nearest Neighbors 
 ## 
 ## 168 samples
-##  61 predictor
+##  61 predictors
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold, repeated 5 times) 
-## Summary of sample sizes: 135, 134, 136, 134, 133, 135, ... 
+## Summary of sample sizes: 135, 135, 134, 135, 133, 135, ... 
 ## Resampling results across tuning parameters:
 ## 
 ##   k   RMSE       Rsquared   MAE      
-##    1  0.6520387  0.3985028  0.4632774
-##    2  0.6113262  0.4259039  0.4627144
-##    3  0.5862976  0.4444624  0.4402393
-##    4  0.5828015  0.4437783  0.4407852
-##    5  0.5933604  0.4209923  0.4516132
-##    6  0.5982192  0.4100908  0.4550370
-##    7  0.6032227  0.4002708  0.4531828
-##    8  0.6078117  0.3936972  0.4583254
-##    9  0.6106399  0.3858548  0.4596576
-##   10  0.6149638  0.3799661  0.4629568
+##    1  0.6413320  0.4132466  0.4642574
+##    2  0.5957949  0.4374605  0.4500493
+##    3  0.5888289  0.4382933  0.4410306
+##    4  0.5841354  0.4364264  0.4409199
+##    5  0.5867094  0.4292670  0.4494250
+##    6  0.5988751  0.4038387  0.4593885
+##    7  0.6015944  0.3971522  0.4554279
+##    8  0.6059279  0.3899379  0.4587389
+##    9  0.6108446  0.3813605  0.4622043
+##   10  0.6145065  0.3769979  0.4647581
 ## 
-## RMSE was used to select the optimal model using  the smallest value.
+## RMSE was used to select the optimal model using the smallest value.
 ## The final value used for the model was k = 4.
 ```
 

@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-04-30">
+<meta name="date" content="2018-05-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -191,8 +191,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.3.1" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#cell-segmentation-data-set"><i class="fa fa-check"></i><b>7.3.1</b> Cell segmentation data set</a></li>
 <li class="chapter" data-level="7.3.2" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#data-splitting"><i class="fa fa-check"></i><b>7.3.2</b> Data splitting</a></li>
 <li class="chapter" data-level="7.3.3" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#identification-of-data-quality-issues"><i class="fa fa-check"></i><b>7.3.3</b> Identification of data quality issues</a></li>
-<li class="chapter" data-level="7.3.4" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#fit-model-without-feature-selection"><i class="fa fa-check"></i><b>7.3.4</b> Fit model without feature selection</a></li>
-<li class="chapter" data-level="7.3.5" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#feature-selection-using-filter"><i class="fa fa-check"></i><b>7.3.5</b> Feature selection using filter</a></li>
+<li class="chapter" data-level="7.3.4" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#fit-model"><i class="fa fa-check"></i><b>7.3.4</b> Fit model</a></li>
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#knn-regression"><i class="fa fa-check"></i><b>7.4</b> Regression</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#partition-data"><i class="fa fa-check"></i><b>7.4.1</b> Partition data</a></li>
@@ -346,7 +345,7 @@ Figure 8.3: The two classes cannot be separated by a hyperplane and so the maxim
 Figure 8.4: Left: two classes of observations and a maximum margin hyperplane (solid line). Right: Hyperplane (solid line) moves after the addition of a new observation (original hyperplane is dashed line). Source: <a href="http://www-bcf.usc.edu/~gareth/ISL/" class="uri">http://www-bcf.usc.edu/~gareth/ISL/</a>
 </p>
 </div>
-<p>It would be better to choose a classifier base on a hyperplane that:</p>
+<p>It would be better to choose a classifier based on a hyperplane that:</p>
 <ul>
 <li>is more robust to individual observations</li>
 <li>provides better classification of most of the training variables</li>
@@ -382,7 +381,7 @@ Figure 8.6: Margin of a support vector classifier changing with tuning parameter
 Figure 8.7: Two classes of observations with a non-linear boundary between them.
 </p>
 </div>
-<p>The SVM uses the <strong>kernel trick</strong> to project the data into higher dimensions where a separating linear hyperplane may be found.</p>
+<p>The SVM uses the <strong>kernel trick</strong> to operate in a higher dimensional space, without ever computing the coordinates of the data in that space.</p>
 <div class="figure" style="text-align: center"><span id="fig:svmKernelMachine"></span>
 <img src="images/svm_kernel_machine.png" alt="Kernel machine. By Alisneaky - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=14941564" width="80%" />
 <p class="caption">

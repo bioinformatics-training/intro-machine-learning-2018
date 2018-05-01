@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-04-30">
+<meta name="date" content="2018-05-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -191,8 +191,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.3.1" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#cell-segmentation-data-set"><i class="fa fa-check"></i><b>7.3.1</b> Cell segmentation data set</a></li>
 <li class="chapter" data-level="7.3.2" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#data-splitting"><i class="fa fa-check"></i><b>7.3.2</b> Data splitting</a></li>
 <li class="chapter" data-level="7.3.3" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#identification-of-data-quality-issues"><i class="fa fa-check"></i><b>7.3.3</b> Identification of data quality issues</a></li>
-<li class="chapter" data-level="7.3.4" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#fit-model-without-feature-selection"><i class="fa fa-check"></i><b>7.3.4</b> Fit model without feature selection</a></li>
-<li class="chapter" data-level="7.3.5" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#feature-selection-using-filter"><i class="fa fa-check"></i><b>7.3.5</b> Feature selection using filter</a></li>
+<li class="chapter" data-level="7.3.4" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#fit-model"><i class="fa fa-check"></i><b>7.3.4</b> Fit model</a></li>
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#knn-regression"><i class="fa fa-check"></i><b>7.4</b> Regression</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="nearest-neighbours.html"><a href="nearest-neighbours.html#partition-data"><i class="fa fa-check"></i><b>7.4.1</b> Partition data</a></li>
@@ -812,9 +811,9 @@ Figure 7.8: Image segmentation in high content screening. Images <strong>b</stro
 ##  $ XCentroid              : int  42 215 371 487 283 191 180 373 236 303 ...
 ##  $ YCentroid              : int  14 347 252 295 159 127 138 181 467 468 ...</code></pre>
 <p>The first column of <strong>segmentationData</strong> is a unique identifier for each cell and the second column is a factor indicating how the observations were characterized into training and test sets in the original study; these two variables are irrelevant for the purposes of this demonstration and so can be discarded.</p>
-<p>The third column <em>Case</em> contains the class labels: <em>PS</em> (poorly-segmented) and <em>WS</em> (well-segmented). Columns 4-61 are the 58 morphological measurements available to be used as predictors. Let’s put the class labels in a vector and the predictors in their own data.frame.</p>
+<p>The third column <em>Class</em> contains the class labels: <em>PS</em> (poorly-segmented) and <em>WS</em> (well-segmented). The last two columns are cell centroids and can be ignored. Columns 4-59 are the 58 morphological measurements available to be used as predictors. Let’s put the class labels in a vector and the predictors in their own data.frame.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">segClass &lt;-<span class="st"> </span>segmentationData<span class="op">$</span>Class
-segData &lt;-<span class="st"> </span>segmentationData[,<span class="dv">4</span><span class="op">:</span><span class="dv">61</span>]</code></pre></div>
+segData &lt;-<span class="st"> </span>segmentationData[,<span class="dv">4</span><span class="op">:</span><span class="dv">59</span>]</code></pre></div>
 </div>
 <div id="data-splitting" class="section level3">
 <h3><span class="header-section-number">7.3.2</span> Data splitting</h3>
@@ -903,9 +902,7 @@ nzv</code></pre></div>
 ## VarIntenCh1              1.000000    100.000000   FALSE FALSE
 ## VarIntenCh3              1.000000    100.000000   FALSE FALSE
 ## VarIntenCh4              1.000000    100.000000   FALSE FALSE
-## WidthCh1                 1.000000    100.000000   FALSE FALSE
-## XCentroid                1.111111     41.584158   FALSE FALSE
-## YCentroid                1.000000     35.742574   FALSE FALSE</code></pre>
+## WidthCh1                 1.000000    100.000000   FALSE FALSE</code></pre>
 </div>
 <div id="scaling" class="section level4">
 <h4><span class="header-section-number">7.3.3.2</span> Scaling</h4>
@@ -965,8 +962,8 @@ segDataTrain <- segDataTrain[,-highCorr]
 -->
 </div>
 </div>
-<div id="fit-model-without-feature-selection" class="section level3">
-<h3><span class="header-section-number">7.3.4</span> Fit model without feature selection</h3>
+<div id="fit-model" class="section level3">
+<h3><span class="header-section-number">7.3.4</span> Fit model</h3>
 <!-- original settings:
 set.seed(42)
 seeds <- vector(mode = "list", length = 101)
@@ -999,7 +996,7 @@ seeds[[<span class="dv">26</span>]] &lt;-<span class="st"> </span><span class="k
 segDataTrain &lt;-<span class="st"> </span><span class="kw">predict</span>(transformations, segDataTrain)</code></pre></div>
 <p>The <code>cutoff</code> refers to the correlation coefficient threshold.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(segDataTrain)</code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    1010 obs. of  27 variables:
+<pre><code>## &#39;data.frame&#39;:    1010 obs. of  25 variables:
 ##  $ AngleCh1               : num  1.045 0.873 -0.376 -0.994 1.586 ...
 ##  $ ConvexHullPerimRatioCh1: num  0.31 -1.221 -0.363 1.22 1.113 ...
 ##  $ EntropyIntenCh1        : num  -2.443 -0.671 -1.688 0.554 0.425 ...
@@ -1024,9 +1021,7 @@ segDataTrain &lt;-<span class="st"> </span><span class="kw">predict</span>(trans
 ##  $ VarIntenCh1            : num  -2.118 -1.346 -1.917 1.062 0.856 ...
 ##  $ VarIntenCh3            : num  -1.9155 -0.1836 -0.8001 0.0478 -0.3658 ...
 ##  $ VarIntenCh4            : num  -2.304 0.332 -1.092 0.843 0.387 ...
-##  $ WidthCh1               : num  -1.626 1.845 -0.718 -0.188 -0.333 ...
-##  $ XCentroid              : num  -1.647 -0.241 1.484 -0.412 -0.492 ...
-##  $ YCentroid              : num  -2.098 1.447 1.118 -0.251 -0.138 ...</code></pre>
+##  $ WidthCh1               : num  -1.626 1.845 -0.718 -0.188 -0.333 ...</code></pre>
 <p>Perform cross validation to find best value of <em>k</em>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knnFit &lt;-<span class="st"> </span><span class="kw">train</span>(segDataTrain, segClassTrain, 
                 <span class="dt">method=</span><span class="st">&quot;knn&quot;</span>,
@@ -1036,7 +1031,7 @@ knnFit</code></pre></div>
 <pre><code>## k-Nearest Neighbors 
 ## 
 ## 1010 samples
-##   27 predictors
+##   25 predictors
 ##    2 classes: &#39;PS&#39;, &#39;WS&#39; 
 ## 
 ## No pre-processing
@@ -1045,59 +1040,59 @@ knnFit</code></pre></div>
 ## Resampling results across tuning parameters:
 ## 
 ##   k    Accuracy   Kappa    
-##     5  0.7883168  0.5449241
-##    15  0.7992079  0.5702967
-##    25  0.8114851  0.5960169
-##    35  0.8033663  0.5780284
-##    45  0.8065347  0.5844876
-##    55  0.8047525  0.5809689
-##    65  0.8097030  0.5903493
-##    75  0.8089109  0.5884100
-##    85  0.8067327  0.5829885
-##    95  0.8059406  0.5798239
-##   105  0.8021782  0.5723636
-##   115  0.8047525  0.5770621
-##   125  0.8011881  0.5681088
-##   135  0.8011881  0.5675244
-##   145  0.8013861  0.5675697
-##   155  0.8031683  0.5703946
-##   165  0.8013861  0.5660457
-##   175  0.8011881  0.5654292
-##   185  0.7996040  0.5610611
-##   195  0.7978218  0.5561759
-##   205  0.7982178  0.5568515
-##   215  0.7972277  0.5539169
-##   225  0.7976238  0.5546920
-##   235  0.7968317  0.5520418
-##   245  0.7968317  0.5517094
-##   255  0.7958416  0.5487693
-##   265  0.7956436  0.5475332
-##   275  0.7958416  0.5467831
-##   285  0.7994059  0.5535346
-##   295  0.7978218  0.5492166
-##   305  0.7984158  0.5488107
-##   315  0.7958416  0.5412723
-##   325  0.7968317  0.5424166
-##   335  0.7908911  0.5264160
-##   345  0.7902970  0.5236154
-##   355  0.7873267  0.5143268
-##   365  0.7861386  0.5101993
-##   375  0.7831683  0.5016861
-##   385  0.7796040  0.4900167
-##   395  0.7778218  0.4836628
-##   405  0.7706931  0.4601307
-##   415  0.7596040  0.4287823
-##   425  0.7489109  0.3946052
-##   435  0.7384158  0.3621238
-##   445  0.7326733  0.3390919
-##   455  0.7251485  0.3140993
-##   465  0.7213861  0.2974286
-##   475  0.7154455  0.2720747
-##   485  0.7091089  0.2460255
-##   495  0.7017822  0.2169777
+##     5  0.7938614  0.5540746
+##    15  0.8053465  0.5829961
+##    25  0.8047525  0.5814369
+##    35  0.8065347  0.5843286
+##    45  0.8037624  0.5786056
+##    55  0.8035644  0.5781528
+##    65  0.8043564  0.5787198
+##    75  0.8037624  0.5777703
+##    85  0.8037624  0.5768178
+##    95  0.8063366  0.5823443
+##   105  0.8057426  0.5797978
+##   115  0.8019802  0.5709231
+##   125  0.7990099  0.5635596
+##   135  0.8001980  0.5653667
+##   145  0.8000000  0.5643285
+##   155  0.8003960  0.5650775
+##   165  0.8007921  0.5653539
+##   175  0.8013861  0.5667665
+##   185  0.8000000  0.5633628
+##   195  0.7996040  0.5623200
+##   205  0.8005941  0.5636922
+##   215  0.8003960  0.5631617
+##   225  0.8023762  0.5676501
+##   235  0.8019802  0.5661531
+##   245  0.8017822  0.5651162
+##   255  0.8011881  0.5631157
+##   265  0.7990099  0.5570764
+##   275  0.7978218  0.5536355
+##   285  0.7992079  0.5554954
+##   295  0.7990099  0.5540500
+##   305  0.7964356  0.5471107
+##   315  0.7940594  0.5401644
+##   325  0.7926733  0.5358168
+##   335  0.7928713  0.5344022
+##   345  0.7900990  0.5260618
+##   355  0.7912871  0.5268895
+##   365  0.7897030  0.5217485
+##   375  0.7877228  0.5153088
+##   385  0.7849505  0.5062599
+##   395  0.7796040  0.4911638
+##   405  0.7716832  0.4675901
+##   415  0.7689109  0.4564594
+##   425  0.7594059  0.4280275
+##   435  0.7504950  0.3989447
+##   445  0.7398020  0.3652969
+##   455  0.7316832  0.3376567
+##   465  0.7247525  0.3112618
+##   475  0.7186139  0.2871843
+##   485  0.7144554  0.2662335
+##   495  0.7059406  0.2341570
 ## 
 ## Accuracy was used to select the optimal model using the largest value.
-## The final value used for the model was k = 25.</code></pre>
+## The final value used for the model was k = 35.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(knnFit)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:cvAccuracySegDataHighCorRem"></span>
 <img src="07-nearest-neighbours_files/figure-html/cvAccuracySegDataHighCorRem-1.png" alt="Accuracy (repeated cross-validation) as a function of neighbourhood size for the segmentation training data with highly correlated predictors removed." width="100%" />
@@ -1105,101 +1100,54 @@ knnFit</code></pre></div>
 Figure 7.11: Accuracy (repeated cross-validation) as a function of neighbourhood size for the segmentation training data with highly correlated predictors removed.
 </p>
 </div>
-</div>
-<div id="feature-selection-using-filter" class="section level3">
-<h3><span class="header-section-number">7.3.5</span> Feature selection using filter</h3>
-<p>We will use the same <strong>trainingControl</strong> settings and <strong>tuning grid</strong> as before.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_ctrl &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;repeatedcv&quot;</span>,
-                   <span class="dt">number =</span> <span class="dv">5</span>,
-                   <span class="dt">repeats =</span> <span class="dv">5</span>
-                   )</code></pre></div>
-<p>Let’s define a filter using Caret’s Selection By Filter (SBF) function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mySBF &lt;-<span class="st"> </span>caretSBF
-mySBF<span class="op">$</span>summary &lt;-<span class="st"> </span>twoClassSummary</code></pre></div>
-<p>We will use a simple t-test to eliminate the predictors that differ the least between classes. Since we are performing many hypothesis tests we will use Holm’s method to control the family wise error rate.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mySBF<span class="op">$</span>score &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
-  out &lt;-<span class="st"> </span><span class="kw">t.test</span>(x <span class="op">~</span><span class="st"> </span>y)<span class="op">$</span>p.value 
-  out &lt;-<span class="st"> </span><span class="kw">p.adjust</span>(out, <span class="dt">method=</span><span class="st">&quot;holm&quot;</span>)
-  out
-}</code></pre></div>
-<p>Now to set a p-value threshold for our t-test filter.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mySBF<span class="op">$</span>filter &lt;-<span class="st"> </span><span class="cf">function</span>(score, x, y) { score <span class="op">&lt;=</span><span class="st"> </span><span class="fl">0.01</span> }</code></pre></div>
-<p>Let’s run the cross-validation. The cross-validation will run in two nested loops. Feature selection will occur in the outer loop. Features selected at each iteration of the outer loop will be passed to the inner loop, where the optimum value of k will be found for that set of features.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sbf_ctrl &lt;-<span class="st"> </span><span class="kw">sbfControl</span>(<span class="dt">functions =</span> mySBF,
-                                <span class="dt">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,
-                                <span class="dt">number =</span> <span class="dv">5</span>,
-                                <span class="dt">repeats =</span> <span class="dv">5</span>,
-                                <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
-
-knn_sbf &lt;-<span class="st"> </span><span class="kw">sbf</span>(segDataTrain,
-                segClassTrain,
-                <span class="dt">trControl =</span> train_ctrl,
-                <span class="dt">sbfControl =</span> sbf_ctrl,
-                ## now arguments to `train`:
-                <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>,
-                <span class="dt">tuneGrid =</span> tuneParam)
-knn_sbf</code></pre></div>
-<pre><code>## 
-## Selection By Filter
-## 
-## Outer resampling method: Cross-Validated (5 fold, repeated 5 times) 
-## 
-## Resampling performance:
-## 
-##     ROC   Sens   Spec   ROCSD  SensSD  SpecSD
-##  0.8844 0.8305 0.7689 0.02017 0.02769 0.07046
-## 
-## Using the training set, 16 variables were selected:
-##    ConvexHullPerimRatioCh1, EntropyIntenCh1, FiberWidthCh1, IntenCoocASMCh4, IntenCoocContrastCh3...
-## 
-## During resampling, the top 5 selected variables (out of a possible 19):
-##    ConvexHullPerimRatioCh1 (100%), EntropyIntenCh1 (100%), FiberWidthCh1 (100%), IntenCoocASMCh4 (100%), IntenCoocContrastCh3 (100%)
-## 
-## On average, 15.6 variables were selected (min = 15, max = 17)</code></pre>
-<p>Much information about the final model is stored in <strong>knn_sbf</strong>. To reveal the identities of the predictors selected for the final model run:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">predictors</span>(knn_sbf)</code></pre></div>
-<pre><code>##  [1] &quot;ConvexHullPerimRatioCh1&quot; &quot;EntropyIntenCh1&quot;        
-##  [3] &quot;FiberWidthCh1&quot;           &quot;IntenCoocASMCh4&quot;        
-##  [5] &quot;IntenCoocContrastCh3&quot;    &quot;IntenCoocMaxCh3&quot;        
-##  [7] &quot;KurtIntenCh1&quot;            &quot;KurtIntenCh3&quot;           
-##  [9] &quot;KurtIntenCh4&quot;            &quot;ShapeBFRCh1&quot;            
-## [11] &quot;ShapeLWRCh1&quot;             &quot;SkewIntenCh1&quot;           
-## [13] &quot;TotalIntenCh2&quot;           &quot;VarIntenCh1&quot;            
-## [15] &quot;VarIntenCh4&quot;             &quot;WidthCh1&quot;</code></pre>
-<p>Here are some performance metrics for the final model:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knn_sbf<span class="op">$</span>results</code></pre></div>
-<pre><code>##         ROC      Sens      Spec      ROCSD     SensSD     SpecSD
-## 1 0.8843675 0.8304615 0.7688889 0.02017254 0.02768875 0.07046473</code></pre>
-<p>To retrieve the optimum value of k found during training run:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knn_sbf<span class="op">$</span>fit<span class="op">$</span>finalModel<span class="op">$</span>k</code></pre></div>
-<pre><code>## [1] 25</code></pre>
+<p>Let’s retrieve some information on the final model. To see the optimum value of <em>k</em> found during the grid search, run either of the following lines:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knnFit<span class="op">$</span>finalModel<span class="op">$</span>k</code></pre></div>
+<pre><code>## [1] 35</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knnFit<span class="op">$</span>finalModel<span class="op">$</span>tuneValue</code></pre></div>
+<pre><code>##    k
+## 4 35</code></pre>
+<p>To find out which variables have been used in the final model, run:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knnFit<span class="op">$</span>finalModel<span class="op">$</span>xNames</code></pre></div>
+<pre><code>##  [1] &quot;AngleCh1&quot;                &quot;ConvexHullPerimRatioCh1&quot;
+##  [3] &quot;EntropyIntenCh1&quot;         &quot;EqEllipseOblateVolCh1&quot;  
+##  [5] &quot;FiberAlign2Ch3&quot;          &quot;FiberAlign2Ch4&quot;         
+##  [7] &quot;FiberWidthCh1&quot;           &quot;IntenCoocASMCh4&quot;        
+##  [9] &quot;IntenCoocContrastCh3&quot;    &quot;IntenCoocContrastCh4&quot;   
+## [11] &quot;IntenCoocMaxCh3&quot;         &quot;KurtIntenCh1&quot;           
+## [13] &quot;KurtIntenCh3&quot;            &quot;KurtIntenCh4&quot;           
+## [15] &quot;NeighborAvgDistCh1&quot;      &quot;NeighborMinDistCh1&quot;     
+## [17] &quot;ShapeBFRCh1&quot;             &quot;ShapeLWRCh1&quot;            
+## [19] &quot;SkewIntenCh1&quot;            &quot;SpotFiberCountCh3&quot;      
+## [21] &quot;TotalIntenCh2&quot;           &quot;VarIntenCh1&quot;            
+## [23] &quot;VarIntenCh3&quot;             &quot;VarIntenCh4&quot;            
+## [25] &quot;WidthCh1&quot;</code></pre>
 <p>Let’s predict our test set using our final model.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">segDataTest &lt;-<span class="st"> </span><span class="kw">predict</span>(transformations, segDataTest)
-test_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(knn_sbf, segDataTest)
-<span class="kw">confusionMatrix</span>(test_pred<span class="op">$</span>pred, segClassTest)</code></pre></div>
+test_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(knnFit, segDataTest)
+<span class="kw">confusionMatrix</span>(test_pred, segClassTest)</code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
 ## Prediction  PS  WS
-##         PS 543  98
-##         WS 107 261
+##         PS 540 100
+##         WS 110 259
 ##                                           
-##                Accuracy : 0.7968          
-##                  95% CI : (0.7707, 0.8213)
+##                Accuracy : 0.7919          
+##                  95% CI : (0.7655, 0.8165)
 ##     No Information Rate : 0.6442          
 ##     P-Value [Acc &gt; NIR] : &lt;2e-16          
 ##                                           
-##                   Kappa : 0.5593          
-##  Mcnemar&#39;s Test P-Value : 0.5763          
+##                   Kappa : 0.5488          
+##  Mcnemar&#39;s Test P-Value : 0.5346          
 ##                                           
-##             Sensitivity : 0.8354          
-##             Specificity : 0.7270          
-##          Pos Pred Value : 0.8471          
-##          Neg Pred Value : 0.7092          
+##             Sensitivity : 0.8308          
+##             Specificity : 0.7214          
+##          Pos Pred Value : 0.8438          
+##          Neg Pred Value : 0.7019          
 ##              Prevalence : 0.6442          
-##          Detection Rate : 0.5382          
-##    Detection Prevalence : 0.6353          
-##       Balanced Accuracy : 0.7812          
+##          Detection Rate : 0.5352          
+##    Detection Prevalence : 0.6343          
+##       Balanced Accuracy : 0.7761          
 ##                                           
 ##        &#39;Positive&#39; Class : PS              
 ## </code></pre>

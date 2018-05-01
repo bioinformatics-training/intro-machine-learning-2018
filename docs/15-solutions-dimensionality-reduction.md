@@ -81,46 +81,6 @@ clusterresults[1,which(clusterresults[2,]==1)]
 ```
 
 ```
-## preimp.46 preimp.51 preimp.82 preimp.87    ESC.16    ESC.18    ESC.31 
-##  "preimp"  "preimp"  "preimp"  "preimp"     "ESC"     "ESC"     "ESC" 
-##    ESC.33    soma.3    soma.4    soma.6    soma.8   soma.12   soma.13 
-##     "ESC"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.14   soma.15   soma.20   soma.23   soma.25   soma.27   soma.48 
-##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.49   soma.50   soma.51   soma.52   soma.53   soma.54   soma.58 
-##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
-##   soma.70   soma.81 
-##    "soma"    "soma"
-```
-
-```r
-clusterresults[1,which(clusterresults[2,]==2)]
-```
-
-```
-## PGC.192 PGC.193 PGC.194 PGC.196 PGC.197 PGC.199 PGC.200 PGC.201    soma 
-##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"  "soma" 
-##  soma.1  soma.2  soma.5  soma.7  soma.9 soma.10 soma.11 soma.16 soma.17 
-##  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma" 
-## soma.18 soma.19 soma.21 soma.22 soma.24 soma.26 soma.28 soma.29 soma.30 
-##  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma" 
-## soma.31 soma.32 soma.33 soma.34 soma.35 soma.36 soma.37 soma.38 soma.39 
-##  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma" 
-## soma.40 soma.41 soma.42 soma.43 soma.44 soma.45 soma.46 soma.47 soma.55 
-##  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma" 
-## soma.56 soma.57 soma.59 soma.60 soma.61 soma.62 soma.63 soma.64 soma.65 
-##  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma" 
-## soma.66 soma.67 soma.68 soma.69 soma.71 soma.72 soma.73 soma.74 soma.75 
-##  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma" 
-## soma.76 soma.77 soma.78 soma.79 soma.80 soma.82 soma.83 soma.84 soma.85 
-##  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"  "soma"
-```
-
-```r
-clusterresults[1,which(clusterresults[2,]==3)]
-```
-
-```
 ##    preimp  preimp.1  preimp.2  preimp.3  preimp.4  preimp.5  preimp.6 
 ##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
 ##  preimp.7  preimp.8  preimp.9 preimp.10 preimp.11       ESC     ESC.1 
@@ -133,40 +93,49 @@ clusterresults[1,which(clusterresults[2,]==3)]
 ##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
 ## preimp.33 preimp.34 preimp.35 preimp.36 preimp.37 preimp.38 preimp.39 
 ##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.40 preimp.41 preimp.42 preimp.43 preimp.44 preimp.45 preimp.47 
+## preimp.40 preimp.41 preimp.42 preimp.43 preimp.44 preimp.45 preimp.46 
 ##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.48 preimp.49 preimp.50 preimp.52 preimp.53 preimp.54 preimp.55 
+## preimp.47 preimp.48 preimp.49 preimp.50 preimp.52 preimp.53 preimp.54 
 ##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.56 preimp.57 preimp.58 preimp.59 preimp.60 preimp.61 preimp.62 
+## preimp.55 preimp.56 preimp.57 preimp.58 preimp.59 preimp.60 preimp.61 
 ##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.63 preimp.64 preimp.65 preimp.66 preimp.67 preimp.68 preimp.69 
+## preimp.62 preimp.63 preimp.64 preimp.65 preimp.66 preimp.67 preimp.68 
 ##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.70 preimp.71 preimp.72 preimp.73 preimp.74 preimp.75 preimp.76 
+## preimp.69 preimp.70 preimp.71 preimp.72 preimp.73 preimp.74 preimp.75 
 ##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.77 preimp.78 preimp.79 preimp.80 preimp.81 preimp.83 preimp.84 
+## preimp.76 preimp.77 preimp.78 preimp.79 preimp.80 preimp.81 preimp.82 
 ##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
-## preimp.85 preimp.86 preimp.88 preimp.89     ESC.2     ESC.3     ESC.4 
-##  "preimp"  "preimp"  "preimp"  "preimp"     "ESC"     "ESC"     "ESC" 
-##     ESC.5     ESC.6     ESC.7     ESC.8     ESC.9    ESC.10    ESC.11 
+## preimp.83 preimp.84 preimp.85 preimp.86 preimp.87 preimp.88 preimp.89 
+##  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp"  "preimp" 
+##     ESC.2     ESC.3     ESC.4     ESC.5     ESC.6     ESC.7     ESC.8 
 ##     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC" 
-##    ESC.12    ESC.13    ESC.14    ESC.15    ESC.17    ESC.19    ESC.20 
+##     ESC.9    ESC.10    ESC.11    ESC.12    ESC.13    ESC.14    ESC.15 
 ##     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC" 
-##    ESC.21    ESC.22    ESC.23    ESC.24    ESC.25    ESC.26    ESC.27 
+##    ESC.16    ESC.17    ESC.18    ESC.19    ESC.20    ESC.21    ESC.22 
 ##     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC" 
-##    ESC.28    ESC.29    ESC.30    ESC.32   PGC.145   PGC.202   PGC.203 
-##     "ESC"     "ESC"     "ESC"     "ESC"     "PGC"     "PGC"     "PGC" 
-##   PGC.204   PGC.206   PGC.208   PGC.209   PGC.210   PGC.211   PGC.212 
-##     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC" 
-##   PGC.213   PGC.214   PGC.215   PGC.216   PGC.218   PGC.219   PGC.220 
-##     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC" 
-##   PGC.221   PGC.222   PGC.223   PGC.224   PGC.225   PGC.226   PGC.227 
-##     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC" 
-##   PGC.228   PGC.229   PGC.230   PGC.232 
-##     "PGC"     "PGC"     "PGC"     "PGC"
+##    ESC.23    ESC.24    ESC.25    ESC.26    ESC.27    ESC.28    ESC.29 
+##     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC"     "ESC" 
+##    ESC.30    ESC.32    ESC.33   soma.48   soma.49   soma.51   soma.52 
+##     "ESC"     "ESC"     "ESC"    "soma"    "soma"    "soma"    "soma"
 ```
 
 ```r
-clusterresults[1,which(clusterresults[2,]==4)]
+clusterresults[1,which(clusterresults[2,]==2)]
+```
+
+```
+## PGC.109 PGC.111 PGC.144 PGC.145 PGC.202 PGC.203 PGC.204 PGC.206 PGC.208 
+##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
+## PGC.209 PGC.210 PGC.211 PGC.212 PGC.213 PGC.214 PGC.215 PGC.216 PGC.218 
+##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
+## PGC.219 PGC.220 PGC.221 PGC.222 PGC.223 PGC.224 PGC.225 PGC.226 PGC.227 
+##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
+## PGC.228 PGC.229 PGC.230 PGC.231 PGC.232 
+##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"
+```
+
+```r
+clusterresults[1,which(clusterresults[2,]==3)]
 ```
 
 ```
@@ -194,28 +163,63 @@ clusterresults[1,which(clusterresults[2,]==4)]
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
 ##  PGC.99 PGC.100 PGC.101 PGC.102 PGC.103 PGC.104 PGC.105 PGC.106 PGC.107 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.108 PGC.109 PGC.110 PGC.111 PGC.112 PGC.113 PGC.114 PGC.115 PGC.116 
+## PGC.108 PGC.110 PGC.112 PGC.113 PGC.114 PGC.115 PGC.116 PGC.117 PGC.118 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.117 PGC.118 PGC.119 PGC.120 PGC.121 PGC.122 PGC.123 PGC.124 PGC.125 
+## PGC.119 PGC.120 PGC.121 PGC.122 PGC.123 PGC.124 PGC.125 PGC.126 PGC.127 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.126 PGC.127 PGC.128 PGC.129 PGC.130 PGC.131 PGC.132 PGC.133 PGC.134 
+## PGC.128 PGC.129 PGC.130 PGC.131 PGC.132 PGC.133 PGC.134 PGC.135 PGC.136 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.135 PGC.136 PGC.137 PGC.138 PGC.139 PGC.140 PGC.141 PGC.142 PGC.143 
+## PGC.137 PGC.138 PGC.139 PGC.140 PGC.141 PGC.142 PGC.143 PGC.146 PGC.147 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.144 PGC.146 PGC.147 PGC.148 PGC.149 PGC.150 PGC.151 PGC.152 PGC.153 
+## PGC.148 PGC.149 PGC.150 PGC.151 PGC.152 PGC.153 PGC.154 PGC.155 PGC.156 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.154 PGC.155 PGC.156 PGC.157 PGC.158 PGC.159 PGC.160 PGC.161 PGC.162 
+## PGC.157 PGC.158 PGC.159 PGC.160 PGC.161 PGC.162 PGC.163 PGC.164 PGC.165 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.163 PGC.164 PGC.165 PGC.166 PGC.167 PGC.168 PGC.169 PGC.170 PGC.171 
+## PGC.166 PGC.167 PGC.168 PGC.169 PGC.170 PGC.171 PGC.172 PGC.173 PGC.174 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.172 PGC.173 PGC.174 PGC.175 PGC.176 PGC.177 PGC.178 PGC.179 PGC.180 
+## PGC.175 PGC.176 PGC.177 PGC.178 PGC.179 PGC.180 PGC.181 PGC.182 PGC.183 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.181 PGC.182 PGC.183 PGC.184 PGC.185 PGC.186 PGC.187 PGC.188 PGC.189 
+## PGC.184 PGC.185 PGC.186 PGC.187 PGC.188 PGC.189 PGC.190 PGC.191 PGC.195 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.190 PGC.191 PGC.195 PGC.198 PGC.205 PGC.207 PGC.217 PGC.231 PGC.233 
+## PGC.198 PGC.205 PGC.207 PGC.217 PGC.233 PGC.234 PGC.235 PGC.236 PGC.237 
 ##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC" 
-## PGC.234 PGC.235 PGC.236 PGC.237 PGC.238 PGC.239 PGC.240 PGC.241 
-##   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"   "PGC"
+## PGC.238 PGC.239 PGC.240 PGC.241 
+##   "PGC"   "PGC"   "PGC"   "PGC"
+```
+
+```r
+clusterresults[1,which(clusterresults[2,]==4)]
+```
+
+```
+## preimp.51    ESC.31   PGC.192   PGC.193   PGC.194   PGC.196   PGC.197 
+##  "preimp"     "ESC"     "PGC"     "PGC"     "PGC"     "PGC"     "PGC" 
+##   PGC.199   PGC.200   PGC.201      soma    soma.1    soma.2    soma.3 
+##     "PGC"     "PGC"     "PGC"    "soma"    "soma"    "soma"    "soma" 
+##    soma.4    soma.5    soma.6    soma.7    soma.8    soma.9   soma.10 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.11   soma.12   soma.13   soma.14   soma.15   soma.16   soma.17 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.18   soma.19   soma.20   soma.21   soma.22   soma.23   soma.24 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.25   soma.26   soma.27   soma.28   soma.29   soma.30   soma.31 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.32   soma.33   soma.34   soma.35   soma.36   soma.37   soma.38 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.39   soma.40   soma.41   soma.42   soma.43   soma.44   soma.45 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.46   soma.47   soma.50   soma.53   soma.54   soma.55   soma.56 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.57   soma.58   soma.59   soma.60   soma.61   soma.62   soma.63 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.64   soma.65   soma.66   soma.67   soma.68   soma.69   soma.70 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.71   soma.72   soma.73   soma.74   soma.75   soma.76   soma.77 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.78   soma.79   soma.80   soma.81   soma.82   soma.83   soma.84 
+##    "soma"    "soma"    "soma"    "soma"    "soma"    "soma"    "soma" 
+##   soma.85 
+##    "soma"
 ```
 
 ## Exercise 5.4.
@@ -232,13 +236,13 @@ t.test(D[which(genenames=="SOX17")+3, which(clusterresults[2,]==1)],D[which(gene
 ## 	Welch Two Sample t-test
 ## 
 ## data:  D[which(genenames == "SOX17") + 3, which(clusterresults[2, ] ==  and D[which(genenames == "SOX17") + 3, which(clusterresults[2, ] ==     1)] and     3)]
-## t = -0.081071, df = 41.257, p-value = 0.9358
+## t = -13.174, df = 301.34, p-value < 2.2e-16
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.5376875  0.4961767
+##  -2.394655 -1.772243
 ## sample estimates:
 ## mean of x mean of y 
-## 0.4002884 0.4210437
+## 0.2382337 2.3216827
 ```
 
 Typically we won't always know the important genes, but can perform an unbiased analysis by testing all genes.

@@ -37,7 +37,7 @@ Even if a separating hyperplane exists, it may not be the best decision boundary
 </div>
 
 
-It would be better to choose a classifier base on a hyperplane that:
+It would be better to choose a classifier based on a hyperplane that:
 
 * is more robust to individual observations
 * provides better classification of most of the training variables
@@ -73,7 +73,7 @@ The support vector classifier performs well if we have linearly separable classe
 <p class="caption">(\#fig:svmNonLinearBoundary)Two classes of observations with a non-linear boundary between them.</p>
 </div>
 
-The SVM uses the **kernel trick** to project the data into higher dimensions where a separating linear hyperplane may be found.
+The SVM uses the **kernel trick** to operate in a higher dimensional space, without ever computing the coordinates of the data in that space.
 
 <div class="figure" style="text-align: center">
 <img src="images/svm_kernel_machine.png" alt="Kernel machine. By Alisneaky - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=14941564" width="80%" />

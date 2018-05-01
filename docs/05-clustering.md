@@ -671,6 +671,12 @@ res <- lapply(k, function(i){kmeans(diff_density[,1:2], i, nstart=50)})
 ## Warning: did not converge in 10 iterations
 
 ## Warning: did not converge in 10 iterations
+
+## Warning: did not converge in 10 iterations
+
+## Warning: did not converge in 10 iterations
+
+## Warning: did not converge in 10 iterations
 ```
 Failure to converge, so increase number of iterations.
 

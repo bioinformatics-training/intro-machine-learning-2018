@@ -144,7 +144,7 @@ segClass <- segmentationData$Class
 Extract predictors from segmentationData
 
 ```r
-segData <- segmentationData[,4:61]
+segData <- segmentationData[,4:59]
 ```
 
 Partition data
@@ -196,24 +196,24 @@ svmTune
 ## Support Vector Machines with Radial Kernel - e1071 
 ## 
 ## 1010 samples
-##   58 predictors
+##   56 predictors
 ##    2 classes: 'PS', 'WS' 
 ## 
-## Pre-processing: centered (58), scaled (58) 
+## Pre-processing: centered (56), scaled (56) 
 ## Resampling: Cross-Validated (10 fold, repeated 5 times) 
 ## Summary of sample sizes: 909, 909, 909, 909, 909, 909, ... 
 ## Resampling results across tuning parameters:
 ## 
 ##   cost   ROC        Sens       Spec     
-##    0.25  0.8807051  0.8716923  0.6705556
-##    0.50  0.8869786  0.8692308  0.7122222
-##    1.00  0.8908803  0.8698462  0.7283333
-##    2.00  0.8887009  0.8600000  0.7533333
-##    4.00  0.8835000  0.8526154  0.7433333
-##    8.00  0.8746453  0.8427692  0.7250000
-##   16.00  0.8659402  0.8443077  0.7161111
-##   32.00  0.8593291  0.8449231  0.7033333
-##   64.00  0.8590043  0.8440000  0.6994444
+##    0.25  0.8822436  0.8744615  0.6788889
+##    0.50  0.8889359  0.8704615  0.7111111
+##    1.00  0.8920256  0.8729231  0.7283333
+##    2.00  0.8908248  0.8630769  0.7494444
+##    4.00  0.8856239  0.8566154  0.7494444
+##    8.00  0.8761197  0.8443077  0.7422222
+##   16.00  0.8627179  0.8372308  0.7200000
+##   32.00  0.8530897  0.8415385  0.6988889
+##   64.00  0.8493974  0.8406154  0.6916667
 ## 
 ## ROC was used to select the optimal model using the largest value.
 ## The final value used for the model was cost = 1.
@@ -235,9 +235,9 @@ svmTune$finalModel
 ##    SVM-Type:  C-classification 
 ##  SVM-Kernel:  radial 
 ##        cost:  1 
-##       gamma:  0.01724138 
+##       gamma:  0.01785714 
 ## 
-## Number of Support Vectors:  545
+## Number of Support Vectors:  531
 ```
 
 SVM accuracy profile
@@ -264,25 +264,25 @@ confusionMatrix(svmPred, segClassTest)
 ## 
 ##           Reference
 ## Prediction  PS  WS
-##         PS 569 104
-##         WS  81 255
+##         PS 571 103
+##         WS  79 256
 ##                                           
-##                Accuracy : 0.8167          
-##                  95% CI : (0.7914, 0.8401)
+##                Accuracy : 0.8196          
+##                  95% CI : (0.7945, 0.8429)
 ##     No Information Rate : 0.6442          
-##     P-Value [Acc > NIR] : <2e-16          
+##     P-Value [Acc > NIR] : < 2e-16         
 ##                                           
-##                   Kappa : 0.5942          
-##  Mcnemar's Test P-Value : 0.1058          
+##                   Kappa : 0.6005          
+##  Mcnemar's Test P-Value : 0.08822         
 ##                                           
-##             Sensitivity : 0.8754          
-##             Specificity : 0.7103          
-##          Pos Pred Value : 0.8455          
-##          Neg Pred Value : 0.7589          
+##             Sensitivity : 0.8785          
+##             Specificity : 0.7131          
+##          Pos Pred Value : 0.8472          
+##          Neg Pred Value : 0.7642          
 ##              Prevalence : 0.6442          
-##          Detection Rate : 0.5639          
-##    Detection Prevalence : 0.6670          
-##       Balanced Accuracy : 0.7928          
+##          Detection Rate : 0.5659          
+##    Detection Prevalence : 0.6680          
+##       Balanced Accuracy : 0.7958          
 ##                                           
 ##        'Positive' Class : PS              
 ## 
@@ -297,12 +297,12 @@ head(svmProbs)
 
 ```
 ##           PS         WS
-## 3  0.1942982 0.80570183
-## 5  0.9357074 0.06429258
-## 9  0.7684649 0.23153513
-## 10 0.7915982 0.20840184
-## 13 0.9445892 0.05541077
-## 14 0.7505999 0.24940014
+## 3  0.2304227 0.76957732
+## 5  0.9334686 0.06653140
+## 9  0.7495522 0.25044784
+## 10 0.8312663 0.16873374
+## 13 0.9421962 0.05780381
+## 14 0.7674553 0.23254472
 ```
 
 Build a ROC curve
@@ -313,7 +313,7 @@ auc(svmROC)
 ```
 
 ```
-## Area under the curve: 0.8872
+## Area under the curve: 0.8865
 ```
 
 Plot ROC curve.
@@ -338,7 +338,7 @@ auc(svmROC)
 ```
 
 ```
-## Area under the curve: 0.8872
+## Area under the curve: 0.8865
 ```
 
 
