@@ -9,9 +9,9 @@
 *ANN* is actually an old idea but it came back into vogue recently and it is the state of the art technique for machine learning. The goal of ANN algorithms is to mimmick the functions of a neuron (Figure \@ref(fig:neuronalComputation)) and neuronal networks. 
 
 ```{r neuronalComputation, echo = F, fig.cap = 'Neuronal computation', fig.align = 'center', fig.show='hold', out.width = '65%'}
-knitr::include_graphics(c("images/Neuronal computation.png"))
+knitr::include_graphics(c("images/neuronal_computation.png"))
 ```
-Computational representation of a neuron (Figure \@ref(fig:perceptron)) aims to mimmick the biological input-and-activation architecture of a neuron (Figure Neuronal Computation). A single unit of a computational neuron is also called a **perceptron  or ptrons**. Ptrons have a nonlinear activation function (e.g a logistic function) which determines their output value based upon the values of their inputs.
+Computational representation of a neuron (Figure \@ref(fig:perceptron)) aims to mimmick the biological input-and-activation architecture of a neuron (Figure \@ref(fig:neuronalComputation)). A single unit of a computational neuron is also called a **perceptron  or ptrons**. Ptrons have a nonlinear activation function (e.g a logistic function) which determines their output value based upon the values of their inputs.
 
 
 ```{r perceptron, echo = F, fig.cap = 'Perceptron', fig.align = 'center', fig.show='hold', out.width = '65%'}
@@ -33,11 +33,11 @@ Due to the network-like nature of the ANN a complex, non-linear relationship exi
 
 **Forward propagation**
 
-Figure Neural Network Modeling represents a simple ANN, where we have an input later (layer 1) with three ptrons and a base unit, one hidden layer (layer 2) again with three prtons and a base unit, and an output layer (layer 3) where the $h_{\theta}$(x) is computed. 
+Figure \@ref(fig:neuralNetworkModeling) represents a simple ANN, where we have an input later (layer 1) with three ptrons and a base unit, one hidden layer (layer 2) again with three prtons and a base unit, and an output layer (layer 3) where the $h_{\theta}$(x) is computed. 
 
 This method of computing $h_{\theta}$(x) is called *Forward Propagation*.
 
-```{r echo = F, fig.cap = 'Neural Network Modeling', fig.align = 'center', fig.show='hold', out.width = '85%'}
+```{r neuralNetworkModeling, echo = F, fig.cap = 'Neural Network Modeling', fig.align = 'center', fig.show='hold', out.width = '85%'}
 knitr::include_graphics(c("images/NN3.png"))
 ```
 
@@ -84,8 +84,8 @@ h_\Theta(x) &= a^{(3)} = g(z^{(3)})
 
 **Why ANN?**
 
-Consider the supervised learning problems below. The first two are straight forward cases. 
-```{r echo = F, fig.cap = 'Why ANN', fig.align = 'center', fig.show='hold', out.width = '85%'}
+Consider the supervised learning problems below (Figure \@ref(fig:supervisedLearningProbs)). The first two are straight forward cases. 
+```{r supervisedLearningProbs, echo = F, fig.cap = 'Why ANN', fig.align = 'center', fig.show='hold', out.width = '85%'}
 knitr::include_graphics(c("images/NN4.PNG"))
 ```
 
@@ -104,9 +104,9 @@ Because ANN has felixibility to derive complex features from each layer of ptron
 
 Observed data are used to train the neural network and the neural network learns an approximation of the relationship by iteratively adapting its parameters. 
 
-Figure Simple Logical AND ANN shows an example of a simple logical AND ptron architecture. 
+Figure \@ref(fig:simpleLogicalANDANN) shows an example of a simple logical AND ptron architecture. 
 
-```{r echo = F, fig.cap = 'Simple Logical AND ANN', fig.align = 'center', fig.show='hold', out.width = '85%'}
+```{r simpleLogicalANDANN, echo = F, fig.cap = 'Simple Logical AND ANN', fig.align = 'center', fig.show='hold', out.width = '85%'}
 knitr::include_graphics(c("images/NN5.png"))
 ```
 
