@@ -1,0 +1,54 @@
+An introduction to caret
+========================================================
+author:
+date:
+autosize: true
+transition: rotate
+css: custom.css
+
+Classification And Regression Trees
+========================================================
+
+For more details on authoring R presentations please visit <https://support.rstudio.com/hc/en-us/articles/200486468>.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+
+Purpose
+========================================================
+Unified interface to diverse packages for predictive modeling.
+
+
+
+Resources
+========================================================
+
+http://topepo.github.io/caret/index.html
+
+
+Data-splitting
+========================================================
+type: section
+
+
+Pre-processing
+========================================================
+type: section
+
+
+Slide With Code
+========================================================
+
+```{r}
+summary(cars)
+```
+
+Slide With Plot
+========================================================
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
