@@ -8,47 +8,85 @@ css: custom.css
 
 Classification And Regression Trees
 ========================================================
+The caret package was developed by Max Kuhn to:
+- create a unified interface for modeling and prediction (interfaces to over 200 models)
+- streamline model tuning using resampling
+- provide a variety of “helper” functions and classes for day–to–day model building tasks
+increase computational efficiency using parallel processing
 
-For more details on authoring R presentations please visit <https://support.rstudio.com/hc/en-us/articles/200486468>.
+<https://www.r-project.org/conferences/useR-2013/Tutorials/kuhn/user_caret_2up.pdf>
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
-
-
-Purpose
+Syntax is inconsistent among R packages
 ========================================================
-Unified interface to diverse packages for predictive modeling.
+```{r tidy=FALSE, echo=F}
+column1 <- c("lda", "glm", "gbm", "mda", "rpart", "Weka", "LogitBoost")
+column2 <- c("MASS","stats", "gbm", "mda", "rpart", "RWeka", "caTools")
+column3 <- c('predict(obj) (no options needed)',
+             'predict(obj, type = "response")',
+             'predict(obj, type = "response", n.trees)',
+             'predict(obj, type = "posterior")',
+             'predict(obj, type = "prob")',
+             'predict(obj, type = "probability")',
+             'predict(obj, type = "raw", nIter)')
+syntax <- data.frame(column1, column2, column3)
+names(syntax) <- c("obj Class", "Package", "predict Function Syntax")
+knitr::kable(syntax)
+```
+https://www.r-project.org/conferences/useR-2013/Tutorials/kuhn/user_caret_2up.pdf
 
 
+
+
+Available Models
+========================================================
+
+<https://topepo.github.io/caret/available-models.html>
+
+
+Demo
+========================================================
+type:section
+
+Algorithm: K nearest neighbours
+========================================================
+```{r knnClassification, echo=FALSE, out.width='75%', fig.align='center', fig.cap="Illustration of _k_-nn classification. In this example we have two classes: blue squares and red triangles. The green circle represents a test object. If k=3 (solid line circle) the test object is assigned to the red triangle class. If k=5 the test object is assigned to the blue square class.  By Antti Ajanki AnAj - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=2170282"}
+knitr::include_graphics("knn_classification.svg")
+```
+By Antti Ajanki AnAj - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=2170282
+
+
+Data set: detection and staging of malaria infection
+========================================================
+Automated Detection of P. falciparum Using Machine Learning Algorithms with Quantitative Phase Images of Unstained Cells
+
+Park HS, Rinehart MT, Walzer KA, Chi J-TA, Wax A (2016)
+
+https://doi.org/10.1371/journal.pone.0163045
+
+![bright field images](brightfield.png)
+
+**A** uninfected, **B** early trophozoite, **C** late trophozoite, **D** schizont.
+
+Malaria data set
+========================================================
+
+![optical path length images](OPL_images.PNG)
+
+Optical path length images
+
+Demo
+=======================================================
+type:alert
 
 Resources
 ========================================================
 
-http://topepo.github.io/caret/index.html
+- Manual: http://topepo.github.io/caret/index.html
+
+- JSS Paper: http://www.jstatsoft.org/v28/i05/paper
+
+- Book: http://appliedpredictivemodeling.com
 
 
-Data-splitting
-========================================================
-type: section
 
-
-Pre-processing
-========================================================
-type: section
-
-
-Slide With Code
-========================================================
-
-```{r}
-summary(cars)
-```
-
-Slide With Plot
-========================================================
-
-```{r, echo=FALSE}
-plot(cars)
-```
 
