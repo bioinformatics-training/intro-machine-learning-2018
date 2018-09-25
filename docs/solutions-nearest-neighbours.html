@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-05-01">
+<meta name="date" content="2018-09-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -321,7 +321,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(corrplot)</code></pre></div>
 <pre><code>## corrplot 0.84 loaded</code></pre>
 <p>Prepare for parallel processing</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">registerDoMC</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">registerDoMC</span>(<span class="kw">detectCores</span>())</code></pre></div>
 <p>Load data</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;data/wheat_seeds/wheat_seeds.Rda&quot;</span>)</code></pre></div>
 <p>Partition data</p>

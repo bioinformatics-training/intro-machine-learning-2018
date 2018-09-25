@@ -213,7 +213,7 @@ summary(mod)
 ```
 
 ```
-## <keras.models.Sequential>
+## <keras.engine.sequential.Sequential>
 ```
 
 In this case we see a total of $4320302$ parameters. Next we need to compile and run the model. In this case we need to specify three things:

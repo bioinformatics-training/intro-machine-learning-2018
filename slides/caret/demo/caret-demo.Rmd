@@ -149,7 +149,8 @@ The **train** function is used to tune a model
 knnFit <- train(morphologyTrain, stageTrain,
                 method="knn",
                 preProcess = c("center", "scale"),
-                tuneGrid=tuneParam,
+                #tuneGrid=tuneParam,
+                tuneLength=25,
                 trControl=train_ctrl)
 
 knnFit
@@ -160,9 +161,26 @@ Plot the results of the cross-validation
 plot(knnFit)
 ```
 
+svm radial
+```{r}
+svmFit <- train(morphologyTrain, stageTrain,
+                method="svmRadialCost",
+                preProcess = c("center", "scale"),
+                #tuneGrid=tuneParam,
+                tuneLength=25,
+                trControl=train_ctrl)
+
+svmFit
+```
+
+```{r}
+plot(svmFit)
+```
+
+
 Predict test set and tabulate results in a confusion matrix
 ```{r}
-test_pred <- predict(knnFit, morphologyTest)
+test_pred <- predict(svmFit, morphologyTest)
 confusionMatrix(test_pred, stageTest)
 ```
 

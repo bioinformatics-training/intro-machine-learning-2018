@@ -215,16 +215,12 @@ library("arm")
 ```
 
 ```
-## Loading required package: methods
-```
-
-```
 ## 
 ## arm (Version 1.10-1, built: 2018-4-12)
 ```
 
 ```
-## Working directory is /home/participant/Course_Materials
+## Working directory is /home/participant/Matt/intro-machine-learning-2018-master
 ```
 
 ```r
@@ -648,6 +644,7 @@ print_DEtime
 ##     print(DEtimeOutput$result, sep = "\t", zero.print = ".")
 ##     cat("==========================================================\n")
 ## }
+## <bytecode: 0xd461690>
 ## <environment: namespace:DEtime>
 ```
 

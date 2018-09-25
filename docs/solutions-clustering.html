@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-05-01">
+<meta name="date" content="2018-09-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -341,7 +341,7 @@ imgDF &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
 <pre><code>## Loading required package: foreach</code></pre>
 <pre><code>## Loading required package: iterators</code></pre>
 <pre><code>## Loading required package: parallel</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">registerDoMC</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">registerDoMC</span>(<span class="kw">detectCores</span>())
 k=<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>
 <span class="kw">set.seed</span>(<span class="dv">42</span>)
 res &lt;-<span class="st"> </span><span class="kw">foreach</span>(

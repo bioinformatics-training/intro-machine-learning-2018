@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-05-01">
+<meta name="date" content="2018-09-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -463,7 +463,7 @@ Figure 6.5: Dendrograms for the example distance matrix using three different li
 <span class="kw">library</span>(dendextend)</code></pre></div>
 <pre><code>## 
 ## ---------------------
-## Welcome to dendextend version 1.7.0
+## Welcome to dendextend version 1.8.0
 ## Type citation(&#39;dendextend&#39;) for how to cite the package.
 ## 
 ## Type browseVignettes(package = &#39;dendextend&#39;) for the package vignette.
@@ -886,14 +886,6 @@ Figure 6.20: K-means clustering of the noisy moons data set: scatterplot of clus
 res &lt;-<span class="st"> </span><span class="kw">lapply</span>(k, <span class="cf">function</span>(i){<span class="kw">kmeans</span>(diff_density[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], i, <span class="dt">nstart=</span><span class="dv">50</span>)})</code></pre></div>
 <pre><code>## Warning: did not converge in 10 iterations
 
-## Warning: did not converge in 10 iterations
-
-## Warning: did not converge in 10 iterations
-
-## Warning: did not converge in 10 iterations
-
-## Warning: did not converge in 10 iterations
-
 ## Warning: did not converge in 10 iterations</code></pre>
 <p>Failure to converge, so increase number of iterations.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw">lapply</span>(k, <span class="cf">function</span>(i){<span class="kw">kmeans</span>(diff_density[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], i, <span class="dt">iter.max=</span><span class="dv">20</span>, <span class="dt">nstart=</span><span class="dv">50</span>)})
@@ -977,10 +969,10 @@ Figure 6.26: K-means clustering of the data set with no structure: scatterplot o
 <pre><code>## Loading required package: foreach</code></pre>
 <pre><code>## Loading required package: iterators</code></pre>
 <pre><code>## Loading required package: parallel</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">registerDoMC</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">registerDoMC</span>(<span class="kw">detectCores</span>())</code></pre></div>
 <p>To find out how many cores we have registered we can use:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getDoParWorkers</span>()</code></pre></div>
-<pre><code>## [1] 4</code></pre>
+<pre><code>## [1] 8</code></pre>
 <p>Instead of using the <strong>lapply</strong> function to vectorize our code, we will instead use the parallel equivalent, <strong>foreach</strong>. Like <strong>lapply</strong>, <strong>foreach</strong> returns a list by default. For this example we have set a seed, rather than generate a random number, for the sake of reproducibility. Ordinarily we would omit <code>set.seed(42)</code> and <code>.options.multicore=list(set.seed=FALSE)</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k&lt;-<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>
 <span class="kw">set.seed</span>(<span class="dv">42</span>)
@@ -1021,13 +1013,13 @@ table(tissue, res$cluster)
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(tissue, res_k_<span class="dv">15</span>[[<span class="dv">7</span>]]<span class="op">$</span>cluster)</code></pre></div>
 <pre><code>##              
 ## tissue         1  2  3  4  5  6  7
-##   cerebellum   0  0  5 31  0  0  2
-##   colon        0 34  0  0  0  0  0
-##   endometrium 15  0  0  0  0  0  0
-##   hippocampus  0  0 31  0  0  0  0
-##   kidney      37  0  0  0  0  0  2
-##   liver        0  0  0  0  0 24  2
-##   placenta     0  0  0  0  6  0  0</code></pre>
+##   cerebellum   0  0  0 33  0  0  5
+##   colon        0  0  0  0  0 34  0
+##   endometrium  0  0  0  0 15  0  0
+##   hippocampus  0  0  0  0  0  0 31
+##   kidney       0  0 39  0  0  0  0
+##   liver       26  0  0  0  0  0  0
+##   placenta     0  6  0  0  0  0  0</code></pre>
 <p>The analysis has found a distinct cluster for each tissue and therefore performed slightly better than the earlier hierarchical clustering analysis, which placed endometrium and kidney observations in the same cluster.</p>
 <p>To visualize the result in a 2D scatter plot we first need to apply dimensionality reduction. We will use principal component analysis (PCA), which was described in chapter <a href="dimensionality-reduction.html#dimensionality-reduction">5</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(<span class="kw">t</span>(e))

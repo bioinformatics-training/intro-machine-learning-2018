@@ -150,12 +150,12 @@ library(e1071)
 Initialize parallel processing
 
 ```r
-registerDoMC()
+registerDoMC(detectCores())
 getDoParWorkers()
 ```
 
 ```
-## [1] 4
+## [1] 8
 ```
 
 ### Partition data
@@ -342,17 +342,17 @@ svmTune
 ## 
 ##   cost   ROC        Sens       Spec     
 ##    0.25  0.9337245  0.8485714  0.8900000
-##    0.50  0.9437245  0.8571429  0.8942857
+##    0.50  0.9437755  0.8571429  0.8942857
 ##    1.00  0.9517857  0.8542857  0.8971429
 ##    2.00  0.9584184  0.8685714  0.9014286
 ##    4.00  0.9611224  0.8785714  0.9014286
-##    8.00  0.9633163  0.8842857  0.8985714
+##    8.00  0.9633673  0.8842857  0.8985714
 ##   16.00  0.9633673  0.8900000  0.8957143
 ##   32.00  0.9629592  0.8914286  0.8914286
 ##   64.00  0.9609184  0.8771429  0.8871429
 ## 
 ## ROC was used to select the optimal model using the largest value.
-## The final value used for the model was cost = 16.
+## The final value used for the model was cost = 8.
 ```
 
 
@@ -370,10 +370,10 @@ svmTune$finalModel
 ## Parameters:
 ##    SVM-Type:  C-classification 
 ##  SVM-Kernel:  radial 
-##        cost:  16 
+##        cost:  8 
 ##       gamma:  0.5 
 ## 
-## Number of Support Vectors:  79
+## Number of Support Vectors:  81
 ```
 
 
@@ -434,13 +434,13 @@ head(svmProbs)
 ```
 
 ```
-##             A          B
-## 2 0.006794294 0.99320571
-## 5 0.056411649 0.94358835
-## 6 0.966313899 0.03368610
-## 7 0.996845020 0.00315498
-## 8 0.023448085 0.97655192
-## 9 0.939438609 0.06056139
+##            A           B
+## 2 0.01529839 0.984701610
+## 5 0.05702411 0.942975894
+## 6 0.97385690 0.026143097
+## 7 0.99341309 0.006586907
+## 8 0.03357317 0.966426827
+## 9 0.94400432 0.055995678
 ```
 
 Build a ROC curve.
@@ -451,7 +451,7 @@ auc(svmROC)
 ```
 
 ```
-## Area under the curve: 0.96
+## Area under the curve: 0.9578
 ```
 
 Plot ROC curve, including the threshold with the highest sum sensitivity + specificity.
@@ -483,7 +483,7 @@ auc(svmROC)
 ```
 
 ```
-## Area under the curve: 0.96
+## Area under the curve: 0.9578
 ```
 
 ### Plot decision boundary

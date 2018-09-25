@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-05-01">
+<meta name="date" content="2018-09-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -410,7 +410,7 @@ Figure 11.1: Example of a multilayer convolutional neural network
 </div>
 <p>We can also print a summary of the network, for example to see how many parameters it has, using the {summary} function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(mod)</code></pre></div>
-<pre><code>## &lt;keras.models.Sequential&gt;</code></pre>
+<pre><code>## &lt;keras.engine.sequential.Sequential&gt;</code></pre>
 <p>In this case we see a total of <span class="math inline">\(4320302\)</span> parameters. Next we need to compile and run the model. In this case we need to specify three things:</p>
 <ul>
 <li><p>A <a href="https://keras.io/losses/">loss</a> function, which specifies the objective function that the model will try to minimise. A number of existing loss functions are built into keras, including mean squared error (mean_squared_error) and categorical cross entropy (categorical_crossentropy). Since we are dealing with binary classification, we will use binary cross entropy (binary_crossentropy).</p></li>

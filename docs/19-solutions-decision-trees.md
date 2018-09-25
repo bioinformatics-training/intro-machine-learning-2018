@@ -37,10 +37,6 @@ library(party)
 ```
 
 ```
-## Loading required package: methods
-```
-
-```
 ## Loading required package: grid
 ```
 
@@ -167,6 +163,13 @@ titanic3 <- "https://goo.gl/At238b" %>%
 rtree_fit <- rpart(survived ~ ., 
           .data$training) 
 rpart.plot(rtree_fit)
+```
+
+```
+## Warning: Bad 'data' field in model 'call' (expected a data.frame or a matrix).
+## To silence this warning:
+##     Call rpart.plot with roundint=FALSE,
+##     or rebuild the rpart model with model=TRUE.
 ```
 
 <img src="19-solutions-decision-trees_files/figure-html/unnamed-chunk-4-1.png" width="672" />

@@ -374,7 +374,7 @@ library(doMC)
 ```
 
 ```r
-registerDoMC()
+registerDoMC(detectCores())
 ```
 
 To find out how many cores we have registered we can use:
@@ -384,7 +384,7 @@ getDoParWorkers()
 ```
 
 ```
-## [1] 4
+## [1] 8
 ```
 
 The [caret](http://cran.r-project.org/web/packages/caret/index.html) function **train** is used to fit predictive models over different values of _k_. The function **trainControl** is used to specify a list of computational and resampling options, which will be passed to **train**. We will start by configuring our cross-validation procedure using **trainControl**.

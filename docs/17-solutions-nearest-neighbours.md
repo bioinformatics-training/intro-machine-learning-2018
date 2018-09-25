@@ -46,7 +46,7 @@ library(corrplot)
 Prepare for parallel processing
 
 ```r
-registerDoMC()
+registerDoMC(detectCores())
 ```
 
 Load data

@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-05-01">
+<meta name="date" content="2018-09-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -419,9 +419,9 @@ Figure 8.9: Left: SVM with polynomial kernel of degree 3. Right: SVM with radial
 ##     cov, smooth, var</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(e1071)</code></pre></div>
 <p>Initialize parallel processing</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">registerDoMC</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">registerDoMC</span>(<span class="kw">detectCores</span>())
 <span class="kw">getDoParWorkers</span>()</code></pre></div>
-<pre><code>## [1] 4</code></pre>
+<pre><code>## [1] 8</code></pre>
 </div>
 <div id="partition-data-1" class="section level3">
 <h3><span class="header-section-number">8.4.2</span> Partition data</h3>
@@ -568,17 +568,17 @@ svmTune</code></pre></div>
 ## 
 ##   cost   ROC        Sens       Spec     
 ##    0.25  0.9337245  0.8485714  0.8900000
-##    0.50  0.9437245  0.8571429  0.8942857
+##    0.50  0.9437755  0.8571429  0.8942857
 ##    1.00  0.9517857  0.8542857  0.8971429
 ##    2.00  0.9584184  0.8685714  0.9014286
 ##    4.00  0.9611224  0.8785714  0.9014286
-##    8.00  0.9633163  0.8842857  0.8985714
+##    8.00  0.9633673  0.8842857  0.8985714
 ##   16.00  0.9633673  0.8900000  0.8957143
 ##   32.00  0.9629592  0.8914286  0.8914286
 ##   64.00  0.9609184  0.8771429  0.8871429
 ## 
 ## ROC was used to select the optimal model using the largest value.
-## The final value used for the model was cost = 16.</code></pre>
+## The final value used for the model was cost = 8.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svmTune<span class="op">$</span>finalModel</code></pre></div>
 <pre><code>## 
 ## Call:
@@ -589,10 +589,10 @@ svmTune</code></pre></div>
 ## Parameters:
 ##    SVM-Type:  C-classification 
 ##  SVM-Kernel:  radial 
-##        cost:  16 
+##        cost:  8 
 ##       gamma:  0.5 
 ## 
-## Number of Support Vectors:  79</code></pre>
+## Number of Support Vectors:  81</code></pre>
 </div>
 <div id="prediction-performance-measures" class="section level3">
 <h3><span class="header-section-number">8.4.6</span> Prediction performance measures</h3>
@@ -636,17 +636,17 @@ Figure 8.11: SVM accuracy profile for moons data set.
 <p>Get predicted class probabilities so we can build ROC curve.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svmProbs &lt;-<span class="st"> </span><span class="kw">predict</span>(svmTune, moonsTest[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)], <span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)
 <span class="kw">head</span>(svmProbs)</code></pre></div>
-<pre><code>##             A          B
-## 2 0.006794294 0.99320571
-## 5 0.056411649 0.94358835
-## 6 0.966313899 0.03368610
-## 7 0.996845020 0.00315498
-## 8 0.023448085 0.97655192
-## 9 0.939438609 0.06056139</code></pre>
+<pre><code>##            A           B
+## 2 0.01529839 0.984701610
+## 5 0.05702411 0.942975894
+## 6 0.97385690 0.026143097
+## 7 0.99341309 0.006586907
+## 8 0.03357317 0.966426827
+## 9 0.94400432 0.055995678</code></pre>
 <p>Build a ROC curve.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svmROC &lt;-<span class="st"> </span><span class="kw">roc</span>(moonsTest[,<span class="dv">3</span>], svmProbs[,<span class="st">&quot;A&quot;</span>])
 <span class="kw">auc</span>(svmROC)</code></pre></div>
-<pre><code>## Area under the curve: 0.96</code></pre>
+<pre><code>## Area under the curve: 0.9578</code></pre>
 <p>Plot ROC curve, including the threshold with the highest sum sensitivity + specificity.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(svmROC, <span class="dt">type =</span> <span class="st">&quot;S&quot;</span>, 
      <span class="dt">print.thres =</span> <span class="fl">0.5</span>,
@@ -665,7 +665,7 @@ Figure 8.12: SVM accuracy profile.
 <p><em>SPC = TN/N = TN/(TN+FP)</em></p>
 <p>Calculate area under ROC curve.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">auc</span>(svmROC)</code></pre></div>
-<pre><code>## Area under the curve: 0.96</code></pre>
+<pre><code>## Area under the curve: 0.9578</code></pre>
 </div>
 <div id="plot-decision-boundary" class="section level3">
 <h3><span class="header-section-number">8.4.7</span> Plot decision boundary</h3>

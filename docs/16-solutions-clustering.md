@@ -60,7 +60,7 @@ library(doMC)
 ```
 
 ```r
-registerDoMC()
+registerDoMC(detectCores())
 k=1:9
 set.seed(42)
 res <- foreach(

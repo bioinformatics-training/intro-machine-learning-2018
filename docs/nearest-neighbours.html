@@ -25,7 +25,7 @@
 <meta name="author" content="Sudhakaran Prabakaran, Matt Wayland and Chris Penfold">
 
 
-<meta name="date" content="2018-05-01">
+<meta name="date" content="2018-09-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -573,10 +573,10 @@ Figure 7.4: Misclassification errors as a function of neighbourhood size.
 <pre><code>## Loading required package: foreach</code></pre>
 <pre><code>## Loading required package: iterators</code></pre>
 <pre><code>## Loading required package: parallel</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">registerDoMC</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">registerDoMC</span>(<span class="kw">detectCores</span>())</code></pre></div>
 <p>To find out how many cores we have registered we can use:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getDoParWorkers</span>()</code></pre></div>
-<pre><code>## [1] 4</code></pre>
+<pre><code>## [1] 8</code></pre>
 <p>The <a href="http://cran.r-project.org/web/packages/caret/index.html">caret</a> function <strong>train</strong> is used to fit predictive models over different values of <em>k</em>. The function <strong>trainControl</strong> is used to specify a list of computational and resampling options, which will be passed to <strong>train</strong>. We will start by configuring our cross-validation procedure using <strong>trainControl</strong>.</p>
 <p>We would like to make this demonstration reproducible and because we will be running the models in parallel, using the <strong>set.seed</strong> function alone is not sufficient. In addition to using <strong>set.seed</strong> we have to make use of the optional <strong>seeds</strong> argument to <strong>trainControl</strong>. We need to supply <strong>seeds</strong> with a list of integers that will be used to set the seed at each sampling iteration. The list is required to have a length of B+1, where B is the number of resamples. We will be repeating 10-fold cross-validation a total of ten times and so our list must have a length of 101. The first B elements of the list are required to be vectors of integers of length M, where M is the number of models being evaluated (in this case 19). The last element of the list only needs to be a single integer, which will be used for the final model.</p>
 <p>First we generate our list of seeds.</p>
