@@ -15,7 +15,7 @@ install.packages("caret", dependencies = c("Depends", "Suggests"))
 ##Load required libraries
 ```{r}
 library(caret)
-library(doParallel)
+library(doMC)
 library(corrplot)
 ```
 
@@ -115,8 +115,7 @@ featurePlot(x = morphologyTrain[,1:4],
 We will use repeated cross-validation to find the best value of *k*. Repeated cross-validation can readily be parallelized to increase speed of execution. All we need to do is create a local cluster - **caret** will then use this cluster to parallelize the cross-validation.
 
 ```{r}
-cl <- makePSOCKcluster(detectCores()-1)
-registerDoParallel(cl)
+registerDoMC(detectCores())
 getDoParWorkers()
 ```
 
@@ -167,9 +166,5 @@ test_pred <- predict(knnFit, morphologyTest)
 confusionMatrix(test_pred, stageTest)
 ```
 
-Finally we can stop our cluster if we no longer need it
-```{r}
-stopCluster(cl)
-```
 
 

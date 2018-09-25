@@ -45,7 +45,7 @@ imgDF <- data.frame(
 Next we will perform kmeans clustering for k in the range 1:9. This is computationally quite intensive, so we'll use parallel processing:
 ```{r echo=T}
 library(doMC)
-registerDoMC()
+registerDoMC(detectCores())
 k=1:9
 set.seed(42)
 res <- foreach(

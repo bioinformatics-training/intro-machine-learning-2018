@@ -133,7 +133,7 @@ $(document).ready(function () {
 <pre class="r"><code>library(caret)</code></pre>
 <pre><code>## Loading required package: lattice</code></pre>
 <pre><code>## Loading required package: ggplot2</code></pre>
-<pre class="r"><code>library(doParallel)</code></pre>
+<pre class="r"><code>library(doMC)</code></pre>
 <pre><code>## Loading required package: foreach</code></pre>
 <pre><code>## Loading required package: iterators</code></pre>
 <pre><code>## Loading required package: parallel</code></pre>
@@ -242,10 +242,9 @@ length(highCorr)</code></pre>
 <h2>Model training and parameter tuning</h2>
 <p><em>k</em>-NN has only one parameter: the number of nearest neighbours <em>k</em>.</p>
 <p>We will use repeated cross-validation to find the best value of <em>k</em>. Repeated cross-validation can readily be parallelized to increase speed of execution. All we need to do is create a local cluster - <strong>caret</strong> will then use this cluster to parallelize the cross-validation.</p>
-<pre class="r"><code>cl &lt;- makePSOCKcluster(detectCores()-1)
-registerDoParallel(cl)
+<pre class="r"><code>registerDoMC(detectCores())
 getDoParWorkers()</code></pre>
-<pre><code>## [1] 3</code></pre>
+<pre><code>## [1] 4</code></pre>
 <p>Create a ‘grid’ of values of k for evaluation:</p>
 <pre class="r"><code>tuneParam &lt;- data.frame(k=seq(1,50,2))</code></pre>
 <p>The resampling method is specified using the <strong>trainControl</strong> function. To repeat five-fold cross validation a total of five times we would use:</p>
@@ -355,8 +354,6 @@ confusionMatrix(test_pred, stageTest)</code></pre>
 ## Detection Rate                0.1897            0.3306
 ## Detection Prevalence          0.3008            0.3550
 ## Balanced Accuracy             0.7700            0.9776</code></pre>
-<p>Finally we can stop our cluster if we no longer need it</p>
-<pre class="r"><code>stopCluster(cl)</code></pre>
 </div>
 
 

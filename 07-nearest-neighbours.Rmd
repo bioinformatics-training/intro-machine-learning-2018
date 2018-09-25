@@ -236,7 +236,7 @@ library(caret)
 To take advantage of Caret's parallel processing functionality, we simply need to load the [doMC](http://cran.r-project.org/web/packages/doMC/index.html) package and register workers: 
 ```{r echo=T}
 library(doMC)
-registerDoMC()
+registerDoMC(detectCores())
 ```
 
 To find out how many cores we have registered we can use:

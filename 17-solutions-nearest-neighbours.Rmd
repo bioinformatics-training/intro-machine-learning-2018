@@ -14,7 +14,7 @@ library(corrplot)
 
 Prepare for parallel processing
 ```{r echo=T}
-registerDoMC()
+registerDoMC(detectCores())
 ```
 
 Load data

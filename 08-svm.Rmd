@@ -95,7 +95,7 @@ library(e1071)
 
 Initialize parallel processing
 ```{r echo=T}
-registerDoMC()
+registerDoMC(detectCores())
 getDoParWorkers()
 ```
 
