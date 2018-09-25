@@ -16,7 +16,7 @@ increase computational efficiency using parallel processing
 
 <https://www.r-project.org/conferences/useR-2013/Tutorials/kuhn/user_caret_2up.pdf>
 
-Syntax is inconsistent among R packages
+Why we need caret
 ========================================================
 
 |obj Class  |Package |predict Function Syntax                  |
@@ -38,15 +38,20 @@ Available Models
 
 <https://topepo.github.io/caret/available-models.html>
 
+Parameter tuning - K nearest neighbours
+========================================================
+![k nearest neighbours](img/knn_classification.svg)
+
+By Antti Ajanki AnAj - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=2170282
+
+k-fold cross-validation
+=========================
+![k-fold cross-validation](img/cross-validation.png)
 
 Demo
 ========================================================
 type:section
 
-Algorithm: K nearest neighbours
-========================================================
-<img src="knn_classification.svg" title="Illustration of _k_-nn classification. In this example we have two classes: blue squares and red triangles. The green circle represents a test object. If k=3 (solid line circle) the test object is assigned to the red triangle class. If k=5 the test object is assigned to the blue square class.  By Antti Ajanki AnAj - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=2170282" alt="Illustration of _k_-nn classification. In this example we have two classes: blue squares and red triangles. The green circle represents a test object. If k=3 (solid line circle) the test object is assigned to the red triangle class. If k=5 the test object is assigned to the blue square class.  By Antti Ajanki AnAj - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=2170282" width="75%" style="display: block; margin: auto;" />
-By Antti Ajanki AnAj - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=2170282
 
 
 Data set: detection and staging of malaria infection
@@ -57,14 +62,14 @@ Park HS, Rinehart MT, Walzer KA, Chi J-TA, Wax A (2016)
 
 https://doi.org/10.1371/journal.pone.0163045
 
-![bright field images](brightfield.png)
+![bright field images](img/brightfield.png)
 
 **A** uninfected, **B** early trophozoite, **C** late trophozoite, **D** schizont.
 
 Malaria data set
 ========================================================
 
-![optical path length images](OPL_images.PNG)
+![optical path length images](img/OPL_images.PNG)
 
 Optical path length images
 

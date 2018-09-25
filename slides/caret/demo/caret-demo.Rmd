@@ -119,11 +119,6 @@ registerDoMC(detectCores())
 getDoParWorkers()
 ```
 
-Create a 'grid' of values of k  for evaluation:
-```{r}
-tuneParam <- data.frame(k=seq(1,50,2))
-```
-
 The resampling method is specified using the **trainControl** function. To repeat five-fold cross validation a total of five times we would use:
 ```{r eval=F}
 train_ctrl <- trainControl(method="repeatedcv",
@@ -135,7 +130,7 @@ To make the analysis reproducible we need to specify the seed for each resamplin
 ```{r}
 set.seed(42)
 seeds <- vector(mode = "list", length = 26)
-for(i in 1:25) seeds[[i]] <- sample.int(1000, length(tuneParam$k))
+for(i in 1:25) seeds[[i]] <- sample.int(1000, 10)
 seeds[[26]] <- sample.int(1000,1)
 
 train_ctrl <- trainControl(method="repeatedcv",
@@ -150,7 +145,7 @@ knnFit <- train(morphologyTrain, stageTrain,
                 method="knn",
                 preProcess = c("center", "scale"),
                 #tuneGrid=tuneParam,
-                tuneLength=25,
+                tuneLength=10,
                 trControl=train_ctrl)
 
 knnFit
@@ -161,13 +156,26 @@ Plot the results of the cross-validation
 plot(knnFit)
 ```
 
-svm radial
+rf
+```{r}
+rfFit <- train(morphologyTrain, stageTrain,
+                method="rf",
+                preProcess = c("center", "scale"),
+                #tuneGrid=tuneParam,
+                tuneLength=10,
+                trControl=train_ctrl)
+rfFit
+
+plot(rfFit)
+```
+
+svm
 ```{r}
 svmFit <- train(morphologyTrain, stageTrain,
                 method="svmRadialCost",
                 preProcess = c("center", "scale"),
                 #tuneGrid=tuneParam,
-                tuneLength=25,
+                tuneLength=10,
                 trControl=train_ctrl)
 
 svmFit
@@ -176,6 +184,8 @@ svmFit
 ```{r}
 plot(svmFit)
 ```
+
+
 
 
 Predict test set and tabulate results in a confusion matrix
