@@ -19,52 +19,6 @@ Methods of clustering can be broadly divided into two types:
 - **Partitioning** algorithms divide objects into non-overlapping subsets (examples include k-means and DBSCAN)
 
 
-========================
-```{r clusterTypes, fig.cap='Example clusters. **A**, *blobs*; **B**, *aggregation* [@Gionis2007]; **C**, *noisy moons*; **D**, *different density*; **E**, *anisotropic distributions*; **F**, *no structure*.', out.width='80%', fig.asp=1.2, fig.align='center', echo=F}
-library(ggplot2)
-library(GGally)
-
-blobs <- read.csv("/Users/matt/git_repositories/intro-machine-learning-2018/data/example_clusters/blobs.csv", header=F)
-aggregation <- read.table("/Users/matt/git_repositories/intro-machine-learning-2018/data/example_clusters/aggregation.txt")
-noisy_moons <- read.csv("/Users/matt/git_repositories/intro-machine-learning-2018/data/example_clusters/noisy_moons.csv", header=F)
-diff_density <- read.csv("/Users/matt/git_repositories/intro-machine-learning-2018/data/example_clusters/different_density.csv", header=F)
-aniso <- read.csv("/Users/matt/git_repositories/intro-machine-learning-2018/data/example_clusters/aniso.csv", header=F)
-no_structure <- read.csv("/Users/matt/git_repositories/intro-machine-learning-2018/data/example_clusters/no_structure.csv", header=F)
-
-plotList <- list(
-qplot(x=V1, y=V2, data=blobs, geom="point", size=I(0.2)) +
-  annotate("text", x=(0.01 * (max(blobs$V1)-min(blobs$V1))) + min(blobs$V1),
-           y=(0.9 * (max(blobs$V2)-min(blobs$V2))) + min(blobs$V2),
-           label ="A", size=8, col="blue"),
-qplot(x=V1, y=V2, data=aggregation, geom="point", size=I(0.2)) +
-  annotate("text", x=(0.01 * (max(aggregation$V1)-min(aggregation$V1))) + min(aggregation$V1),
-           y=(0.9 * (max(aggregation$V2)-min(aggregation$V2))) + min(aggregation$V2),
-           label="B", size=8, col="blue"),
-qplot(x=V1, y=V2, data=noisy_moons, geom="point", size=I(0.2)) +
-  annotate("text", x=(0.01 * (max(noisy_moons$V1)-min(noisy_moons$V1))) + min(noisy_moons$V1),
-           y=(0.9 * (max(noisy_moons$V2)-min(noisy_moons$V2))) + min(noisy_moons$V2),
-           label="C", size=8, col="blue"),
-qplot(x=V1, y=V2, data=diff_density, geom="point", size=I(0.2)) +
-  annotate("text", x=(0.01 * (max(diff_density$V1)-min(diff_density$V1))) + min(diff_density$V1),
-           y=(0.9 * (max(diff_density$V2)-min(diff_density$V2))) + min(diff_density$V2),
-           label="D", size=8, col="blue"),
-qplot(x=V1, y=V2, data=aniso, geom="point", size=I(0.2)) +
-  annotate("text", x=(0.01 * (max(aniso$V1)-min(aniso$V1))) + min(aniso$V1),
-           y=(0.9 * (max(aniso$V2)-min(aniso$V2))) + min(aniso$V2),
-           label="E", size=8, col="blue"),
-qplot(x=V1, y=V2, data=no_structure, geom="point", size=I(0.2)) +
-  annotate("text", x=(0.01 * (max(no_structure$V1)-min(no_structure$V1))) + min(no_structure$V1),
-           y=(0.9 * (max(no_structure$V2)-min(no_structure$V2))) + min(no_structure$V2),
-           label="F", size=8, col="blue")
-)
-
-pm <- ggmatrix(
-  plotList, nrow=2, ncol=3, showXAxisPlotLabels = F, showYAxisPlotLabels = F
-) + theme_bw()
-
-pm
-```
-
 
 Distance metrics
 ========================================================
@@ -93,7 +47,6 @@ x <- matrix(c(6, 9, 3, 5, 4, 2, 1, 7, 8),ncol=3, dimnames=list(c("a","b","c"),c(
 ```{r echo=T, eval=T}
 x
 dist(x)
-sqrt((6-9)^2 + (5-4)^2 + (1-7)^2)
 ```
 
 Hierarchic agglomerative
@@ -230,13 +183,6 @@ p_average <- ggplot(segment(dd_average)) +
 p_average
 
 ```
-
-Hierarchical clustering examples
-====================================
-type: prompt
-
-- Clustering synthetic data sets (6.3.2)
-- Gene expression profiling of human tissues (6.3.3)
 
 
 K-means clustering
@@ -472,6 +418,8 @@ pm
 Clustering using a range of values of k
 ======================================================
 ```{r echo=F, eval=T}
+library(ggplot2)
+library(GGally)
 point_colours <- brewer.pal(9,"Set1")
 k <- 1:9
 res <- lapply(k, function(i){kmeans(blobs[,1:2], i, nstart=50)})
@@ -511,13 +459,6 @@ qplot(k, tot_withinss, geom=c("point", "line"),
 
 ```
 
-
-K-means clustering examples
-====================================
-type: prompt
-
-- Clustering synthetic data sets (6.4.4)
-- Gene expression profiling of human tissues (6.4.5)
 
 
 DBSCAN
@@ -606,17 +547,69 @@ ggplot(blobs, aes(V1,V2)) +
 ```
 
 
-DBSCAN examples
+Examples
 ====================================
-type: prompt
+type: section
 
-- Clustering synthetic data sets (6.5.4)
-- Gene expression profiling of human tissues (6.5.5)
+- 2D synthetic data sets
+- Gene expression profiling of human tissues
 
+2D synthetic data sets
+========================
+```{r clusterTypes, fig.cap='Example clusters. **A**, *blobs*; **B**, *aggregation* [@Gionis2007]; **C**, *noisy moons*; **D**, *different density*; **E**, *anisotropic distributions*; **F**, *no structure*.', out.width='80%', fig.asp=1.2, fig.align='center', echo=F}
+library(ggplot2)
+library(GGally)
+
+blobs <- read.csv("/Users/matt/git_repositories/intro-machine-learning-2018/data/example_clusters/blobs.csv", header=F)
+aggregation <- read.table("/Users/matt/git_repositories/intro-machine-learning-2018/data/example_clusters/aggregation.txt")
+noisy_moons <- read.csv("/Users/matt/git_repositories/intro-machine-learning-2018/data/example_clusters/noisy_moons.csv", header=F)
+diff_density <- read.csv("/Users/matt/git_repositories/intro-machine-learning-2018/data/example_clusters/different_density.csv", header=F)
+aniso <- read.csv("/Users/matt/git_repositories/intro-machine-learning-2018/data/example_clusters/aniso.csv", header=F)
+no_structure <- read.csv("/Users/matt/git_repositories/intro-machine-learning-2018/data/example_clusters/no_structure.csv", header=F)
+
+plotList <- list(
+qplot(x=V1, y=V2, data=blobs, geom="point", size=I(0.2)) +
+  annotate("text", x=(0.01 * (max(blobs$V1)-min(blobs$V1))) + min(blobs$V1),
+           y=(0.9 * (max(blobs$V2)-min(blobs$V2))) + min(blobs$V2),
+           label ="A", size=8, col="blue"),
+qplot(x=V1, y=V2, data=aggregation, geom="point", size=I(0.2)) +
+  annotate("text", x=(0.01 * (max(aggregation$V1)-min(aggregation$V1))) + min(aggregation$V1),
+           y=(0.9 * (max(aggregation$V2)-min(aggregation$V2))) + min(aggregation$V2),
+           label="B", size=8, col="blue"),
+qplot(x=V1, y=V2, data=noisy_moons, geom="point", size=I(0.2)) +
+  annotate("text", x=(0.01 * (max(noisy_moons$V1)-min(noisy_moons$V1))) + min(noisy_moons$V1),
+           y=(0.9 * (max(noisy_moons$V2)-min(noisy_moons$V2))) + min(noisy_moons$V2),
+           label="C", size=8, col="blue"),
+qplot(x=V1, y=V2, data=diff_density, geom="point", size=I(0.2)) +
+  annotate("text", x=(0.01 * (max(diff_density$V1)-min(diff_density$V1))) + min(diff_density$V1),
+           y=(0.9 * (max(diff_density$V2)-min(diff_density$V2))) + min(diff_density$V2),
+           label="D", size=8, col="blue"),
+qplot(x=V1, y=V2, data=aniso, geom="point", size=I(0.2)) +
+  annotate("text", x=(0.01 * (max(aniso$V1)-min(aniso$V1))) + min(aniso$V1),
+           y=(0.9 * (max(aniso$V2)-min(aniso$V2))) + min(aniso$V2),
+           label="E", size=8, col="blue"),
+qplot(x=V1, y=V2, data=no_structure, geom="point", size=I(0.2)) +
+  annotate("text", x=(0.01 * (max(no_structure$V1)-min(no_structure$V1))) + min(no_structure$V1),
+           y=(0.9 * (max(no_structure$V2)-min(no_structure$V2))) + min(no_structure$V2),
+           label="F", size=8, col="blue")
+)
+
+pm <- ggmatrix(
+  plotList, nrow=2, ncol=3, showXAxisPlotLabels = F, showYAxisPlotLabels = F
+) + theme_bw()
+
+pm
+```
+
+Gene expression profiling of human tissues
+=======================================
+* 7 tissue types
+* 189 observations/samples
+* 22k transcripts
 
 Exercise
 =======================================
 type: prompt
 
-- Image segmentation using *k*-means clustering (6.7.1)
+- Image segmentation using *k*-means clustering
 

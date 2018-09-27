@@ -5,6 +5,8 @@ output:
     df_print: paged
   html_notebook: default
   pdf_document: default
+editor_options: 
+  chunk_output_type: console
 ---
 
 ##Installation
@@ -55,8 +57,8 @@ summary(stageTest)/sum(summary(stageTest))
 ##Check data quality
 CARET provides functions for assessing data quality. The function **nearZeroVar** identifies predictors that have one unique value. It also diagnoses predictors having both of the following characteristics:
 
-    *very few unique values relative to the number of samples
-    *the ratio of the frequency of the most common value to the frequency of the 2nd most common value is large.
+* very few unique values relative to the number of samples
+* the ratio of the frequency of the most common value to the frequency of the 2nd most common value is large.
 
 Such zero and near zero-variance predictors have a deleterious impact on modelling and may lead to unstable fits.
 ```{r}
@@ -112,7 +114,7 @@ featurePlot(x = morphologyTrain[,1:4],
 ##Model training and parameter tuning
 *k*-NN has only one parameter: the number of nearest neighbours *k*.
 
-We will use repeated cross-validation to find the best value of *k*. Repeated cross-validation can readily be parallelized to increase speed of execution. All we need to do is create a local cluster - **caret** will then use this cluster to parallelize the cross-validation.
+We will use repeated cross-validation to find the best value of *k* and we will try 10 different values of *k*. Repeated cross-validation can readily be parallelized to increase speed of execution. All we need to do is create a local cluster - **caret** will then use this cluster to parallelize the cross-validation.
 
 ```{r}
 registerDoMC(detectCores())
@@ -156,7 +158,13 @@ Plot the results of the cross-validation
 plot(knnFit)
 ```
 
-rf
+The model fit object contains much information
+```{r}
+names(knnFit)
+```
+
+##Try other models
+###Random Forest
 ```{r}
 rfFit <- train(morphologyTrain, stageTrain,
                 method="rf",
@@ -169,7 +177,7 @@ rfFit
 plot(rfFit)
 ```
 
-svm
+###Support Vector Machine
 ```{r}
 svmFit <- train(morphologyTrain, stageTrain,
                 method="svmRadialCost",
@@ -185,12 +193,28 @@ svmFit
 plot(svmFit)
 ```
 
-
-
-
-Predict test set and tabulate results in a confusion matrix
+##Compare models
+Make a list of our models
 ```{r}
-test_pred <- predict(svmFit, morphologyTest)
+model_list <- list(knn=knnFit,
+                   randomForest=rfFit,
+                   svm=svmFit)
+```
+
+Collect resampling results for each model
+```{r}
+resamps <- resamples(model_list)
+resamps
+summary(resamps)
+```
+```{r}
+bwplot(resamps)
+```
+
+
+##Predict test set using our best model
+```{r}
+test_pred <- predict(rfFit, morphologyTest)
 confusionMatrix(test_pred, stageTest)
 ```
 
