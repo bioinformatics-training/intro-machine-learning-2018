@@ -10,36 +10,63 @@ autosize: true
 transition: rotate
 css: custom.css
 
-First Slide
+Separating hyperplanes
 ========================================================
+![](img/svm.9.2.png)
 
-For more details on authoring R presentations please visit <https://support.rstudio.com/hc/en-us/articles/200486468>.
+http://www-bcf.usc.edu/~gareth/ISL/
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
 
-Slide With Code
+Maximum margin classifier
 ========================================================
+![](img/svm.9.3.png)
 
-```{r}
-summary(cars)
-```
+http://www-bcf.usc.edu/~gareth/ISL/
 
-Slide With Plot
+Classes not separable by a hyperplane
 ========================================================
+![](img/svm.9.4.png)
 
-```{r, echo=FALSE}
-plot(cars)
-```
+http://www-bcf.usc.edu/~gareth/ISL/
 
-Prompt Slide
-====================================
-type: prompt
+Max margin classifier sensitive to indvidual data points
+========================================================
+![](img/svm.9.5.png)
+
+http://www-bcf.usc.edu/~gareth/ISL/
+
+Support Vector Classifier
+========================================================
+![](img/svm.9.6.png)
+
+http://www-bcf.usc.edu/~gareth/ISL/
+
+SVC and tuning parameter C
+========================================================
+![](img/svm.9.7.png)
+
+http://www-bcf.usc.edu/~gareth/ISL/
+
+Two classes of observations with a non-linear boundary between them
+========================================================
+![](img/svm.9.8.png)
+
+http://www-bcf.usc.edu/~gareth/ISL/
+
+8 Support Vector Machine
+========================================================
+![](img/svm.9.9b.png)
+
+http://www-bcf.usc.edu/~gareth/ISL/
+
+9
+========================================================
+![]()
 
 
-Alert Slide
-====================================
-type: alert
+Further reading
+========================================================
+[An Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/)
+
 
 
