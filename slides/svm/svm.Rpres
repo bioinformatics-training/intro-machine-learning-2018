@@ -53,20 +53,25 @@ Two classes of observations with a non-linear boundary between them
 
 http://www-bcf.usc.edu/~gareth/ISL/
 
-8 Support Vector Machine
+Kernel Trick
+========================================================
+![](img/kernel-trick.png)
+
+https://github.com/mbeyeler/opencv-machine-learning
+
+Support Vector Machine
 ========================================================
 ![](img/svm.9.9b.png)
 
 http://www-bcf.usc.edu/~gareth/ISL/
 
-9
-========================================================
-![]()
-
 
 Further reading
 ========================================================
-[An Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/)
 
 
+### An Introduction to Statistical Learning
+http://www-bcf.usc.edu/~gareth/ISL/
 
+### Elements of Statistical Learning
+https://web.stanford.edu/~hastie/ElemStatLearn/
